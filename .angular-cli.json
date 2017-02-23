@@ -52,5 +52,9 @@
   "defaults": {
     "styleExt": "css",
     "component": {}
-  }
+  },
+  "scripts": [
+    "materialize-css/bin/materialize.css",
+    "materialize-css/bin/materialize.js"
+  ]
 }
