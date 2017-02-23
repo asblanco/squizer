@@ -1,9 +1,10 @@
 /* Feature Module */
-import { NgModule }     from '@angular/core';
+import { NgModule, OnInit }     from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoursesComponent } from './courses.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { ChapterComponent } from './chapter/chapter.component';
 
 @NgModule({
   imports: [
@@ -11,9 +12,16 @@ import { SideNavComponent } from './side-nav/side-nav.component';
   ],
   declarations: [
     CoursesComponent,
-    SideNavComponent
+    SideNavComponent,
+    ChapterComponent
   ],
   exports: [ CoursesComponent ],
   providers: []
 })
-export class CoursesModule { }
+export class CoursesModule implements OnInit {
+
+  ngOnInit() {
+
+  }
+
+}

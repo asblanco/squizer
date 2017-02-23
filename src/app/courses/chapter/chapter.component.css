@@ -1,0 +1,6 @@
+.onHover .delete{
+  visibility:hidden;
+}
+.onHover:hover .delete {
+ visibility:visible;
+}

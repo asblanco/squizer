@@ -1,4 +1,6 @@
 nav {
   position: fixed;
   z-index:100;
+  padding-left: 60px;
+  padding-right: 60px;
 }

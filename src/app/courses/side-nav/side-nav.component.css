@@ -9,5 +9,6 @@ header, main, footer {
 }
 
 .side-nav {
-  z-index:50;
+  z-index: 50;
+  margin-top: 65px;
 }
