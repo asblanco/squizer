@@ -1,15 +1,41 @@
 <ul class="collapsible" data-collapsible="accordion">
   <li class="hoverable onHover">
     <!-- Header -->
-    <div class="collapsible-header">
-      {{chapterTitle}}
+    <div class="collapsible-header grey lighten-3">
+      <strong>{{chapterTitle}}</strong>
       <div class="right">
         <i class="material-icons delete">delete</i>
       </div>
     </div>
     <!-- Body -->
     <div class="collapsible-body">
-      <span>{{chapterContent}}</span>
+      <div class="answer">
+        <div class="right">
+          <a class="waves-effect waves btn-flat edit">EDIT</a>
+        </div>
+        <p>{{chapterContent}}</p>
+      </div>
+      <hr>
+      <div class="answer">
+        <div class="right">
+          <a class="waves-effect waves btn-flat edit">EDIT</a>
+        </div>
+        <p>I am a very simple card. I am good at containing small bits of information. <br>
+        - I am convenient because I require little markup to use effectively. <br>
+        - I am similar to what is called a panel in other frameworks.
+        </p>
+      </div>
+      <hr>
+      <div class="answer">
+        <div class="right">
+          <a class="waves-effect waves btn-flat edit">EDIT</a>
+        </div>
+        <p>I am a very simple card. I am good at containing small bits of information. <br>
+        - I am convenient because I require little markup to use effectively. <br>
+        - I am similar to what is called a panel in other frameworks. <br>
+        - Wrong answer !!
+        </p>
+      </div>
       <div class="right-align">
         <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
       </div>

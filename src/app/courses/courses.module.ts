@@ -1,6 +1,6 @@
 /* Feature Module */
-import { NgModule, OnInit }     from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, OnInit } from '@angular/core';
+import { CommonModule }     from '@angular/common';
 
 import { CoursesComponent } from './courses.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
@@ -15,8 +15,7 @@ import { ChapterComponent } from './chapter/chapter.component';
     SideNavComponent,
     ChapterComponent
   ],
-  exports: [ CoursesComponent ],
-  providers: []
+  exports: [ CoursesComponent ]
 })
 export class CoursesModule implements OnInit {
 

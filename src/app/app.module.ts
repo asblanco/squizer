@@ -3,25 +3,23 @@ import { NgModule }       from '@angular/core';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 
-/* App Root */
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }     from './app.component';
-import { NavbarComponent }  from './navbar/navbar.component';
-
-/* Courses imports */
 import { CoursesModule }    from './courses/courses.module';
+import { SharedModule }     from './shared/shared.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    AppRoutingModule,
     HttpModule,
-    CoursesModule
+    CoursesModule,
+    SharedModule.forRoot()
   ],
   declarations: [
-    AppComponent,
-    NavbarComponent
+    AppComponent
   ],
-  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
