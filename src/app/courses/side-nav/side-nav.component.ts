@@ -27,4 +27,7 @@ export class SideNavComponent implements OnInit {
     this.onSelected.emit(course);
   }
 
+  openModal() {
+    (<any>$('#modal1')).openModal();
+  }
 }

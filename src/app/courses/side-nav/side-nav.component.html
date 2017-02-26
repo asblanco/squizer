@@ -2,6 +2,30 @@
   <li class="truncate" *ngFor="let course of courses">
     <a (click)="select(course)">{{course.name}}</a>
   </li>
-  <a class="waves-effect indigo accent-2 btn white-text">Nueva Asignatura</a>
+  <a class="waves-effect indigo accent-2 btn white-text" (click)="openModal()">Nueva Asignatura</a>
 </ul>
 <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+ <div class="modal-content">
+   <h4>Nueva asignatura</h4>
+   <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="title" type="text" class="validate">
+          <label for="first_name">Titulo</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="short" type="text" class="validate">
+          <label for="last_name">Abreviatura</label>
+        </div>
+      </div>
+    </form>
+  </div>
+ </div>
+ <div class="modal-footer">
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Guardar</a>
+ </div>
+</div>

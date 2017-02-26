@@ -27,7 +27,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openModal() {
-    (<any>$('#modal1')).openModal();
+    (<any>$('#modal2')).openModal();
   }
 
 }
