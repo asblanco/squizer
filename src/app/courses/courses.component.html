@@ -10,7 +10,31 @@
       </div>
     </div>
     <div class="row center-align">
-      <a class="waves-effect indigo accent-2 btn">Nuevo tema</a>
+      <a class="waves-effect indigo accent-2 btn" (click)="openModal()">Nuevo tema</a>
     </div>
   </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal bottom-sheet">
+ <div class="modal-content">
+   <h4>Nuevo tema</h4>
+   <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="title" type="text" class="validate">
+          <label for="first_name">Titulo</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="short" type="text" class="validate">
+          <label for="last_name">Abreviatura</label>
+        </div>
+      </div>
+    </form>
+  </div>
+ </div>
+ <div class="modal-footer">
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Guardar</a>
+ </div>
 </div>

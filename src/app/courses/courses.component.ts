@@ -26,4 +26,8 @@ export class CoursesComponent implements OnInit {
       .then(course => this.selectedCourse = course);
   }
 
+  openModal() {
+    (<any>$('#modal1')).openModal();
+  }
+
 }
