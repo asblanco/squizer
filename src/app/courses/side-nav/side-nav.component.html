@@ -1,7 +1,7 @@
 <ul id="slide-out" class="side-nav fixed">
   <li class="truncate" *ngFor="let course of courses">
-    <a href="#">{{course.name}}</a>
+    <a (click)="select(course)">{{course.name}}</a>
   </li>
-  <a class="waves-effect waves btn white-text">Nueva Asignatura</a>
+  <a class="waves-effect indigo accent-2 btn white-text">Nueva Asignatura</a>
 </ul>
 <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Course }         from '../shared/db/course';
-import { CourseService }  from '../shared/db/course.service';
+import { Component, OnInit }  from '@angular/core';
+import { Course }             from '../shared/db/course';
+import { CourseService }      from '../shared/db/course.service';
 
 @Component({
   moduleId: module.id,
@@ -9,17 +9,21 @@ import { CourseService }  from '../shared/db/course.service';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-  courses: Course[] = [];
+  selectedCourse: Course;
 
-  constructor(private courseService: CourseService) { }
+  constructor(
+    private courseService: CourseService) { }
 
-  ngOnInit():void {
-    this.getCourses();
+  onSelected(course: Course) {
+    this.selectedCourse = course;
+    this.getCourseDetails(course.id);
   }
 
-  getCourses(): void {
-    this.courseService.getCourses()
-      .then(courses => this.courses = courses);
+  ngOnInit():void { }
+
+  getCourseDetails(courseId: number): void {
+      this.courseService.getCourseDetails(courseId)
+      .then(course => this.selectedCourse = course);
   }
 
 }

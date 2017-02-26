@@ -1,24 +1,40 @@
 <ul class="collapsible" data-collapsible="accordion">
   <li class="hoverable onHover">
     <!-- Header -->
-    <div class="collapsible-header grey lighten-3">
-      <strong>{{chapterTitle}}</strong>
+    <div class="collapsible-header grey lighten-4">
+      <strong>{{chapter.title}}</strong>
       <div class="right">
-        <i class="material-icons delete">delete</i>
+        <i class="material-icons delete indigo-text accent-2-text">delete</i>
       </div>
     </div>
     <!-- Body -->
     <div class="collapsible-body">
+      <div *ngFor="let question of chapter.questions">
+        <div class="answer">
+          <div class="right">
+            <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">DELETE</a></b>
+          </div>
+          <p>
+            {{question.title}}
+            <span *ngFor="let answer of question.answers">
+              <br>
+              - {{answer.title}}
+            </span>
+          </p>
+        </div>
+        <hr>
+      </div>
+<!--
       <div class="answer">
         <div class="right">
-          <a class="waves-effect waves btn-flat edit">EDIT</a>
+          <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">DELETE</a></b>
         </div>
-        <p>{{chapterContent}}</p>
+        <p>Blabla</p>
       </div>
       <hr>
       <div class="answer">
         <div class="right">
-          <a class="waves-effect waves btn-flat edit">EDIT</a>
+          <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">DELETE</a></b>
         </div>
         <p>I am a very simple card. I am good at containing small bits of information. <br>
         - I am convenient because I require little markup to use effectively. <br>
@@ -28,16 +44,16 @@
       <hr>
       <div class="answer">
         <div class="right">
-          <a class="waves-effect waves btn-flat edit">EDIT</a>
+          <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">DELETE</a></b>
         </div>
         <p>I am a very simple card. I am good at containing small bits of information. <br>
         - I am convenient because I require little markup to use effectively. <br>
         - I am similar to what is called a panel in other frameworks. <br>
         - Wrong answer !!
         </p>
-      </div>
+      </div> -->
       <div class="right-align">
-        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn-large waves-effect waves indigo accent-2"><i class="material-icons">add</i></a>
       </div>
     </div>
   </li>

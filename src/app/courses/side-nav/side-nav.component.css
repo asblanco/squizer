@@ -12,3 +12,6 @@ header, main, footer {
   z-index: 50;
   margin-top: 65px;
 }
+a {
+  cursor: pointer;
+}
