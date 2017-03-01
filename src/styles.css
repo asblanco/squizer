@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles, and also import other style files */
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #b388ff;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #b388ff;
+  box-shadow: 0 1px 0 0 #b388ff;
+}

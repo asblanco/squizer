@@ -6,7 +6,7 @@
 </ul>
 <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
-<!-- Modal Structure -->
+<!-- New Course Modal -->
 <div id="modal1" class="modal bottom-sheet">
  <div class="modal-content">
    <h4>Nueva asignatura</h4>
@@ -14,7 +14,7 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="title" type="text" class="validate">
+          <input #courseTitle type="text" class="validate" >
           <label for="first_name">Titulo</label>
         </div>
         <div class="input-field col s6">
@@ -26,6 +26,7 @@
   </div>
  </div>
  <div class="modal-footer">
-   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Guardar</a>
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn"
+   (click)="add(courseTitle.value); courseTitle.value=''">Guardar</a>
  </div>
 </div>

@@ -30,4 +30,14 @@ export class SideNavComponent implements OnInit {
   openModal() {
     (<any>$('#modal1')).openModal();
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.courseService.create(name)
+      .then(course => {
+        this.courses.push(course);
+        this.onSelected.emit(course);
+      });
+  }
 }

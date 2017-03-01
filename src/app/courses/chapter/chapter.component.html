@@ -4,7 +4,7 @@
     <div class="collapsible-header grey lighten-4">
       <strong>{{chapter.title}}</strong>
       <div class="right">
-        <i class="material-icons delete indigo-text accent-2-text">delete</i>
+        <a href="#"><i class="material-icons indigo-text accent-2-text delete">delete</i></a>
       </div>
     </div>
     <!-- Body -->
@@ -12,7 +12,7 @@
       <div *ngFor="let question of chapter.questions">
         <div class="answer">
           <div class="right">
-            <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">DELETE</a></b>
+            <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">ELIMINAR</a></b>
           </div>
           <p>
             {{question.title}}

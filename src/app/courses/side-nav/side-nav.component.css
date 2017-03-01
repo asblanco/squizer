@@ -1,17 +1,9 @@
-header, main, footer {
-  padding-left: 300px;
-}
-
-@media only screen and (max-width : 992px) {
-  header, main, footer {
-    padding-left: 0;
-  }
-}
-
 .side-nav {
   z-index: 50;
-  margin-top: 65px;
+  margin-top: 4em;
+  width: 20em;
 }
+
 a {
   cursor: pointer;
 }

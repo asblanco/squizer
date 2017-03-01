@@ -32,4 +32,12 @@ export class CourseService {
     return Promise.reject(error.message || error);
   }
 
+  create(name: string): Promise<Course> {
+    return this.http
+      .post(this.coursesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
+
 }

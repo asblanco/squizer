@@ -1,7 +1,20 @@
 /*320px = 20em*/
 @media only screen and (min-width: 62em){
   .content {
-    margin-left: 15em;
+    margin-left: 20em;
+  }
+  .center-div
+  {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 67em;
+    height: 6em;
+    border-radius: 3px;
+    text-align: right;
   }
 }
 
@@ -9,24 +22,11 @@
   margin-top: 4em;
 }
 
-.center-div
-{
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 67em;
-  height: 6em;
-  border-radius: 3px;
-  text-align: right;
-}
-
 .light-grey {
   color: #bdbdbd;
 }
 
+/*
 .center-div-temas {
   position: absolute;
   margin: auto;
@@ -38,4 +38,8 @@
   height: 6em;
   border-radius: 3px;
   text-align: right;
+}
+*/
+#deleteCourse:hover {
+  background-color: white;
 }

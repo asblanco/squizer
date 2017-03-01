@@ -26,8 +26,12 @@ export class CoursesComponent implements OnInit {
       .then(course => this.selectedCourse = course);
   }
 
-  openModal() {
-    (<any>$('#modal2')).openModal();
+  openNewChapterModal() {
+    (<any>$('#newChapterModal')).openModal();
+  }
+
+  openDeleteCourseModal() {
+    (<any>$('#deleteChapterModal')).openModal();
   }
 
 }
