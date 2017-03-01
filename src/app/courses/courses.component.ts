@@ -10,6 +10,7 @@ import { CourseService }      from '../shared/db/course.service';
 })
 export class CoursesComponent implements OnInit {
   selectedCourse: Course;
+  editCourseTitle: boolean = false;
 
   constructor(
     private courseService: CourseService) { }
@@ -32,6 +33,19 @@ export class CoursesComponent implements OnInit {
 
   openDeleteCourseModal() {
     (<any>$('#deleteChapterModal')).openModal();
+  }
+
+  deleteCourse(course: Course): void {
+    this.courseService
+        .delete(course.id)
+        .then(() => {
+          //this.courses = this.courses.filter(c => c !== course);
+          if (this.selectedCourse === course) { this.selectedCourse = null; }
+        });
+  }
+
+  editCourseBtn() {
+    this.editCourseTitle = !this.editCourseTitle;
   }
 
 }

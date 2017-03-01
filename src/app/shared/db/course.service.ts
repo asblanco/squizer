@@ -40,4 +40,12 @@ export class CourseService {
       .catch(this.handleError);
   }
 
+  delete(id: number): Promise<void> {
+    const url = `${this.coursesUrl}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null)
+      .catch(this.handleError);
+  }
+
 }

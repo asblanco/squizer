@@ -2,10 +2,21 @@
 <div class="content" *ngIf="selectedCourse">
   <div class="container">
     <div class="row">
-      <h3>
-        {{selectedCourse.name}}
-        <a href="#"><i class="material-icons indigo-text lighten-2-text">edit</i></a>
+      <h3 *ngIf="!editCourseTitle">
+        <div class="col s11">
+            {{selectedCourse.name}}
+        </div>
+        <div class="col s1">
+          <a (click)="editCourseBtn()"><i class="material-icons indigo-text lighten-2-text">edit</i></a>
+        </div>
       </h3>
+      <div *ngIf="editCourseTitle">
+        <div class="input-field">
+          <input id="course_title" type="text" class="validate" value="{{selectedCourse.name}}">
+          <b><a class="waves-effect waves btn-flat indigo-text accent-2-text">Guardar</a></b>
+          <a (click)="editCourseBtn()" class="waves-effect waves btn-flat">Cancelar</a>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div *ngFor="let chapter of selectedCourse.chapters">
@@ -20,7 +31,6 @@
    <div class="footer">
      <div class="container">
        <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
-       <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
      </div>
    </div>
  </footer>
@@ -62,6 +72,7 @@
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves btn-flat">Cancelar</a>
-      <b><a href="#!" class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat">Eliminar</a></b>
+      <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="deleteCourse(selectedCourse); $event.stopPropagation()">
+        Eliminar</a></b>
     </div>
   </div>
