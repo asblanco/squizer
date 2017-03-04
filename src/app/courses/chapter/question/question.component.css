@@ -1,0 +1,32 @@
+.question .edit{
+  visibility:hidden;
+}
+
+.question:hover .edit{
+  visibility:visible;
+}
+
+p {
+  padding: 1em;
+}
+
+.answer {
+  padding-left: 2.5em;
+  padding-right: 1em;
+}
+
+.greenLine {
+  border-left: thick solid #4caf50;
+  padding-left: 1em;
+  color: #424242;
+}
+
+.redLine {
+  border-left: thick solid #ff0000;
+  padding-left: 1em;
+  color: #424242;
+}
+
+a {
+  color: black;
+}

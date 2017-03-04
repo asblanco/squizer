@@ -5,6 +5,7 @@ import { CommonModule }     from '@angular/common';
 import { CoursesComponent } from './courses.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ChapterComponent } from './chapter/chapter.component';
+import { QuestionComponent } from './chapter/question/question.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { ChapterComponent } from './chapter/chapter.component';
   declarations: [
     CoursesComponent,
     SideNavComponent,
-    ChapterComponent
+    ChapterComponent,
+    QuestionComponent
   ],
   exports: [ CoursesComponent ]
 })

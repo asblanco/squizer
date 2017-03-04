@@ -1,0 +1,21 @@
+<a class="question">
+  <div class="right">
+    <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">ELIMINAR</a></b>
+  </div>
+  <b><p> #{{question.id}} {{question.title}} </p></b>
+  <div class="collection">
+    <a *ngFor="let answer of question.answers" class="collection-item">
+      <span *ngIf="answer.correct">
+        <div class="greenLine">
+          {{answer.title}}
+        </div>
+      </span>
+      <span *ngIf="!answer.correct">
+        <div class="redLine">
+          {{answer.title}}
+        </div>
+      </span>
+    </a>
+  </div>
+</a>
+<hr>

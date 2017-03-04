@@ -8,11 +8,3 @@
 .collapsible-body {
   padding: 1em;
 }
-
-.answer .edit{
-  visibility:hidden;
-}
-
-.answer:hover .edit{
-  visibility:visible;
-}

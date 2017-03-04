@@ -10,24 +10,82 @@
     <!-- Body -->
     <div class="collapsible-body">
       <div *ngFor="let question of chapter.questions">
-        <div class="answer">
-          <div class="right">
-            <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit">ELIMINAR</a></b>
-          </div>
-          <p>
-            {{question.title}}
-            <span *ngFor="let answer of question.answers">
-              <br>
-              - {{answer.title}}
-            </span>
-          </p>
-        </div>
-        <hr>
+        <question [question]="question" (click)="openEditQuestionModal(question)"></question>
       </div>
-
       <div class="right-align">
-        <a class="btn-floating btn-large waves-effect waves indigo accent-2"><i class="material-icons">add</i></a>
+        <a class="btn-floating btn-large waves-effect waves indigo accent-2" (click)="openNewQuestionModal()">
+          <i class="material-icons">add</i>
+        </a>
       </div>
     </div>
   </li>
 </ul>
+
+<!-- New Question Modal -->
+<div id="newQuestionModal" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Crear pregunta</h4>
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field">
+          <input id="title" type="text" class="validate">
+          <label for="title_question">Titulo pregunta</label>
+        </div>
+      </div>
+      <div class="row col s6">
+        <b>Respuestas correctas</b>
+        <div class="input-field">
+          <input id="title" type="text" class="validate">
+          <label for="first_name">Respuesta correcta</label>
+        </div>
+        <div class="input-field">
+          <input id="title" type="text" class="validate">
+          <label for="first_name">Respuesta correcta</label>
+        </div>
+      </div>
+      <div class="row col s6">
+        <b>Respuestas incorrectas</b>
+        <div class="input-field">
+          <input id="title" type="text" class="validate">
+          <label for="first_name">Respuesta incorrecta</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Crear</a>
+  </div>
+</div>
+
+<!-- Edit Question Modal -->
+<div id="editQuestionModal" class="modal bottom-sheet">
+  <div class="modal-content" *ngIf="selectedQuestion">
+    <h4>Editar pregunta #{{selectedQuestion.id}}</h4>
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field">
+          <input id="title" type="text" class="validate" value="{{selectedQuestion.title}}">
+        </div>
+      </div>
+      <div class="row col s6">
+        <b>Respuestas correctas</b>
+        <div class="input-field" *ngFor="let answer of selectedQuestion.answers">
+          <span *ngIf="answer.correct">
+            <input id="title" type="text" class="validate" value="{{answer.title}}">
+          </span>
+        </div>
+      </div>
+      <div class="row col s6">
+        <b>Respuestas incorrectas</b>
+        <div class="input-field" *ngFor="let answer of selectedQuestion.answers">
+          <span *ngIf="!answer.correct">
+            <input id="title" type="text" class="validate" value="{{answer.title}}">
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Guardar</a>
+  </div>
+</div>

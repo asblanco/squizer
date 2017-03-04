@@ -48,4 +48,8 @@ export class CoursesComponent implements OnInit {
     this.editCourseTitle = !this.editCourseTitle;
   }
 
+  updateCourseTitle() {
+    this.editCourseTitle = !this.editCourseTitle;
+  }
+
 }

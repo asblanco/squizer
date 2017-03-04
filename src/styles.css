@@ -8,3 +8,7 @@
   border-bottom: 1px solid #b388ff;
   box-shadow: 0 1px 0 0 #b388ff;
 }
+
+a {
+  cursor: pointer;
+}
