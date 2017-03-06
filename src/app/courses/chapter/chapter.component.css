@@ -13,3 +13,8 @@
   width: 80% !important;
   /*height: 80% !important; */
 }
+
+fieldset {
+  padding: 1em;
+  background-color: white;
+}

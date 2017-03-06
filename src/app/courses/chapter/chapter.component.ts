@@ -40,7 +40,7 @@ export class ChapterComponent implements OnInit, AfterViewInit {
 
   openEditQuestionModal(question: Question) {
     this.selectedQuestion = question;
-    (<any>$('#editQuestionModal')).openModal();
+    (<any>$('#editQuestionModal')).openModal({dismissible: false});
   }
 
   initAnswer() {

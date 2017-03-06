@@ -34,24 +34,26 @@
       </div>
       <!--answers-->
       <div class="row">
-        <b>Respuestas</b>
-        <div formArrayName="answers">
-          <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
-            <div class="row" [formGroupName]="i">
-              <answer-form class="col s11" [group]="myForm.controls.answers.controls[i]"></answer-form>
-              <div class="col s1 switch">
-                <label>
-                  <input type="checkbox" id="{{i}}">
-                  <span class="lever"></span>
-                </label>
+        <fieldset>
+          <legend><b> Respuestas </b></legend>
+          <div formArrayName="answers">
+            <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
+              <div class="row" [formGroupName]="i">
+                <answer-form class="col s11" [group]="myForm.controls.answers.controls[i]" [id]="i" [length]="myForm.controls.answers.controls.length" (onRemoveAnswer)="removeAnswer($event)"></answer-form>
+                <div class="col s1 switch">
+                  <label>
+                    <input type="checkbox" id="{{i}}">
+                    <span class="lever"></span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <a class="col s12" (click)="addAnswer()">
-          <i class="material-icons">library_add</i>
-          Add another answer
-        </a>
+          <a class="col s12" (click)="addAnswer()">
+            <i class="material-icons">library_add</i>
+            Add another answer
+          </a>
+        </fieldset>
       </div>
       <br>
       <!--<div class="row col s12">
@@ -69,34 +71,51 @@
 </div>
 
 <!-- Edit Question Modal -->
-<div id="editQuestionModal" class="modal bottom-sheet">
+<div id="editQuestionModal" class="modal modal-fixed-footer">
   <div class="modal-content" *ngIf="selectedQuestion">
     <h4>Editar pregunta #{{selectedQuestion.id}}</h4>
-    <form class="col s12">
+    <form class="col s12" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
       <div class="row">
-        <div class="input-field">
-          <input id="title" type="text" class="validate" value="{{selectedQuestion.title}}">
+        <div class="input-field form-group">
+          <input type="text" class="form-control" formControlName="title" value="{{selectedQuestion.title}}">
+          <label for="title_question">Titulo pregunta</label>
         </div>
       </div>
-      <div class="row col s6">
-        <b>Respuestas correctas</b>
-        <div class="input-field" *ngFor="let answer of selectedQuestion.answers">
-          <span *ngIf="answer.correct">
-            <input id="title" type="text" class="validate" value="{{answer.title}}">
-          </span>
-        </div>
+      <!--answers-->
+      <div class="row">
+        <fieldset>
+          <legend><b> Respuestas </b></legend>
+          <div formArrayName="answers">
+            <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
+              <div class="row" [formGroupName]="i">
+                <answer-form class="col s11" [group]="myForm.controls.answers.controls[i]"
+                [id]="i" [length]="myForm.controls.answers.controls.length"
+                [answerText]="selectedQuestion.answers[1].title" (onRemoveAnswer)="removeAnswer($event)"></answer-form>
+                <div class="col s1 switch">
+                  <label>
+                    <input type="checkbox" id="{{i}}">
+                    <span class="lever"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="col s12" (click)="addAnswer()">
+            <i class="material-icons">library_add</i>
+            Add another answer
+          </a>
+        </fieldset>
       </div>
-      <div class="row col s6">
-        <b>Respuestas incorrectas</b>
-        <div class="input-field" *ngFor="let answer of selectedQuestion.answers">
-          <span *ngIf="!answer.correct">
-            <input id="title" type="text" class="validate" value="{{answer.title}}">
-          </span>
-        </div>
-      </div>
+      <br>
+      <!--<div class="row col s12">
+        <div>myForm details:-</div>
+        <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
+        <pre>form value: <br>{{myForm.value | json}}</pre>
+      </div>-->
     </form>
   </div>
   <div class="modal-footer">
-   <a class=" modal-action modal-close waves-effect indigo accent-2 btn">Guardar</a>
+    <a class=" modal-action modal-close waves-effect btn-flat">CANCELAR</a>
+    <button class=" modal-action modal-close waves-effect indigo accent-2 btn" type="submit" [disabled]="!myForm.valid">GUARDAR</button>
   </div>
 </div>
