@@ -12,3 +12,8 @@
 a {
   cursor: pointer;
 }
+
+@font-face {
+    font-family: 'womby';
+    src: url('./assets/fonts/womby/Womby-Regular.ttf');
+}

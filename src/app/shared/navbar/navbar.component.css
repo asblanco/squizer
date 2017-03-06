@@ -4,3 +4,11 @@ nav {
   padding-left: 60px;
   padding-right: 60px;
 }
+
+.brand-logo {
+  font-family: 'womby';
+}
+
+img {
+  max-height: 4em;;
+}
