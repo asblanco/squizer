@@ -8,3 +8,8 @@
 .collapsible-body {
   padding: 1em;
 }
+
+.modal {
+  width: 80% !important;
+  /*height: 80% !important; */
+}

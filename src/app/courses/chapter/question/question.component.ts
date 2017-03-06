@@ -14,4 +14,8 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
   }
 
+  delete() {
+    console.log("Delete question");
+  }
+
 }
