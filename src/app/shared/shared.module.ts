@@ -10,13 +10,13 @@ import { InMemoryDataService }  from './db/in-memory-data.service';
 @NgModule({
   imports: [
     CommonModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService)
+    //InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   declarations: [
     NavbarComponent
   ],
   exports: [
-    InMemoryWebApiModule,
+    //InMemoryWebApiModule,
     NavbarComponent
   ]
 })
@@ -26,7 +26,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         CourseService,
-        InMemoryDataService
+        //InMemoryDataService
       ]
     };
   }
