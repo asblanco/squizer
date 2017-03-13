@@ -21,7 +21,7 @@ export class CourseService {
   }
 
   getCourseDetails(id: number): Promise<Course> {
-    const url = `${this.coursesUrl}/${id}`;
+    const url = `${this.coursesUrl}${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Course)
@@ -42,10 +42,19 @@ export class CourseService {
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.coursesUrl}/${id}`;
+    const url = `${this.coursesUrl}${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
+      .catch(this.handleError);
+  }
+
+  update(course: Course): Promise<Course> {
+    const url = `${this.coursesUrl}${course.id}/`;
+    return this.http
+      .put(url, JSON.stringify(course), {headers: this.headers})
+      .toPromise()
+      .then(() => course)
       .catch(this.handleError);
   }
 

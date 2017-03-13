@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output }  from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input }  from '@angular/core';
 import { Course }         from '../../shared/db/course';
 import { CourseService }  from '../../shared/db/course.service';
 
@@ -9,19 +9,12 @@ import { CourseService }  from '../../shared/db/course.service';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
-  courses: Course[] = [];
+  @Input() courses: Course[] = [];
   @Output() onSelected = new EventEmitter<Course>();
 
   constructor(private courseService: CourseService) { }
 
-  ngOnInit() {
-    this.getCourses();
-  }
-
-  getCourses(): void {
-    this.courseService.getCourses()
-      .then(courses => this.courses = courses);
-  }
+  ngOnInit() { }
 
   select(course: Course) {
     this.onSelected.emit(course);

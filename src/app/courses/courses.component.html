@@ -1,4 +1,4 @@
-<side-nav (onSelected)="onSelected($event)"></side-nav>
+<side-nav (onSelected)="onSelected($event)" [courses]="courses"></side-nav>
 <div class="content" *ngIf="selectedCourse">
   <div class="container">
     <!-- Course title -->
@@ -13,9 +13,10 @@
       </h3>
       <div *ngIf="editCourseTitle">
         <div class="input-field">
-          <input id="courseTitle" type="text" class="validate" value="{{selectedCourse.name}}">
+          <!-- <input id="courseTitle" type="text" class="validate" value="{{selectedCourse.name}}"> -->
+          <input id="courseTitle" [(ngModel)]="selectedCourse.name" placeholder="name" />
           <b><a id="saveCourseTitle" class="waves-effect waves btn-flat indigo-text accent-2-text" (click)="updateCourseTitle()">Guardar</a></b>
-          <a (click)="editCourseBtn()" class="waves-effect waves btn-flat">Cancelar</a>
+          <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
         </div>
       </div>
     </div>

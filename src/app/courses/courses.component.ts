@@ -9,22 +9,26 @@ import { CourseService }      from '../shared/db/course.service';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
+  courses: Course[] = [];
+  editedCourse: Course;
   selectedCourse: Course;
   editCourseTitle: boolean = false;
 
-  constructor(
-    private courseService: CourseService) { }
+  constructor(private courseService: CourseService) { }
+
+  ngOnInit():void {
+    this.getCourses();
+  }
 
   onSelected(course: Course) {
     this.selectedCourse = course;
+    this.editCourseTitle = false;
     this.getCourseDetails(course.id);
   }
 
-  ngOnInit():void { }
-
-  getCourseDetails(courseId: number): void {
-      this.courseService.getCourseDetails(courseId)
-      .then(course => this.selectedCourse = course);
+  getCourses(): void {
+    this.courseService.getCourses()
+      .then(courses => this.courses = courses);
   }
 
   openNewChapterModal() {
@@ -35,21 +39,50 @@ export class CoursesComponent implements OnInit {
     (<any>$('#deleteChapterModal')).openModal();
   }
 
+  /* Get, delete and updateTitle course methods */
+
+  getCourseDetails(courseId: number): void {
+      this.courseService.getCourseDetails(courseId)
+      .then(course => this.selectedCourse = course);
+  }
+
   deleteCourse(course: Course): void {
     this.courseService
         .delete(course.id)
         .then(() => {
-          //this.courses = this.courses.filter(c => c !== course);
+          this.courses.splice(this.indexOf(this.courses, course), 1);
           if (this.selectedCourse === course) { this.selectedCourse = null; }
         });
   }
 
-  editCourseBtn() {
-    this.editCourseTitle = !this.editCourseTitle;
+  editCourseBtn(): void {
+    this.editCourseTitle = true;
+    this.editedCourse = JSON.parse(JSON.stringify(this.selectedCourse)); //Save value without binding
   }
 
-  updateCourseTitle() {
-    this.editCourseTitle = !this.editCourseTitle;
+  cancelEditCourse(): void {
+    this.courses.splice(this.indexOf(this.courses, this.selectedCourse), 1, this.editedCourse);
+    this.selectedCourse = this.editedCourse;
+    this.editCourseTitle = false;
+  }
+
+  updateCourseTitle(): void {
+    let newCourse = this.selectedCourse;
+
+    this.courseService.update(newCourse)
+    .then(() => {
+      this.courses.splice(this.indexOf(this.courses, this.editedCourse), 1, newCourse),
+      this.selectedCourse = newCourse,
+      this.editCourseTitle = false;
+    })
+    .catch(() => this.cancelEditCourse());
+  }
+
+  private indexOf(array, item) {
+      for (var i = 0; i < array.length; i++) {
+          if (array[i].id === item.id) return i;
+      }
+      return -1;
   }
 
 }
