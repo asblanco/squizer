@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, AfterViewInit }        from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit }        from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
 import { Chapter }  from '../../shared/db/chapter';
 import { Question } from '../../shared/db/question';
+import { ChapterService }     from '../../shared/db/chapter.service';
 
 @Component({
   selector: 'chapter',
@@ -10,12 +11,14 @@ import { Question } from '../../shared/db/question';
   styleUrls: ['./chapter.component.css']
 })
 export class ChapterComponent implements OnInit, AfterViewInit {
+  @Output() onDeletedChapter = new EventEmitter<Chapter>();
   @Input() chapter: Chapter;
   selectedQuestion: Question;
   public myForm: FormGroup; // our form model
 
   constructor(
-    private _fb: FormBuilder) { }
+    private _fb: FormBuilder,
+    private chapterService: ChapterService) { }
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -44,6 +47,20 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     (<any>$('#editQuestionModal')).openModal({dismissible: false});
   }
 
+  openDeleteChapterModal() {
+    (<any>$('#deleteChapterModal'+this.chapter.id)).openModal();
+  }
+
+  /* Chapter delete and edit */
+  deleteChapter(chapter: Chapter): void {
+    this.chapterService
+        .delete(chapter.id)
+        .then(() => {
+          this.onDeletedChapter.emit(chapter);
+        });
+  }
+
+  /* Answer */
   initAnswer() {
     return this._fb.group({
       answer: ['', Validators.required],

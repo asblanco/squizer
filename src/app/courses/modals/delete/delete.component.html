@@ -1,0 +1,12 @@
+<!-- Delete Modal -->
+<div id="{{id}}" class="modal">
+  <div class="modal-content">
+    <h4>Eliminar</h4>
+    <p>¿Eliminar <b>{{title}}</b>?</p>
+  </div>
+  <div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect waves btn-flat">Cancelar</a>
+    <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="delete(); $event.stopPropagation()">
+      Eliminar</a></b>
+  </div>
+</div>

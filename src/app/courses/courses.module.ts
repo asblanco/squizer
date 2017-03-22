@@ -8,6 +8,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { QuestionComponent } from './chapter/question/question.component';
 import { AnswerFormComponent } from './chapter/answer-form/answer-form.component';
+import { DeleteComponent } from './modals/delete/delete.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { AnswerFormComponent } from './chapter/answer-form/answer-form.component
     SideNavComponent,
     ChapterComponent,
     QuestionComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    DeleteComponent
   ],
   exports: [ CoursesComponent ]
 })

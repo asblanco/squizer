@@ -1,5 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 import { Course }             from '../shared/db/course';
+import { Chapter }             from '../shared/db/chapter';
 import { CourseService }      from '../shared/db/course.service';
 import { ChapterService }     from '../shared/db/chapter.service';
 
@@ -95,6 +96,10 @@ export class CoursesComponent implements OnInit {
       .then(chapter => {
         this.selectedCourse.chapters.push(chapter);
       });
+  }
+
+  onDeletedChapter(chapter: Chapter): void {
+    this.selectedCourse.chapters.splice(this.indexOf(this.selectedCourse.chapters, chapter), 1);
   }
 
 }

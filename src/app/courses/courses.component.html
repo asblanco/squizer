@@ -22,7 +22,7 @@
     <!-- Chapters -->
     <div class="row">
       <div *ngFor="let chapter of selectedCourse.chapters">
-        <chapter [chapter]="chapter"></chapter>
+        <chapter [chapter]="chapter" (onDeletedChapter)="onDeletedChapter($event)"></chapter>
       </div>
     </div>
 
@@ -69,7 +69,10 @@
 </div>
 
 <!-- Delete Course Modal -->
-<div id="deleteCourseModal" class="modal">
+<div *ngIf="selectedCourse">
+  <delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></delete-modal>
+</div>
+<!--<div id="deleteCourseModal" class="modal">
   <div class="modal-content" *ngIf="selectedCourse">
     <h4>Eliminar</h4>
     <p>¿Eliminar <b>{{selectedCourse.name}}</b>?</p>
@@ -79,7 +82,7 @@
     <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="deleteCourse(selectedCourse); $event.stopPropagation()">
       Eliminar</a></b>
   </div>
-</div>
+</div> -->
 
 <script type="text/javascript">
   $("#courseTitle").keyup(function(event){

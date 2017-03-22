@@ -5,7 +5,7 @@
       <strong>{{chapter.title}}</strong>
       <div class="right">
         <a href="#"><i class="material-icons indigo-text accent-2-text delete">edit</i></a>
-        <a href="#"><i class="material-icons red-text delete">delete</i></a>
+        <a (click)="openDeleteChapterModal()"><i class="material-icons red-text delete">delete</i></a>
       </div>
     </div>
     <!-- Body -->
@@ -120,3 +120,5 @@
     <button class=" modal-action modal-close waves-effect indigo accent-2 btn" type="submit" [disabled]="!myForm.valid">GUARDAR</button>
   </div>
 </div>
+
+<delete-modal (onDeleted)="deleteChapter(chapter)" [id]="'deleteChapterModal'+chapter.id" [title]="chapter.title"></delete-modal>
