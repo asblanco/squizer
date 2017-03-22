@@ -1,6 +1,7 @@
 import { Component, OnInit }  from '@angular/core';
 import { Course }             from '../shared/db/course';
 import { CourseService }      from '../shared/db/course.service';
+import { ChapterService }     from '../shared/db/chapter.service';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +15,8 @@ export class CoursesComponent implements OnInit {
   selectedCourse: Course;
   editCourseTitle: boolean = false;
 
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService,
+              private chapterService: ChapterService) { }
 
   ngOnInit():void {
     this.getCourses();
@@ -36,7 +38,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openDeleteCourseModal() {
-    (<any>$('#deleteChapterModal')).openModal();
+    (<any>$('#deleteCourseModal')).openModal();
   }
 
   /* Get, delete and updateTitle course methods */
@@ -83,6 +85,16 @@ export class CoursesComponent implements OnInit {
           if (array[i].id === item.id) return i;
       }
       return -1;
+  }
+
+  /* Add new chapter */
+  addChapter(title: string): void {
+    title = title.trim();
+    if (!title) { return; }
+    this.chapterService.create(title, this.selectedCourse.id)
+      .then(chapter => {
+        this.selectedCourse.chapters.push(chapter);
+      });
   }
 
 }

@@ -21,7 +21,7 @@ export class SideNavComponent implements OnInit {
   }
 
   openModal() {
-    (<any>$('#modal1')).openModal();
+    (<any>$('#newCourseModal')).openModal();
   }
 
   add(name: string): void {

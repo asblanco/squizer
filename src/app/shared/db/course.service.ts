@@ -7,21 +7,21 @@ import { Course } from './course';
 
 @Injectable()
 export class CourseService {
-  //private coursesUrl = 'api/courses';  // URL to web api
-  private coursesUrl = 'http://127.0.0.1:8000/courses/';  // URL to web api
+  private url = 'http://127.0.0.1:8000/course/';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 
   getCourses(): Promise<Course[]> {
-    return this.http.get(this.coursesUrl)
+    const url = `http://127.0.0.1:8000/courses/`;
+    return this.http.get(this.url)
                .toPromise()
                .then(response => response.json() as Course[])
                .catch(this.handleError);
   }
 
   getCourseDetails(id: number): Promise<Course> {
-    const url = `${this.coursesUrl}${id}`;
+    const url = `${this.url}${id}/`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as Course)
@@ -35,14 +35,14 @@ export class CourseService {
 
   create(name: string): Promise<Course> {
     return this.http
-      .post(this.coursesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.url, JSON.stringify({name: name, chapters:[]}), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.coursesUrl}${id}`;
+    const url = `${this.url}${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
@@ -50,7 +50,7 @@ export class CourseService {
   }
 
   update(course: Course): Promise<Course> {
-    const url = `${this.coursesUrl}${course.id}/`;
+    const url = `${this.url}${course.id}/`;
     return this.http
       .put(url, JSON.stringify(course), {headers: this.headers})
       .toPromise()

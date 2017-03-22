@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, AfterViewInit }        from '@angular/core';
+import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
-import { Chapter } from '../../shared/db/chapter';
+import { Chapter }  from '../../shared/db/chapter';
 import { Question } from '../../shared/db/question';
 
 @Component({
@@ -14,7 +14,8 @@ export class ChapterComponent implements OnInit, AfterViewInit {
   selectedQuestion: Question;
   public myForm: FormGroup; // our form model
 
-  constructor(private _fb: FormBuilder) { }
+  constructor(
+    private _fb: FormBuilder) { }
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -64,5 +65,4 @@ export class ChapterComponent implements OnInit, AfterViewInit {
       // call API to save question
       console.log(model);
   }
-
 }
