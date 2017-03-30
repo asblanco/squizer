@@ -1,0 +1,19 @@
+<!-- New Modal -->
+<div id="{{modalId}}" class="modal bottom-sheet">
+ <div class="modal-content">
+   <h4>{{newText}}</h4>
+   <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field">
+          <input #inputTitle type="text" class="validate">
+          <label for="first_name">Titulo</label>
+        </div>
+      </div>
+    </form>
+  </div>
+ </div>
+ <div class="modal-footer">
+   <a class=" modal-action modal-close waves-effect indigo accent-2 btn" (click)="add(inputTitle.value)">Guardar</a>
+ </div>
+</div>

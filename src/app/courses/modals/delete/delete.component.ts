@@ -2,8 +2,7 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'delete-modal',
-  templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.css']
+  templateUrl: './delete.component.html'
 })
 export class DeleteComponent implements OnInit {
   @Input() id: string;
