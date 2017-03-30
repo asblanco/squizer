@@ -30,3 +30,12 @@ p {
 a {
   color: black;
 }
+
+.modal-fixed-footer {
+  width: 80% !important;
+}
+
+fieldset {
+  padding: 1em;
+  background-color: white;
+}

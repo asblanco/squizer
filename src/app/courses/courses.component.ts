@@ -1,7 +1,9 @@
 import { Component, OnInit }  from '@angular/core';
 import { Course }             from '../shared/db/course';
-import { Chapter }             from '../shared/db/chapter';
+import { Chapter }            from '../shared/db/chapter';
+import { Question }           from '../shared/db/question';
 import { CourseService }      from '../shared/db/course.service';
+import { CourseInfoService }  from './course-info.service';
 import { ChapterService }     from '../shared/db/chapter.service';
 
 @Component({
@@ -16,8 +18,9 @@ export class CoursesComponent implements OnInit {
   selectedCourse: Course;
   editCourseTitle: boolean = false;
 
-  constructor(private courseService: CourseService,
-              private chapterService: ChapterService) { }
+  constructor( private courseInfoService:  CourseInfoService,
+               private courseService:      CourseService,
+               private chapterService:     ChapterService     ) { }
 
   ngOnInit():void {
     this.getCourses();
@@ -46,7 +49,8 @@ export class CoursesComponent implements OnInit {
 
   getCourseDetails(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
-      .then(course => this.selectedCourse = course);
+      .then(course => {this.courseInfoService.course = course,
+                       this.selectedCourse = this.courseInfoService.course});
   }
 
   deleteCourse(course: Course): void {
@@ -94,12 +98,8 @@ export class CoursesComponent implements OnInit {
     if (!title) { return; }
     this.chapterService.create(title, this.selectedCourse.id)
       .then(chapter => {
-        this.selectedCourse.chapters.push(chapter);
+        this.courseInfoService.addChapter(chapter);
       });
-  }
-
-  onDeletedChapter(chapter: Chapter): void {
-    this.selectedCourse.chapters.splice(this.indexOf(this.selectedCourse.chapters, chapter), 1);
   }
 
 }

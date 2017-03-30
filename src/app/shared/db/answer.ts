@@ -1,8 +1,6 @@
 export class Answer {
   id: number;
-  courseId: number;
-  chapterId: number;
-  questionId: number;
+  question: number;
   title: string;
   correct: boolean;
 }

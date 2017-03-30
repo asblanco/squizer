@@ -2,7 +2,7 @@ import { Question } from './question';
 
 export class Chapter {
   id: number;
-  courseId: number;
+  course: number;
   title: string;
   questions: Question[];
 }

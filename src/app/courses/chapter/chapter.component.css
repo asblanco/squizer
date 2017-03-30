@@ -9,9 +9,8 @@
   padding: 1em;
 }
 
-.modal {
+#newQuestionModal {
   width: 80% !important;
-  /*height: 80% !important; */
 }
 
 fieldset {

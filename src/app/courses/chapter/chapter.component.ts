@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit }        from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit }    from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
 import { Chapter }  from '../../shared/db/chapter';
 import { Question } from '../../shared/db/question';
 import { ChapterService }     from '../../shared/db/chapter.service';
+import { CourseInfoService }  from '../course-info.service';
 
 @Component({
   selector: 'chapter',
@@ -11,23 +12,22 @@ import { ChapterService }     from '../../shared/db/chapter.service';
   styleUrls: ['./chapter.component.css']
 })
 export class ChapterComponent implements OnInit, AfterViewInit {
-  @Output() onDeletedChapter = new EventEmitter<Chapter>();
   @Input() chapter: Chapter;
-  selectedQuestion: Question;
   public myForm: FormGroup; // our form model
 
   constructor(
     private _fb: FormBuilder,
+    private courseInfoService: CourseInfoService,
     private chapterService: ChapterService) { }
 
   ngOnInit() {
     this.myForm = this._fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       answers: this._fb.array([
-        this.initAnswer(),
-        this.initAnswer(),
-        this.initAnswer(),
-        this.initAnswer()
+        this.initAnswerT(),
+        this.initAnswerT(),
+        this.initAnswerT(),
+        this.initAnswerF()
       ])
     });
     // add address
@@ -38,13 +38,12 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     (<any>$('.collapsible')).collapsible(); //casting to any
   }
 
-  openNewQuestionModal() {
-    (<any>$('#newQuestionModal')).openModal({dismissible: false});
+  openEditChapterModal() {
+    (<any>$('#editChapterModal'+this.chapter.id)).openModal();
   }
 
-  openEditQuestionModal(question: Question) {
-    this.selectedQuestion = question;
-    (<any>$('#editQuestionModal')).openModal({dismissible: false});
+  openNewQuestionModal() {
+    (<any>$('#newQuestionModal')).openModal({dismissible: false});
   }
 
   openDeleteChapterModal() {
@@ -52,16 +51,31 @@ export class ChapterComponent implements OnInit, AfterViewInit {
   }
 
   /* Chapter delete and edit */
+  updateChapterTitle(title: string): void {
+    let oldTitle = this.chapter.title;
+    this.chapter.title = title;
+    this.chapterService.update(this.chapter)
+    .then(() => { })
+    .catch(() => this.chapter.title = oldTitle);
+  }
+
   deleteChapter(chapter: Chapter): void {
     this.chapterService
         .delete(chapter.id)
         .then(() => {
-          this.onDeletedChapter.emit(chapter);
+          this.courseInfoService.deleteChapter(chapter);
         });
   }
 
   /* Answer */
-  initAnswer() {
+  initAnswerT() {
+    return this._fb.group({
+      answer: ['', Validators.required],
+      correct: true
+    });
+  }
+
+  initAnswerF() {
     return this._fb.group({
       answer: ['', Validators.required],
       correct: false
@@ -70,7 +84,7 @@ export class ChapterComponent implements OnInit, AfterViewInit {
 
   addAnswer() {
     const control = <FormArray>this.myForm.controls['answers'];
-    control.push(this.initAnswer());
+    control.push(this.initAnswerF());
   }
 
   removeAnswer(i: number) {
@@ -78,8 +92,9 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     control.removeAt(i);
   }
 
-  save(model: Question) {
+  addQuestion(q: Question) {
       // call API to save question
-      console.log(model);
+      console.log(q);
   }
+
 }

@@ -22,7 +22,7 @@
     <!-- Chapters -->
     <div class="row">
       <div *ngFor="let chapter of selectedCourse.chapters">
-        <chapter [chapter]="chapter" (onDeletedChapter)="onDeletedChapter($event)"></chapter>
+        <chapter [chapter]="chapter"></chapter>
       </div>
     </div>
 
@@ -49,40 +49,12 @@
 </div>
 
 <!-- New Chapter Modal -->
-<div id="newChapterModal" class="modal bottom-sheet">
- <div class="modal-content">
-   <h4>Nuevo tema</h4>
-   <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field">
-          <input #chapterTitle type="text" class="validate">
-          <label for="first_name">Titulo</label>
-        </div>
-      </div>
-    </form>
-  </div>
- </div>
- <div class="modal-footer">
-   <a class=" modal-action modal-close waves-effect indigo accent-2 btn" (click)="addChapter(chapterTitle.value)">Guardar</a>
- </div>
-</div>
+<new-modal (onAdded)="addChapter($event)" [modalId]="'newChapterModal'" [newText]="'Nuevo tema'"></new-modal>
 
 <!-- Delete Course Modal -->
 <div *ngIf="selectedCourse">
   <delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></delete-modal>
 </div>
-<!--<div id="deleteCourseModal" class="modal">
-  <div class="modal-content" *ngIf="selectedCourse">
-    <h4>Eliminar</h4>
-    <p>¿Eliminar <b>{{selectedCourse.name}}</b>?</p>
-  </div>
-  <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect waves btn-flat">Cancelar</a>
-    <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="deleteCourse(selectedCourse); $event.stopPropagation()">
-      Eliminar</a></b>
-  </div>
-</div> -->
 
 <script type="text/javascript">
   $("#courseTitle").keyup(function(event){

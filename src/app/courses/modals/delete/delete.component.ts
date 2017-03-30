@@ -1,18 +1,15 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'delete-modal',
   templateUrl: './delete.component.html'
 })
-export class DeleteComponent implements OnInit {
+export class DeleteComponent {
   @Input() id: string;
   @Input() title: string;
   @Output() onDeleted = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   delete(): void {
     this.onDeleted.emit();

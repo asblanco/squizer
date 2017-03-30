@@ -9,6 +9,9 @@ import { ChapterComponent } from './chapter/chapter.component';
 import { QuestionComponent } from './chapter/question/question.component';
 import { AnswerFormComponent } from './chapter/answer-form/answer-form.component';
 import { DeleteComponent } from './modals/delete/delete.component';
+import { NewComponent } from './modals/new/new.component';
+
+import { CourseInfoService } from './course-info.service';
 
 @NgModule({
   imports: [
@@ -22,9 +25,11 @@ import { DeleteComponent } from './modals/delete/delete.component';
     ChapterComponent,
     QuestionComponent,
     AnswerFormComponent,
-    DeleteComponent
+    DeleteComponent,
+    NewComponent,
   ],
-  exports: [ CoursesComponent ]
+  exports: [ CoursesComponent ],
+  providers: [ CourseInfoService ]
 })
 export class CoursesModule implements OnInit {
 

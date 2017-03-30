@@ -13,8 +13,8 @@ export class CourseService {
   constructor(private http: Http) { }
 
   getCourses(): Promise<Course[]> {
-    const url = `http://127.0.0.1:8000/courses/`;
-    return this.http.get(this.url)
+    const urlListCourses = `http://127.0.0.1:8000/courses/`;
+    return this.http.get(urlListCourses)
                .toPromise()
                .then(response => response.json() as Course[])
                .catch(this.handleError);
