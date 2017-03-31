@@ -1,6 +1,6 @@
 <a class="question" (click)="openEditQuestionModal(); $event.stopPropagation();">
   <div class="right">
-    <b><a class="waves-effect waves btn-flat indigo-text accent-2-text edit" (click)="openDeleteQuestionModal(); $event.stopPropagation();">ELIMINAR</a></b>
+    <b><a class="waves-effect waves btn-flat edit squizer-btn-text" (click)="openDeleteQuestionModal(); $event.stopPropagation();">ELIMINAR</a></b>
   </div>
   <b><p> #{{question.id}} {{question.title}} </p></b>
   <div class="collection">
@@ -66,7 +66,7 @@
   </div>
   <div class="modal-footer">
     <a class=" modal-action modal-close waves-effect btn-flat">CANCELAR</a>
-    <button class=" modal-action modal-close waves-effect indigo accent-2 btn" type="submit" [disabled]="!myForm.valid">GUARDAR</button>
+    <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!myForm.valid">GUARDAR</button>
   </div>
 </div>
 

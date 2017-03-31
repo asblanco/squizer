@@ -30,6 +30,8 @@
   background-color: white;
 }
 
+/*h3 size and font family*/
 #courseTitle {
   font-size: 2.9em;
+  font-family: 'raleway-bold';
 }

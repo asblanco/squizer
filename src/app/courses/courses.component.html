@@ -8,13 +8,13 @@
             {{selectedCourse.name}}
         </div>
         <div class="col s1">
-          <a (click)="editCourseBtn()"><i class="material-icons indigo-text lighten-2-text">edit</i></a>
+          <a (click)="editCourseBtn()"><i class="material-icons icon-blue">edit</i></a>
         </div>
       </h3>
       <div *ngIf="editCourseTitle">
         <div class="input-field">
           <input id="courseTitle" [(ngModel)]="selectedCourse.name" placeholder="name" />
-          <b><a id="saveCourseTitle" class="waves-effect waves btn-flat indigo-text accent-2-text" (click)="updateCourseTitle()">Guardar</a></b>
+          <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-btn-text" (click)="updateCourseTitle()">Guardar</a></b>
           <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
         </div>
       </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="row">
-      <a class="waves-effect indigo accent-2 btn-large" (click)="openNewChapterModal()">Nuevo tema</a>
+      <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
     </div>
   </div>
   <!-- Delete course -->

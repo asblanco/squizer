@@ -1,19 +1,75 @@
 /* Global styles, and also import other style files */
-/* label focus color */
-.input-field input[type=text]:focus + label {
-  color: #b388ff;
+@font-face {
+    font-family: 'womby';
+    src: url('./assets/fonts/womby/Womby-Regular.ttf');
 }
-/* label underline focus color */
-.input-field input[type=text]:focus {
-  border-bottom: 1px solid #b388ff;
-  box-shadow: 0 1px 0 0 #b388ff;
+
+@font-face {
+    font-family: 'raleway';
+    src: url('./assets/fonts/raleway/Raleway-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'raleway-bold';
+    src: url('./assets/fonts/raleway/Raleway-Bold.ttf');
 }
 
 a {
   cursor: pointer;
 }
 
-@font-face {
-    font-family: 'womby';
-    src: url('./assets/fonts/womby/Womby-Regular.ttf');
+/* General Colors */
+/*
+Paleta de colores:
+   - Void:    #0E0B16   texto
+   - Fushia:  #A239CA   navbar
+   - Jewel:   #4717F6   botones
+              #2806A5   botones on hover
+   - Stark:   #E7DFDD   background
+*/
+
+body {
+  font-family: 'raleway';
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'raleway-bold';
+}
+
+.squizer-btn {
+  color: white !important;
+  background-color: #4717F6;
+  font-family: 'raleway-bold';
+}
+
+.squizer-btn:hover {
+  color: white !important;
+  background-color: #2806A5 !important;
+  font-family: 'raleway-bold';
+}
+
+.btn-flat {
+  font-family: 'raleway-bold';
+}
+
+.squizer-btn-text {
+  color: #4717F6 !important;
+}
+
+i.icon-blue {
+  color: #4717F6;
+}
+
+i.icon-red {
+  color: red;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #4717F6;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #4717F6;
+  box-shadow: 0 1px 0 0 #4717F6;
 }
