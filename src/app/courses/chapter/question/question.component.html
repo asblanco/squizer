@@ -38,9 +38,9 @@
           <div formArrayName="answers">
             <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
               <div class="row" [formGroupName]="i">
-                <answer-form class="col s11" [group]="myForm.controls.answers.controls[i]"
+                <!--<answer-form class="col s11" [group]="myForm.controls.answers.controls[i]"-
                 [id]="i" [length]="myForm.controls.answers.controls.length"
-                [answerText]="question.answers[1].title" (onRemoveAnswer)="removeAnswer($event)"></answer-form>
+                [answerText]="question.answers[1].title" (onRemoveAnswer)="removeAnswer($event)"></answer-form>-->
                 <div class="col s1 switch">
                   <label>
                     <input type="checkbox" id="{{i}}">
@@ -57,11 +57,6 @@
         </fieldset>
       </div>
       <br>
-      <!--<div class="row col s12">
-        <div>myForm details:-</div>
-        <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
-        <pre>form value: <br>{{myForm.value | json}}</pre>
-      </div>-->
     </form>
   </div>
   <div class="modal-footer">

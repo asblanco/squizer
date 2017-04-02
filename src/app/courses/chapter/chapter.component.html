@@ -40,54 +40,6 @@
   </div>
 </div>
 
-
-<!-- New Question Modal -->
-<div id="newQuestionModal" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Crear pregunta</h4>
-    <form class="col s12" [formGroup]="myForm" novalidate (ngSubmit)="addQuestion(myForm)">
-      <div class="row">
-        <div class="input-field form-group">
-          <input type="text" class="form-control" formControlName="title">
-          <label for="title_question">Titulo pregunta</label>
-        </div>
-      </div>
-      <!--answers-->
-      <div class="row">
-        <fieldset>
-          <legend><b> Respuestas </b></legend>
-          <div formArrayName="answers">
-            <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
-              <div class="row" [formGroupName]="i">
-                <answer-form class="col s11" [group]="myForm.controls.answers.controls[i]" [id]="i" [length]="myForm.controls.answers.controls.length" (onRemoveAnswer)="removeAnswer($event)"></answer-form>
-                <div class="col s1 switch">
-                  <label>
-                    <input type="checkbox" id="{{i}}">
-                    <span class="lever"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="col s12" (click)="addAnswer()">
-            <i class="material-icons">library_add</i>
-            Add another answer
-          </a>
-        </fieldset>
-      </div>
-      <br>
-      <!--<div class="row col s12">
-        <div>myForm details:-</div>
-        <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
-        <pre>form value: <br>{{myForm.value | json}}</pre>
-      </div>-->
-    </form>
-
-  </div>
-  <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect btn-flat">CANCELAR</a>
-    <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!myForm.valid">Crear</button>
-  </div>
-</div>
+<new-question-modal [chapter]="chapter"></new-question-modal>
 
 <delete-modal (onDeleted)="deleteChapter(chapter)" [id]="'deleteChapterModal'+chapter.id" [title]="chapter.title"></delete-modal>

@@ -18,6 +18,10 @@ export class CourseInfoService {
     this.course.chapters.splice(this.course.chapters.indexOf(chapter), 1);
   }
 
+  addQuestion(chapterId: number, question: Question): void {
+    this.course.chapters[this.indexOfId(this.course.chapters, chapterId)].questions.push(question);
+  }
+
   deleteQuestion(chapterId: number, question: Question): void {
     this.course.chapters[this.indexOfId(this.course.chapters, chapterId)].questions
     .splice(this.course.chapters[this.indexOfId(this.course.chapters, chapterId)].questions.indexOf(question), 1);

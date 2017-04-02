@@ -1,3 +1,12 @@
+.modal {
+  width: 80% !important;
+}
+
+fieldset {
+  padding: 1em;
+  background-color: white;
+}
+
 span {
   position: relative;
   border: none;
@@ -9,5 +18,4 @@ img.icon-cross {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 2em;
 }

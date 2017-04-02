@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit }    from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
 import { Chapter }  from '../../shared/db/chapter';
 import { Question } from '../../shared/db/question';
@@ -13,26 +12,12 @@ import { CourseInfoService }  from '../course-info.service';
 })
 export class ChapterComponent implements OnInit, AfterViewInit {
   @Input() chapter: Chapter;
-  public myForm: FormGroup; // our form model
 
   constructor(
-    private _fb: FormBuilder,
     private courseInfoService: CourseInfoService,
     private chapterService: ChapterService) { }
 
-  ngOnInit() {
-    this.myForm = this._fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      answers: this._fb.array([
-        this.initAnswerT(),
-        this.initAnswerT(),
-        this.initAnswerT(),
-        this.initAnswerF()
-      ])
-    });
-    // add address
-    //this.addAnswer();
-  }
+  ngOnInit() { }
 
   ngAfterViewInit() {
     (<any>$('.collapsible')).collapsible(); //casting to any
@@ -43,14 +28,14 @@ export class ChapterComponent implements OnInit, AfterViewInit {
   }
 
   openNewQuestionModal() {
-    (<any>$('#newQuestionModal')).openModal({dismissible: false});
+    (<any>$('#newQuestionModal'+this.chapter.id)).openModal({dismissible: false});
   }
 
   openDeleteChapterModal() {
     (<any>$('#deleteChapterModal'+this.chapter.id)).openModal();
   }
 
-  /* Chapter delete and edit */
+  /* Edit and remove chapter */
   updateChapterTitle(title: string): void {
     let oldTitle = this.chapter.title;
     this.chapter.title = title;
@@ -65,36 +50,6 @@ export class ChapterComponent implements OnInit, AfterViewInit {
         .then(() => {
           this.courseInfoService.deleteChapter(chapter);
         });
-  }
-
-  /* Answer */
-  initAnswerT() {
-    return this._fb.group({
-      answer: ['', Validators.required],
-      correct: true
-    });
-  }
-
-  initAnswerF() {
-    return this._fb.group({
-      answer: ['', Validators.required],
-      correct: false
-    });
-  }
-
-  addAnswer() {
-    const control = <FormArray>this.myForm.controls['answers'];
-    control.push(this.initAnswerF());
-  }
-
-  removeAnswer(i: number) {
-    const control = <FormArray>this.myForm.controls['answers'];
-    control.removeAt(i);
-  }
-
-  addQuestion(q: Question) {
-      // call API to save question
-      console.log(q);
   }
 
 }

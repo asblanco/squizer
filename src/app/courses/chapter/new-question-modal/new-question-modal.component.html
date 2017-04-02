@@ -1,0 +1,45 @@
+<div id="newQuestionModal{{chapter.id}}" class="modal modal-fixed-footer">
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="modal-content">
+      <h4>Crear pregunta</h4>
+        <div class="row">
+          <div class="input-field form-group">
+            <input type="text" class="form-control" formControlName="title">
+            <label for="title_question">Titulo pregunta</label>
+          </div>
+        </div>
+        <!--answers-->
+        <div class="row">
+          <fieldset>
+            <legend><b> Respuestas </b></legend>
+            <div formArrayName="answers">
+              <div *ngFor="let answer of questionForm.controls.answers.controls; let i=index" class="panel panel-default">
+                <div class="row" [formGroupName]="i">
+                  <span class="col s11">
+                    <label for="answer">Respuesta</label>
+                    <input type="text" class="form-control" formControlName="title" required/>
+                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(id)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
+                  </span>
+                  <div class="col s1 switch">
+                    <label>
+                      <input type="checkbox" id="{{i}}" formControlName="correct">
+                      <span class="lever"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="col s12" (click)="addAnswer()">
+              <i class="material-icons">library_add</i>
+              Add another answer
+            </a>
+          </fieldset>
+        </div>
+        <br>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!questionForm.valid">Crear</button>
+    </div>
+  </form>
+</div>

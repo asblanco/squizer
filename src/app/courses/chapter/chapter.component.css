@@ -8,12 +8,3 @@
 .collapsible-body {
   padding: 1em;
 }
-
-#newQuestionModal {
-  width: 80% !important;
-}
-
-fieldset {
-  padding: 1em;
-  background-color: white;
-}

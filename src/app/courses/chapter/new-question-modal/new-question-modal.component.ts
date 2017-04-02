@@ -1,0 +1,116 @@
+import { Component, OnInit, Input, OnChanges }            from '@angular/core';
+import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
+
+import { Chapter }      from '../../../shared/db/chapter';
+import { Question }     from '../../../shared/db/question';;
+import { Answer }       from '../../../shared/db/answer';
+
+import { QuestionService }    from '../../../shared/db/question.service';
+import { CourseInfoService }  from '../../course-info.service';
+
+@Component({
+  selector: 'new-question-modal',
+  templateUrl: './new-question-modal.component.html',
+  styleUrls: ['./new-question-modal.component.css']
+})
+export class NewQuestionModalComponent implements OnInit, OnChanges {
+  @Input() chapter: Chapter;
+  question: Question = new Question();
+  questionForm: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+    private courseInfoService: CourseInfoService,
+    private questionService: QuestionService) { }
+
+  ngOnInit() {
+    this.createForm();
+  }
+
+  ngOnChanges() {
+    this.createForm();
+    /*this.questionForm.reset({
+      title: this.question.title
+    });
+    this.setAnswers(this.question.answers);*/
+  }
+
+  createForm() {
+    this.questionForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      answers: this.fb.array([
+        this.initAnswerT(),
+        this.initAnswerF(),
+        this.initAnswerF(),
+        this.initAnswerF()
+      ])
+    });
+  }
+
+  /* Answer */
+  initAnswerT() {
+    return this.fb.group({
+      title: ['', Validators.required],
+      correct: true
+    });
+  }
+
+  initAnswerF() {
+    return this.fb.group({
+      title: ['', Validators.required],
+      correct: false
+    });
+  }
+
+  addAnswer() {
+    const control = <FormArray>this.questionForm.controls['answers'];
+    control.push(this.initAnswerF());
+  }
+
+  removeAnswer(i: number) {
+    const control = <FormArray>this.questionForm.controls['answers'];
+    control.removeAt(i);
+  }
+
+  onSubmit() {
+    this.question = this.prepareSaveQuestion();
+
+    this.questionService.create(this.question)
+      .then(question => {
+        this.courseInfoService.addQuestion(question.chapter, question);
+      });
+    this.ngOnChanges();
+  }
+
+  prepareSaveQuestion(): Question {
+    const formModel = this.questionForm.value;
+
+    // deep copy of form model answers
+    const answersDeepCopy: Answer[] = formModel.answers.map(
+      (answer: Answer) => Object.assign({}, answer)
+    );
+
+    // return new `Question` object containing a combination of original question value(s)
+    // and deep copies of changed form model values
+    const saveQuestion: Question = {
+      id: 0,
+      chapter: this.chapter.id,
+      title: formModel.title as string,
+      answers: answersDeepCopy
+    };
+    return saveQuestion;
+  }
+
+  revert() { this.ngOnChanges(); }
+
+  get answers(): FormArray {
+    return this.questionForm.get('answers') as FormArray;
+  };
+
+  setAnswers(answers: Answer[]) {
+    const answerFGs = answers.map(answer => this.fb.group(answer));
+    const answerFormArray = this.fb.array(answerFGs);
+    this.questionForm.setControl('answers', answerFormArray);
+  }
+
+}

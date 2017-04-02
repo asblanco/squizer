@@ -17,9 +17,9 @@ export class QuestionService {
     return Promise.reject(error.message || error);
   }
 
-  create(title: string, chapter: number): Promise<Question> {
+  create(question: Question): Promise<Question> {
     return this.http
-      .post(this.url, JSON.stringify({chapter: chapter, title: title, answers:[]}), {headers: this.headers})
+      .post(this.url, JSON.stringify(question), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);

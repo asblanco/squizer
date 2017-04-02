@@ -7,11 +7,11 @@ import { CoursesComponent } from './courses.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { QuestionComponent } from './chapter/question/question.component';
-import { AnswerFormComponent } from './chapter/answer-form/answer-form.component';
 import { DeleteComponent } from './modals/delete/delete.component';
 import { NewComponent } from './modals/new/new.component';
 
 import { CourseInfoService } from './course-info.service';
+import { NewQuestionModalComponent } from './chapter/new-question-modal/new-question-modal.component';
 
 @NgModule({
   imports: [
@@ -24,9 +24,9 @@ import { CourseInfoService } from './course-info.service';
     SideNavComponent,
     ChapterComponent,
     QuestionComponent,
-    AnswerFormComponent,
     DeleteComponent,
     NewComponent,
+    NewQuestionModalComponent,
   ],
   exports: [ CoursesComponent ],
   providers: [ CourseInfoService ]
