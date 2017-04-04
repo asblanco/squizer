@@ -10,8 +10,8 @@
     </div>
     <!-- Body -->
     <div class="collapsible-body">
-      <div *ngFor="let question of chapter.questions">
-        <question [question]="question" (onDeletedQuestion)="deleteQuestion(chapter, question)"></question>
+      <div *ngFor="let question of chapter.questions; let i=index">
+        <question [i]="i" [question]="question" (onDeletedQuestion)="deleteQuestion(chapter, question)"></question>
       </div>
       <div class="right-align">
         <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="openNewQuestionModal(); $event.stopPropagation();">

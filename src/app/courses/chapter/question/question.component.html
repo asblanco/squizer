@@ -2,7 +2,7 @@
   <div class="right">
     <b><a class="waves-effect waves btn-flat edit squizer-btn-text" (click)="openDeleteQuestionModal(); $event.stopPropagation();">ELIMINAR</a></b>
   </div>
-  <b><p> #{{question.id}} {{question.title}} </p></b>
+  <b><p> #{{i+1}} {{question.title}} </p></b>
   <div class="collection">
     <a *ngFor="let answer of question.answers" class="collection-item">
       <span *ngIf="answer.correct">
@@ -21,49 +21,6 @@
 <hr>
 
 <!-- Edit Question Modal -->
-<div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Editar pregunta #{{question.id}}</h4>
-    <form class="col s12" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
-      <div class="row">
-        <div class="input-field form-group">
-          <input type="text" class="form-control" formControlName="title" value="{{question.title}}">
-          <label for="title_question">Titulo pregunta</label>
-        </div>
-      </div>
-      <!--answers-->
-      <div class="row">
-        <fieldset>
-          <legend><b> Respuestas </b></legend>
-          <div formArrayName="answers">
-            <div *ngFor="let answer of myForm.controls.answers.controls; let i=index" class="panel panel-default">
-              <div class="row" [formGroupName]="i">
-                <!--<answer-form class="col s11" [group]="myForm.controls.answers.controls[i]"-
-                [id]="i" [length]="myForm.controls.answers.controls.length"
-                [answerText]="question.answers[1].title" (onRemoveAnswer)="removeAnswer($event)"></answer-form>-->
-                <div class="col s1 switch">
-                  <label>
-                    <input type="checkbox" id="{{i}}">
-                    <span class="lever"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="col s12" (click)="addAnswer()">
-            <i class="material-icons">library_add</i>
-            Add another answer
-          </a>
-        </fieldset>
-      </div>
-      <br>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect btn-flat">CANCELAR</a>
-    <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!myForm.valid">GUARDAR</button>
-  </div>
-</div>
-
+<edit-question-modal [chapterId]="question.chapter" [question]="question"></edit-question-modal>
 <!-- Delete Question Modal -->
 <delete-modal (onDeleted)="deleteQuestion(question)" [id]="'deleteQuestionModal'+question.id" [title]="question.title"></delete-modal>

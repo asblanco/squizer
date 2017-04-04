@@ -23,8 +23,17 @@ export class CourseInfoService {
   }
 
   deleteQuestion(chapterId: number, question: Question): void {
-    this.course.chapters[this.indexOfId(this.course.chapters, chapterId)].questions
-    .splice(this.course.chapters[this.indexOfId(this.course.chapters, chapterId)].questions.indexOf(question), 1);
+    let chapterIndex = this.indexOfId(this.course.chapters, chapterId);
+    let questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
+
+    this.course.chapters[chapterIndex].questions.splice(questionIndex, 1);
+  }
+
+  updateQuestion(chapterId: number, question: Question): void {
+    let chapterIndex = this.indexOfId(this.course.chapters, chapterId);
+    let questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
+
+    this.course.chapters[chapterIndex].questions.splice(questionIndex, 1, question);
   }
 
   private indexOfId(array, id: number) {

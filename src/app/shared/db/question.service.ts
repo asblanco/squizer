@@ -26,7 +26,7 @@ export class QuestionService {
   }
 
   update(question: Question): Promise<Question> {
-    const url = `${this.url}${question.id}/`;
+    const url = `http://127.0.0.1:8000/update-question/${question.id}/`;
     return this.http
       .put(url, JSON.stringify(question), {headers: this.headers})
       .toPromise()

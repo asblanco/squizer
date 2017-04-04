@@ -1,11 +1,11 @@
-<div id="newQuestionModal{{chapter.id}}" class="modal modal-fixed-footer">
+<div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer">
   <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Crear pregunta</h4>
+      <h4>Editar pregunta</h4>
         <div class="row">
           <div class="input-field form-group">
+            <input type="text" class="form-control" formControlName="title">
             <label for="title_question">Titulo pregunta</label>
-            <input type="text" class="form-control" formControlName="title" required>
           </div>
         </div>
         <!--answers-->
@@ -36,10 +36,11 @@
           </fieldset>
         </div>
         <br>
+        <p>{{questionForm.pristine}}</p>
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
-      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!questionForm.valid">Crear</button>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="questionForm.pristine">Editar</button>
     </div>
   </form>
 </div>

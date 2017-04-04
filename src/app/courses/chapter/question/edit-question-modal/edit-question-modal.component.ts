@@ -1,62 +1,48 @@
-import { Component, OnInit, Input, OnChanges }            from '@angular/core';
+import { Component, Input, OnChanges }            from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
-import { Chapter }      from '../../../shared/db/chapter';
-import { Question }     from '../../../shared/db/question';;
-import { Answer }       from '../../../shared/db/answer';
+import { Chapter }      from '../../../../shared/db/chapter';
+import { Question }     from '../../../../shared/db/question';;
+import { Answer }       from '../../../../shared/db/answer';
 
-import { QuestionService }    from '../../../shared/db/question.service';
-import { CourseInfoService }  from '../../course-info.service';
+import { QuestionService }    from '../../../../shared/db/question.service';
+import { CourseInfoService }  from '../../../course-info.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'new-question-modal',
-  templateUrl: './new-question-modal.component.html',
-  styleUrls: ['./new-question-modal.component.css']
+  selector: 'edit-question-modal',
+  templateUrl: './edit-question-modal.component.html',
+  styleUrls: ['./edit-question-modal.component.css']
 })
-export class NewQuestionModalComponent implements OnInit, OnChanges {
-  @Input() chapter: Chapter;
-  question: Question = new Question();
+export class EditQuestionModalComponent implements OnChanges {
+  @Input() chapterId: number;
+  @Input() question: Question;
   questionForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
-    private questionService: QuestionService) { }
-
-  ngOnInit() {
+    private questionService: QuestionService)
+  {
     this.createForm();
   }
 
   ngOnChanges() {
-    this.createForm();
-    /*this.questionForm.reset({
+    this.questionForm.reset({
       title: this.question.title
     });
-    this.setAnswers(this.question.answers);*/
+    this.setAnswers(this.question.answers);
   }
 
   createForm() {
     this.questionForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
-      answers: this.fb.array([
-        this.initAnswerT(),
-        this.initAnswerF(),
-        this.initAnswerF(),
-        this.initAnswerF()
-      ])
+      answers: this.fb.array([])
     });
   }
 
   /* Answer */
-  initAnswerT() {
-    return this.fb.group({
-      title: ['', Validators.required],
-      correct: true
-    });
-  }
-
-  initAnswerF() {
+  newAnswer() {
     return this.fb.group({
       title: ['', Validators.required],
       correct: false
@@ -65,7 +51,8 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
 
   addAnswer() {
     const control = <FormArray>this.questionForm.controls['answers'];
-    control.push(this.initAnswerF());
+    control.push(this.newAnswer());
+    //formGroup.addControl()
   }
 
   removeAnswer(i: number) {
@@ -74,12 +61,12 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    this.question = this.prepareSaveQuestion();
-    console.log(this.question);
+    const q = this.prepareSaveQuestion();
 
-    this.questionService.create(this.question)
+    this.questionService.update(q)
       .then(question => {
-        this.courseInfoService.addQuestion(question.chapter, question);
+        this.courseInfoService.updateQuestion(this.question.chapter, q);
+        this.question = q;
       });
     this.ngOnChanges();
   }
@@ -95,8 +82,8 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
     // return new `Question` object containing a combination of original question value(s)
     // and deep copies of changed form model values
     const saveQuestion: Question = {
-      id: 0,
-      chapter: this.chapter.id,
+      id: this.question.id,
+      chapter: this.chapterId,
       title: formModel.title as string,
       answers: answersDeepCopy
     };
@@ -114,5 +101,4 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
     const answerFormArray = this.fb.array(answerFGs);
     this.questionForm.setControl('answers', answerFormArray);
   }
-
 }
