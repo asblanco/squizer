@@ -5,6 +5,7 @@ import { NavbarComponent }  from './navbar/navbar.component';
 import { CourseService }    from './db/course.service';
 import { ChapterService }   from './db/chapter.service';
 import { QuestionService }  from './db/question.service';
+import { AnswerService }    from './db/answer.service';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ export class SharedModule {
       providers: [
         CourseService,
         ChapterService,
-        QuestionService
+        QuestionService,
+        AnswerService
       ]
     };
   }

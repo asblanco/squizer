@@ -16,9 +16,9 @@
               <div *ngFor="let answer of questionForm.controls.answers.controls; let i=index" class="panel panel-default">
                 <div class="row" [formGroupName]="i">
                   <span class="col s11">
-                    <label for="answer">Respuesta</label>
+                    <label for="answer">Respuesta {{answer.controls.id._value}}</label>
                     <input type="text" class="form-control" formControlName="title" required/>
-                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(id)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
+                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(i)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
                   </span>
                   <div class="col s1 switch">
                     <label>
@@ -36,11 +36,10 @@
           </fieldset>
         </div>
         <br>
-        <p>{{questionForm.pristine}}</p>
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
-      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="questionForm.pristine">Editar</button>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit">Editar</button>
     </div>
   </form>
 </div>

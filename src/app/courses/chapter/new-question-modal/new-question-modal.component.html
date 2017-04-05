@@ -18,7 +18,7 @@
                   <span class="col s11">
                     <label for="answer">Respuesta</label>
                     <input type="text" class="form-control" formControlName="title" required/>
-                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(id)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
+                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(i)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
                   </span>
                   <div class="col s1 switch">
                     <label>

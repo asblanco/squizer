@@ -1,11 +1,12 @@
-import { Component, Input, OnChanges }            from '@angular/core';
+import { Component, Input, OnChanges }                    from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
-import { Chapter }      from '../../../../shared/db/chapter';
-import { Question }     from '../../../../shared/db/question';;
-import { Answer }       from '../../../../shared/db/answer';
+import { Chapter }   from '../../../../shared/db/chapter';
+import { Question }  from '../../../../shared/db/question';;
+import { Answer }    from '../../../../shared/db/answer';
 
 import { QuestionService }    from '../../../../shared/db/question.service';
+import { AnswerService }      from '../../../../shared/db/answer.service';
 import { CourseInfoService }  from '../../../course-info.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class EditQuestionModalComponent implements OnChanges {
   constructor(
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
-    private questionService: QuestionService)
+    private questionService: QuestionService,
+    private answerService: AnswerService)
   {
     this.createForm();
   }
@@ -44,6 +46,8 @@ export class EditQuestionModalComponent implements OnChanges {
   /* Answer */
   newAnswer() {
     return this.fb.group({
+      id: 0,
+      question: this.question.id,
       title: ['', Validators.required],
       correct: false
     });
@@ -52,7 +56,6 @@ export class EditQuestionModalComponent implements OnChanges {
   addAnswer() {
     const control = <FormArray>this.questionForm.controls['answers'];
     control.push(this.newAnswer());
-    //formGroup.addControl()
   }
 
   removeAnswer(i: number) {
@@ -62,12 +65,26 @@ export class EditQuestionModalComponent implements OnChanges {
 
   onSubmit() {
     const q = this.prepareSaveQuestion();
+    const answers = this.questionForm.controls['answers'].value;
+    const noInserts = this.updateQuestionWithoutInserts(q);
 
+    /* Update and delete answers */
     this.questionService.update(q)
       .then(question => {
-        this.courseInfoService.updateQuestion(this.question.chapter, q);
-        this.question = q;
+        this.courseInfoService.updateQuestion(this.question.chapter, noInserts);
+        this.question = noInserts;
+
+        /* Create the new ones */
+        for (var i = 0; i < answers.length; i++) {
+            if (answers[i].id == 0){
+              this.answerService.create(answers[i])
+                .then(answer => {
+                  this.question = this.courseInfoService.addAnswer(this.question.chapter, this.question, answer);
+                });
+            }
+        }
       });
+
     this.ngOnChanges();
   }
 
@@ -88,6 +105,22 @@ export class EditQuestionModalComponent implements OnChanges {
       answers: answersDeepCopy
     };
     return saveQuestion;
+  }
+
+  updateQuestionWithoutInserts(completeQuestion: Question): Question {
+    let answersDeepCopy: Answer[] = new Array<Answer>();
+    for(var i = 0; i < completeQuestion.answers.length; i++){
+      if(completeQuestion.answers[i].id != 0)
+        answersDeepCopy.push(completeQuestion.answers[i]);
+    }
+
+    const updateQ: Question = {
+      id: completeQuestion.id,
+      chapter: completeQuestion.chapter,
+      title: completeQuestion.title,
+      answers: answersDeepCopy
+    };
+    return updateQ;
   }
 
   revert() { this.ngOnChanges(); }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, OnChanges }            from '@angular/core';
+import { Component, Input, OnChanges }                    from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
-import { Chapter }      from '../../../shared/db/chapter';
-import { Question }     from '../../../shared/db/question';;
-import { Answer }       from '../../../shared/db/answer';
+import { Chapter }   from '../../../shared/db/chapter';
+import { Question }  from '../../../shared/db/question';;
+import { Answer }    from '../../../shared/db/answer';
 
 import { QuestionService }    from '../../../shared/db/question.service';
 import { CourseInfoService }  from '../../course-info.service';
@@ -14,7 +14,7 @@ import { CourseInfoService }  from '../../course-info.service';
   templateUrl: './new-question-modal.component.html',
   styleUrls: ['./new-question-modal.component.css']
 })
-export class NewQuestionModalComponent implements OnInit, OnChanges {
+export class NewQuestionModalComponent implements OnChanges {
   @Input() chapter: Chapter;
   question: Question = new Question();
   questionForm: FormGroup;
@@ -22,18 +22,13 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
-    private questionService: QuestionService) { }
-
-  ngOnInit() {
+    private questionService: QuestionService)
+  {
     this.createForm();
   }
 
   ngOnChanges() {
     this.createForm();
-    /*this.questionForm.reset({
-      title: this.question.title
-    });
-    this.setAnswers(this.question.answers);*/
   }
 
   createForm() {
@@ -75,7 +70,6 @@ export class NewQuestionModalComponent implements OnInit, OnChanges {
 
   onSubmit() {
     this.question = this.prepareSaveQuestion();
-    console.log(this.question);
 
     this.questionService.create(this.question)
       .then(question => {
