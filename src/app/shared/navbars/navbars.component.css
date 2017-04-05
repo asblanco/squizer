@@ -1,0 +1,65 @@
+nav {
+  font-family: 'raleway-bold';
+  background-color: #A239CA;
+}
+
+@media only screen and (min-width: 62em){
+  nav {
+    position: fixed;
+    z-index:100;
+    top:0;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+.brand-logo {
+  font-family: 'womby';
+}
+
+img {
+  max-height: 4em;;
+}
+
+#mobile-demo {
+  background-color: #303030;
+}
+#mobile-demo li a {
+  color: white;
+  font-family: 'raleway';
+}
+
+
+/* EXTENDED TABS */
+.mobile {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 62em){
+  .mobile {
+    visibility: visible;
+  }
+}
+
+.tabs{
+  background-color: #A239CA;
+  color: white;
+}
+
+.tabs .tab a{
+  color:#fff;
+} /*White color to the text*/
+
+.tabs .tab a:hover {
+  color:#fff;
+} /*Text color on hover*/
+
+.tabs .tab a.active {
+  background-color: #9133b5;
+  color:#fff;
+} /*Background and text color when a tab is active*/
+
+/* Not working, only in the global styles.css
+.tabs .indicator {
+   background-color:#fff !important;
+} /*Color of underline*/

@@ -36,6 +36,10 @@ h1, h2, h3, h4, h5 {
   font-family: 'raleway-bold';
 }
 
+.tabs .indicator {
+    background-color:#fff !important;
+} /*Color of underline in mobile extended navbar*/
+
 .squizer-btn {
   color: white !important;
   background-color: #4717F6;

@@ -1,4 +1,4 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit, OnDestroy }  from '@angular/core';
 import { Course }             from '../shared/db/course';
 import { Chapter }            from '../shared/db/chapter';
 import { Question }           from '../shared/db/question';
@@ -6,35 +6,39 @@ import { CourseService }      from '../shared/db/course.service';
 import { CourseInfoService }  from './course-info.service';
 import { ChapterService }     from '../shared/db/chapter.service';
 
+import { Subscription }       from 'rxjs/Subscription';
+
 @Component({
   moduleId: module.id,
   selector: 'courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent implements OnInit {
-  courses: Course[] = [];
+export class CoursesComponent implements OnInit, OnDestroy {
+  //courses: Course[] = [];
   editedCourse: Course;
   selectedCourse: Course;
   editCourseTitle: boolean = false;
+  subscription: Subscription;
 
   constructor( private courseInfoService:  CourseInfoService,
                private courseService:      CourseService,
-               private chapterService:     ChapterService     ) { }
-
-  ngOnInit():void {
-    this.getCourses();
+               private chapterService:     ChapterService     )
+  {
+    this.subscription = courseInfoService.courseSelected$.subscribe(
+      course => {
+        this.selectedCourse = course;
+        this.editCourseTitle = false;
+        this.getCourseDetails(course.id);
+    });
   }
+
+  ngOnInit() {}
 
   onSelected(course: Course) {
     this.selectedCourse = course;
     this.editCourseTitle = false;
     this.getCourseDetails(course.id);
-  }
-
-  getCourses(): void {
-    this.courseService.getCourses()
-      .then(courses => this.courses = courses);
   }
 
   openNewChapterModal() {
@@ -45,7 +49,9 @@ export class CoursesComponent implements OnInit {
     (<any>$('#deleteCourseModal')).openModal();
   }
 
-  /* Get, delete and updateTitle course methods */
+  /*
+   *  Get, delete and updateTitle course methods
+   */
 
   getCourseDetails(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
@@ -57,7 +63,7 @@ export class CoursesComponent implements OnInit {
     this.courseService
         .delete(course.id)
         .then(() => {
-          this.courses.splice(this.indexOf(this.courses, course), 1);
+          this.courseInfoService.announceDeleteCourse(course);
           if (this.selectedCourse === course) { this.selectedCourse = null; }
         });
   }
@@ -68,7 +74,7 @@ export class CoursesComponent implements OnInit {
   }
 
   cancelEditCourse(): void {
-    this.courses.splice(this.indexOf(this.courses, this.selectedCourse), 1, this.editedCourse);
+    this.courseInfoService.announceEditCourse(this.editedCourse);
     this.selectedCourse = this.editedCourse;
     this.editCourseTitle = false;
   }
@@ -78,21 +84,16 @@ export class CoursesComponent implements OnInit {
 
     this.courseService.update(newCourse)
     .then(() => {
-      this.courses.splice(this.indexOf(this.courses, this.editedCourse), 1, newCourse),
+      this.courseInfoService.announceEditCourse(newCourse);
       this.selectedCourse = newCourse,
       this.editCourseTitle = false;
     })
     .catch(() => this.cancelEditCourse());
   }
 
-  private indexOf(array, item) {
-      for (var i = 0; i < array.length; i++) {
-          if (array[i].id === item.id) return i;
-      }
-      return -1;
-  }
-
-  /* Add new chapter */
+  /*
+   *  Add new chapter
+   */
   addChapter(title: string): void {
     title = title.trim();
     if (!title) { return; }
@@ -100,6 +101,18 @@ export class CoursesComponent implements OnInit {
       .then(chapter => {
         this.courseInfoService.addChapter(chapter);
       });
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
+  }
+
+  private indexOf(array, item) {
+      for (var i = 0; i < array.length; i++) {
+          if (array[i].id === item.id) return i;
+      }
+      return -1;
   }
 
 }

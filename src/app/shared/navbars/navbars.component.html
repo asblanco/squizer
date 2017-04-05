@@ -1,0 +1,47 @@
+<nav class="nav-extended">
+
+  <div class="nav-wrapper">
+    <!--<img src="../../assets/img/clipWhite.png" alt="">-->
+    <a href="/" class="brand-logo">SQUIZER</a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+    <ul class="right hide-on-med-and-down">
+      <li><a routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
+      <li><a routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
+    </ul>
+
+    <ul class="side-nav" id="mobile-demo">
+      <div *ngIf="activeTab == 1">
+        <li><div class="center">ASIGNATURAS</div></li>
+        <li class="truncate" *ngFor="let course of courses">
+          <a (click)="select(course)">{{course.name}}</a>
+        </li>
+        <a class="waves-effect btn squizer-btn" (click)="openCourseModal()">Nueva Asignatura</a>
+      </div>
+
+      <div *ngIf="activeTab == 2">
+        <li><div class="center">CURSOS ACADEMICOS</div></li>
+        <li class="truncate">
+          <a>2016-2017</a>
+        </li>
+        <a class="waves-effect btn squizer-btn" (click)="openYearModal()">Nuevo Curso</a>
+      </div>
+    </ul>
+
+  </div>
+
+  <div class="nav-content mobile">
+    <ul class="tabs">
+      <li class="tab"><a class="active" routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
+      <li class="tab"><a routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
+    </ul>
+  </div>
+
+</nav>
+
+<side-nav (onSelected)="select($event)" [courses]="courses" [activeTab]="activeTab"></side-nav>
+
+<!-- New Course Modal -->
+<new-modal (onAdded)="add($event)" [modalId]="'newCourseModal'" [newText]="'Nueva asignatura'"></new-modal>
+<!-- New Academic Year Modal -->
+<new-modal (onAdded)="add($event)" [modalId]="'newYearModal'" [newText]="'Nuevo curso academico'"></new-modal>
