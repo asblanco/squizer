@@ -11,6 +11,9 @@ import { ChapterService }   from './db/chapter.service';
 import { QuestionService }  from './db/question.service';
 import { AnswerService }    from './db/answer.service';
 
+import { ApiConfig }         from './web-api/api-config';
+import { ApiEndpointConfig } from './web-api/api-endpoint.config';
+
 @NgModule({
   imports: [
     CommonModule
@@ -25,6 +28,10 @@ import { AnswerService }    from './db/answer.service';
     NavbarsComponent,
     DeleteComponent,
     NewComponent
+  ],
+  providers: [{
+      provide: ApiConfig,
+      useValue: ApiEndpointConfig }
   ]
 })
 export class SharedModule {

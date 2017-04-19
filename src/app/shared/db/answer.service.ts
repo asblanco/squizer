@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http }  from '@angular/http';
-
+import { Injectable, Inject } from '@angular/core';
+import { Headers, Http }      from '@angular/http';
+import { ApiConfig }          from '../web-api/api-config';
+import { IApiConfig }         from '../web-api/api-config.interface';
+import { Answer }             from './answer';
 import 'rxjs/add/operator/toPromise';
-
-import { Answer } from './answer';
 
 @Injectable()
 export class AnswerService {
-  private url = 'http://127.0.0.1:8000/answers/';
+  private url = this.config.apiEndpoint + 'answers/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    @Inject(ApiConfig) private config: IApiConfig
+  ) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

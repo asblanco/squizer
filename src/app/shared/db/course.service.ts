@@ -1,19 +1,22 @@
-import { Injectable }     from '@angular/core';
-import { Headers, Http }  from '@angular/http';
-
+import { Injectable, Inject } from '@angular/core';
+import { Headers, Http }      from '@angular/http';
+import { ApiConfig }          from '../web-api/api-config';
+import { IApiConfig }         from '../web-api/api-config.interface';
+import { Course }             from './course';
 import 'rxjs/add/operator/toPromise';
-
-import { Course } from './course';
 
 @Injectable()
 export class CourseService {
-  private url = 'http://127.0.0.1:8000/course/';  // URL to web api
+  private url = this.config.apiEndpoint + 'course/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    @Inject(ApiConfig) private config: IApiConfig
+  ) { }
 
   getCourses(): Promise<Course[]> {
-    const urlListCourses = `http://127.0.0.1:8000/courses/`;
+    const urlListCourses = this.config.apiEndpoint + 'courses/';
     return this.http.get(urlListCourses)
                .toPromise()
                .then(response => response.json() as Course[])

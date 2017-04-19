@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Headers, Http }  from '@angular/http';
-
+import { Injectable, Inject } from '@angular/core';
+import { Headers, Http }      from '@angular/http';
+import { ApiConfig }          from '../web-api/api-config';
+import { IApiConfig }         from '../web-api/api-config.interface';
+import { Chapter }            from './chapter';
 import 'rxjs/add/operator/toPromise';
-
-import { Chapter } from './chapter';
 
 @Injectable()
 export class ChapterService {
-  private url = 'http://127.0.0.1:8000/chapters/';
+  private url = this.config.apiEndpoint + 'chapters/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    @Inject(ApiConfig) private config: IApiConfig
+  ) { }
 
   getChapters(): Promise<Chapter[]> {
     return this.http.get(this.url)
