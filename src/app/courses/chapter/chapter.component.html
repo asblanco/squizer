@@ -24,21 +24,7 @@
 
 
 <!-- Edit title Chapter -->
-<div id="editChapterModal{{chapter.id}}" class="modal bottom-sheet">
-  <div class="modal-content">
-    <h4>Editar tema</h4>
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field">
-          <input #chapterTitle type="text" class="validate" value="{{chapter.title}}">
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect btn squizer-btn" (click)="updateChapterTitle(chapterTitle.value)">Guardar</a>
-  </div>
-</div>
+<new-edit-modal (onSubmit)="updateChapterTitle($event)" [modalId]="'editChapterModal'+chapter.id" [text]="'Editar tema'" [title]="chapter.title"></new-edit-modal>
 
 <new-question-modal [chapter]="chapter"></new-question-modal>
 

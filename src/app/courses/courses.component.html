@@ -48,7 +48,7 @@
 </div>
 
 <!-- New Chapter Modal -->
-<new-modal (onAdded)="addChapter($event)" [modalId]="'newChapterModal'" [newText]="'Nuevo tema'"></new-modal>
+<new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></new-edit-modal>
 
 <!-- Delete Course Modal -->
 <div *ngIf="selectedCourse">

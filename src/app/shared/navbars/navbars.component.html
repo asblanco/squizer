@@ -42,6 +42,6 @@
 <side-nav (onSelected)="select($event)" [courses]="courses" [activeTab]="activeTab"></side-nav>
 
 <!-- New Course Modal -->
-<new-modal (onAdded)="createCourse($event)" [modalId]="'newCourseModal'" [newText]="'Nueva asignatura'"></new-modal>
+<new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></new-edit-modal>
 <!-- New Academic Year Modal -->
-<new-modal (onAdded)="createCourse($event)" [modalId]="'newYearModal'" [newText]="'Nuevo curso academico'"></new-modal>
+<new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newYearModal'" [text]="'Nuevo curso academico'" [title]=""></new-edit-modal>

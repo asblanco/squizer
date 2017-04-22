@@ -1,10 +1,11 @@
 import { NgModule, ModuleWithProviders }  from '@angular/core';
 import { CommonModule }                   from '@angular/common';
+import { FormsModule }                    from '@angular/forms';
 
 import { NavbarsComponent } from './navbars/navbars.component';
 import { SideNavComponent } from './navbars/side-nav/side-nav.component';
 import { DeleteComponent }  from './modals/delete/delete.component';
-import { NewComponent }     from './modals/new/new.component';
+import { NewEditComponent } from './modals/new-edit/new-edit.component';
 
 import { CourseService }    from './db/course.service';
 import { ChapterService }   from './db/chapter.service';
@@ -16,18 +17,19 @@ import { ApiEndpointConfig } from './web-api/api-endpoint.config';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   declarations: [
     NavbarsComponent,
     SideNavComponent,
     DeleteComponent,
-    NewComponent
+    NewEditComponent
   ],
   exports: [
     NavbarsComponent,
     DeleteComponent,
-    NewComponent
+    NewEditComponent
   ],
   providers: [{
       provide: ApiConfig,

@@ -16,7 +16,6 @@ import { Subscription }         from 'rxjs/Subscription';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
-  //courses: Course[] = [];
   oldTitleCourse: Course;
   selectedCourse: Course;
   editCourseTitle: boolean = false;
@@ -51,10 +50,10 @@ export class CoursesComponent implements OnInit, OnDestroy {
     (<any>$('#deleteCourseModal')).openModal();
   }
 
+
   /*
    *  Get, delete and updateTitle course methods
    */
-
   getCourseDetails(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
       .then(course => {this.courseInfoService.course = course,

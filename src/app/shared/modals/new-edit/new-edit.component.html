@@ -1,0 +1,17 @@
+<!-- New and Edit Modal -->
+<div id="{{modalId}}" class="modal bottom-sheet">
+  <form #form="ngForm" novalidate>
+    <div class="modal-content">
+      <h4>{{text}}</h4>
+      <div class="row">
+        <div class="input-field">
+          <label>Titulo</label>
+          <input type="text" name="title" [ngModel]="title">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect btn squizer-btn" (click)="submit(form)">Guardar</a>
+    </div>
+  </form>
+</div>
