@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input }                       from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
-import { Question } from '../../../shared/db/question';
+
+import { Question }           from '../../../shared/db/question';
 import { QuestionService }    from '../../../shared/db/question.service';
 import { CourseInfoService }  from '../../course-info.service';
+
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +21,8 @@ export class QuestionComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private courseInfoService: CourseInfoService,
-    private questionService: QuestionService) { }
+    private questionService: QuestionService,
+    private notificationsService: NotificationsService ) { }
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -40,7 +44,8 @@ export class QuestionComponent implements OnInit {
         .delete(this.question.id)
         .then(() => {
           this.courseInfoService.deleteQuestion(this.question.chapter, this.question);
-        });
+        })
+        .catch( () => this.notificationsService.error("Error", "Al eliminar la pregunta: " + this.question.title));
   }
 
   initAnswer() {
@@ -58,6 +63,7 @@ export class QuestionComponent implements OnInit {
   removeAnswer(i: number) {
     const control = <FormArray>this.myForm.controls['answers'];
     control.removeAt(i);
+    this.myForm.markAsDirty();
   }
 
 }

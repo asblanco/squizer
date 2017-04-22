@@ -9,6 +9,7 @@ import { CoursesModule }    from './courses/courses.module';
 import { SharedModule }     from './shared/shared.module';
 
 import * as $ from 'jquery';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import * as $ from 'jquery';
     AppRoutingModule,
     HttpModule,
     CoursesModule,
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    SimpleNotificationsModule.forRoot()
   ],
   declarations: [
     AppComponent

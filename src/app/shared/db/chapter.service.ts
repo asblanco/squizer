@@ -22,11 +22,6 @@ export class ChapterService {
                .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
-
   create(title: string, course: number): Promise<Chapter> {
     return this.http
       .post(this.url, JSON.stringify({course: course, title: title, questions:[]}), {headers: this.headers})
@@ -50,5 +45,10 @@ export class ChapterService {
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

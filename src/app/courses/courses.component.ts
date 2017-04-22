@@ -6,7 +6,8 @@ import { CourseService }      from '../shared/db/course.service';
 import { CourseInfoService }  from './course-info.service';
 import { ChapterService }     from '../shared/db/chapter.service';
 
-import { Subscription }       from 'rxjs/Subscription';
+import { NotificationsService } from 'angular2-notifications';
+import { Subscription }         from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
@@ -16,14 +17,15 @@ import { Subscription }       from 'rxjs/Subscription';
 })
 export class CoursesComponent implements OnInit, OnDestroy {
   //courses: Course[] = [];
-  editedCourse: Course;
+  oldTitleCourse: Course;
   selectedCourse: Course;
   editCourseTitle: boolean = false;
   subscription: Subscription;
 
-  constructor( private courseInfoService:  CourseInfoService,
-               private courseService:      CourseService,
-               private chapterService:     ChapterService     )
+  constructor( private courseInfoService:     CourseInfoService,
+               private courseService:         CourseService,
+               private chapterService:        ChapterService,
+               private notificationsService:  NotificationsService )
   {
     this.subscription = courseInfoService.courseSelected$.subscribe(
       course => {
@@ -56,7 +58,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
   getCourseDetails(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
       .then(course => {this.courseInfoService.course = course,
-                       this.selectedCourse = this.courseInfoService.course});
+                       this.selectedCourse = this.courseInfoService.course})
+      .catch(() => this.notificationsService.error("Error", "Al descargar detalles de asignatura."));
   }
 
   deleteCourse(course: Course): void {
@@ -65,30 +68,32 @@ export class CoursesComponent implements OnInit, OnDestroy {
         .then(() => {
           this.courseInfoService.announceDeleteCourse(course);
           if (this.selectedCourse === course) { this.selectedCourse = null; }
-        });
+        })
+        .catch(() => this.notificationsService.error("Error", "Al eliminar asignatura " + course.name));
   }
 
   editCourseBtn(): void {
     this.editCourseTitle = true;
-    this.editedCourse = JSON.parse(JSON.stringify(this.selectedCourse)); //Save value without binding
+    this.oldTitleCourse = JSON.parse(JSON.stringify(this.selectedCourse)); //Save value without binding
   }
 
   cancelEditCourse(): void {
-    this.courseInfoService.announceEditCourse(this.editedCourse);
-    this.selectedCourse = this.editedCourse;
+    this.courseInfoService.announceEditCourse(this.oldTitleCourse);
+    this.selectedCourse = this.oldTitleCourse;
     this.editCourseTitle = false;
   }
 
   updateCourseTitle(): void {
-    let newCourse = this.selectedCourse;
+    let updatedCourse = this.selectedCourse;
 
-    this.courseService.update(newCourse)
+    this.courseService.update(updatedCourse)
     .then(() => {
-      this.courseInfoService.announceEditCourse(newCourse);
-      this.selectedCourse = newCourse,
+      this.courseInfoService.announceEditCourse(updatedCourse);
       this.editCourseTitle = false;
     })
-    .catch(() => this.cancelEditCourse());
+    .catch(() => {  this.cancelEditCourse(),
+                    this.notificationsService.error("Error", "Al actualizar el titulo de la asignatura.")
+                  });
   }
 
   /*
@@ -100,7 +105,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.chapterService.create(title, this.selectedCourse.id)
       .then(chapter => {
         this.courseInfoService.addChapter(chapter);
-      });
+      })
+      .catch(() => this.notificationsService.error("Error", "Al añadir el tema: " + title));
   }
 
   ngOnDestroy() {

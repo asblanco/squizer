@@ -15,16 +15,16 @@ export class AnswerService {
     @Inject(ApiConfig) private config: IApiConfig
   ) { }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
-
   create(answer: Answer): Promise<Answer> {
     return this.http
       .post(this.url, JSON.stringify(answer), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
+  }
+  
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

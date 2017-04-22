@@ -5,6 +5,8 @@ import { Question } from '../../shared/db/question';
 import { ChapterService }     from '../../shared/db/chapter.service';
 import { CourseInfoService }  from '../course-info.service';
 
+import { NotificationsService } from 'angular2-notifications';
+
 @Component({
   selector: 'chapter',
   templateUrl: './chapter.component.html',
@@ -15,7 +17,8 @@ export class ChapterComponent implements OnInit, AfterViewInit {
 
   constructor(
     private courseInfoService: CourseInfoService,
-    private chapterService: ChapterService) { }
+    private chapterService: ChapterService,
+    private notificationsService: NotificationsService ) { }
 
   ngOnInit() { }
 
@@ -41,7 +44,8 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     this.chapter.title = title;
     this.chapterService.update(this.chapter)
     .then(() => { })
-    .catch(() => this.chapter.title = oldTitle);
+    .catch(() => {  this.chapter.title = oldTitle,
+                    this.notificationsService.error("Error", "Al actualizar el titulo del tema.")});
   }
 
   deleteChapter(chapter: Chapter): void {
@@ -49,7 +53,8 @@ export class ChapterComponent implements OnInit, AfterViewInit {
         .delete(chapter.id)
         .then(() => {
           this.courseInfoService.deleteChapter(chapter);
-        });
+        })
+        .catch( () => this.notificationsService.error("Error", "Al eliminar el capitulo: " + chapter.title));
   }
 
 }

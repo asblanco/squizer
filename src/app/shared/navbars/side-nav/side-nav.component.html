@@ -1,15 +1,15 @@
 <ul id="slide-out" class="side-nav fixed">
   <div *ngIf="activeTab == 1">
     <li><div class="center bold">ASIGNATURAS</div></li>
-    <li class="truncate" *ngFor="let course of courses">
-      <a (click)="select(course)">{{course.name}}</a>
+    <li *ngFor="let course of courses">
+      <a class="truncate" (click)="select(course)">{{course.name}}</a>
     </li>
     <a class="waves-effect btn squizer-btn" (click)="openCourseModal()">Nueva Asignatura</a>
   </div>
   <div *ngIf="activeTab == 2">
     <li><div class="center bold">CURSOS ACADEMICOS</div></li>
-    <li class="truncate">
-      <a>2016-2017</a>
+    <li>
+      <a class="truncate">2016-2017</a>
     </li>
     <a class="waves-effect btn squizer-btn" (click)="openYearModal()">Nuevo Curso</a>
   </div>

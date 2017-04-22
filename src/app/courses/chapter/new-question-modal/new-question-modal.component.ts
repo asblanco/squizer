@@ -8,6 +8,8 @@ import { Answer }    from '../../../shared/db/answer';
 import { QuestionService }    from '../../../shared/db/question.service';
 import { CourseInfoService }  from '../../course-info.service';
 
+import { NotificationsService } from 'angular2-notifications';
+
 @Component({
   moduleId: module.id,
   selector: 'new-question-modal',
@@ -22,7 +24,8 @@ export class NewQuestionModalComponent implements OnChanges {
   constructor(
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
-    private questionService: QuestionService)
+    private questionService: QuestionService,
+    private notificationsService: NotificationsService )
   {
     this.createForm();
   }
@@ -74,7 +77,8 @@ export class NewQuestionModalComponent implements OnChanges {
     this.questionService.create(this.question)
       .then(question => {
         this.courseInfoService.addQuestion(question.chapter, question);
-      });
+      })
+      .catch(() => this.notificationsService.error("Error", "Al crear pregunta: " + this.question.title));
     this.ngOnChanges();
   }
 

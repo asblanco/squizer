@@ -1,9 +1,11 @@
 import { Component, OnInit, Output, Input, AfterViewInit } from '@angular/core';
-import { Course }             from '../../shared/db/course';
-import { CourseService }      from '../../shared/db/course.service';
-import { CourseInfoService }  from '../../courses/course-info.service';
 
-import { Subscription }       from 'rxjs/Subscription';
+import { Course }               from '../../shared/db/course';
+import { CourseService }        from '../../shared/db/course.service';
+import { CourseInfoService }    from '../../courses/course-info.service';
+import { NotificationsService } from 'angular2-notifications';
+
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'nav-bars',
@@ -17,7 +19,8 @@ export class NavbarsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private courseService: CourseService,
-    private courseInfoService: CourseInfoService)
+    private courseInfoService: CourseInfoService,
+    private notificationsService: NotificationsService)
   {
     this.subscription = courseInfoService.courseDeleted$.subscribe(
       course => {
@@ -45,7 +48,8 @@ export class NavbarsComponent implements OnInit, AfterViewInit {
   getCourses(): void {
     this.activeTab = 1;
     this.courseService.getCourses()
-      .then(courses => this.courses = courses);
+      .then(courses => this.courses = courses)
+      .catch(() => this.notificationsService.error("Error", "Al descargar la lista de cursos"));
   }
 
   getTests(): void {
@@ -60,14 +64,15 @@ export class NavbarsComponent implements OnInit, AfterViewInit {
     (<any>$('#newYearModal')).openModal();
   }
 
-  add(name: string): void {
+  createCourse(name: string): void {
     name = name.trim();
     if (!name) { return; }
     this.courseService.create(name)
       .then(course => {
         this.courses.push(course);
-        //this.onSelected.emit(course);
-      });
+        this.courseInfoService.announceSelectCourse(course);
+      })
+      .catch(() => this.notificationsService.error("Error", "Al crear la asignatura: " + name));
   }
 
   ngOnDestroy() {

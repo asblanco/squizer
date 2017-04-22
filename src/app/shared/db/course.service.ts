@@ -16,8 +16,7 @@ export class CourseService {
   ) { }
 
   getCourses(): Promise<Course[]> {
-    const urlListCourses = this.config.apiEndpoint + 'courses/';
-    return this.http.get(urlListCourses)
+    return this.http.get(this.config.apiEndpoint + 'courses/')
                .toPromise()
                .then(response => response.json() as Course[])
                .catch(this.handleError);
@@ -29,11 +28,6 @@ export class CourseService {
       .toPromise()
       .then(response => response.json() as Course)
       .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
   }
 
   create(name: string): Promise<Course> {
@@ -59,6 +53,11 @@ export class CourseService {
       .toPromise()
       .then(() => course)
       .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
 }

@@ -15,11 +15,6 @@ export class QuestionService {
     @Inject(ApiConfig) private config: IApiConfig
   ) { }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
-
   create(question: Question): Promise<Question> {
     return this.http
       .post(this.url, JSON.stringify(question), {headers: this.headers})
@@ -29,9 +24,11 @@ export class QuestionService {
   }
 
   update(question: Question): Promise<Question> {
-    const url = `http://127.0.0.1:8000/update-question/${question.id}/`;
     return this.http
-      .put(url, JSON.stringify(question), {headers: this.headers})
+      .put( this.config.apiEndpoint + `update-question/${question.id}/`,
+            JSON.stringify(question),
+            {headers: this.headers}
+          )
       .toPromise()
       .then(() => question)
       .catch(this.handleError);
@@ -43,6 +40,11 @@ export class QuestionService {
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
+  }
+
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 
 }

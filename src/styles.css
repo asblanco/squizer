@@ -38,6 +38,7 @@ h1, h2, h3, h4, h5 {
 
 .tabs .indicator {
     background-color:#fff !important;
+    height: 3px;
 } /*Color of underline in mobile extended navbar*/
 
 .squizer-btn {

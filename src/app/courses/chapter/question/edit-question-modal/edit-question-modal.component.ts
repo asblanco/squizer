@@ -9,6 +9,8 @@ import { QuestionService }    from '../../../../shared/db/question.service';
 import { AnswerService }      from '../../../../shared/db/answer.service';
 import { CourseInfoService }  from '../../../course-info.service';
 
+import { NotificationsService } from 'angular2-notifications';
+
 @Component({
   moduleId: module.id,
   selector: 'edit-question-modal',
@@ -24,7 +26,8 @@ export class EditQuestionModalComponent implements OnChanges {
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
     private questionService: QuestionService,
-    private answerService: AnswerService)
+    private answerService: AnswerService,
+    private notificationsService: NotificationsService )
   {
     this.createForm();
   }
@@ -80,10 +83,12 @@ export class EditQuestionModalComponent implements OnChanges {
               this.answerService.create(answers[i])
                 .then(answer => {
                   this.question = this.courseInfoService.addAnswer(this.question.chapter, this.question, answer);
-                });
+                })
+                .catch(() => this.notificationsService.error("Error", "Al crear las nuevas respuestas."));
             }
         }
-      });
+      })
+      .catch(() => this.notificationsService.error("Error", "Al actualizar la pregunta: " + q.title));
 
     this.ngOnChanges();
   }
