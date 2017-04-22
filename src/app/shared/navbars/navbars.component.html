@@ -1,47 +1,46 @@
 <nav class="nav-extended">
-
+  <!-- Main top nabvar -->
   <div class="nav-wrapper">
-    <!--<img src="../../assets/img/clipWhite.png" alt="">-->
     <a href="/" class="brand-logo">SQUIZER</a>
-    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <!-- Sandwitch button in mobile view -->
+    <a href="#" data-activates="mobile-sidenav" class="button-collapse"><i class="material-icons">menu</i></a>
 
+    <!-- Top right navigation in desktop view -->
     <ul class="right hide-on-med-and-down">
-      <li><a routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
-      <li><a routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
+      <li [class.active]="activeTab == 1"><a routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
+      <li [class.active]="activeTab == 2"><a routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
     </ul>
 
-    <ul class="side-nav" id="mobile-demo">
+    <!-- Tabs under main nabvar in mobile view -->
+    <div class="nav-content hide-on-large-only">
+      <ul class="tabs">
+        <li class="tab"><a class="active waves-effect waves-light" routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
+        <li class="tab"><a class="waves-effect waves-light" routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
+      </ul>
+    </div>
+
+    <!-- Collapsible side nav in mobile view -->
+    <ul class="side-nav" id="mobile-sidenav">
       <div *ngIf="activeTab == 1">
         <li><div class="center">ASIGNATURAS</div></li>
-        <li *ngFor="let course of courses">
+        <li *ngFor="let course of courses" [class.active]="course === selectedCourse">
           <a class="truncate" (click)="select(course)">{{course.name}}</a>
         </li>
         <a class="waves-effect btn squizer-btn" (click)="openCourseModal()">Nueva Asignatura</a>
       </div>
-
       <div *ngIf="activeTab == 2">
         <li><div class="center">CURSOS ACADEMICOS</div></li>
-        <li>
-          <a class="truncate">2016-2017</a>
-        </li>
+        <li><a class="truncate">2016-2017</a></li>
         <a class="waves-effect btn squizer-btn" (click)="openYearModal()">Nuevo Curso</a>
       </div>
     </ul>
 
   </div>
-
-  <div class="nav-content hide-on-med-and-up">
-    <ul class="tabs">
-      <li class="tab"><a class="active waves-effect waves-light" routerLink="/courses" routerLinkActive="active" (click)="getCourses()">Asignaturas</a></li>
-      <li class="tab"><a class="waves-effect waves-light" routerLink="/" routerLinkActive="active" (click)="getTests()">Tests</a></li>
-    </ul>
-  </div>
-
 </nav>
 
-<side-nav (onSelected)="select($event)" [courses]="courses" [activeTab]="activeTab"></side-nav>
+<!-- Side nav in desktop view -->
+<side-nav (onSelected)="select($event)" [courses]="courses" [activeTab]="activeTab" [selectedCourse]="selectedCourse"></side-nav>
 
-<!-- New Course Modal -->
+<!-- New Course & Academic Year Modals -->
 <new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></new-edit-modal>
-<!-- New Academic Year Modal -->
 <new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newYearModal'" [text]="'Nuevo curso academico'" [title]=""></new-edit-modal>

@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class NavbarsComponent implements OnInit, AfterViewInit {
   @Input() courses: Course[] = [];
+  selectedCourse: Course;
   activeTab: number = 1; //1=courses, 2=tests
   subscription: Subscription;
 
@@ -42,6 +43,7 @@ export class NavbarsComponent implements OnInit, AfterViewInit {
 
   select(course: Course) {
     this.courseInfoService.announceSelectCourse(course);
+    this.selectedCourse = course;
     (<any>$(".button-collapse")).sideNav('hide');
   }
 

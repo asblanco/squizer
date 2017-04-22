@@ -10,6 +10,7 @@ import { CourseService }  from '../../db/course.service';
 })
 export class SideNavComponent implements OnInit {
   @Input() courses: Course[] = [];
+  @Input() selectedCourse: Course;
   @Output() onSelected = new EventEmitter<Course>();
   @Input() activeTab: EventEmitter<number> = new EventEmitter();
 
@@ -19,6 +20,7 @@ export class SideNavComponent implements OnInit {
 
   select(course: Course) {
     this.onSelected.emit(course);
+    this.selectedCourse = course;
   }
 
   openCourseModal() {

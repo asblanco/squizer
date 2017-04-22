@@ -5,8 +5,20 @@
   background-color: #303030;
 }
 
+.active {
+  font-weight: bold !important;
+  background-color: #232323 !important;
+  border-radius: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 a{
   color: white !important;
+}
+
+a:hover {
+  font-weight: bold !important;
 }
 
 .bold {

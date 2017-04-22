@@ -21,14 +21,27 @@ img {
   max-height: 4em;;
 }
 
-#mobile-demo {
+/*
+ * Side navbar
+ */
+#mobile-sidenav {
   background-color: #303030;
 }
-#mobile-demo li a {
+#mobile-sidenav li a {
   color: white;
   font-family: 'raleway';
 }
+#mobile-sidenav .active {
+  font-weight: bold !important;
+  background-color: #232323 !important;
+  border-radius: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
+#mobile-sidenav li a:hover {
+  font-weight: bold !important;
+}
 
 /*
  * Extended Tabs
