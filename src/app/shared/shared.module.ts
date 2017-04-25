@@ -12,8 +12,7 @@ import { ChapterService }   from './db/chapter.service';
 import { QuestionService }  from './db/question.service';
 import { AnswerService }    from './db/answer.service';
 
-import { ApiConfig }         from './web-api/api-config';
-import { ApiEndpointConfig } from './web-api/api-endpoint.config';
+import { APP_CONFIG, ApiEndpointConfig }  from './app-config/app-config';
 
 @NgModule({
   imports: [
@@ -32,7 +31,7 @@ import { ApiEndpointConfig } from './web-api/api-endpoint.config';
     NewEditComponent
   ],
   providers: [{
-      provide: ApiConfig,
+      provide: APP_CONFIG,
       useValue: ApiEndpointConfig }
   ]
 })

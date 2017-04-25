@@ -4,8 +4,8 @@
       <h4>Editar pregunta</h4>
         <div class="row">
           <div class="input-field form-group">
-            <label for="title_question">Titulo pregunta</label>
-            <input type="text" class="form-control" formControlName="title">
+            <label>Titulo pregunta</label>
+            <input type="text" class="form-control" [formControl]="questionForm.controls['title']">
           </div>
         </div>
         <!--answers-->
@@ -13,16 +13,17 @@
           <fieldset>
             <legend><b> Respuestas </b></legend>
             <div formArrayName="answers">
-              <div *ngFor="let answer of questionForm.controls.answers.controls; let i=index" class="panel panel-default">
-                <div class="row" [formGroupName]="i">
-                  <span class="col s11">
-                    <label for="answer">Respuesta {{answer.controls.id._value}}</label>
+              <div *ngFor="let answer of questionForm.controls.answers.controls; let i=index" [formGroupName]="i" id="answer{{i}}">
+                <div class="row">
+                  <span class="col s11 form-group">
+                    <label for="title">Respuesta {{i}} {{answer.controls.id._value}} {{answer.controls.title._value}}</label>
                     <input type="text" class="form-control" formControlName="title" required/>
-                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(i)"><img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
+                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(i)">
+                      <img class="icon-cross" src="../../../../assets/close.svg" alt="remove answer"></a>
                   </span>
-                  <div class="col s1 switch">
+                  <div class="col s1 switch form-group">
                     <label>
-                      <input type="checkbox" id="{{i}}" formControlName="correct">
+                      <input type="checkbox" class="form-control" formControlName="correct">
                       <span class="lever"></span>
                     </label>
                   </div>
@@ -34,6 +35,11 @@
               Add another answer
             </a>
           </fieldset>
+        </div>
+        <div class="margin-20">
+          <div>myForm details:-</div>
+          <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
+          <pre>form value: <br>{{questionForm.value | json}}</pre>
         </div>
         <br>
     </div>

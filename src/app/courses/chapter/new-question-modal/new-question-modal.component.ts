@@ -46,6 +46,16 @@ export class NewQuestionModalComponent implements OnChanges {
     });
   }
 
+  get answers(): FormArray {
+    return this.questionForm.get('answers') as FormArray;
+  };
+
+  setAnswers(answers: Answer[]) {
+    const answerFGs = answers.map(answer => this.fb.group(answer));
+    const answerFormArray = this.fb.array(answerFGs);
+    this.questionForm.setControl('answers', answerFormArray);
+  }
+
   /* Answer */
   initAnswerT() {
     return this.fb.group({
@@ -102,15 +112,5 @@ export class NewQuestionModalComponent implements OnChanges {
   }
 
   revert() { this.ngOnChanges(); }
-
-  get answers(): FormArray {
-    return this.questionForm.get('answers') as FormArray;
-  };
-
-  setAnswers(answers: Answer[]) {
-    const answerFGs = answers.map(answer => this.fb.group(answer));
-    const answerFormArray = this.fb.array(answerFGs);
-    this.questionForm.setControl('answers', answerFormArray);
-  }
 
 }

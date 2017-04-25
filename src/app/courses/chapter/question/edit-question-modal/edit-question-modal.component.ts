@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges }                    from '@angular/core';
+import { Component, Input, OnChanges, AfterViewInit }                    from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
 import { Chapter }   from '../../../../shared/db/chapter';
-import { Question }  from '../../../../shared/db/question';;
+import { Question }  from '../../../../shared/db/question';
 import { Answer }    from '../../../../shared/db/answer';
 
 import { QuestionService }    from '../../../../shared/db/question.service';
@@ -17,7 +17,7 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './edit-question-modal.component.html',
   styleUrls: ['./edit-question-modal.component.css']
 })
-export class EditQuestionModalComponent implements OnChanges {
+export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
   @Input() chapterId: number;
   @Input() question: Question;
   questionForm: FormGroup;
@@ -39,6 +39,9 @@ export class EditQuestionModalComponent implements OnChanges {
     this.setAnswers(this.question.answers);
   }
 
+  ngAfterViewInit() {
+  }
+
   createForm() {
     this.questionForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
@@ -46,8 +49,18 @@ export class EditQuestionModalComponent implements OnChanges {
     });
   }
 
+  get answers(): FormArray {
+    return this.questionForm.get('answers') as FormArray;
+  };
+
+  setAnswers(answers: Answer[]) {
+    const answerFGs = answers.map(answer => this.fb.group(answer));
+    const answerFormArray = this.fb.array(answerFGs);
+    this.questionForm.setControl('answers', answerFormArray);
+  }
+
   /* Answer */
-  newAnswer() {
+  initAnswer() {
     return this.fb.group({
       id: 0,
       question: this.question.id,
@@ -57,18 +70,17 @@ export class EditQuestionModalComponent implements OnChanges {
   }
 
   addAnswer() {
-    const control = <FormArray>this.questionForm.controls['answers'];
-    control.push(this.newAnswer());
+    this.answers.push(this.initAnswer());
   }
 
   removeAnswer(i: number) {
-    const control = <FormArray>this.questionForm.controls['answers'];
-    control.removeAt(i);
+    this.answers.removeAt(i);
+    //$( "#answer"+i ).remove();
   }
 
   onSubmit() {
     const q = this.prepareSaveQuestion();
-    const answers = this.questionForm.controls['answers'].value;
+    const answers = this.answers.value;
     const noInserts = this.updateQuestionWithoutInserts(q);
 
     /* Update and delete answers */
@@ -129,14 +141,4 @@ export class EditQuestionModalComponent implements OnChanges {
   }
 
   revert() { this.ngOnChanges(); }
-
-  get answers(): FormArray {
-    return this.questionForm.get('answers') as FormArray;
-  };
-
-  setAnswers(answers: Answer[]) {
-    const answerFGs = answers.map(answer => this.fb.group(answer));
-    const answerFormArray = this.fb.array(answerFGs);
-    this.questionForm.setControl('answers', answerFormArray);
-  }
 }

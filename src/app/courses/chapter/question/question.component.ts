@@ -1,5 +1,4 @@
 import { Component, OnInit, Input }                       from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
 
 import { Question }           from '../../../shared/db/question';
 import { QuestionService }    from '../../../shared/db/question.service';
@@ -16,20 +15,13 @@ import { NotificationsService } from 'angular2-notifications';
 export class QuestionComponent implements OnInit {
   @Input() question: Question;
   @Input() i: number;
-  public myForm: FormGroup;
 
   constructor(
-    private _fb: FormBuilder,
     private courseInfoService: CourseInfoService,
     private questionService: QuestionService,
     private notificationsService: NotificationsService ) { }
 
-  ngOnInit() {
-    this.myForm = this._fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      answers: this._fb.array([])
-    });
-  }
+  ngOnInit() { }
 
   openEditQuestionModal() {
     (<any>$('#editQuestionModal'+this.question.id)).openModal({dismissible: false});
@@ -47,23 +39,4 @@ export class QuestionComponent implements OnInit {
         })
         .catch( () => this.notificationsService.error("Error", "Al eliminar la pregunta: " + this.question.title));
   }
-
-  initAnswer() {
-    return this._fb.group({
-      answer: ['', Validators.required],
-      correct: false
-    });
-  }
-
-  addAnswer() {
-    const control = <FormArray>this.myForm.controls['answers'];
-    control.push(this.initAnswer());
-  }
-
-  removeAnswer(i: number) {
-    const control = <FormArray>this.myForm.controls['answers'];
-    control.removeAt(i);
-    this.myForm.markAsDirty();
-  }
-
 }

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Headers, Http }      from '@angular/http';
-import { ApiConfig }          from '../web-api/api-config';
-import { IApiConfig }         from '../web-api/api-config.interface';
+import { APP_CONFIG }         from '../app-config/app-config';
+import { IAppConfig }         from '../app-config/iapp-config';
 import { Answer }             from './answer';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,7 +12,7 @@ export class AnswerService {
 
   constructor(
     private http: Http,
-    @Inject(ApiConfig) private config: IApiConfig
+    @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   create(answer: Answer): Promise<Answer> {
@@ -22,7 +22,7 @@ export class AnswerService {
       .then(res => res.json())
       .catch(this.handleError);
   }
-  
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

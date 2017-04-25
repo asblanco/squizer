@@ -5,16 +5,9 @@
   <b><p> #{{i+1}} {{question.title}} </p></b>
   <div class="collection">
     <a *ngFor="let answer of question.answers" class="collection-item">
-      <span *ngIf="answer.correct">
-        <div class="greenLine">
-          {{answer.title}}
-        </div>
-      </span>
-      <span *ngIf="!answer.correct">
-        <div class="redLine">
-          {{answer.title}}
-        </div>
-      </span>
+      <div [ngClass]="{'greenLine': answer.correct, 'redLine': !answer.correct}">
+        {{answer.title}}
+      </div>
     </a>
   </div>
 </a>

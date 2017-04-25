@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Headers, Http }      from '@angular/http';
-import { ApiConfig }          from '../web-api/api-config';
-import { IApiConfig }         from '../web-api/api-config.interface';
+import { APP_CONFIG }         from '../app-config/app-config';
+import { IAppConfig }         from '../app-config/iapp-config';
 import { Course }             from './course';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,7 +12,7 @@ export class CourseService {
 
   constructor(
     private http: Http,
-    @Inject(ApiConfig) private config: IApiConfig
+    @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getCourses(): Promise<Course[]> {
