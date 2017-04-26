@@ -21,6 +21,10 @@ img {
   max-height: 4em;;
 }
 
+.desktopTab .active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 /*
  * Side navbar
  */

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy }  from '@angular/core';
+import { Component, OnDestroy, OnInit }  from '@angular/core';
 import { Course }             from '../shared/db/course';
 import { Chapter }            from '../shared/db/chapter';
 import { Question }           from '../shared/db/question';
@@ -35,12 +35,6 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {}
-
-  onSelected(course: Course) {
-    this.selectedCourse = course;
-    this.editCourseTitle = false;
-    this.getCourseDetails(course.id);
-  }
 
   openNewChapterModal() {
     (<any>$('#newChapterModal')).openModal();
