@@ -1,0 +1,28 @@
+<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet">
+  <form [formGroup]="editSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="modal-content">
+      <h4>Editar curso</h4>
+
+      <div class="row">
+        <div class="input-field form-group">
+          <label for="title" class="active">Titulo</label>
+          <input type="text" class="form-control" formControlName="title" required>
+        </div>
+
+        <div class="input-field form-group col s6">
+          <label for="start_date" class="active">Fecha de inicio</label>
+          <input type="date" class="datepicker form-control" id="start_date" formControlName="start_date" required>
+        </div>
+        <div class="input-field form-group col s6">
+          <label for="end_date" class="active">Fecha de fin</label>
+          <input type="date" class="datepicker form-control" id="end_date" formControlName="end_date"  required>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect btn red left" (click)="openDeleteSchoolYearModal()">Eliminar</button>
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn">Guardar</button>
+    </div>
+  </form>
+</div>

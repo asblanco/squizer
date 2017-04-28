@@ -1,31 +1,30 @@
-import { Component, OnDestroy, OnInit }  from '@angular/core';
-import { Course }             from '../shared/db/course';
-import { Chapter }            from '../shared/db/chapter';
-import { Question }           from '../shared/db/question';
-import { CourseService }      from '../shared/db/course.service';
-import { CourseInfoService }  from './course-info.service';
-import { ChapterService }     from '../shared/db/chapter.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Course } from '../db/course';
+import { Chapter } from '../db/chapter';
+import { Question } from '../db/question';
+import { CourseService } from '../db/course.service';
+import { CourseInfoService } from './course-info.service';
+import { ChapterService } from '../db/chapter.service';
 
 import { NotificationsService } from 'angular2-notifications';
-import { Subscription }         from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   moduleId: module.id,
-  selector: 'courses',
+  selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit, OnDestroy {
   oldTitleCourse: Course;
   selectedCourse: Course;
-  editCourseTitle: boolean = false;
+  editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
   subscription: Subscription;
 
   constructor( private courseInfoService:     CourseInfoService,
                private courseService:         CourseService,
                private chapterService:        ChapterService,
-               private notificationsService:  NotificationsService )
-  {
+               private notificationsService:  NotificationsService ) {
     this.subscription = courseInfoService.courseSelected$.subscribe(
       course => {
         this.selectedCourse = course;
@@ -50,9 +49,9 @@ export class CoursesComponent implements OnInit, OnDestroy {
    */
   getCourseDetails(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
-      .then(course => {this.courseInfoService.course = course,
-                       this.selectedCourse = this.courseInfoService.course})
-      .catch(() => this.notificationsService.error("Error", "Al descargar detalles de asignatura."));
+      .then(course => { this.courseInfoService.course = course;
+                        this.selectedCourse = this.courseInfoService.course; })
+      .catch(() => this.notificationsService.error('Error', 'Al descargar detalles de asignatura.'));
   }
 
   deleteCourse(course: Course): void {
@@ -62,12 +61,12 @@ export class CoursesComponent implements OnInit, OnDestroy {
           this.courseInfoService.announceDeleteCourse(course);
           if (this.selectedCourse === course) { this.selectedCourse = null; }
         })
-        .catch(() => this.notificationsService.error("Error", "Al eliminar asignatura " + course.name));
+        .catch(() => this.notificationsService.error('Error', 'Al eliminar asignatura ' + course.name));
   }
 
   editCourseBtn(): void {
     this.editCourseTitle = true;
-    this.oldTitleCourse = JSON.parse(JSON.stringify(this.selectedCourse)); //Save value without binding
+    this.oldTitleCourse = JSON.parse(JSON.stringify(this.selectedCourse)); // Save value without binding
   }
 
   cancelEditCourse(): void {
@@ -77,15 +76,15 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   updateCourseTitle(): void {
-    let updatedCourse = this.selectedCourse;
+    const updatedCourse = this.selectedCourse;
 
     this.courseService.update(updatedCourse)
     .then(() => {
       this.courseInfoService.announceEditCourse(updatedCourse);
       this.editCourseTitle = false;
     })
-    .catch(() => {  this.cancelEditCourse(),
-                    this.notificationsService.error("Error", "Al actualizar el titulo de la asignatura.")
+    .catch(() => {  this.cancelEditCourse();
+                    this.notificationsService.error('Error', 'Al actualizar el titulo de la asignatura.');
                   });
   }
 
@@ -99,7 +98,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
       .then(chapter => {
         this.courseInfoService.addChapter(chapter);
       })
-      .catch(() => this.notificationsService.error("Error", "Al añadir el tema: " + title));
+      .catch(() => this.notificationsService.error('Error', 'Al añadir el tema: ' + title));
   }
 
   ngOnDestroy() {
@@ -108,8 +107,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   private indexOf(array, item) {
-      for (var i = 0; i < array.length; i++) {
-          if (array[i].id === item.id) return i;
+      for (let i = 0; i < array.length; i++) {
+          if (array[i].id === item.id) { return i; }
       }
       return -1;
   }

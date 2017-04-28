@@ -1,7 +1,8 @@
 /*320px = 20em*/
 @media only screen and (min-width: 62em){
   .content {
-    margin-left: 20em;
+    margin-left: 25em;
+    margin-right: 5em;
   }
   .center-div
   {
@@ -11,6 +12,10 @@
   }
 }
 @media only screen and (max-width: 62em){
+  .content {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
   .center-div
   {
     position: absolute;

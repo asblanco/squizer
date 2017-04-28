@@ -1,10 +1,10 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CommonModule }         from '@angular/common';
+import { CommonModule } from '@angular/common';
 
-import { MainAppComponent }      from './main-app/main-app.component';
-import { TestsComponent }        from './main-app/tests/tests.component';
-import { CoursesComponent }      from './main-app/courses/courses.component';
+import { MainAppComponent } from './main-app/main-app.component';
+import { TestsComponent } from './main-app/tests/tests.component';
+import { CoursesComponent } from './main-app/courses/courses.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [

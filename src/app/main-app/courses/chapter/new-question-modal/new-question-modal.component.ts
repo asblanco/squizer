@@ -1,18 +1,18 @@
-import { Component, Input, OnChanges }                    from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
-import { Chapter }   from '../../../shared/db/chapter';
-import { Question }  from '../../../shared/db/question';;
-import { Answer }    from '../../../shared/db/answer';
+import { Chapter } from '../../../db/chapter';
+import { Question } from '../../../db/question';
+import { Answer } from '../../../db/answer';
 
-import { QuestionService }    from '../../../shared/db/question.service';
-import { CourseInfoService }  from '../../course-info.service';
+import { QuestionService } from '../../../db/question.service';
+import { CourseInfoService } from '../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
-  selector: 'new-question-modal',
+  selector: 'app-new-question-modal',
   templateUrl: './new-question-modal.component.html',
   styleUrls: ['./new-question-modal.component.css']
 })
@@ -25,9 +25,8 @@ export class NewQuestionModalComponent implements OnChanges {
     private fb: FormBuilder,
     private courseInfoService: CourseInfoService,
     private questionService: QuestionService,
-    private notificationsService: NotificationsService )
-  {
-    this.createForm();
+    private notificationsService: NotificationsService ) {
+      this.createForm();
   }
 
   ngOnChanges() {
@@ -88,7 +87,7 @@ export class NewQuestionModalComponent implements OnChanges {
       .then(question => {
         this.courseInfoService.addQuestion(question.chapter, question);
       })
-      .catch(() => this.notificationsService.error("Error", "Al crear pregunta: " + this.question.title));
+      .catch(() => this.notificationsService.error('Error', 'Al crear pregunta: ' + this.question.title));
     this.ngOnChanges();
   }
 

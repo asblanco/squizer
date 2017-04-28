@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Course }     from '../shared/db/course';
-import { Chapter }    from '../shared/db/chapter';
-import { Question }   from '../shared/db/question';
-import { Answer }     from '../shared/db/answer';
-import { CourseService }  from '../shared/db/course.service';
 
-import { Subject }    from 'rxjs/Subject';
+import { Answer } from '../db/answer';
+import { Chapter } from '../db/chapter';
+import { Course } from '../db/course';
+import { CourseService } from '../db/course.service';
+import { Question } from '../db/question';
+
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CourseInfoService {
@@ -45,29 +46,31 @@ export class CourseInfoService {
   }
 
   deleteQuestion(chapterId: number, question: Question): void {
-    let chapterIndex = this.indexOfId(this.course.chapters, chapterId);
-    let questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
+    const chapterIndex = this.indexOfId(this.course.chapters, chapterId);
+    const questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
 
     this.course.chapters[chapterIndex].questions.splice(questionIndex, 1);
   }
 
   updateQuestion(chapterId: number, question: Question): void {
-    let chapterIndex = this.indexOfId(this.course.chapters, chapterId);
-    let questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
+    const chapterIndex = this.indexOfId(this.course.chapters, chapterId);
+    const questionIndex = this.indexOfId(this.course.chapters[chapterIndex].questions, question.id);
 
     this.course.chapters[chapterIndex].questions.splice(questionIndex, 1, question);
   }
 
   addAnswer(chapterId: number, question: Question, answer: Answer): Question {
-    let chapterIndex = this.indexOfId(this.course.chapters, chapterId);
-    let questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
+    const chapterIndex = this.indexOfId(this.course.chapters, chapterId);
+    const questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
     this.course.chapters[chapterIndex].questions[questionIndex].answers.push(answer);
     return this.course.chapters[chapterIndex].questions[questionIndex];
   }
 
   private indexOfId(array, id: number) {
-      for (var i = 0; i < array.length; i++) {
-          if (array[i].id === id) return i;
+      for (let i = 0; i < array.length; i++) {
+          if (array[i].id === id) {
+            return i;
+          }
       }
       return -1;
   }

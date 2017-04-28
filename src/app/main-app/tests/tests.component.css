@@ -1,5 +1,15 @@
 /*320px = 20em*/
 @media only screen and (min-width: 62em){
+  .header {
+    margin-left: 21em;
+    margin-right: 1em;
+  }
+
+  .content {
+    margin-left: 22em;
+    margin-right: 2em;
+  }
+
   .center-div
   {
     position: absolute;
@@ -8,6 +18,11 @@
   }
 }
 @media only screen and (max-width: 62em){
+
+  .content {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
   .center-div
   {
     position: absolute;
@@ -15,6 +30,35 @@
   }
 }
 
+h4 {
+  padding-left: 1em;
+}
+
+sub {
+  font-size: 0.6em;
+}
+
+.header {
+  padding-top: 4em;
+  background-color: #8f8f8f;
+  border-radius: 0px 0px 3em 3em;
+}
+
 .center-div h2 {
   color: #bdbdbd;
+}
+
+.card-content {
+  background-color: #efefef;
+}
+
+#deleteCall:hover {
+  background-color: white;
+}
+
+#editSchoolYear {
+  font-size: 0.5em;
+}
+#editSchoolYear:hover {
+  background-color: rgba(255, 255, 255, 0);;
 }

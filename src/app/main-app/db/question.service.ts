@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http }      from '@angular/http';
-import { APP_CONFIG }         from '../app-config/app-config';
-import { IAppConfig }         from '../app-config/iapp-config';
-import { Question }           from './question';
+import { Headers, Http } from '@angular/http';
+import { APP_CONFIG } from '../shared/app-config/app-config';
+import { IAppConfig } from '../shared/app-config/iapp-config';
+import { Question } from './question';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -35,7 +35,7 @@ export class QuestionService {
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.url}${id}`;
+    const url = `${this.url}${id}/`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)

@@ -1,19 +1,19 @@
-import { Component, Input, OnChanges, AfterViewInit }                    from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder }  from '@angular/forms';
+import { Component, Input, OnChanges, AfterViewInit } from '@angular/core';
+import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
-import { Chapter }   from '../../../../shared/db/chapter';
-import { Question }  from '../../../../shared/db/question';
-import { Answer }    from '../../../../shared/db/answer';
+import { Chapter } from '../../../../db/chapter';
+import { Question } from '../../../../db/question';
+import { Answer } from '../../../../db/answer';
 
-import { QuestionService }    from '../../../../shared/db/question.service';
-import { AnswerService }      from '../../../../shared/db/answer.service';
-import { CourseInfoService }  from '../../../course-info.service';
+import { QuestionService } from '../../../../db/question.service';
+import { AnswerService } from '../../../../db/answer.service';
+import { CourseInfoService } from '../../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   moduleId: module.id,
-  selector: 'edit-question-modal',
+  selector: 'app-edit-question-modal',
   templateUrl: './edit-question-modal.component.html',
   styleUrls: ['./edit-question-modal.component.css']
 })
@@ -27,8 +27,7 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
     private courseInfoService: CourseInfoService,
     private questionService: QuestionService,
     private answerService: AnswerService,
-    private notificationsService: NotificationsService )
-  {
+    private notificationsService: NotificationsService ) {
     this.createForm();
   }
 
@@ -75,7 +74,7 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
 
   removeAnswer(i: number) {
     this.answers.removeAt(i);
-    //$( "#answer"+i ).remove();
+    // $( "#answer"+i ).remove();
   }
 
   onSubmit() {
@@ -90,17 +89,17 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
         this.question = noInserts;
 
         /* Create the new ones */
-        for (var i = 0; i < answers.length; i++) {
-            if (answers[i].id == 0){
+        for (let i = 0; i < answers.length; i++) {
+            if (answers[i].id === 0) {
               this.answerService.create(answers[i])
                 .then(answer => {
                   this.question = this.courseInfoService.addAnswer(this.question.chapter, this.question, answer);
                 })
-                .catch(() => this.notificationsService.error("Error", "Al crear las nuevas respuestas."));
+                .catch(() => this.notificationsService.error('Error', 'Al crear las nuevas respuestas.'));
             }
         }
       })
-      .catch(() => this.notificationsService.error("Error", "Al actualizar la pregunta: " + q.title));
+      .catch(() => this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + q.title));
 
     this.ngOnChanges();
   }
@@ -125,10 +124,11 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
   }
 
   updateQuestionWithoutInserts(completeQuestion: Question): Question {
-    let answersDeepCopy: Answer[] = new Array<Answer>();
-    for(var i = 0; i < completeQuestion.answers.length; i++){
-      if(completeQuestion.answers[i].id != 0)
+    const answersDeepCopy: Answer[] = new Array<Answer>();
+    for (let i = 0; i < completeQuestion.answers.length; i++) {
+      if (completeQuestion.answers[i].id !== 0) {
         answersDeepCopy.push(completeQuestion.answers[i]);
+      }
     }
 
     const updateQ: Question = {

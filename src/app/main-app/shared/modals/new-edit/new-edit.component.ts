@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
-  selector: 'new-edit-modal',
+  selector: 'app-new-edit-modal',
   templateUrl: './new-edit.component.html'
 })
 export class NewEditComponent {

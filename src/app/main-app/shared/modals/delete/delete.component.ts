@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
-  selector: 'delete-modal',
+  selector: 'app-delete-modal',
   templateUrl: './delete.component.html'
 })
 export class DeleteComponent {

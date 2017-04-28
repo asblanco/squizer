@@ -11,7 +11,7 @@
     <!-- Body -->
     <div class="collapsible-body">
       <div *ngFor="let question of chapter.questions; let i=index">
-        <question [i]="i" [question]="question" (onDeletedQuestion)="deleteQuestion(chapter, question)"></question>
+        <app-question [i]="i" [question]="question" (onDeletedQuestion)="deleteQuestion(chapter, question)"></app-question>
       </div>
       <div class="right-align">
         <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="openNewQuestionModal(); $event.stopPropagation();">
@@ -24,8 +24,8 @@
 
 
 <!-- Edit title Chapter -->
-<new-edit-modal (onSubmit)="updateChapterTitle($event)" [modalId]="'editChapterModal'+chapter.id" [text]="'Editar tema'" [title]="chapter.title"></new-edit-modal>
+<app-new-edit-modal (onSubmit)="updateChapterTitle($event)" [modalId]="'editChapterModal'+chapter.id" [text]="'Editar tema'" [title]="chapter.title"></app-new-edit-modal>
 
-<new-question-modal [chapter]="chapter"></new-question-modal>
+<app-new-question-modal [chapter]="chapter"></app-new-question-modal>
 
-<delete-modal (onDeleted)="deleteChapter(chapter)" [id]="'deleteChapterModal'+chapter.id" [title]="chapter.title"></delete-modal>
+<app-delete-modal (onDeleted)="deleteChapter(chapter)" [id]="'deleteChapterModal'+chapter.id" [title]="chapter.title"></app-delete-modal>

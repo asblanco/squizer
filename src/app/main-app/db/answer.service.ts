@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http }      from '@angular/http';
-import { APP_CONFIG }         from '../app-config/app-config';
-import { IAppConfig }         from '../app-config/iapp-config';
-import { Answer }             from './answer';
+import { Headers, Http } from '@angular/http';
+import { APP_CONFIG } from '../shared/app-config/app-config';
+import { IAppConfig } from '../shared/app-config/iapp-config';
+import { Answer } from './answer';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

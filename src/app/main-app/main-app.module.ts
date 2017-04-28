@@ -1,22 +1,24 @@
-import { NgModule }     from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoursesModule } from './courses/courses.module';
-import { TestsModule }   from './tests/tests.module';
-import { SharedModule }  from './shared/shared.module';
-import { MainAppRoutingModule }  from './main-app-routing.module';
+import { TestsModule } from './tests/tests.module';
+import { SharedModule } from './shared/shared.module';
+import { DbModule } from './db/db.module';
+import { MainAppRoutingModule } from './main-app-routing.module';
 
-import { MainAppComponent }     from './main-app.component';
-import { NavbarComponent }  from './navbar/navbar.component';
+import { MainAppComponent } from './main-app.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { CoursesComponent } from './courses/courses.component';
-import { TestsComponent }   from './tests/tests.component';
+import { TestsComponent } from './tests/tests.component';
 
 @NgModule({
   imports: [
     CommonModule,
     CoursesModule,
     TestsModule,
-    SharedModule.forRoot(),
+    SharedModule,
+    DbModule.forRoot(),
     MainAppRoutingModule
   ],
   declarations: [
@@ -29,4 +31,4 @@ import { TestsComponent }   from './tests/tests.component';
   ],
   providers: []
 })
-export class MainAppModule { }
+export class MainAppModule {}

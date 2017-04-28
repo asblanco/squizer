@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http }      from '@angular/http';
-import { APP_CONFIG }         from '../app-config/app-config';
-import { IAppConfig }         from '../app-config/iapp-config';
-import { Chapter }            from './chapter';
+import { Headers, Http } from '@angular/http';
+import { APP_CONFIG } from '../shared/app-config/app-config';
+import { IAppConfig } from '../shared/app-config/iapp-config';
+import { Chapter } from './chapter';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class ChapterService {
 
   create(title: string, course: number): Promise<Chapter> {
     return this.http
-      .post(this.url, JSON.stringify({course: course, title: title, questions:[]}), {headers: this.headers})
+      .post(this.url, JSON.stringify({course: course, title: title, questions: []}), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -40,7 +40,7 @@ export class ChapterService {
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.url}${id}`;
+    const url = `${this.url}${id}/`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)

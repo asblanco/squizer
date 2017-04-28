@@ -1,41 +1,36 @@
-<!-- <nav-bars></nav-bars> -->
 <div class="content" *ngIf="selectedCourse">
-  <div class="container">
-    <!-- Course title -->
-    <div class="row">
-      <h3 *ngIf="!editCourseTitle">
-        <div class="col s11">
-            {{selectedCourse.name}}
-        </div>
-        <div class="col s1">
-          <a (click)="editCourseBtn()"><i class="material-icons icon-blue">edit</i></a>
-        </div>
-      </h3>
-      <div *ngIf="editCourseTitle">
-        <div class="input-field">
-          <input id="courseTitle" [(ngModel)]="selectedCourse.name" placeholder="name" />
-          <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-btn-text" (click)="updateCourseTitle()">Guardar</a></b>
-          <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
-        </div>
+  <!-- Course title -->
+  <div class="row">
+    <h3 *ngIf="!editCourseTitle">
+      <div class="col s11">
+          {{selectedCourse.name}}
+      </div>
+      <div class="col s1">
+        <a (click)="editCourseBtn()"><i class="material-icons icon-blue">edit</i></a>
+      </div>
+    </h3>
+    <div *ngIf="editCourseTitle">
+      <div class="input-field">
+        <input id="courseTitle" [(ngModel)]="selectedCourse.name" placeholder="name" />
+        <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-btn-text" (click)="updateCourseTitle()">Guardar</a></b>
+        <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
       </div>
     </div>
-    <!-- Chapters -->
-    <div class="row">
-      <div *ngFor="let chapter of selectedCourse.chapters">
-        <chapter [chapter]="chapter"></chapter>
-      </div>
+  </div>
+  <!-- Chapters -->
+  <div class="row">
+    <div *ngFor="let chapter of selectedCourse.chapters">
+      <app-chapter [chapter]="chapter"></app-chapter>
     </div>
+  </div>
 
-    <div class="row">
-      <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
-    </div>
+  <div class="row">
+    <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
   </div>
   <!-- Delete course -->
   <footer class="footer">
    <div class="footer">
-     <div class="container">
-       <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
-     </div>
+     <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
    </div>
  </footer>
 </div>
@@ -48,19 +43,19 @@
   </div>
 </div>
 
-<side-nav [title]="'ASIGNATURAS'"></side-nav>
+<app-side-nav [title]="'ASIGNATURAS'"></app-side-nav>
 
 <!-- New Chapter Modal -->
-<new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></new-edit-modal>
+<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
 
 <!-- Delete Course Modal -->
 <div *ngIf="selectedCourse">
-  <delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></delete-modal>
+  <app-delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></app-delete-modal>
 </div>
 
 <script type="text/javascript">
   $("#courseTitle").keyup(function(event){
-    if(event.keyCode == 13){
+    if(event.keyCode == 13) {
         $("#saveCourseTitle").click();
     }
   });

@@ -47,6 +47,10 @@ img {
   font-weight: bold !important;
 }
 
+.call {
+  margin-left: 1em;
+}
+
 /*
  * Extended Tabs
  */

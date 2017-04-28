@@ -1,25 +1,25 @@
-import { Component, OnInit, EventEmitter, Output, Input }  from '@angular/core';
-import { Router, NavigationEnd }  from '@angular/router';
-import { CourseService }          from '../../shared/db/course.service';
-import { CourseInfoService }      from '../../courses/course-info.service';
-import { SideNavService }         from './side-nav.service';
-import { NotificationsService }   from 'angular2-notifications';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { CourseInfoService } from '../../courses/course-info.service';
+import { CourseService } from '../../db/course.service';
+import { SideNavService } from './side-nav.service';
+import { NotificationsService } from 'angular2-notifications';
 
+import 'rxjs/add/operator/filter';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
-import 'rxjs/add/operator/filter';
 
 @Component({
   moduleId: module.id,
-  selector: 'side-nav',
+  selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, OnDestroy {
   @Input() title: string;
   activeTab: string;
   selected;
-  itemList; //array of courses or academic years
+  itemList; // array of courses or academic years
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -27,16 +27,15 @@ export class SideNavComponent implements OnInit {
     private courseInfoService: CourseInfoService,
     private sideNavService: SideNavService,
     private notificationsService: NotificationsService,
-    private router: Router )
-  {
+    private router: Router ) {
     router.events
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
       // Use urlAfterRedirects because when you first load the app from / it
       // redirects, so only event.url will give / as result
-      if(event.urlAfterRedirects == "/app/manage-courses"){
-        this.activeTab = "courses";
+      if (event.urlAfterRedirects === '/app/manage-courses') {
+        this.activeTab = 'courses';
 
         this.sideNavService.getCourses$
         .takeUntil(this.ngUnsubscribe)
@@ -63,9 +62,8 @@ export class SideNavComponent implements OnInit {
           course => {
             this.sideNavService.editCourse(course);
         });
-      }
-      else if(event.urlAfterRedirects == "/app/manage-tests"){
-        this.activeTab = "tests";
+      } else if (event.urlAfterRedirects === '/app/manage-tests') {
+        this.activeTab = 'tests';
       }
     });
   }
@@ -82,21 +80,22 @@ export class SideNavComponent implements OnInit {
 
   select(item) {
     this.selected = item;
-    if(this.activeTab == "courses")
+    if (this.activeTab === 'courses') {
       this.courseInfoService.announceSelectCourse(item);
-    (<any>$(".button-collapse")).sideNav('hide');
+    }
+    (<any>$('.button-collapse')).sideNav('hide');
   }
 
   create(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    if(this.activeTab == "courses"){
+    if (this.activeTab === 'courses') {
       this.courseService.create(name)
         .then(course => {
           this.sideNavService.addCourse(course);
           this.courseInfoService.announceSelectCourse(course);
         })
-        .catch(() => this.notificationsService.error("Error", "Al crear la asignatura: " + name));
+        .catch(() => this.notificationsService.error('Error', 'Al crear la asignatura: ' + name));
     }
   }
 
@@ -107,8 +106,8 @@ export class SideNavComponent implements OnInit {
   }
 
   private indexOf(array, itemId) {
-      for (var i = 0; i < array.length; i++) {
-          if (array[i].id === itemId) return i;
+      for (let i = 0; i < array.length; i++) {
+          if (array[i].id === itemId) { return i; }
       }
       return -1;
   }
