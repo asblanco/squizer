@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainAppComponent } from './main-app.component';
 import { CoursesComponent } from './courses/courses.component';
-import { TestsComponent } from './tests/tests.component';
+import { SchoolYearComponent } from './tests/school-year/school-year.component';
 
 const appRoutes: Routes = [
   {
@@ -13,7 +13,7 @@ const appRoutes: Routes = [
       {
         path: '',
         children: [
-          { path: 'manage-tests', component: TestsComponent },
+          { path: 'manage-tests', component: SchoolYearComponent },
           { path: 'manage-courses', component: CoursesComponent },
           { path: '', redirectTo: '/app/manage-tests', pathMatch: 'full' },
         ]

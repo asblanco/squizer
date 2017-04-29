@@ -1,7 +1,8 @@
-<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet">
-  <form [formGroup]="editSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
+<div id="{{modalId}}" class="modal bottom-sheet">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Editar curso</h4>
+      <h4 *ngIf="schoolYear">Editar curso</h4>
+      <h4 *ngIf="call">Editar convocatoria</h4>
 
       <div class="row">
         <div class="input-field form-group">
@@ -21,7 +22,7 @@
     </div>
 
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect btn red left" (click)="openDeleteSchoolYearModal()">Eliminar</button>
+      <button *ngIf="schoolYear" class="modal-action modal-close waves-effect btn red left" (click)="openDeleteSchoolYearModal()">Eliminar Curso</button>
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn">Guardar</button>
     </div>
   </form>

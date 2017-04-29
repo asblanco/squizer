@@ -6,7 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class SideNavService {
+export class CoursesSideNavService {
   courses: Course[] = [];
   // Observable string sources
   private coursesList = new Subject<Course[]>();
@@ -26,12 +26,13 @@ export class SideNavService {
     this.coursesList.next(courses);
   }
 
-  announceAddCourse(course: Course) {
-    this.newCourse.next(course);
-  }
-
   announceSelected(item) {
     this.select.next(item);
+  }
+
+  announceDeleteCourse(course: Course) {
+    this.select.next(course);
+    this.deleteCourse(course);
   }
 
   addCourse(course: Course) {

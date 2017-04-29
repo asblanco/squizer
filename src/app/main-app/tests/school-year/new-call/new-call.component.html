@@ -1,7 +1,7 @@
-<div id="newSchoolYearModal" class="modal bottom-sheet">
-  <form [formGroup]="newSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
+<div id="{{modalId}}" class="modal bottom-sheet">
+  <form [formGroup]="newCallForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Nuevo curso</h4>
+      <h4>Nueva convocatoria en {{schoolYear.title}}</h4>
 
       <div class="row">
         <div class="input-field form-group">

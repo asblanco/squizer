@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
-import { TestsComponent } from './tests.component';
+import { SchoolYearComponent } from './school-year/school-year.component';
 import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
 import { NewSchoolYearComponent } from './new-school-year/new-school-year.component';
 
 import { TestsSideNavService } from './tests-side-nav/tests-side-nav.service';
-import { EditDeleteSchoolYearComponent } from './edit-delete-school-year/edit-delete-school-year.component';
+import { EditSchoolYearCallComponent } from './school-year/edit-school-year-call/edit-school-year-call.component';
+import { CallComponent } from './school-year/call/call.component';
+import { NewCallComponent } from './school-year/new-call/new-call.component';
 
 @NgModule({
   imports: [
@@ -18,12 +20,17 @@ import { EditDeleteSchoolYearComponent } from './edit-delete-school-year/edit-de
     ReactiveFormsModule
   ],
   declarations: [
-    TestsComponent,
+    SchoolYearComponent,
     TestsSideNavComponent,
     NewSchoolYearComponent,
-    EditDeleteSchoolYearComponent
+    EditSchoolYearCallComponent,
+    CallComponent,
+    NewCallComponent
   ],
-  exports: [ TestsComponent ],
+  exports: [
+    SchoolYearComponent,
+    TestsSideNavComponent
+  ],
   providers: [ TestsSideNavService ]
 })
 export class TestsModule {}

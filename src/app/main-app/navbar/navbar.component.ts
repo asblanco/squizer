@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Output, Input, AfterViewInit } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
-import { SideNavService } from '../courses/side-nav/side-nav.service';
+import { CoursesSideNavService } from '../courses/courses-side-nav/courses-side-nav.service';
 import { CourseService } from '../db/course.service';
 import { CourseInfoService } from '../courses/course-info.service';
 import { Course } from '../db/course';
 
+import { Call } from '../db/call';
 import { TestsSideNavService } from '../tests/tests-side-nav/tests-side-nav.service';
 import { SchoolYearService } from '../db/school-year.service';
 import { SchoolYear } from '../db/school-year';
@@ -28,24 +29,25 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
-    private sideNavService: SideNavService,
+    private  coursesSideNavService: CoursesSideNavService,
     private testsSideNavService: TestsSideNavService,
     private courseService: CourseService,
     private schoolYearService: SchoolYearService,
     private courseInfoService: CourseInfoService,
     private notificationsService: NotificationsService,
-    private router: Router ) {
+    private router: Router
+  ) {
       courseInfoService.courseSelected$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(
         course => {
           this.selected = course;
       });
-      this.testsSideNavService.selected$
+      this.testsSideNavService.selectedCall$
       .takeUntil(this.ngUnsubscribe)
       .subscribe(
-        schoolYear => {
-          this.selected = schoolYear;
+        call => {
+          this.selected = call;
       });
 
       router.events
@@ -78,7 +80,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCourses() {
     this.courseService.getCourses()
-    .then(courses => { this.sideNavService.announceCoursesList(courses);
+    .then(courses => { this. coursesSideNavService.announceCoursesList(courses);
                        this.courses = courses; })
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
 
@@ -97,9 +99,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     (<any>$('.button-collapse')).sideNav('hide');
   }
 
-  selectSchoolYear(schoolYear: SchoolYear) {
-    this.selected = schoolYear;
-    this.testsSideNavService.announceSelected(schoolYear);
+  select() {
     (<any>$('.button-collapse')).sideNav('hide');
   }
 
@@ -109,7 +109,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.courseService.create(name)
       .then(course => {
-        this.sideNavService.addCourse(course);
+        this. coursesSideNavService.addCourse(course);
         this.courseInfoService.announceSelectCourse(course);
       })
       .catch(() => this.notificationsService.error('Error', 'Al crear la asignatura: ' + name));

@@ -5,14 +5,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CourseInfoService } from './course-info.service';
 import { SharedModule } from '../shared/shared.module';
-import { SideNavService } from './side-nav/side-nav.service';
+import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
 
 import { ChapterComponent } from './chapter/chapter.component';
 import { NewQuestionModalComponent } from './chapter/new-question-modal/new-question-modal.component';
 import { EditQuestionModalComponent } from './chapter/question/edit-question-modal/edit-question-modal.component';
 import { QuestionComponent } from './chapter/question/question.component';
 import { CoursesComponent } from './courses.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
+import { CoursesSideNavComponent } from './courses-side-nav/courses-side-nav.component';
 
 @NgModule({
   imports: [
@@ -27,12 +27,15 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     QuestionComponent,
     NewQuestionModalComponent,
     EditQuestionModalComponent,
-    SideNavComponent
+    CoursesSideNavComponent
   ],
-  exports: [ CoursesComponent ],
+  exports: [
+    CoursesComponent,
+    CoursesSideNavComponent
+  ],
   providers: [
     CourseInfoService,
-    SideNavService
+    CoursesSideNavService
   ]
 })
 export class CoursesModule implements OnInit {

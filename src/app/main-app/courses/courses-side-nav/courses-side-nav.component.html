@@ -1,0 +1,7 @@
+<!-- Side Navigation -->
+<li><div class="center bold">ASIGNATURAS</div></li>
+<li><div class="divider"></div></li>
+<li *ngFor="let course of courses" [class.active]="course === selectedCourse">
+  <a class="truncate" (click)="select(course)">{{course.name}}</a>
+</li>
+<a class="waves-effect btn squizer-btn" (click)="openCourseModal()">Nueva Asignatura</a>

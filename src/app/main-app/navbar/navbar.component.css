@@ -30,10 +30,11 @@ img {
  */
 #mobile-sidenav {
   background-color: #303030;
+  font-weight: normal;
+  font-family: 'raleway';
 }
 #mobile-sidenav li a {
   color: white;
-  font-family: 'raleway';
 }
 #mobile-sidenav .active {
   font-weight: bold !important;

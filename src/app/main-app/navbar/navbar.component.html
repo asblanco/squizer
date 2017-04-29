@@ -22,26 +22,10 @@
     <!-- Collapsible side nav in mobile view -->
     <ul class="side-nav" id="mobile-sidenav">
       <div *ngIf="activeTab == 1">
-        <li><div class="center">ASIGNATURAS</div></li>
-        <li><div class="divider"></div></li>
-        <li *ngFor="let course of courses" [class.active]="course === selected">
-          <a class="truncate" (click)="selectCourse(course)">{{course.name}}</a>
-        </li>
-        <a class="waves-effect btn squizer-btn" (click)="openCourseModal()">Nueva Asignatura</a>
+        <app-courses-side-nav></app-courses-side-nav>
       </div>
       <div *ngIf="activeTab == 2">
-        <li><div class="center">CURSOS</div></li>
-        <li><div class="divider"></div></li>
-        <li *ngFor="let schoolYear of schoolYears" [class.active]="schoolYear === selected">
-          <a class="truncate" (click)="selectSchoolYear(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
-          <ul><li *ngFor="let call of schoolYear.calls">
-              <a class="call truncate">= {{call.title}}</a>
-            </li>
-            <li>
-              <a class="call truncate">+ Añadir convocatoria</a>
-            </li></ul>
-        </li>
-        <a class="waves-effect btn squizer-btn" (click)="openNewSchoolYearModal()">Nuevo Curso</a>
+        <app-tests-side-nav (click)="select()"></app-tests-side-nav>
       </div>
     </ul>
 

@@ -1,7 +1,7 @@
 export class Call {
   id: number;
-  schoolYear: number;
+  school_year: number;
   title: string;
-  startDate: Date;
-  endDate: Date;
+  start_date: Date;
+  end_date: Date;
 }

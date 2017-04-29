@@ -1,8 +1,8 @@
-import { Component, OnChanges } from '@angular/core';
-import { SchoolYearService } from '../../db/school-year.service';
-import { TestsSideNavService } from '../tests-side-nav/tests-side-nav.service';
-import { SchoolYear } from '../../db/school-year';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { SchoolYearService } from '../../db/school-year.service';
+import { SchoolYear } from '../../db/school-year';
+import { TestsSideNavService } from '../tests-side-nav/tests-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -28,7 +28,7 @@ export class NewSchoolYearComponent implements OnChanges {
 
   createForm() {
     this.newSchoolYearForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.maxLength(100)]],
       start_date: ['', [Validators.required]],
       end_date: ['', [Validators.required]],
       calls: this.fb.array([])
@@ -36,16 +36,14 @@ export class NewSchoolYearComponent implements OnChanges {
   }
 
   onSubmit() {
-    const sd = $('#start_date').val();
-    console.log(sd);
-    console.log(this.newSchoolYearForm.value);
     this.schoolYearService.create(this.newSchoolYearForm.value)
     .then(schoolYear => {
       this.testsSideNavService.addSchoolYear(schoolYear);
-      this.testsSideNavService.announceSelected(schoolYear);
+      this.testsSideNavService.announceSelected(schoolYear, null);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear curso: ' + this.newSchoolYearForm.value.title));
-    this.newSchoolYearForm.reset();
+
+    this.ngOnChanges();
   }
 
 }

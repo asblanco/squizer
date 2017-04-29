@@ -1,7 +1,7 @@
-.onHover .delete{
+.onHover .edit-delete{
   visibility:hidden;
 }
-.onHover:hover .delete {
+.onHover:hover .edit-delete {
  visibility:visible;
 }
 

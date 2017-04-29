@@ -5,6 +5,7 @@ import { Question } from '../db/question';
 import { CourseService } from '../db/course.service';
 import { CourseInfoService } from './course-info.service';
 import { ChapterService } from '../db/chapter.service';
+import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
 
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,6 +24,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor( private courseInfoService:     CourseInfoService,
                private courseService:         CourseService,
+               private coursesSideNavService: CoursesSideNavService,
                private chapterService:        ChapterService,
                private notificationsService:  NotificationsService ) {
     this.subscription = courseInfoService.courseSelected$.subscribe(
@@ -59,6 +61,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
         .delete(course.id)
         .then(() => {
           this.courseInfoService.announceDeleteCourse(course);
+          this.coursesSideNavService.announceDeleteCourse(course);
           if (this.selectedCourse === course) { this.selectedCourse = null; }
         })
         .catch(() => this.notificationsService.error('Error', 'Al eliminar asignatura ' + course.name));
@@ -81,6 +84,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
     this.courseService.update(updatedCourse)
     .then(() => {
       this.courseInfoService.announceEditCourse(updatedCourse);
+      this.coursesSideNavService.editCourse(updatedCourse);
       this.editCourseTitle = false;
     })
     .catch(() => {  this.cancelEditCourse();

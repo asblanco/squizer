@@ -2,28 +2,27 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Call } from '../../db/call';
 import { SchoolYearService } from '../../db/school-year.service';
 import { SchoolYear } from '../../db/school-year';
-import { TestsSideNavService } from './tests-side-nav.service';
+import { TestsSideNavService } from './../tests-side-nav/tests-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
 @Component({
-  selector: 'app-tests-side-nav',
-  templateUrl: './tests-side-nav.component.html',
-  styleUrls: ['./tests-side-nav.component.css'],
-  providers: [SchoolYearService]
+  selector: 'app-school-year',
+  templateUrl: './school-year.component.html',
+  styleUrls: ['./school-year.component.css']
 })
-export class TestsSideNavComponent implements OnDestroy, OnInit {
+export class SchoolYearComponent implements OnDestroy, OnInit {
   schoolYears: SchoolYear[] = [];
-  selectedSchoolYear: SchoolYear;
-  selectedCall: Call;
+  selectedSchoolYear: SchoolYear = null;
+  selectedCall: Call = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
-    private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService,
-    private notificationsService:  NotificationsService
+    private schoolYearService: SchoolYearService,
+    private notificationsService: NotificationsService
   ) {
     this.testsSideNavService.getSchoolYears$
     .takeUntil(this.ngUnsubscribe)
@@ -49,18 +48,6 @@ export class TestsSideNavComponent implements OnDestroy, OnInit {
       schoolYear => {
         this.selectedSchoolYear = schoolYear;
     });
-    this.testsSideNavService.editedCall$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      call => {
-        this.selectedCall = call;
-    });
-    this.testsSideNavService.removedSchoolYear$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      schoolYear => {
-        this.selectedSchoolYear = null;
-    });
     this.testsSideNavService.removedCall$
     .takeUntil(this.ngUnsubscribe)
     .subscribe(
@@ -72,24 +59,21 @@ export class TestsSideNavComponent implements OnDestroy, OnInit {
   ngOnInit() {
   }
 
-  openSchoolYearModal() {
-    (<any>$('#newSchoolYearModal')).openModal();
+  openEditSchoolYearModal() {
+    (<any>$('#editSchoolYearModal' + this.selectedSchoolYear.id)).openModal();
   }
 
-  openNewCallModal(schoolYear: SchoolYear) {
-    (<any>$('#newCallModal' + schoolYear.id)).openModal();
-  }
-
-  selectSchoolYear(schoolYear: SchoolYear) {
-    this.testsSideNavService.announceSelected(schoolYear, null);
-  }
-
-  selectCall(schoolYear: SchoolYear, call: Call) {
-    this.testsSideNavService.announceSelected(schoolYear, call);
+  deleteSchoolYear() {
+    this.schoolYearService
+        .delete(this.selectedSchoolYear.id)
+        .then(() => {
+          this.testsSideNavService.announceDeleteSchoolYear(this.selectedSchoolYear);
+          this.selectedSchoolYear = null;
+        })
+        .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.selectedSchoolYear.title));
   }
 
   ngOnDestroy() {
-    // prevent memory leak when component destroyed
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

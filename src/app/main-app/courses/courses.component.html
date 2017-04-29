@@ -43,7 +43,10 @@
   </div>
 </div>
 
-<app-side-nav [title]="'ASIGNATURAS'"></app-side-nav>
+<!-- Side Navigation in desktop view -->
+<ul id="slide-out" class="side-nav fixed">
+  <app-courses-side-nav></app-courses-side-nav>
+</ul>
 
 <!-- New Chapter Modal -->
 <app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
@@ -52,6 +55,9 @@
 <div *ngIf="selectedCourse">
   <app-delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></app-delete-modal>
 </div>
+
+<!-- New Course Modal -->
+<app-new-edit-modal (onSubmit)="create($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></app-new-edit-modal>
 
 <script type="text/javascript">
   $("#courseTitle").keyup(function(event){

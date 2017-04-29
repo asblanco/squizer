@@ -1,23 +1,18 @@
-<!-- Side Navigation in desktop view -->
-<ul id="slide-out" class="side-nav fixed">
-    <li><div class="center bold">CURSOS</div></li>
-    <li><div class="divider"></div></li>
-    <li *ngFor="let schoolYear of schoolYears" [class.active]="schoolYear === selected">
-      <a class="school-year truncate" (click)="select(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
-      <ul>
-        <li *ngFor="let call of schoolYear.calls">
-          <a class="call truncate">= {{call.title}}</a>
-        </li>
-        <li >
-          <a class="call truncate">+ Añadir convocatoria</a>
-        </li>
-      </ul>
+<li><div class="center bold">CURSOS</div></li>
+<li><div class="divider"></div></li>
+<li *ngFor="let schoolYear of schoolYears" [class.active]="schoolYear === selectedSchoolYear && selectedCall === null">
+  <a class="school-year truncate" (click)="selectSchoolYear(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
+  <ul>
+    <li *ngFor="let call of schoolYear.calls" [class.active]="call === selectedCall">
+      <a class="call truncate" (click)="selectCall(schoolYear, call)">= {{call.title}}</a>
     </li>
-    <a class="waves-effect btn squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a>
-    <!-- Materialize has a bug so it needs a last empty li to show the actual
-     last one when there is scroll down, or two more <li> in firefox -->
-    <li>-</li>
-    <li>-</li>
-</ul>
-
-<app-new-school-year></app-new-school-year>
+    <li >
+      <a class="call truncate" (click)="openNewCallModal(schoolYear)">+ Añadir convocatoria</a>
+    </li>
+  </ul>
+</li>
+<a class="waves-effect btn squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a>
+<!-- Materialize has a bug so it needs a last empty li to show the actual
+ last one when there is scroll down, or two more <li> in firefox -->
+<li>-</li>
+<li>-</li>

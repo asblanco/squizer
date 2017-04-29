@@ -1,0 +1,39 @@
+<div *ngIf="selectedSchoolYear">
+  <div class="row header">
+    <h4 class="white-text">{{selectedSchoolYear.title}}
+      <sub> ({{selectedSchoolYear.start_date | date:'d MMM yyyy'}} - {{selectedSchoolYear.end_date | date:'d MMM yyyy'}})</sub>
+      <a id="editSchoolYear" class="waves-effect waves btn-flat btn-large white-text right" (click)="openEditSchoolYearModal()">Editar</a>
+    </h4>
+  </div>
+  <div *ngIf="selectedCall" class="content">
+    <app-call [call]="selectedCall"></app-call>
+  </div>
+</div>
+
+<!-- Empty state -->
+<div *ngIf="!selectedSchoolYear">
+  <div class="container">
+    <div class="center-div">
+        <h2 class="light-grey">Selecciona o crea un curso</h2>
+    </div>
+  </div>
+</div>
+
+<!-- Side Nav content in Desktop view-->
+<ul id="slide-out" class="side-nav fixed">
+  <app-tests-side-nav></app-tests-side-nav>
+</ul>
+
+<!-- New SchoolYear Modal -->
+<app-new-school-year></app-new-school-year>
+
+<!-- Delete SchoolYear Modal -->
+<div *ngIf="selectedSchoolYear">
+  <app-delete-modal (onDeleted)="deleteSchoolYear()" [id]="'deleteSchoolYearModal' + selectedSchoolYear.id" [title]="selectedSchoolYear.title"></app-delete-modal>
+  <app-edit-school-year-call [schoolYear]="selectedSchoolYear" [modalId]="'editSchoolYearModal' + selectedSchoolYear.id" [call]="null"></app-edit-school-year-call>
+</div>
+
+<!-- New Calls Modals -->
+<span *ngFor="let schoolYear of schoolYears">
+  <app-new-call [modalId]="'newCallModal' + schoolYear.id" [schoolYear]="schoolYear"></app-new-call>
+</span>

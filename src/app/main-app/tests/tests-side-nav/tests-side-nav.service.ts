@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Call } from '../../db/call';
 import { SchoolYear } from '../../db/school-year';
 import { SchoolYearService } from '../../db/school-year.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -8,18 +9,26 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TestsSideNavService {
   schoolYears: SchoolYear[] = [];
+
   // Observable string sources
   private schoolYearList = new Subject<SchoolYear[]>();
   private newSchoolYear = new Subject<SchoolYear>();
   private editSchoolYear = new Subject<SchoolYear>();
+  private editCall = new Subject<Call>();
   private removeSchoolYear = new Subject<SchoolYear>();
-  private select = new Subject<any>();
+  private removeCall = new Subject<Call>();
+  private selectSchoolYear = new Subject<any>();
+  private selectCall = new Subject<any>();
+
   // Observable string streams
   getSchoolYears$ = this.schoolYearList.asObservable();
   addedSchoolYear$ = this.newSchoolYear.asObservable();
   editedSchoolYear$ = this.editSchoolYear.asObservable();
+  editedCall$ = this.editCall.asObservable();
   removedSchoolYear$ = this.removeSchoolYear.asObservable();
-  selected$ = this.select.asObservable();
+  removedCall$ = this.removeCall.asObservable();
+  selectedSchoolYear$ = this.selectSchoolYear.asObservable();
+  selectedCall$ = this.selectCall.asObservable();
 
   constructor(
     private schoolYearService: SchoolYearService,
@@ -36,14 +45,27 @@ export class TestsSideNavService {
 
   announceEditSchoolYear(schoolYear: SchoolYear) {
     this.editSchoolYear.next(schoolYear);
+    this.updateSchoolYear(schoolYear);
+  }
+
+  announceEditCall(call: Call) {
+    this.editCall.next(call);
+    this.updateCall(call);
   }
 
   announceDeleteSchoolYear(schoolYear: SchoolYear) {
     this.removeSchoolYear.next(schoolYear);
+    this.deleteSchoolYear(schoolYear);
   }
 
-  announceSelected(item) {
-    this.select.next(item);
+  announceDeleteCall(call: Call) {
+    this.removeCall.next(call);
+    this.deleteCall(call);
+  }
+
+  announceSelected(schoolYear: SchoolYear, call: Call) {
+    this.selectSchoolYear.next(schoolYear);
+    this.selectCall.next(call);
   }
 
   addSchoolYear(schoolYear: SchoolYear) {
@@ -56,6 +78,26 @@ export class TestsSideNavService {
 
   deleteSchoolYear(schoolYear: SchoolYear) {
     this.schoolYears.splice(this.indexOf(this.schoolYears, schoolYear.id), 1);
+  }
+
+  addCall(call: Call) {
+    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
+
+    this.schoolYears[schoolYearID].calls.push(call);
+  }
+
+  updateCall(call: Call) {
+    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
+    const callID = this.indexOf(this.schoolYears[schoolYearID].calls, call.id);
+
+    this.schoolYears[schoolYearID].calls.splice(callID, 1, call);
+  }
+
+  deleteCall(call: Call) {
+    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
+    const callID = this.indexOf(this.schoolYears[schoolYearID].calls, call.id);
+
+    this.schoolYears[schoolYearID].calls.splice(callID, 1);
   }
 
   private indexOf(array, itemId) {
