@@ -13,8 +13,8 @@
   }
 
   .content {
-    margin-left: 22em;
-    margin-right: 2em;
+    margin-left: 21em;
+    margin-right: 1em;
   }
 
   .center-div
@@ -25,11 +25,11 @@
   }
 }
 @media only screen and (max-width: 62em){
-
   .content {
-    margin-left: 2em;
-    margin-right: 2em;
+    margin-left: 1em;
+    margin-right: 1em;
   }
+
   .center-div
   {
     position: absolute;

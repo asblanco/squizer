@@ -40,7 +40,7 @@ export class CallComponent implements OnDestroy {
   deleteCall() {
     this.callService
     .delete(this.call.id)
-    .then(() => {  
+    .then(() => {
       this.testsSideNavService.announceDeleteCall(this.call);
     })
     .catch(() => this.notificationsService.error('Error', 'Al eliminar convocatoria ' + this.call.title));
