@@ -48,16 +48,16 @@
   <app-courses-side-nav></app-courses-side-nav>
 </ul>
 
-<!-- New Chapter Modal -->
-<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
+<!-- New Course Modal -->
+<app-new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></app-new-edit-modal>
 
 <!-- Delete Course Modal -->
 <div *ngIf="selectedCourse">
   <app-delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></app-delete-modal>
 </div>
 
-<!-- New Course Modal -->
-<app-new-edit-modal (onSubmit)="create($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></app-new-edit-modal>
+<!-- New Chapter Modal -->
+<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
 
 <script type="text/javascript">
   $("#courseTitle").keyup(function(event){

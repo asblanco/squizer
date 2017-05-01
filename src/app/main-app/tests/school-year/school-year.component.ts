@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Call } from '../../db/call';
+import { Course } from '../../db/course';
 import { SchoolYearService } from '../../db/school-year.service';
 import { SchoolYear } from '../../db/school-year';
 import { TestsSideNavService } from './../tests-side-nav/tests-side-nav.service';
@@ -14,9 +15,10 @@ import 'rxjs/add/operator/takeUntil';
   styleUrls: ['./school-year.component.css']
 })
 export class SchoolYearComponent implements OnDestroy, OnInit {
-  schoolYears: SchoolYear[] = [];
-  selectedSchoolYear: SchoolYear = null;
+  courses: Course[] = [];   // Pass it to every call component
+  schoolYears: SchoolYear[] = [];   // Initialize create call modals for each school year
   selectedCall: Call = null;
+  selectedSchoolYear: SchoolYear = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -29,6 +31,12 @@ export class SchoolYearComponent implements OnDestroy, OnInit {
     .subscribe(
       schoolYears => {
         this.schoolYears = schoolYears;
+    });
+    this.testsSideNavService.getCourses$
+    .takeUntil(this.ngUnsubscribe)
+    .subscribe(
+      courses => {
+        this.courses = courses;
     });
     this.testsSideNavService.selectedSchoolYear$
     .takeUntil(this.ngUnsubscribe)
@@ -65,12 +73,12 @@ export class SchoolYearComponent implements OnDestroy, OnInit {
 
   deleteSchoolYear() {
     this.schoolYearService
-        .delete(this.selectedSchoolYear.id)
-        .then(() => {
-          this.testsSideNavService.announceDeleteSchoolYear(this.selectedSchoolYear);
-          this.selectedSchoolYear = null;
-        })
-        .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.selectedSchoolYear.title));
+      .delete(this.selectedSchoolYear.id)
+      .then(() => {
+        this.testsSideNavService.announceDeleteSchoolYear(this.selectedSchoolYear);
+        this.selectedSchoolYear = null;
+      })
+      .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.selectedSchoolYear.title));
   }
 
   ngOnDestroy() {

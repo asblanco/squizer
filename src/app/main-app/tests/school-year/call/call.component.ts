@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Call } from '../../../db/call';
 import { CallService } from '../../../db/call.service';
+import { Course } from '../../../db/course';
 import { NotificationsService } from 'angular2-notifications';
 import { TestsSideNavService } from './../../tests-side-nav/tests-side-nav.service';
 
@@ -14,6 +15,7 @@ import 'rxjs/add/operator/takeUntil';
 })
 export class CallComponent implements OnDestroy {
   @Input() call: Call;
+  @Input() courses: Course[];
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(

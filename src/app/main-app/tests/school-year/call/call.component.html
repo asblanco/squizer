@@ -9,12 +9,9 @@
       </div>
     </div>
     <div class="card-action">
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
+      <b><p *ngFor="let course of courses">
+        {{course.name | uppercase}}
+      </p></b>
     </div>
   </div>
 </div>

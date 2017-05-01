@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { DeleteComponent } from './modals/delete/delete.component';
-import { NewEditComponent } from './modals/new-edit/new-edit.component';
 
 import { APP_CONFIG, ApiEndpointConfig } from './app-config/app-config';
 
@@ -13,12 +12,10 @@ import { APP_CONFIG, ApiEndpointConfig } from './app-config/app-config';
     FormsModule
   ],
   declarations: [
-    DeleteComponent,
-    NewEditComponent
+    DeleteComponent
   ],
   exports: [
-    DeleteComponent,
-    NewEditComponent
+    DeleteComponent
   ],
   providers: [{
       provide: APP_CONFIG,

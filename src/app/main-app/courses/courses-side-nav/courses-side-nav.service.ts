@@ -21,9 +21,10 @@ export class CoursesSideNavService {
     private courseService: CourseService,
     private notificationsService: NotificationsService ) {  }
 
-  announceCoursesList(courses: Course[]) {
-    this.courses = courses;
-    this.coursesList.next(courses);
+  getCourses() {
+    this.courseService.getCourses()
+    .then(courses => { this.announceCoursesList(courses); })
+    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
   }
 
   announceSelected(item) {
@@ -33,6 +34,11 @@ export class CoursesSideNavService {
   announceDeleteCourse(course: Course) {
     this.select.next(course);
     this.deleteCourse(course);
+  }
+
+  announceCoursesList(courses: Course[]) {
+    this.courses = courses;
+    this.coursesList.next(courses);
   }
 
   addCourse(course: Course) {
@@ -48,9 +54,9 @@ export class CoursesSideNavService {
   }
 
   private indexOf(array, itemId) {
-      for (let i = 0; i < array.length; i++) {
-          if (array[i].id === itemId) { return i; }
-      }
-      return -1;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].id === itemId) { return i; }
+    }
+    return -1;
   }
 }

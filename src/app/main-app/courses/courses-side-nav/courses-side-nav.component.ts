@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { CourseInfoService } from '../../courses/course-info.service';
 import { Course } from '../../db/course';
+import { CourseInfoService } from '../../courses/course-info.service';
 import { CourseService } from '../../db/course.service';
 import { CoursesSideNavService } from './courses-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -26,8 +26,7 @@ export class CoursesSideNavComponent implements OnInit, OnDestroy {
     private coursesSideNavService: CoursesSideNavService,
     private notificationsService: NotificationsService
   ) {
-
-    this. coursesSideNavService.getCourses$
+    coursesSideNavService.getCourses$
     .takeUntil(this.ngUnsubscribe)
     .subscribe(
       courses => {

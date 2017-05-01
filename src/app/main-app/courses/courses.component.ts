@@ -22,11 +22,13 @@ export class CoursesComponent implements OnInit, OnDestroy {
   editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
   subscription: Subscription;
 
-  constructor( private courseInfoService:     CourseInfoService,
-               private courseService:         CourseService,
-               private coursesSideNavService: CoursesSideNavService,
-               private chapterService:        ChapterService,
-               private notificationsService:  NotificationsService ) {
+  constructor(
+    private courseInfoService: CourseInfoService,
+    private courseService: CourseService,
+    private coursesSideNavService: CoursesSideNavService,
+    private chapterService: ChapterService,
+    private notificationsService: NotificationsService
+ ) {
     this.subscription = courseInfoService.courseSelected$.subscribe(
       course => {
         this.selectedCourse = course;
@@ -54,6 +56,20 @@ export class CoursesComponent implements OnInit, OnDestroy {
       .then(course => { this.courseInfoService.course = course;
                         this.selectedCourse = this.courseInfoService.course; })
       .catch(() => this.notificationsService.error('Error', 'Al descargar detalles de asignatura.'));
+  }
+
+  createCourse(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+
+    this.courseService.create(name)
+      .then(course => {
+        this. coursesSideNavService.addCourse(course);
+        this.courseInfoService.announceSelectCourse(course);
+      })
+      .catch(() => this.notificationsService.error('Error', 'Al crear la asignatura: ' + name));
+
+    (<any>$('.button-collapse')).sideNav('hide');
   }
 
   deleteCourse(course: Course): void {

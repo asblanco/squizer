@@ -9,8 +9,6 @@ import { MainAppRoutingModule } from './main-app-routing.module';
 
 import { MainAppComponent } from './main-app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CoursesComponent } from './courses/courses.component';
-import { TestsComponent } from './tests/tests.component';
 
 @NgModule({
   imports: [

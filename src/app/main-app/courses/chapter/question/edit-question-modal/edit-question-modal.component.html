@@ -4,7 +4,7 @@
       <h4>Editar pregunta</h4>
         <div class="row">
           <div class="input-field form-group">
-            <label>Titulo pregunta</label>
+            <label class="active">Titulo pregunta</label>
             <input type="text" class="form-control" [formControl]="questionForm.controls['title']">
           </div>
         </div>
@@ -36,11 +36,11 @@
             </a>
           </fieldset>
         </div>
-        <div class="margin-20">
+        <!-- <div class="margin-20">
           <div>myForm details:-</div>
           <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
           <pre>form value: <br>{{questionForm.value | json}}</pre>
-        </div>
+        </div> -->
         <br>
     </div>
     <div class="modal-footer">
