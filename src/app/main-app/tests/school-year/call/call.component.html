@@ -9,9 +9,10 @@
       </div>
     </div>
     <div class="card-action">
-      <b><p *ngFor="let course of courses">
-        {{course.name | uppercase}}
-      </p></b>
+      <div *ngFor="let course of courses">
+        <b><p>{{course.name | uppercase}}</p></b>
+        <p>(No tests)</p>
+      </div>
     </div>
   </div>
 </div>
@@ -22,4 +23,4 @@
 </footer>
 
 <app-delete-modal (onDeleted)="deleteCall()" [id]="'deleteCallModal' + call.id" [title]="call.title"></app-delete-modal>
-<app-edit-school-year-call [modalId]="'editCallModal' + call.id" [call]="call" [schoolYear]="null"></app-edit-school-year-call>
+<app-edit-call [call]="call"></app-edit-call>

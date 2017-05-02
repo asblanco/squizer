@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Call } from '../../db/call';
-// import { SchoolYearService } from '../../db/school-year.service';
 import { SchoolYear } from '../../db/school-year';
 import { TestsSideNavService } from './tests-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -11,18 +10,16 @@ import 'rxjs/add/operator/takeUntil';
 @Component({
   selector: 'app-tests-side-nav',
   templateUrl: './tests-side-nav.component.html',
-  styleUrls: ['./tests-side-nav.component.css'],
-  // providers: [SchoolYearService]
+  styleUrls: ['./tests-side-nav.component.css']
 })
 export class TestsSideNavComponent implements OnDestroy, OnInit {
   schoolYears: SchoolYear[] = [];
-  selectedSchoolYear: SchoolYear;
-  selectedCall: Call;
+  selectedSchoolYear: SchoolYear = null;
+  selectedCall: Call = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private notificationsService:  NotificationsService,
-    // private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService
   ) {
     this.testsSideNavService.getSchoolYears$

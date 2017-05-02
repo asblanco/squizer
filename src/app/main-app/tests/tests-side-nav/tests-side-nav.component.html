@@ -6,8 +6,8 @@
     <li *ngFor="let call of schoolYear.calls" [class.active]="call === selectedCall">
       <a class="call truncate" (click)="selectCall(schoolYear, call)">= {{call.title}}</a>
     </li>
-    <li >
-      <a class="call truncate" (click)="openNewCallModal(schoolYear)">+ Añadir convocatoria</a>
+    <li *ngIf="schoolYear === selectedSchoolYear">
+      <a class="call truncate" (click)="openNewCallModal(schoolYear)"><u>+ Añadir convocatoria</u></a>
     </li>
   </ul>
 </li>

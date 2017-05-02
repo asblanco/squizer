@@ -8,9 +8,10 @@ import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component
 import { NewSchoolYearComponent } from './new-school-year/new-school-year.component';
 
 import { TestsSideNavService } from './tests-side-nav/tests-side-nav.service';
-import { EditSchoolYearCallComponent } from './school-year/edit-school-year-call/edit-school-year-call.component';
+import { EditSchoolYearComponent } from './school-year/edit-school-year/edit-school-year.component';
 import { CallComponent } from './school-year/call/call.component';
 import { NewCallComponent } from './school-year/new-call/new-call.component';
+import { EditCallComponent } from './school-year/call/edit-call/edit-call.component';
 
 @NgModule({
   imports: [
@@ -20,12 +21,13 @@ import { NewCallComponent } from './school-year/new-call/new-call.component';
     ReactiveFormsModule
   ],
   declarations: [
-    SchoolYearComponent,
-    TestsSideNavComponent,
-    NewSchoolYearComponent,
-    EditSchoolYearCallComponent,
     CallComponent,
-    NewCallComponent
+    EditCallComponent,
+    EditSchoolYearComponent,
+    NewCallComponent,
+    NewSchoolYearComponent,
+    SchoolYearComponent,
+    TestsSideNavComponent
   ],
   exports: [
     SchoolYearComponent,

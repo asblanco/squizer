@@ -103,23 +103,23 @@ export class TestsSideNavService {
   }
 
   addCall(call: Call) {
-    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
+    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
 
-    this.schoolYears[schoolYearID].calls.push(call);
+    this.schoolYears[schoolYearIndex].calls.push(call);
   }
 
   updateCall(call: Call) {
-    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
-    const callID = this.indexOf(this.schoolYears[schoolYearID].calls, call.id);
+    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
+    const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
 
-    this.schoolYears[schoolYearID].calls.splice(callID, 1, call);
+    this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1, call);
   }
 
   deleteCall(call: Call) {
-    const schoolYearID = this.indexOf(this.schoolYears, call.school_year);
-    const callID = this.indexOf(this.schoolYears[schoolYearID].calls, call.id);
+    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
+    const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
 
-    this.schoolYears[schoolYearID].calls.splice(callID, 1);
+    this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1);
   }
 
   private indexOf(array, itemId) {

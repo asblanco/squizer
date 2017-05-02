@@ -11,7 +11,6 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./new-call.component.css']
 })
 export class NewCallComponent implements OnChanges {
-  @Input() modalId: string;
   @Input() schoolYear: SchoolYear;
   newCallForm: FormGroup;
 
@@ -56,20 +55,5 @@ export class NewCallComponent implements OnChanges {
 
     this.ngOnChanges();
   }
-
-  // prepareSaveCall(): Call {
-  //   const formModel = this.newCallForm.value;
-  //
-  //   // return new `Question` object containing a combination of original question value(s)
-  //   // and deep copies of changed form model values
-  //   const saveCall: Call = {
-  //     school_year: this.schoolYear.id,
-  //     title: formModel.title as string,
-  //     start_date: formModel.start_date as Date,
-  //     end_date: formModel.end_date as Date
-  //   };
-  //   return saveCall;
-  // }
-
 
 }
