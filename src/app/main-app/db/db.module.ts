@@ -1,13 +1,14 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CourseService } from './course.service';
-import { ChapterService } from './chapter.service';
-import { QuestionService } from './question.service';
 import { AnswerService } from './answer.service';
+import { ChapterService } from './chapter.service';
+import { CourseService } from './course.service';
+import { QuestionService } from './question.service';
 
-import { SchoolYearService } from './school-year.service';
 import { CallService } from './call.service';
+import { SchoolYearService } from './school-year.service';
+import { TestService } from './test.service';
 
 @NgModule({
   imports: [
@@ -20,12 +21,13 @@ export class DbModule {
     return {
       ngModule: DbModule,
       providers: [
-        CourseService,
-        ChapterService,
-        QuestionService,
         AnswerService,
+        CallService,
+        ChapterService,
+        CourseService,
+        QuestionService,
         SchoolYearService,
-        CallService
+        TestService
       ]
     };
   }

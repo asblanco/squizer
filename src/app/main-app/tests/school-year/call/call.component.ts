@@ -20,8 +20,8 @@ export class CallComponent implements OnDestroy {
 
   constructor(
     private callService: CallService,
-    private testsSideNavService: TestsSideNavService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private testsSideNavService: TestsSideNavService
   ) {
     this.testsSideNavService.editedCall$
     .takeUntil(this.ngUnsubscribe)

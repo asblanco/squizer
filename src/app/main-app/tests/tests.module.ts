@@ -12,6 +12,7 @@ import { EditSchoolYearComponent } from './school-year/edit-school-year/edit-sch
 import { CallComponent } from './school-year/call/call.component';
 import { NewCallComponent } from './school-year/new-call/new-call.component';
 import { EditCallComponent } from './school-year/call/edit-call/edit-call.component';
+import { TestsComponent } from './school-year/call/tests/tests.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { EditCallComponent } from './school-year/call/edit-call/edit-call.compon
     NewCallComponent,
     NewSchoolYearComponent,
     SchoolYearComponent,
-    TestsSideNavComponent
+    TestsSideNavComponent,
+    TestsComponent
   ],
   exports: [
     SchoolYearComponent,

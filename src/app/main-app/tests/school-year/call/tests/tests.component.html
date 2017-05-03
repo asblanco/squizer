@@ -1,0 +1,18 @@
+<p *ngIf="tests.length === 0">(No tests)</p>
+
+<table class="highlight" *ngIf="tests.length > 0">
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of tests">
+      <td>{{test.title}}</td>
+      <td>{{test.creation_date | date:'d MMM yyyy'}}</td>
+      <td>Delete Edit Download</td>
+    </tr>
+  </tbody>
+</table>
