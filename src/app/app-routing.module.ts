@@ -9,10 +9,6 @@ const routes: Routes = [
     path: 'app',
     loadChildren: './main-app/main-app.module#MainAppModule'
   },
-  { path: '',
-    redirectTo: '/app/manage-tests',
-    pathMatch: 'full'
-  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

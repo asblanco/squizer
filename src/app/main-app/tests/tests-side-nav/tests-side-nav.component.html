@@ -1,10 +1,10 @@
 <li><div class="center bold">CURSOS</div></li>
 <li><div class="divider"></div></li>
 <li *ngFor="let schoolYear of schoolYears" [class.active]="schoolYear === selectedSchoolYear && selectedCall === null">
-  <a class="school-year truncate" (click)="selectSchoolYear(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
+  <a class="school-year truncate" routerLink="/app/manage-tests" (click)="selectSchoolYear(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
   <ul>
     <li *ngFor="let call of schoolYear.calls" [class.active]="call === selectedCall">
-      <a class="call truncate" (click)="selectCall(schoolYear, call)">= {{call.title}}</a>
+      <a class="call truncate" routerLink="/app/manage-tests" (click)="selectCall(schoolYear, call)">= {{call.title}}</a>
     </li>
     <li *ngIf="schoolYear === selectedSchoolYear">
       <a class="call truncate" (click)="openNewCallModal(schoolYear)"><u>+ Añadir convocatoria</u></a>

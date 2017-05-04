@@ -1,0 +1,52 @@
+<div class="content">
+  <h3>Crear test</h3>
+
+  <form #newTestForm="ngForm" novalidate>
+    <div class="row">
+      <div class="input-field form-group col s6">
+        <label for="title">Titulo</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="test.title" required>
+      </div>
+
+      <div class="input-field form-group col s6">
+        <select name="course" class="browser-default" [(ngModel)]="test.course" (change)="selectCourse()">
+          <option value="" disabled>Choose your option</option>
+          <option *ngFor="let course of courses" [value]="course.id">{{course.name}}</option>
+        </select>
+        <!-- <label for="course">Asignatura</label> -->
+      </div>
+    </div>
+    <div *ngIf="course" class="row" id="all">
+      <b><p>Numero de preguntas por tema: </p></b>
+      <div *ngFor="let chapter of course.chapters">
+        <div class="input-field">
+          <label for="title" class="active">{{chapter.title}}</label>
+          <input type="number" class="form-control" name="nQuestions" [(ngModel)]="chapter.nQuestions" required>
+        </div>
+      </div>
+      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', false)">uncheckAll</button>
+      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', true)">checkAll</button>
+      <br><br>
+      <div *ngFor="let chapter of course.chapters">
+        <input type="checkbox" id="course{{chapter.id}}"/>
+        <label for="course{{chapter.id}}">{{chapter.title}}</label>
+
+        <div class="questions" *ngFor="let question of chapter.questions">
+          <input type="checkbox" id="question{{question.id}}" (change)="question.checked=$event.target.checked"/>
+          <!-- <label> -->
+            <!-- <input type="checkbox" id="question{{question.id}}" value="{{question.id}}" (change)="checkboxes[$event.target.getAttribute('value')]=$event.target.checked"> -->
+        <!-- {{ question.title }}</label> -->
+          <label for="question{{question.id}}">{{question.title}}</label>
+
+          <div class="answers" *ngFor="let answer of question.answers">
+            <input type="checkbox" id="answer{{answer.id}}" (change)="answer.checked=$event.target.checked" />
+            <label for="answer{{answer.id}}">{{answer.title}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn" (click)="save(newTestForm.value)">Crear test</button>
+    </div>
+  </form>
+</div>

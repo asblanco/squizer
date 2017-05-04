@@ -38,7 +38,7 @@ export class NewSchoolYearComponent implements OnChanges {
   onSubmit() {
     this.schoolYearService.create(this.newSchoolYearForm.value)
     .then(schoolYear => {
-      this.testsSideNavService.addSchoolYear(schoolYear);
+      this.testsSideNavService.announceAddSchoolYear(schoolYear);
       this.testsSideNavService.announceSelected(schoolYear, null);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear curso: ' + this.newSchoolYearForm.value.title));

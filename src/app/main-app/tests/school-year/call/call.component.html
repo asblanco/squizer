@@ -11,9 +11,11 @@
     <div class="card-action">
       <div *ngFor="let course of courses">
         <b><p>{{course.name | uppercase}}</p></b>
-        <app-tests [callId]="call.id" [courseId]="course.id"></app-tests>
+        <app-list-tests [callId]="call.id" [courseId]="course.id"></app-list-tests>
         <br>
       </div>
+      <br>
+      <a class="waves-effect btn squizer-btn" routerLink="/app/manage-tests/new-test/{{call.id}}">Nuevo test</a>
     </div>
   </div>
 </div>

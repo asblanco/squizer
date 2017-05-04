@@ -4,11 +4,11 @@ import { TestService } from '../../../../db/test.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
-  selector: 'app-tests',
-  templateUrl: './tests.component.html',
-  styleUrls: ['./tests.component.css']
+  selector: 'app-list-tests',
+  templateUrl: './list-tests.component.html',
+  styleUrls: ['./list-tests.component.css']
 })
-export class TestsComponent implements OnChanges, OnInit {
+export class ListTestsComponent implements OnChanges, OnInit {
   @Input() callId: number;
   @Input() courseId: number;
   tests: Test[] = [];

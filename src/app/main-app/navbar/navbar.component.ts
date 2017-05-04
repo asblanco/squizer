@@ -14,7 +14,7 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
-  activeTab = 1; // 1=courses, 2=tests
+  activeTab: number; // 1=courses, 2=tests
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
       if (event.urlAfterRedirects === '/app/manage-courses') {
         this.coursesSideNavService.getCourses();
         this.activeTab = 1;
-      } else if (event.urlAfterRedirects === '/app/manage-tests') {
+      } else /*if (event.urlAfterRedirects === '/app/manage-tests')*/ {
         this.testsSideNavService.getLists();
         this.activeTab = 2;
       }

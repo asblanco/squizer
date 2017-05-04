@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { Call } from '../../db/call';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
@@ -17,7 +18,7 @@ export class TestsSideNavService {
   private coursesList = new Subject<Course[]>();
   private editCall = new Subject<Call>();
   private editSchoolYear = new Subject<SchoolYear>();
-  private newSchoolYear = new Subject<SchoolYear>();
+  // private newSchoolYear = new Subject<SchoolYear>();
   private removeCall = new Subject<Call>();
   private removeSchoolYear = new Subject<SchoolYear>();
   private schoolYearList = new Subject<SchoolYear[]>();
@@ -25,7 +26,7 @@ export class TestsSideNavService {
   private selectSchoolYear = new Subject<any>();
 
   // Observable string streams
-  addedSchoolYear$ = this.newSchoolYear.asObservable();
+  // addedSchoolYear$ = this.newSchoolYear.asObservable();
   editedCall$ = this.editCall.asObservable();
   editedSchoolYear$ = this.editSchoolYear.asObservable();
   getCourses$ = this.coursesList.asObservable();
@@ -62,7 +63,8 @@ export class TestsSideNavService {
   }
 
   announceAddSchoolYear(schoolYear: SchoolYear) {
-    this.newSchoolYear.next(schoolYear);
+    this.addSchoolYear(schoolYear);
+    this.schoolYearList.next(this.schoolYears);
   }
 
   announceEditSchoolYear(schoolYear: SchoolYear) {
