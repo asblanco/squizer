@@ -16,6 +16,7 @@ import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component
 
 import { SharedModule } from '../shared/shared.module';
 import { TestsSideNavService } from './tests-side-nav/tests-side-nav.service';
+import { ViewTestComponent } from './view-test/view-test.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { TestsSideNavService } from './tests-side-nav/tests-side-nav.service';
     NewTestComponent,
     SchoolYearComponent,
     TestsSideNavComponent,
-    TestsComponent
+    TestsComponent,
+    ViewTestComponent
   ],
   exports: [
     TestsComponent,

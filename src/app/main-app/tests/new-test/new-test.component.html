@@ -16,6 +16,7 @@
         <!-- <label for="course">Asignatura</label> -->
       </div>
     </div>
+
     <div *ngIf="course" class="row" id="all">
       <b><p>Numero de preguntas por tema: </p></b>
       <div *ngFor="let chapter of course.chapters">
@@ -24,20 +25,19 @@
           <input type="number" class="form-control" name="nQuestions" [(ngModel)]="chapter.nQuestions" required>
         </div>
       </div>
+
       <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', false)">uncheckAll</button>
       <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', true)">checkAll</button>
       <br><br>
-      <div *ngFor="let chapter of course.chapters">
-        <input type="checkbox" id="course{{chapter.id}}"/>
+
+      <div *ngFor="let chapter of course.chapters" id="ch{{chapter.id}}">
+        <input type="checkbox" id="course{{chapter.id}}" (change)="checkChapter($event.target.checked, chapter)"/>
         <label for="course{{chapter.id}}">{{chapter.title}}</label>
 
-        <div class="questions" *ngFor="let question of chapter.questions">
-          <input type="checkbox" id="question{{question.id}}" (change)="question.checked=$event.target.checked"/>
-          <!-- <label> -->
-            <!-- <input type="checkbox" id="question{{question.id}}" value="{{question.id}}" (change)="checkboxes[$event.target.getAttribute('value')]=$event.target.checked"> -->
-        <!-- {{ question.title }}</label> -->
+        <div class="questions" *ngFor="let question of chapter.questions" id="q{{question.id}}">
+          <input type="checkbox" id="question{{question.id}}"
+            (change)="question.checked=$event.target.checked; checkQuestion($event.target.checked, question, chapter)"/>
           <label for="question{{question.id}}">{{question.title}}</label>
-
           <div class="answers" *ngFor="let answer of question.answers">
             <input type="checkbox" id="answer{{answer.id}}" (change)="answer.checked=$event.target.checked" />
             <label for="answer{{answer.id}}">{{answer.title}}</label>
@@ -45,6 +45,7 @@
         </div>
       </div>
     </div>
+
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn" (click)="save(newTestForm.value)">Crear test</button>
     </div>

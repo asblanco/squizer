@@ -16,7 +16,6 @@ import 'rxjs/add/operator/takeUntil';
 })
 export class SchoolYearComponent implements OnDestroy, OnInit {
   courses: Course[] = [];   // Pass it to every call component
-  schoolYears: SchoolYear[] = [];   // Initialize create call modals for each school year
   selectedCall: Call = null;
   selectedSchoolYear: SchoolYear = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
@@ -26,12 +25,6 @@ export class SchoolYearComponent implements OnDestroy, OnInit {
     private schoolYearService: SchoolYearService,
     private notificationsService: NotificationsService
   ) {
-    this.testsSideNavService.getSchoolYears$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      schoolYears => {
-        this.schoolYears = schoolYears;
-    });
     this.testsSideNavService.getCourses$
     .takeUntil(this.ngUnsubscribe)
     .subscribe(

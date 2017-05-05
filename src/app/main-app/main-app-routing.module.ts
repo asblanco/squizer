@@ -6,6 +6,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { TestsComponent } from './tests/tests.component';
 import { NewTestComponent } from './tests/new-test/new-test.component';
 import { SchoolYearComponent } from './tests/school-year/school-year.component';
+import { ViewTestComponent } from './tests/view-test/view-test.component';
 
 const appRoutes: Routes = [
   {
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
         component: TestsComponent,
         children: [
           { path: '', component: SchoolYearComponent },
-          { path: 'new-test/:callId', component: NewTestComponent }
+          { path: 'new-test/:callId', component: NewTestComponent },
+          { path: 'test/:id', component: ViewTestComponent }
         ]
       },
       { path: '', redirectTo: '/app/manage-tests', pathMatch: 'full' },

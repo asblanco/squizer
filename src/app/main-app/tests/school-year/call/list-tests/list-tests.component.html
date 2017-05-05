@@ -12,7 +12,11 @@
     <tr *ngFor="let test of tests">
       <td>{{test.title}}</td>
       <td>{{test.creation_date | date:'d MMM yyyy'}}</td>
-      <td>Delete Edit Download</td>
+      <td>
+        <a routerLink="/app/manage-tests/test/{{test.id}}">Ver</a>
+        <a (click)="openDeleteTestModal(test.id)">Eliminar</a>
+        Edit Download</td>
+        <app-delete-modal (onDeleted)="deleteTest(test)" [id]="'deleteTestModal' + test.id" [title]="test.title"></app-delete-modal>
     </tr>
   </tbody>
 </table>

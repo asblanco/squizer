@@ -24,8 +24,3 @@
   <app-delete-modal (onDeleted)="deleteSchoolYear()" [id]="'deleteSchoolYearModal' + selectedSchoolYear.id" [title]="selectedSchoolYear.title"></app-delete-modal>
   <app-edit-school-year [schoolYear]="selectedSchoolYear"></app-edit-school-year>
 </div>
-
-<!-- New Calls Modals -->
-<span *ngFor="let schoolYear of schoolYears">
-  <app-new-call [schoolYear]="schoolYear"></app-new-call>
-</span>

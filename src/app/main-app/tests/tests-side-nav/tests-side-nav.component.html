@@ -10,6 +10,7 @@
       <a class="call truncate" (click)="openNewCallModal(schoolYear)"><u>+ Añadir convocatoria</u></a>
     </li>
   </ul>
+  <app-new-call [schoolYear]="schoolYear"></app-new-call>
 </li>
 <a class="waves-effect btn squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a>
 <!-- Materialize has a bug so it needs a last empty li to show the actual

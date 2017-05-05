@@ -4,6 +4,7 @@ import { APP_CONFIG } from '../shared/app-config/app-config';
 import { IAppConfig } from '../shared/app-config/iapp-config';
 
 import { Test } from './test';
+import { ViewTest } from './view-test';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -22,6 +23,14 @@ export class TestService {
                .toPromise()
                .then(response => response.json() as Test[])
                .catch(this.handleError);
+  }
+
+  getTest(id: number): Promise<ViewTest> {
+    const url = this.config.apiEndpoint + `retrieve-test/${id}/`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as ViewTest)
+      .catch(this.handleError);
   }
 
   create(test: Test): Promise<Test> {

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class QuestionService {
-  private url = this.config.apiEndpoint + 'questions/';
+  private url = this.config.apiEndpoint + 'question/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(

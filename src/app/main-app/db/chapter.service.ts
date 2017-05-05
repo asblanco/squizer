@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ChapterService {
-  private url = this.config.apiEndpoint + 'chapters/';
+  private url = this.config.apiEndpoint + 'chapter/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(

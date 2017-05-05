@@ -25,6 +25,10 @@ export class ListTestsComponent implements OnChanges, OnInit {
     this.getTests();
   }
 
+  openDeleteTestModal(id) {
+    (<any>$('#deleteTestModal' + id)).appendTo("body").openModal();
+  }
+
   getTests() {
     this.testService
     .getCourseCallTests(this.callId, this.courseId)
@@ -32,6 +36,15 @@ export class ListTestsComponent implements OnChanges, OnInit {
       this.tests = tests;
     })
     .catch(() => this.notificationsService.error('Error', 'Al descargar tests.'));
+  }
+
+  deleteTest(test: Test) {
+    this.testService
+    .delete(test.id)
+    .then(() => {
+      this.tests.splice(this.tests.indexOf(test), 1);
+    })
+    .catch(() => this.notificationsService.error('Error', 'Al eliminar convocatoria ' + test.title));
   }
 
 }

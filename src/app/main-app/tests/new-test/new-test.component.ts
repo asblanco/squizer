@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { AbstractControl } from '@angular/forms';
 
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
@@ -11,10 +10,6 @@ import { TestsSideNavService } from '../tests-side-nav/tests-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
-
-interface Dictionary {
-  [ index: number ]: boolean
-}
 
 @Component({
   selector: 'app-new-test',
@@ -32,6 +27,7 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
     private activatedRoute: ActivatedRoute,
     private courseService: CourseService,
     private notificationsService: NotificationsService,
+    private router: Router,
     private testService: TestService,
     private testsSideNavService: TestsSideNavService
   ) {
@@ -85,6 +81,31 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
     }
   }
 
+  checkChapter(check: boolean, chapter) {
+    $('#ch' + chapter.id + ' :checkbox:enabled').prop('checked', check);
+    let index = this.course.chapters.indexOf(chapter);
+    let qs = this.course.chapters[index].questions;
+    for (let j = 0; j < qs.length; j++) {
+      let q = qs[j];
+      q.checked = check;
+      for (let k = 0; k < q.answers.length; k++) {
+        let a = q.answers[k];
+        a.checked = check;
+      }
+    }
+  }
+
+  checkQuestion(check: boolean, question, chapter) {
+    $('#q' + question.id + ' :checkbox:enabled').prop('checked', check);
+    let chapterIndex = this.course.chapters.indexOf(chapter);
+    let questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
+    let q = this.course.chapters[chapterIndex].questions[questionIndex];
+    for (let i = 0; i < q.answers.length; i++) {
+      let a = q.answers[i];
+      a.checked = check;
+    }
+  }
+
   selectCourse() {
     this.test.questions = [];
     this.test.answers = [];
@@ -129,55 +150,38 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
     }
   }
 
-  saveQuestions() {
-    for (let i = 0; i < this.course.chapters.length; i++) {
-      let qs = this.course.chapters[i].questions;
-      for (let j = 0; j < qs.length; j++) {
-        let q = this.course.chapters[i].questions[j];
-        if (q.checked) {
-          this.test.questions.push(q.id);
-
-          for (let k = 0; k < q.answers.length; k++) {
-            let a = q.answers[k];
-            if (a.checked){
-              this.test.answers.push(a.id);
-            }
-          }
-        }
-      }
-    }
-  }
-
   generateTest() {
     for (let i = 0; i < this.course.chapters.length; i++) {
       let qs = this.course.chapters[i].questions;
-      let questions = [];
-      let answers = [];
       if (this.course.chapters[i].nQuestions > 0) {
+        let questions: number[][] = [];
+        // Fill in questions and answers arrays with all the checked ones
         for (let j = 0; j < qs.length; j++) {
           let q = this.course.chapters[i].questions[j];
           if (q.checked) {
-            questions.push(q.id);
+            questions[j] = [];
+            questions[j][0] = q.id;
 
             for (let k = 0; k < q.answers.length; k++) {
               let a = q.answers[k];
               if (a.checked){
-                answers.push(a.id);
+                questions[j].push(a.id);
               }
             }
           }
         }
+        // Select them
         for (let x = 0; x < this.course.chapters[i].nQuestions; x++) {
           let max = questions.length;
-          let n = Math.floor(Math.random() * max) + 1 ;
-          this.test.questions.push(questions[n-1]);
-          questions.splice(n-1, 1);
+          let n = Math.floor(Math.random() * max) + 1;
+          this.test.questions.push(questions[n-1][0]);
           for (let y = 0; y < 4; y++) {
-            let maxA = answers.length;
-            let nA = Math.floor(Math.random() * maxA) + 1 ;
-            this.test.answers.push(answers[nA-1]);
-            answers.splice(nA-1, 1);
+            let maxA = questions[n-1].length - 1;
+            let nA = Math.floor(Math.random() * maxA) + 1;
+            this.test.answers.push(questions[n-1][nA]);
+            questions[n-1].splice(nA, 1);
           }
+          questions.splice(n-1, 1);
         }
       }
     }
@@ -188,12 +192,11 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
   save(form: Test) {
     // const v = (<any>$('#selectCourse')).val();
     // this.test.course = v;
-    // this.saveQuestions();
     this.generateTest();
-    console.log(this.test);
+    // console.log(this.test);
     this.testService.create(this.test)
     .then(test => {
-      console.log(test);
+      this.router.navigate(['/app/manage-tests/test/' + test.id]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear test: ' + this.test.title));
   }

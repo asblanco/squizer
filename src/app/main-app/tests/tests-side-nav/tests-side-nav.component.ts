@@ -75,7 +75,7 @@ export class TestsSideNavComponent implements OnDestroy, OnInit {
   }
 
   openNewCallModal(schoolYear: SchoolYear) {
-    (<any>$('#newCallModal' + schoolYear.id)).openModal();
+    (<any>$('#newCallModal' + schoolYear.id)).appendTo("body").openModal();
   }
 
   selectSchoolYear(schoolYear: SchoolYear) {

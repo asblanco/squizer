@@ -9,6 +9,6 @@ export class Test {
   creation_date: Date;
   course: number;
   call: number;
-  questions: Question[];
-  answers: Answer[];
+  questions: number[];
+  answers: number[];
 }

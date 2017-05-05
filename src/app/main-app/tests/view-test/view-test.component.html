@@ -1,0 +1,15 @@
+<div *ngIf="test" class="content">
+  <h3>{{test.title}}</h3>
+  <p>Creado: {{test.creation_date | date:'d MMM yyyy'}}</p>
+  <p>Asignatura: {{test.course.name}}</p>
+  <p>Convocatoria: {{test.call.title}}</p>
+  <div *ngFor="let question of test.questions">
+    <b>{{question.title}}</b>
+    <div *ngFor="let answer of test.answers">
+      <div *ngIf="answer.question === question.id">
+        - {{answer.title}}
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
