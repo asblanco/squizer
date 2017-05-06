@@ -105,6 +105,7 @@ export class NewQuestionModalComponent implements OnChanges {
       id: 0,
       chapter: this.chapter.id,
       title: formModel.title as string,
+      last_modified: new Date,
       answers: answersDeepCopy
     };
     return saveQuestion;

@@ -1,27 +1,24 @@
-import { AfterViewInit, Component, OnChanges, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
 import { Test } from '../../db/test';
 import { TestService } from '../../db/test.service';
-import { TestsSideNavService } from '../tests-side-nav/tests-side-nav.service';
+import { TestsService } from '../tests.service';
 
 import { NotificationsService } from 'angular2-notifications';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'app-new-test',
   templateUrl: './new-test.component.html',
   styleUrls: ['./new-test.component.css']
 })
-export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
+export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
   callId: number;
   courses: Course[] = [];
   course = null; // Course with checked property in questions and answers
   test: Test;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,18 +26,15 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
     private notificationsService: NotificationsService,
     private router: Router,
     private testService: TestService,
-    private testsSideNavService: TestsSideNavService
+    private testsService: TestsService
   ) {
-    this.testsSideNavService.getCourses$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      courses => {
-        this.courses = courses;
-    });
+    this.courseService.getCourses()
+    .then(courses => { this.courses = courses; })
+    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
   }
 
   ngOnInit() {
-    // this.courses = this.testsSideNavService.courses;
+    // this.courses = this.testsService.courses;
     this.activatedRoute.params.subscribe((params: Params) => {
        this.callId = params['callId'];
      });
@@ -156,18 +150,20 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
       if (this.course.chapters[i].nQuestions > 0) {
         let questions: number[][] = [];
         // Fill in questions and answers arrays with all the checked ones
+        let qi = 0;
         for (let j = 0; j < qs.length; j++) {
           let q = this.course.chapters[i].questions[j];
           if (q.checked) {
-            questions[j] = [];
-            questions[j][0] = q.id;
+            questions[qi] = [];
+            questions[qi].push(q.id);
 
             for (let k = 0; k < q.answers.length; k++) {
               let a = q.answers[k];
               if (a.checked){
-                questions[j].push(a.id);
+                questions[qi].push(a.id);
               }
             }
+            qi++;
           }
         }
         // Select them
@@ -185,25 +181,17 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit, OnDes
         }
       }
     }
-
-
   }
 
   save(form: Test) {
     // const v = (<any>$('#selectCourse')).val();
     // this.test.course = v;
     this.generateTest();
-    // console.log(this.test);
     this.testService.create(this.test)
     .then(test => {
-      this.router.navigate(['/app/manage-tests/test/' + test.id]);
+      this.router.navigate(['/manage-tests/school-year/' + test.course + '/call/' + test.call + '/test/' + test.id]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear test: ' + this.test.title));
-  }
-
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 
 }

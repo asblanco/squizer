@@ -14,6 +14,14 @@ export class CallService {
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
+  getCall(id: number): Promise<Call> {
+    const url = `${this.url}${id}/`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as Call)
+      .catch(this.handleError);
+  }
+
   create(call: Call): Promise<Call> {
     return this.http
       .post(this.url, JSON.stringify(call), {headers: this.headers})

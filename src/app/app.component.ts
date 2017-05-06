@@ -13,5 +13,4 @@ export class AppComponent {
       timeOut: 3,
       lastOnBottom: true,*/
   };
-
 }

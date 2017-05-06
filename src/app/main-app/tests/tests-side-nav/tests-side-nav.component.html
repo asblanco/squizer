@@ -1,12 +1,17 @@
 <li><div class="center bold">CURSOS</div></li>
 <li><div class="divider"></div></li>
-<li *ngFor="let schoolYear of schoolYears" [class.active]="schoolYear === selectedSchoolYear && selectedCall === null">
-  <a class="school-year truncate" routerLink="/app/manage-tests" (click)="selectSchoolYear(schoolYear)"><b>{{schoolYear.title | uppercase}}</b></a>
+<li *ngFor="let schoolYear of (schoolYears$ | async)"
+    [class.active]="((selectedCallId$ | async) === null) && (schoolYear.id === (selectedSchoolYearId$ | async))">
+  <a  class="school-year truncate"
+      routerLink="/manage-tests/school-year/{{schoolYear.id}}">
+      <b>{{schoolYear.title | uppercase}}</b></a>
   <ul>
-    <li *ngFor="let call of schoolYear.calls" [class.active]="call === selectedCall">
-      <a class="call truncate" routerLink="/app/manage-tests" (click)="selectCall(schoolYear, call)">= {{call.title}}</a>
+    <li *ngFor="let call of schoolYear.calls" [class.active]="call.id == (selectedCallId$ | async)">
+      <a  class="call truncate"
+          routerLink="/manage-tests/school-year/{{schoolYear.id}}/call/{{call.id}}">
+          = {{call.title}}</a>
     </li>
-    <li *ngIf="schoolYear === selectedSchoolYear">
+    <li *ngIf="schoolYear.id === (selectedSchoolYearId$ | async)">
       <a class="call truncate" (click)="openNewCallModal(schoolYear)"><u>+ Añadir convocatoria</u></a>
     </li>
   </ul>

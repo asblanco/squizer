@@ -4,3 +4,23 @@
   width: 20em;
   background-color: #303030;
 }
+
+.center-div h2 {
+  color: #bdbdbd;
+}
+
+@media only screen and (min-width: 62em){
+  .center-div
+  {
+    position: absolute;
+    top: 47%;
+    margin-left: 19%;
+  }
+}
+@media only screen and (max-width: 62em){
+  .center-div
+  {
+    position: absolute;
+    top: 43%;
+  }
+}

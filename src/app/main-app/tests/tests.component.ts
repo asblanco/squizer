@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { TestsService } from './tests.service';
 
 @Component({
   selector: 'app-tests',
@@ -6,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tests.component.css']
 })
 export class TestsComponent implements OnInit {
-  constructor() {  }
+  selectedSchoolYearId$: Observable<number>;
+
+  constructor( private testsService: TestsService ) {
+    this.selectedSchoolYearId$ = testsService.selectedSchoolYear$;
+  }
 
   ngOnInit() {}
 }

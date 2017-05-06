@@ -118,6 +118,7 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
       id: this.question.id,
       chapter: this.chapterId,
       title: formModel.title as string,
+      last_modified: new Date,
       answers: answersDeepCopy
     };
     return saveQuestion;
@@ -135,6 +136,7 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
       id: completeQuestion.id,
       chapter: completeQuestion.chapter,
       title: completeQuestion.title,
+      last_modified: new Date,
       answers: answersDeepCopy
     };
     return updateQ;

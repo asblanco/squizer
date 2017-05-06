@@ -1,82 +1,62 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Call } from '../../db/call';
-import { Course } from '../../db/course';
-import { SchoolYearService } from '../../db/school-year.service';
-import { SchoolYear } from '../../db/school-year';
-import { TestsSideNavService } from './../tests-side-nav/tests-side-nav.service';
-import { NotificationsService } from 'angular2-notifications';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
+import { SchoolYear } from '../../db/school-year';
+import { SchoolYearService } from '../../db/school-year.service';
+import { TestsService } from '../tests.service';
+
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-school-year',
   templateUrl: './school-year.component.html',
   styleUrls: ['./school-year.component.css']
 })
-export class SchoolYearComponent implements OnDestroy, OnInit {
-  courses: Course[] = [];   // Pass it to every call component
-  selectedCall: Call = null;
-  selectedSchoolYear: SchoolYear = null;
-  private ngUnsubscribe: Subject<void> = new Subject<void>();
+export class SchoolYearComponent implements OnInit {
+  schoolYear: SchoolYear = null;
+  schoolYearId: number;
 
   constructor(
-    private testsSideNavService: TestsSideNavService,
+    private activatedRoute: ActivatedRoute,
+    private notificationsService: NotificationsService,
+    private router: Router,
     private schoolYearService: SchoolYearService,
-    private notificationsService: NotificationsService
+    private testsService: TestsService
   ) {
-    this.testsSideNavService.getCourses$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      courses => {
-        this.courses = courses;
-    });
-    this.testsSideNavService.selectedSchoolYear$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      schoolYear => {
-        this.selectedSchoolYear = schoolYear;
-    });
-    this.testsSideNavService.selectedCall$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      call => {
-        this.selectedCall = call;
-    });
-    this.testsSideNavService.editedSchoolYear$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      schoolYear => {
-        this.selectedSchoolYear = schoolYear;
-    });
-    this.testsSideNavService.removedCall$
-    .takeUntil(this.ngUnsubscribe)
-    .subscribe(
-      call => {
-        this.selectedCall = null;
-    });
+    this.activatedRoute.params.subscribe((params: Params) => {
+       this.schoolYearId = params['syId'];
+       this.getSchoolYear(this.schoolYearId);
+     });
   }
 
   ngOnInit() {
   }
 
   openEditSchoolYearModal() {
-    (<any>$('#editSchoolYearModal' + this.selectedSchoolYear.id)).openModal();
+      (<any>$('#editSchoolYearModal' + this.schoolYear.id)).openModal();
+  }
+
+  getSchoolYear(id: number) {
+    this.schoolYearService.getSchoolYear(id)
+    .then(schoolYear => {
+      this.schoolYear = schoolYear;
+      this.testsService.announceSelected(schoolYear.id, null);
+    })
+    .catch(() => this.notificationsService.error('Error', 'Al descargar los datos del curso.'));
+  }
+
+  editSchoolYear(schoolYear: SchoolYear) {
+    this.schoolYear = schoolYear;
   }
 
   deleteSchoolYear() {
     this.schoolYearService
-      .delete(this.selectedSchoolYear.id)
+      .delete(this.schoolYear.id)
       .then(() => {
-        this.testsSideNavService.announceDeleteSchoolYear(this.selectedSchoolYear);
-        this.selectedSchoolYear = null;
+        this.testsService.deleteSchoolYear(this.schoolYear);
+        this.router.navigate(['/manage-tests/']);
       })
-      .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.selectedSchoolYear.title));
-  }
-
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+      .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.schoolYear.title));
   }
 
 }

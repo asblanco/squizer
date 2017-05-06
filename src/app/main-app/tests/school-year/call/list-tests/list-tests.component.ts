@@ -9,6 +9,7 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./list-tests.component.css']
 })
 export class ListTestsComponent implements OnChanges, OnInit {
+  @Input() schoolYearId: number;
   @Input() callId: number;
   @Input() courseId: number;
   tests: Test[] = [];
@@ -30,8 +31,7 @@ export class ListTestsComponent implements OnChanges, OnInit {
   }
 
   getTests() {
-    this.testService
-    .getCourseCallTests(this.callId, this.courseId)
+    this.testService.getCourseCallTests(this.callId, this.courseId)
     .then((tests) => {
       this.tests = tests;
     })

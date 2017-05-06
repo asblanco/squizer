@@ -1,8 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
-import { SchoolYearService } from '../../db/school-year.service';
+import { Router } from '@angular/router';
+
 import { SchoolYear } from '../../db/school-year';
-import { TestsSideNavService } from '../tests-side-nav/tests-side-nav.service';
+import { SchoolYearService } from '../../db/school-year.service';
+import { TestsService } from '../tests.service';
+
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -16,7 +19,8 @@ export class NewSchoolYearComponent implements OnChanges {
   constructor(
     private fb: FormBuilder,
     private schoolYearService: SchoolYearService,
-    private testsSideNavService: TestsSideNavService,
+    private router: Router,
+    private testsService: TestsService,
     private notificationsService: NotificationsService
   ) {
     this.createForm();
@@ -38,8 +42,8 @@ export class NewSchoolYearComponent implements OnChanges {
   onSubmit() {
     this.schoolYearService.create(this.newSchoolYearForm.value)
     .then(schoolYear => {
-      this.testsSideNavService.announceAddSchoolYear(schoolYear);
-      this.testsSideNavService.announceSelected(schoolYear, null);
+      this.testsService.addSchoolYear(schoolYear);
+      this.router.navigate(['/manage-tests/school-year/' + schoolYear.id]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear curso: ' + this.newSchoolYearForm.value.title));
 

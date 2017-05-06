@@ -1,26 +1,21 @@
-<div *ngIf="selectedSchoolYear">
+<div *ngIf="schoolYear">
   <div class="row header">
-    <h4 class="white-text">{{selectedSchoolYear.title}}
-      <sub> ({{selectedSchoolYear.start_date | date:'d MMM yyyy'}} - {{selectedSchoolYear.end_date | date:'d MMM yyyy'}})</sub>
-      <a id="editSchoolYear" class="waves-effect waves btn-flat btn-large white-text right" (click)="openEditSchoolYearModal()">Editar</a>
+    <h4 class="white-text">{{schoolYear.title}}
+      <sub> ({{schoolYear.start_date | date:'d MMM yyyy'}} - {{schoolYear.end_date | date:'d MMM yyyy'}})</sub>
+      <a  id="editSchoolYear"
+          class="waves-effect waves btn-flat btn-large white-text right"
+          (click)="openEditSchoolYearModal()">Editar</a>
     </h4>
   </div>
-  <div *ngIf="selectedCall" class="content">
-    <app-call [call]="selectedCall" [courses]="courses"></app-call>
-  </div>
+
+  <!-- Delete & Edit SchoolYear Modals -->
+  <app-delete-modal (onDeleted)="deleteSchoolYear()"
+    [id]="'deleteSchoolYearModal' + schoolYear.id"
+    [title]="schoolYear.title"></app-delete-modal>
+  <app-edit-school-year (editedSchoolYear)="editSchoolYear($event)"
+    [schoolYear]="schoolYear"></app-edit-school-year>
 </div>
 
-<!-- Empty state -->
-<div *ngIf="!selectedSchoolYear">
-  <div class="container">
-    <div class="center-div">
-        <h2 class="light-grey">Selecciona o crea un curso</h2>
-    </div>
-  </div>
-</div>
-
-<!-- Delete SchoolYear Modal -->
-<div *ngIf="selectedSchoolYear">
-  <app-delete-modal (onDeleted)="deleteSchoolYear()" [id]="'deleteSchoolYearModal' + selectedSchoolYear.id" [title]="selectedSchoolYear.title"></app-delete-modal>
-  <app-edit-school-year [schoolYear]="selectedSchoolYear"></app-edit-school-year>
+<div class="content">
+  <router-outlet></router-outlet>
 </div>

@@ -13,7 +13,7 @@
       <td>{{test.title}}</td>
       <td>{{test.creation_date | date:'d MMM yyyy'}}</td>
       <td>
-        <a routerLink="/app/manage-tests/test/{{test.id}}">Ver</a>
+        <a routerLink="/manage-tests/school-year/{{schoolYearId}}/call/{{callId}}/test/{{test.id}}">Ver</a>
         <a (click)="openDeleteTestModal(test.id)">Eliminar</a>
         Edit Download</td>
         <app-delete-modal (onDeleted)="deleteTest(test)" [id]="'deleteTestModal' + test.id" [title]="test.title"></app-delete-modal>

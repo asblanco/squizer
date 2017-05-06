@@ -3,6 +3,13 @@
   <app-tests-side-nav></app-tests-side-nav>
 </ul>
 
+<!-- Empty state -->
+<div *ngIf="(selectedSchoolYearId$ | async) === null" class="container">
+  <div class="center-div">
+      <h2 class="light-grey">Selecciona o crea un curso</h2>
+  </div>
+</div>
+
 <!-- New SchoolYear Modal -->
 <app-new-school-year></app-new-school-year>
 

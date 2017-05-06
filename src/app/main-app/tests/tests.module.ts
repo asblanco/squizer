@@ -15,7 +15,7 @@ import { TestsComponent } from './tests.component';
 import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
 
 import { SharedModule } from '../shared/shared.module';
-import { TestsSideNavService } from './tests-side-nav/tests-side-nav.service';
+import { TestsService } from './tests.service';
 import { ViewTestComponent } from './view-test/view-test.component';
 
 @NgModule({
@@ -44,6 +44,6 @@ import { ViewTestComponent } from './view-test/view-test.component';
     SchoolYearComponent,
     TestsSideNavComponent
   ],
-  providers: [ TestsSideNavService ]
+  providers: [ TestsService ]
 })
 export class TestsModule {}

@@ -18,6 +18,22 @@ a {
   cursor: pointer;
 }
 
+@media only screen and (min-width: 62em){
+  .content {
+    margin-left: 21em;
+    margin-right: 1em;
+  }
+}
+@media only screen and (max-width: 62em){
+  .content {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+.content {
+  margin-bottom: 2em;
+}
+
 /* General Colors */
 /*
 Paleta de colores:

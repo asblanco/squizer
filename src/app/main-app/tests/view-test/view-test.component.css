@@ -1,18 +1,15 @@
-/*320px = 20em*/
 @media only screen and (min-width: 62em){
   .content {
-    margin-top: 5em;
     margin-left: 22em;
-    margin-right: 2em;
   }
 }
 @media only screen and (max-width: 62em){
   .content {
     margin-left: 2em;
-    margin-right: 2em;
   }
 }
 
 .content {
-  margin-bottom: 2em;
+  margin-top: 5em;
+  margin-right: 2em;
 }

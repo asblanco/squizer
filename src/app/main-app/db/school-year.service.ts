@@ -23,6 +23,14 @@ export class SchoolYearService {
                .catch(this.handleError);
   }
 
+  getSchoolYear(id: number): Promise<SchoolYear> {
+    const url = `${this.url}${id}/`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json() as SchoolYear)
+      .catch(this.handleError);
+  }
+
   create(schoolYear: SchoolYear): Promise<SchoolYear> {
     return this.http
       .post(this.url, JSON.stringify(schoolYear), {headers: this.headers})

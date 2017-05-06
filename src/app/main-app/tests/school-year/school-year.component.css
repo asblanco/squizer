@@ -4,30 +4,6 @@
     margin-left: 21em;
     margin-right: 1em;
   }
-
-  .content {
-    margin-left: 21em;
-    margin-right: 1em;
-  }
-
-  .center-div
-  {
-    position: absolute;
-    top: 47%;
-    margin-left: 19%;
-  }
-}
-@media only screen and (max-width: 62em){
-  .content {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-
-  .center-div
-  {
-    position: absolute;
-    top: 43%;
-  }
 }
 
 h4 {
@@ -44,9 +20,6 @@ sub {
   border-radius: 0px 0px 3em 3em;
 }
 
-.center-div h2 {
-  color: #bdbdbd;
-}
 
 .card-content {
   background-color: #efefef;

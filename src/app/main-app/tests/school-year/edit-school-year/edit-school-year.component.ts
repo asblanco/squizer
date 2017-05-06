@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { SchoolYear } from '../../../db/school-year';
 import { SchoolYearService } from '../../../db/school-year.service';
-import { TestsSideNavService } from '../../tests-side-nav/tests-side-nav.service';
+import { TestsService } from '../../tests.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -13,11 +13,12 @@ import { NotificationsService } from 'angular2-notifications';
 export class EditSchoolYearComponent implements OnChanges {
   @Input() schoolYear: SchoolYear;
   editSchoolYearForm: FormGroup;
+  @Output() editedSchoolYear: EventEmitter<SchoolYear> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
     private schoolYearService: SchoolYearService,
-    private testsSideNavService: TestsSideNavService,
+    private testsService: TestsService,
     private notificationsService: NotificationsService
   ) {
     this.createForm();
@@ -59,7 +60,8 @@ export class EditSchoolYearComponent implements OnChanges {
 
     this.schoolYearService.update(this.editSchoolYearForm.value)
     .then(schoolYear => {
-      this.testsSideNavService.announceEditSchoolYear(schoolYear);
+      this.editedSchoolYear.emit(schoolYear);
+      this.testsService.updateSchoolYear(schoolYear);
     })
     .catch(() => this.notificationsService.error('Error', 'Al editar curso: ' + this.editSchoolYearForm.value.title));
 

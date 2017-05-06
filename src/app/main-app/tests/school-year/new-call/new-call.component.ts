@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CallService } from '../../../db/call.service';
 import { SchoolYear } from '../../../db/school-year';
-import { TestsSideNavService } from '../../tests-side-nav/tests-side-nav.service';
+import { TestsService } from '../../tests.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -17,8 +18,9 @@ export class NewCallComponent implements OnChanges {
   constructor(
     private fb: FormBuilder,
     private callService: CallService,
-    private testsSideNavService: TestsSideNavService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private router: Router,
+    private testsService: TestsService
   ) {
     this.createForm();
   }
@@ -48,8 +50,8 @@ export class NewCallComponent implements OnChanges {
   onSubmit() {
     this.callService.create(this.newCallForm.value)
     .then(call => {
-      this.testsSideNavService.addCall(call);
-      this.testsSideNavService.announceSelected(this.schoolYear, call);
+      this.testsService.addCall(call);
+      this.router.navigate(['/manage-tests/school-year/' + call.school_year + '/call/' + call.id]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear convocatoria: ' + this.newCallForm.value.title));
 

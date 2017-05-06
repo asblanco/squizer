@@ -1,55 +1,38 @@
 import { Injectable } from '@angular/core';
 
-import { Call } from '../../db/call';
-import { Course } from '../../db/course';
-import { CourseService } from '../../db/course.service';
+import { Call } from '../db/call';
+import { Course } from '../db/course';
 import { NotificationsService } from 'angular2-notifications';
-import { SchoolYear } from '../../db/school-year';
-import { SchoolYearService } from '../../db/school-year.service';
+import { SchoolYear } from '../db/school-year';
+import { SchoolYearService } from '../db/school-year.service';
 
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class TestsSideNavService {
-  courses: Course[] = [];
+export class TestsService {
   schoolYears: SchoolYear[] = [];
 
   // Observable string sources
-  private coursesList = new Subject<Course[]>();
-  private editCall = new Subject<Call>();
-  private editSchoolYear = new Subject<SchoolYear>();
-  // private newSchoolYear = new Subject<SchoolYear>();
-  private removeCall = new Subject<Call>();
-  private removeSchoolYear = new Subject<SchoolYear>();
   private schoolYearList = new Subject<SchoolYear[]>();
-  private selectCall = new Subject<any>();
-  private selectSchoolYear = new Subject<any>();
+  private selectCall = new Subject<number>();
+  private selectSchoolYear = new Subject<number>();
 
   // Observable string streams
-  // addedSchoolYear$ = this.newSchoolYear.asObservable();
-  editedCall$ = this.editCall.asObservable();
-  editedSchoolYear$ = this.editSchoolYear.asObservable();
-  getCourses$ = this.coursesList.asObservable();
   getSchoolYears$ = this.schoolYearList.asObservable();
-  removedCall$ = this.removeCall.asObservable();
-  removedSchoolYear$ = this.removeSchoolYear.asObservable();
   selectedCall$ = this.selectCall.asObservable();
   selectedSchoolYear$ = this.selectSchoolYear.asObservable();
 
   constructor(
-    private courseService: CourseService,
     private notificationsService: NotificationsService,
     private schoolYearService: SchoolYearService
-  ) {}
+  ) {
+    this.getSchoolYears();
+  }
 
-  getLists() {
+  getSchoolYears() {
     this.schoolYearService.getSchoolYears()
     .then(schoolYears => { this.announceSchoolYearList(schoolYears); })
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de cursos.'));
-
-    this.courseService.getCourses()
-    .then(courses => { this.announceCoursesList(courses); })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
   }
 
   announceSchoolYearList(schoolYears: SchoolYear[]) {
@@ -57,57 +40,32 @@ export class TestsSideNavService {
     this.schoolYearList.next(schoolYears);
   }
 
-  announceCoursesList(courses: Course[]) {
-    this.courses = courses;
-    this.coursesList.next(courses);
-  }
-
-  announceAddSchoolYear(schoolYear: SchoolYear) {
-    this.addSchoolYear(schoolYear);
-    this.schoolYearList.next(this.schoolYears);
-  }
-
-  announceEditSchoolYear(schoolYear: SchoolYear) {
-    this.editSchoolYear.next(schoolYear);
-    this.updateSchoolYear(schoolYear);
-  }
-
-  announceEditCall(call: Call) {
-    this.editCall.next(call);
-    this.updateCall(call);
-  }
-
-  announceDeleteSchoolYear(schoolYear: SchoolYear) {
-    this.removeSchoolYear.next(schoolYear);
-    this.deleteSchoolYear(schoolYear);
-  }
-
-  announceDeleteCall(call: Call) {
-    this.removeCall.next(call);
-    this.deleteCall(call);
-  }
-
-  announceSelected(schoolYear: SchoolYear, call: Call) {
-    this.selectSchoolYear.next(schoolYear);
-    this.selectCall.next(call);
+  announceSelected(schoolYearId: number, callId: number) {
+    this.selectSchoolYear.next(schoolYearId);
+    this.selectCall.next(callId);
   }
 
   addSchoolYear(schoolYear: SchoolYear) {
     this.schoolYears.push(schoolYear);
+    this.announceSchoolYearList(this.schoolYears);
   }
 
   updateSchoolYear(schoolYear: SchoolYear) {
     this.schoolYears.splice(this.indexOf(this.schoolYears, schoolYear.id), 1, schoolYear);
+    this.announceSchoolYearList(this.schoolYears);
   }
 
   deleteSchoolYear(schoolYear: SchoolYear) {
     this.schoolYears.splice(this.indexOf(this.schoolYears, schoolYear.id), 1);
+    this.announceSchoolYearList(this.schoolYears);
+    this.announceSelected(null, null);
   }
 
   addCall(call: Call) {
     const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
 
     this.schoolYears[schoolYearIndex].calls.push(call);
+    this.announceSchoolYearList(this.schoolYears);
   }
 
   updateCall(call: Call) {
@@ -115,6 +73,7 @@ export class TestsSideNavService {
     const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
 
     this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1, call);
+    this.announceSchoolYearList(this.schoolYears);
   }
 
   deleteCall(call: Call) {
@@ -122,6 +81,8 @@ export class TestsSideNavService {
     const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
 
     this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1);
+    this.announceSchoolYearList(this.schoolYears);
+    this.selectCall.next(null);
   }
 
   private indexOf(array, itemId) {

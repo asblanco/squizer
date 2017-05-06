@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Call } from '../../../../db/call';
 import { CallService } from '../../../../db/call.service';
-import { TestsSideNavService } from '../../../tests-side-nav/tests-side-nav.service';
+import { TestsService } from '../../../tests.service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -14,11 +14,12 @@ export class EditCallComponent {
   @Input() call: Call;
   @Input() modalId: string;
   editCallForm: FormGroup;
+  @Output() editedCall = new EventEmitter<Call>();
 
   constructor(
     private fb: FormBuilder,
     private callService: CallService,
-    private testsSideNavService: TestsSideNavService,
+    private testsService: TestsService,
     private notificationsService: NotificationsService
   ) {
     this.createForm();
@@ -51,7 +52,8 @@ export class EditCallComponent {
   onSubmit() {
     this.callService.update(this.editCallForm.value)
     .then(call => {
-      this.testsSideNavService.announceEditCall(call);
+      this.editedCall.emit(call);
+      this.testsService.updateCall(call);
     })
     .catch(() => this.notificationsService.error('Error', 'Al editar convocatoria: ' + this.editCallForm.value.title));
     this.ngOnChanges();

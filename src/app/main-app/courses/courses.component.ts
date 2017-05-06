@@ -64,7 +64,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
     this.courseService.create(name)
       .then(course => {
-        this. coursesSideNavService.addCourse(course);
+        this.coursesSideNavService.addCourse(course);
         this.courseInfoService.announceSelectCourse(course);
       })
       .catch(() => this.notificationsService.error('Error', 'Al crear la asignatura: ' + name));
