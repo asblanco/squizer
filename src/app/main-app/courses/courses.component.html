@@ -1,4 +1,4 @@
-<div class="content" *ngIf="selectedCourse">
+<div class="content" *ngIf="selectedCourse; else elsePart">
   <!-- Course title -->
   <div class="row">
     <h3 *ngIf="!editCourseTitle">
@@ -35,13 +35,13 @@
  </footer>
 </div>
 
-<div *ngIf="!selectedCourse">
+<ng-template #elsePart>
   <div class="container">
     <div class="center-div">
         <h2>Selecciona o crea una asignatura</h2>
     </div>
   </div>
-</div>
+</ng-template>
 
 <!-- Side Navigation in desktop view -->
 <ul id="slide-out" class="side-nav fixed">

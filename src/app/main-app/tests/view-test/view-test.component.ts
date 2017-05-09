@@ -5,6 +5,7 @@ import { ViewTest } from '../../db/view-test';
 
 import { TestService } from '../../db/test.service';
 import { NotificationsService } from 'angular2-notifications';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-view-test',
@@ -32,6 +33,16 @@ export class ViewTestComponent implements OnInit {
       this.test = test;
     })
     .catch(() => this.notificationsService.error('Error', 'Al descargar test.'));
+  }
+
+  generatePDF() {
+    this.testService.downloadPDF(this.test.id).subscribe(
+        (res) => {
+          let fileURL = URL.createObjectURL(res);
+          // window.open(res.url);
+          window.open(fileURL);
+        }
+    );
   }
 
 }

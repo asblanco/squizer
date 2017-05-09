@@ -1,6 +1,6 @@
-import { SchoolYear } from './../../db/school-year';
-import { Course } from './../../db/course';
-import { Answer } from './../../db/answer';
+import { SchoolYear } from './school-year';
+import { Course } from './course';
+import { Answer } from './answer';
 
 export class ViewTest {
   id: number;

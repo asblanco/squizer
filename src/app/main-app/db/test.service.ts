@@ -1,11 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, ResponseContentType } from '@angular/http';
 import { APP_CONFIG } from '../shared/app-config/app-config';
 import { IAppConfig } from '../shared/app-config/iapp-config';
 
 import { Test } from './test';
 import { ViewTest } from './view-test';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+ // import 'rxjs/Rx';
 
 @Injectable()
 export class TestService {
@@ -56,6 +58,17 @@ export class TestService {
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
+  }
+
+  downloadPDF(id: number): any {
+    // const url = `https://latexonline.cc/compile?url=http://asblanco.com/test.tex`;
+    const url = this.config.apiEndpoint + 'test-pdf/' + id;
+    return this.http.get(url, { responseType: ResponseContentType.Blob })
+    .map(
+      (res) => {
+        // return res;
+        return new Blob([res.blob()], { type: 'application/pdf' })
+      })
   }
 
   private handleError(error: any): Promise<any> {
