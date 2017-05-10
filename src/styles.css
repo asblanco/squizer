@@ -18,22 +18,6 @@ a {
   cursor: pointer;
 }
 
-@media only screen and (min-width: 62em){
-  .content {
-    margin-left: 21em;
-    margin-right: 1em;
-  }
-}
-@media only screen and (max-width: 62em){
-  .content {
-    margin-left: 1em;
-    margin-right: 1em;
-  }
-}
-.content {
-  margin-bottom: 2em;
-}
-
 /* General Colors */
 /*
 Paleta de colores:
@@ -84,7 +68,7 @@ h1, h2, h3, h4, h5 {
   font-family: 'raleway-bold';
 }
 
-.squizer-btn-text {
+.squizer-color {
   color: #4717F6 !important;
 }
 

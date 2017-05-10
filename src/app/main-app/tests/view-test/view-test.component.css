@@ -1,15 +1,42 @@
 @media only screen and (min-width: 62em){
   .content {
-    margin-left: 22em;
+    padding-left: 30em;
+    padding-right: 10em;
+  }
+  .questions {
+    padding-left: 6em;
+    padding-right: 4em;
+  }
+
+  .answers {
+    padding-left: 2em;
   }
 }
 @media only screen and (max-width: 62em){
   .content {
-    margin-left: 2em;
+    padding-left: 10em;
+    padding-right: 10em;
+  }
+  .questions {
+    padding-left: 1em;
+  }
+  .answers {
+    padding-left: 2em;
   }
 }
 
 .content {
-  margin-top: 5em;
-  margin-right: 2em;
+  padding-top: 5em;
+  background-color: #f0f0f0 !important;
+}
+
+.pdf {
+  position: absolute;
+  right: 0;
+}
+
+.navigate-before {
+  position: absolute;
+  left: 3em;
+  top: 3.5em;
 }

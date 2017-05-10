@@ -1,9 +1,21 @@
-/*320px = 20em*/
 @media only screen and (min-width: 62em){
+  .content {
+    padding-left: 21em;
+    padding-right: 1em;
+  }
   .header {
     margin-left: 21em;
     margin-right: 1em;
   }
+}
+@media only screen and (max-width: 62em){
+  .content {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+.content {
+  padding-bottom: 2em;
 }
 
 h4 {

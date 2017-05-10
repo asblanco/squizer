@@ -1,20 +1,29 @@
 <div *ngIf="test" class="content">
-  <h3>{{test.title}}</h3>
-  <p>Creado: {{test.creation_date | date:'d MMM yyyy'}}</p>
-  <p>Asignatura: {{test.course.name}}</p>
-  <p>Convocatoria: {{test.call.title}}</p>
-  <div *ngFor="let question of test.questions; let i=index">
-    <b>{{i+1}} - {{question.title}}
-       <span *ngIf="question.last_modified > test.creation_date" class="red-text">
-         <sup>Actualizada el {{question.last_modified | date:'d MMM yyyy'}}</sup></span>
-    </b>
-    <div *ngFor="let answer of test.answers">
-      <div *ngIf="answer.question === question.id">
-        - {{answer.title}}
+  <div class="card">
+    <div class="card-content center-align">
+      <a routerLink="../../">
+        <img class="navigate-before" src="../../../../assets/icons/ic_navigate_before.svg" alt="remove answer"></a>
+      <span class="pdf">
+        <a class="waves-effect waves btn-flat blue-text squizer-color" (click)="displayPDF()">PDF</a>
+        <a class="waves-effect waves btn-flat blue-text squizer-color" (click)="downloadTEX()">TEX</a>
+      </span>
+      <h4>{{test.title}} </h4>
+      <p>{{test.course.name}}</p>
+      <p>{{test.creation_date | date:'d MMM yyyy'}}</p>
+    </div>
+    <div class="card-action">
+      <div *ngFor="let question of test.questions; let i=index" class="questions">
+        <b>{{i+1}}. {{question.title}}
+           <span *ngIf="question.last_modified > test.creation_date" class="red-text">
+             <sup>Actualizada el {{question.last_modified | date:'d MMM yyyy'}}</sup></span>
+        </b>
+        <div *ngFor="let answer of test.answers" class="answers">
+          <div *ngIf="answer.question === question.id" [class.green-text]="answer.correct">
+            - {{answer.title}}
+          </div>
+        </div>
+        <br>
       </div>
     </div>
-    <br>
   </div>
-  <a class="waves-effect btn-large squizer-btn"
-      (click)="displayPDF()">Ver PDF</a>
 </div>

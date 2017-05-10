@@ -39,7 +39,15 @@ export class ViewTestComponent implements OnInit {
     this.testService.downloadPDF(this.test.id).subscribe(
         (res) => {
           let fileURL = URL.createObjectURL(res);
-          // window.open(res.url);
+          window.open(fileURL);
+        }
+    );
+  }
+
+  downloadTEX() {
+    this.testService.downloadTEX(this.test.id).subscribe(
+        (res) => {
+          let fileURL = URL.createObjectURL(res);
           window.open(fileURL);
         }
     );

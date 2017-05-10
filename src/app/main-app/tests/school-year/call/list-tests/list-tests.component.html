@@ -15,13 +15,13 @@
       <td>{{test.creation_date | date:'d MMM yyyy'}}</td>
       <td>
         <a routerLink="/manage-tests/school-year/{{schoolYearId}}/call/{{callId}}/test/{{test.id}}">
-          <i class="material-icons squizer-btn-text">visibility</i></a>
-        <a (click)="openEditTestModal(test.id)"><i class="material-icons squizer-btn-text">mode_edit</i></a>
-        <a (click)="openDeleteTestModal(test.id)" class="red-text"><i class="material-icons">delete</i></a>
+          <i class="material-icons icon-blue">visibility</i></a>
+        <a (click)="openEditTestModal(test.id)"><i class="material-icons icon-blue">mode_edit</i></a>
+        <a (click)="openDeleteTestModal(test.id)"><i class="material-icons icon-red">delete</i></a>
       </td>
       <td>
-        <a (click)="displayPDF(test.id)" class="squizer-btn-text">PDF</a>
-        <a (click)="downloadTEX(test.id)" class="squizer-btn-text">TEX</a>
+        <a (click)="displayPDF(test.id)" class="squizer-color">PDF</a>
+        <a (click)="downloadTEX(test.id)" class="squizer-color">TEX</a>
       </td>
         <app-edit-test [test]="test"></app-edit-test>
         <app-delete-modal (onDeleted)="deleteTest(test)" [id]="'deleteTestModal' + test.id" [title]="test.title"></app-delete-modal>
