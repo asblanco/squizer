@@ -54,10 +54,6 @@ export class CallComponent {
     .catch(() => this.notificationsService.error('Error', 'Al descargar los datos de la convocatoria.'));
   }
 
-  editCall(call: Call) {
-    this.call = call;
-  }
-
   deleteCall() {
     this.callService
     .delete(this.call.id)

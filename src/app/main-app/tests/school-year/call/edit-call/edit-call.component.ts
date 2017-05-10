@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Call } from '../../../../db/call';
 import { CallService } from '../../../../db/call.service';
@@ -12,9 +12,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class EditCallComponent {
   @Input() call: Call;
-  @Input() modalId: string;
   editCallForm: FormGroup;
-  @Output() editedCall = new EventEmitter<Call>();
 
   constructor(
     private fb: FormBuilder,
@@ -52,11 +50,16 @@ export class EditCallComponent {
   onSubmit() {
     this.callService.update(this.editCallForm.value)
     .then(call => {
-      this.editedCall.emit(call);
+      this.call.title = call.title;
+      this.call.start_date = call.start_date;
+      this.call.end_date = call.end_date;
       this.testsService.updateCall(call);
+      this.ngOnChanges();
     })
-    .catch(() => this.notificationsService.error('Error', 'Al editar convocatoria: ' + this.editCallForm.value.title));
-    this.ngOnChanges();
+    .catch(() => {
+      this.notificationsService.error('Error', 'Al editar convocatoria: ' + this.editCallForm.value.title);
+      this.ngOnChanges();
+    });
   }
 
 }

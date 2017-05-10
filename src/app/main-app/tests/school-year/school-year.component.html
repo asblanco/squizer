@@ -12,8 +12,7 @@
   <app-delete-modal (onDeleted)="deleteSchoolYear()"
     [id]="'deleteSchoolYearModal' + schoolYear.id"
     [title]="schoolYear.title"></app-delete-modal>
-  <app-edit-school-year (editedSchoolYear)="editSchoolYear($event)"
-    [schoolYear]="schoolYear"></app-edit-school-year>
+  <app-edit-school-year [schoolYear]="schoolYear"></app-edit-school-year>
 </div>
 
 <div class="content">

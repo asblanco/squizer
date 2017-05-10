@@ -62,12 +62,20 @@ export class TestService {
 
   downloadPDF(id: number): any {
     // const url = `https://latexonline.cc/compile?url=http://asblanco.com/test.tex`;
-    const url = this.config.apiEndpoint + 'test-pdf/' + id;
+    const url = `${this.config.apiEndpoint}test-pdf/${id}/`;
     return this.http.get(url, { responseType: ResponseContentType.Blob })
     .map(
       (res) => {
-        // return res;
         return new Blob([res.blob()], { type: 'application/pdf' })
+      })
+  }
+
+  downloadTEX(id: number): any {
+    const url = `${this.config.apiEndpoint}test-tex/${id}/`;
+    return this.http.get(url, { responseType: ResponseContentType.Blob })
+    .map(
+      (res) => {
+        return new Blob([res.blob()], { type: 'plain/text' })
       })
   }
 

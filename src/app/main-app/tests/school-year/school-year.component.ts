@@ -45,10 +45,6 @@ export class SchoolYearComponent implements OnInit {
     .catch(() => this.notificationsService.error('Error', 'Al descargar los datos del curso.'));
   }
 
-  editSchoolYear(schoolYear: SchoolYear) {
-    this.schoolYear = schoolYear;
-  }
-
   deleteSchoolYear() {
     this.schoolYearService
       .delete(this.schoolYear.id)

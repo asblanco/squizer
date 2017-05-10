@@ -1,0 +1,18 @@
+<div id="editTestModal{{test.id}}" class="modal bottom-sheet">
+  <form #editCallForm="ngForm" novalidate>
+    <div class="modal-content">
+      <h4>Editar test</h4>
+      <div class="row">
+        <div class="input-field form-group">
+          <label for="title" class="active">Titulo</label>
+          <input type="text" class="form-control" name="title" [(ngModel)]="testForm.title" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
+         (click)="updateTest()">Guardar</button>
+    </div>
+  </form>
+</div>

@@ -27,5 +27,5 @@
   </footer>
 
   <app-delete-modal (onDeleted)="deleteCall()" [id]="'deleteCallModal' + call.id" [title]="call.title"></app-delete-modal>
-  <app-edit-call (editedCall)="editCall($event)" [call]="call"></app-edit-call>
+  <app-edit-call [call]="call"></app-edit-call>
 </div>

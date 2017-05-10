@@ -48,7 +48,7 @@ export class TestsSideNavComponent implements OnInit {
   }
 
   openSchoolYearModal() {
-    (<any>$('#newSchoolYearModal')).openModal();
+    (<any>$('#newSchoolYearModal')).appendTo("body").openModal();
   }
 
   openNewCallModal(schoolYear: SchoolYear) {

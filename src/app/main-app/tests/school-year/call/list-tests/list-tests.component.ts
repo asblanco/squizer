@@ -26,6 +26,10 @@ export class ListTestsComponent implements OnChanges, OnInit {
     this.getTests();
   }
 
+  openEditTestModal(id) {
+    (<any>$('#editTestModal' + id)).appendTo("body").openModal();
+  }
+
   openDeleteTestModal(id) {
     (<any>$('#deleteTestModal' + id)).appendTo("body").openModal();
   }
@@ -45,6 +49,24 @@ export class ListTestsComponent implements OnChanges, OnInit {
       this.tests.splice(this.tests.indexOf(test), 1);
     })
     .catch(() => this.notificationsService.error('Error', 'Al eliminar convocatoria ' + test.title));
+  }
+
+  displayPDF(id: number) {
+    this.testService.downloadPDF(id).subscribe(
+        (res) => {
+          let fileURL = URL.createObjectURL(res);
+          window.open(fileURL);
+        }
+    );
+  }
+
+  downloadTEX(id: number) {
+    this.testService.downloadTEX(id).subscribe(
+        (res) => {
+          let fileURL = URL.createObjectURL(res);
+          window.open(fileURL);
+        }
+    );
   }
 
 }

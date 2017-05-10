@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { SchoolYear } from '../../../db/school-year';
 import { SchoolYearService } from '../../../db/school-year.service';
@@ -13,7 +13,6 @@ import { NotificationsService } from 'angular2-notifications';
 export class EditSchoolYearComponent implements OnChanges {
   @Input() schoolYear: SchoolYear;
   editSchoolYearForm: FormGroup;
-  @Output() editedSchoolYear: EventEmitter<SchoolYear> = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -60,12 +59,16 @@ export class EditSchoolYearComponent implements OnChanges {
 
     this.schoolYearService.update(this.editSchoolYearForm.value)
     .then(schoolYear => {
-      this.editedSchoolYear.emit(schoolYear);
+      this.schoolYear.title = schoolYear.title;
+      this.schoolYear.start_date = schoolYear.start_date;
+      this.schoolYear.end_date = schoolYear.end_date;
       this.testsService.updateSchoolYear(schoolYear);
+      this.ngOnChanges();
     })
-    .catch(() => this.notificationsService.error('Error', 'Al editar curso: ' + this.editSchoolYearForm.value.title));
-
-    this.ngOnChanges();
+    .catch(() => {
+      this.notificationsService.error('Error', 'Al editar curso: ' + this.editSchoolYearForm.value.title);
+      this.ngOnChanges();
+    });
   }
 
 }
