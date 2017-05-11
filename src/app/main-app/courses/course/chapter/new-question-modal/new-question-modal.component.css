@@ -14,8 +14,20 @@ span {
   padding: 0;
 }
 
-img.icon-cross {
+img.ic-remove {
   position: absolute;
   right: 0;
-  bottom: 0;
+  top: 0;
+}
+
+p.checkbox {
+  margin: 0;
+  padding-left: 40%;
+  padding-top: 2em;
+  padding-bottom: 0;
+}
+
+.checkbox-squizer[type="checkbox"].filled-in:checked + label:after{
+  border: 2px solid #4717F6;
+  background-color: #4717F6;
 }

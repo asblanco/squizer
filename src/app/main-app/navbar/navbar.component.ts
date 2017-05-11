@@ -24,9 +24,9 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
-        let trigger = event.urlAfterRedirects;
-        let regexpCourses = new RegExp('/manage-courses/.*');
-        let regexpTests = new RegExp('/manage-tests/.*');
+        const trigger = event.urlAfterRedirects;
+        const regexpCourses = new RegExp('/manage-courses/.*');
+        const regexpTests = new RegExp('/manage-tests/.*');
 
         if (regexpCourses.test(trigger)) {
           this.activeTab = 1;

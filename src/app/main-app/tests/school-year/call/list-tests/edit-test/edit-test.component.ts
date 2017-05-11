@@ -29,7 +29,7 @@ export class EditTestComponent implements OnChanges {
      creation_date: this.test.creation_date,
      questions: this.test.questions,
      answers: this.test.answers
-    }
+   };
   }
 
   updateTest() {

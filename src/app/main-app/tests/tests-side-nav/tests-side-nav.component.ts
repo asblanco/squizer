@@ -48,11 +48,11 @@ export class TestsSideNavComponent implements OnInit {
   }
 
   openSchoolYearModal() {
-    (<any>$('#newSchoolYearModal')).appendTo("body").openModal();
+    (<any>$('#newSchoolYearModal')).appendTo('body').openModal();
   }
 
   openNewCallModal(schoolYear: SchoolYear) {
-    (<any>$('#newCallModal' + schoolYear.id)).appendTo("body").openModal();
+    (<any>$('#newCallModal' + schoolYear.id)).appendTo('body').openModal();
   }
 
 }

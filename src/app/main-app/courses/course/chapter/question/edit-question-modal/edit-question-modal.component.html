@@ -20,7 +20,7 @@
             <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
               <div class="row">
                 <div class="col s1">
-                  <span *ngIf="i == 0" style="position:absolute;">Verdadera</span>
+                  <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;">V/F</span>
                   <p class="checkbox">
                     <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i" formControlName="correct"/>
                     <label [for]="question.id + 'cb' + i"></label>
@@ -44,11 +44,11 @@
           </div>
         </fieldset>
       </div>
-      <div>
+      <!-- <div>
         <div>myForm details:-</div>
         <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
         <pre>form value: <br>{{questionForm.value | json}}</pre>
-      </div>
+      </div> -->
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>

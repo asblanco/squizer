@@ -10,7 +10,7 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './edit-call.component.html',
   styleUrls: ['./edit-call.component.css']
 })
-export class EditCallComponent {
+export class EditCallComponent implements OnChanges {
   @Input() call: Call;
   editCallForm: FormGroup;
 

@@ -4,7 +4,6 @@ import { NgModule, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { CourseInfoService } from './course-info.service';
 import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
 import { SharedModule } from '../shared/shared.module';
 
@@ -27,20 +26,19 @@ import { QuestionComponent } from './course/chapter/question/question.component'
   ],
   declarations: [
     ChapterComponent,
+    CourseComponent,
     CoursesComponent,
     CoursesSideNavComponent,
     EditQuestionModalComponent,
     NewEditComponent,
     NewQuestionModalComponent,
-    QuestionComponent,
-    CourseComponent
+    QuestionComponent
   ],
   exports: [
     CoursesComponent,
     CoursesSideNavComponent
   ],
   providers: [
-    CourseInfoService,
     CoursesSideNavService
   ]
 })

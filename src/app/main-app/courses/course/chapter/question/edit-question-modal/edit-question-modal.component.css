@@ -21,6 +21,9 @@ img.ic-remove {
 }
 
 p.checkbox {
+  margin: 0;
+  padding-left: 40%;
+  padding-top: 2em;
   padding-bottom: 0;
 }
 

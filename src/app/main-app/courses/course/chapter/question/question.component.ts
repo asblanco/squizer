@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Question } from '../../../../db/question';
 import { QuestionService } from '../../../../db/question.service';
-import { CourseInfoService } from '../../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -11,16 +10,14 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
   @Input() question: Question;
   @Input() i: number;
+  @Output() deletedQuestion: EventEmitter<Question> = new EventEmitter();
 
   constructor(
-    private courseInfoService: CourseInfoService,
     private questionService: QuestionService,
     private notificationsService: NotificationsService ) { }
-
-  ngOnInit() { }
 
   openEditQuestionModal() {
     (<any>$('#editQuestionModal' + this.question.id)).openModal({dismissible: false});
@@ -31,11 +28,10 @@ export class QuestionComponent implements OnInit {
   }
 
   deleteQuestion() {
-    this.questionService
-        .delete(this.question.id)
-        .then(() => {
-          this.courseInfoService.deleteQuestion(this.question.chapter, this.question);
-        })
-        .catch( () => this.notificationsService.error('Error', 'Al eliminar la pregunta: ' + this.question.title));
+    this.questionService.delete(this.question.id)
+      .then(() => {
+        this.deletedQuestion.emit(this.question);
+      })
+      .catch(() => this.notificationsService.error('Error', 'Al eliminar la pregunta: ' + this.question.title));
   }
 }

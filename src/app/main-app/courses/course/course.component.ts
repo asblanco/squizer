@@ -5,7 +5,6 @@ import { Course } from '../../db/course';
 import { Chapter } from '../../db/chapter';
 import { Question } from '../../db/question';
 import { CourseService } from '../../db/course.service';
-import { CourseInfoService } from '../course-info.service';
 import { ChapterService } from '../../db/chapter.service';
 import { CoursesSideNavService } from '../courses-side-nav/courses-side-nav.service';
 
@@ -18,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnDestroy {
-  oldTitleCourse: Course;
+  oldTitleCourse: string;
   courseId: number;
   course: Course;
   editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
@@ -26,7 +25,6 @@ export class CourseComponent implements OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private courseInfoService: CourseInfoService,
     private courseService: CourseService,
     private coursesSideNavService: CoursesSideNavService,
     private chapterService: ChapterService,
@@ -48,14 +46,12 @@ export class CourseComponent implements OnDestroy {
     (<any>$('#deleteCourseModal')).openModal();
   }
 
-
   /*
    *  Get, delete and updateTitle course methods
    */
   getCourse(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
-      .then(course => { this.courseInfoService.course = course;
-                        this.course = this.courseInfoService.course; })
+      .then(course => { this.course = course; })
       .catch(() => this.notificationsService.error('Error', 'Al descargar detalles de asignatura.'));
   }
 
@@ -63,35 +59,34 @@ export class CourseComponent implements OnDestroy {
     this.courseService
         .delete(course.id)
         .then(() => {
-          this.coursesSideNavService.announceDeleteCourse(course);
+          this.coursesSideNavService.deleteCourse(course);
           this.router.navigate(['/manage-courses/']);
         })
         .catch(() => this.notificationsService.error('Error', 'Al eliminar asignatura ' + course.name));
   }
 
+  deleteChapter(chapter) {
+    this.course.chapters.splice(this.course.chapters.indexOf(chapter), 1);
+  }
+
   editCourseBtn(): void {
     this.editCourseTitle = true;
-    this.oldTitleCourse = JSON.parse(JSON.stringify(this.course)); // Save value without binding
+    this.oldTitleCourse = this.course.name;
   }
 
   cancelEditCourse(): void {
-    this.courseInfoService.announceEditCourse(this.oldTitleCourse);
-    this.course = this.oldTitleCourse;
+    this.course.name = this.oldTitleCourse;
     this.editCourseTitle = false;
   }
 
   updateCourseTitle(): void {
-    const updatedCourse = this.course;
-
-    this.courseService.update(updatedCourse)
+    this.courseService.update(this.course)
     .then(() => {
-      this.courseInfoService.announceEditCourse(updatedCourse);
-      this.coursesSideNavService.editCourse(updatedCourse);
+      this.coursesSideNavService.editCourse(this.course);
       this.editCourseTitle = false;
     })
     .catch(() => {  this.cancelEditCourse();
-                    this.notificationsService.error('Error', 'Al actualizar el titulo de la asignatura.');
-                  });
+                    this.notificationsService.error('Error', 'Al actualizar el titulo de la asignatura.'); });
   }
 
   /*
@@ -102,7 +97,7 @@ export class CourseComponent implements OnDestroy {
     if (!title) { return; }
     this.chapterService.create(title, this.course.id)
       .then(chapter => {
-        this.courseInfoService.addChapter(chapter);
+        this.course.chapters.push(chapter);
       })
       .catch(() => this.notificationsService.error('Error', 'Al añadir el tema: ' + title));
   }
@@ -110,13 +105,6 @@ export class CourseComponent implements OnDestroy {
   ngOnDestroy() {
     // prevent memory leak when component destroyed
     this.subscription.unsubscribe();
-  }
-
-  private indexOf(array, item) {
-      for (let i = 0; i < array.length; i++) {
-          if (array[i].id === item.id) { return i; }
-      }
-      return -1;
   }
 
 }

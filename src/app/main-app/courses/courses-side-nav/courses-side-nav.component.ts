@@ -27,7 +27,7 @@ export class CoursesSideNavComponent {
   }
 
   openCourseModal() {
-    (<any>$('#newCourseModal')).appendTo("body").openModal();
+    (<any>$('#newCourseModal')).appendTo('body').openModal();
   }
 
   createCourse(name: string): void {

@@ -13,12 +13,12 @@ export class ViewTest {
     title: string;
     start_date: Date;
     end_date: Date;
-  }
+  };
   questions: {
     id: number;
     chapter: number;
     title: string;
     last_modified: Date;
-  }[]
+  }[];
   answers: Answer[];
 }

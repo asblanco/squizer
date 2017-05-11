@@ -66,8 +66,8 @@ export class TestService {
     return this.http.get(url, { responseType: ResponseContentType.Blob })
     .map(
       (res) => {
-        return new Blob([res.blob()], { type: 'application/pdf' })
-      })
+        return new Blob([res.blob()], { type: 'application/pdf' });
+      });
   }
 
   downloadTEX(id: number): any {
@@ -75,8 +75,8 @@ export class TestService {
     return this.http.get(url, { responseType: ResponseContentType.Blob })
     .map(
       (res) => {
-        return new Blob([res.blob()], { type: 'plain/text' })
-      })
+        return new Blob([res.blob()], { type: 'plain/text' });
+      });
   }
 
   private handleError(error: any): Promise<any> {

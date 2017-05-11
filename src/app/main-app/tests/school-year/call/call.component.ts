@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Call } from '../../../db/call';
 import { CallService } from '../../../db/call.service';
@@ -12,7 +12,7 @@ import { TestsService } from '../../tests.service';
   templateUrl: './call.component.html',
   styleUrls: ['./call.component.css']
 })
-export class CallComponent {
+export class CallComponent implements OnInit {
   callId: number;
   call: Call;
   courses: Course[];

@@ -40,14 +40,14 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
      });
 
     this.test = {
-     id: 0,
-     title: '',
-     course: 0,
-     call: this.callId,
-     creation_date: new Date,
-     questions: [],
-     answers: []
-    }
+      id: 0,
+      title: '',
+      course: 0,
+      call: this.callId,
+      creation_date: new Date,
+      questions: [],
+      answers: []
+    };
   }
 
   ngAfterViewInit() {
@@ -62,13 +62,14 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
 
   checkAll(divId: string, check: boolean) {
     $('#' + divId + ' :checkbox:enabled').prop('checked', check);
+    let qs, q, a;
     for (let i = 0; i < this.course.chapters.length; i++) {
-      let qs = this.course.chapters[i].questions;
+      qs = this.course.chapters[i].questions;
       for (let j = 0; j < qs.length; j++) {
-        let q = this.course.chapters[i].questions[j];
+        q = this.course.chapters[i].questions[j];
         q.checked = check;
         for (let k = 0; k < q.answers.length; k++) {
-          let a = q.answers[k];
+          a = q.answers[k];
           a.checked = check;
         }
       }
@@ -77,13 +78,14 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
 
   checkChapter(check: boolean, chapter) {
     $('#ch' + chapter.id + ' :checkbox:enabled').prop('checked', check);
-    let index = this.course.chapters.indexOf(chapter);
-    let qs = this.course.chapters[index].questions;
+    const index = this.course.chapters.indexOf(chapter);
+    const qs = this.course.chapters[index].questions;
+    let q, a;
     for (let j = 0; j < qs.length; j++) {
-      let q = qs[j];
+      q = qs[j];
       q.checked = check;
       for (let k = 0; k < q.answers.length; k++) {
-        let a = q.answers[k];
+        a = q.answers[k];
         a.checked = check;
       }
     }
@@ -91,11 +93,12 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
 
   checkQuestion(check: boolean, question, chapter) {
     $('#q' + question.id + ' :checkbox:enabled').prop('checked', check);
-    let chapterIndex = this.course.chapters.indexOf(chapter);
-    let questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
-    let q = this.course.chapters[chapterIndex].questions[questionIndex];
+    const chapterIndex = this.course.chapters.indexOf(chapter);
+    const questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
+    const q = this.course.chapters[chapterIndex].questions[questionIndex];
+    let a;
     for (let i = 0; i < q.answers.length; i++) {
-      let a = q.answers[i];
+      a = q.answers[i];
       a.checked = check;
     }
   }
@@ -112,54 +115,57 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
 
   setArray(c) {
     this.course = JSON.parse(JSON.stringify(c)); // Save value without binding
+    let qs, q, a;
     for (let i = 0; i < c.chapters.length; i++) {
-      let qs = c.chapters[i].questions;
+      qs = c.chapters[i].questions;
       this.course.chapters[i] = {
         id: c.chapters[i].id,
         course: c.chapters[i].course,
         title: c.chapters[i].title,
         questions: c.chapters[i].questions,
         nQuestions: 0
-      }
+      };
       for (let j = 0; j < qs.length; j++) {
-        let q = qs[j];
+        q = qs[j];
         this.course.chapters[i].questions[j] = {
           id: q.id,
           chapter: q.chapter,
           title: q.title,
           answers: q.answers,
           checked: false
-        }
+        };
         for (let k = 0; k < q.answers.length; k++) {
-          let a = q.answers[k];
+          a = q.answers[k];
           this.course.chapters[i].questions[j].answers[k] = {
             id: a.id,
             question: a.question,
             title: a.title,
             correct: a.correct,
             checked: false
-          }
+          };
         }
       }
     }
   }
 
   generateTest() {
+    let qs;
     for (let i = 0; i < this.course.chapters.length; i++) {
-      let qs = this.course.chapters[i].questions;
+      qs = this.course.chapters[i].questions;
       if (this.course.chapters[i].nQuestions > 0) {
-        let questions: number[][] = [];
+        const questions: number[][] = [];
         // Fill in questions and answers arrays with all the checked ones
-        let qi = 0;
+        let qi = 0, q;
         for (let j = 0; j < qs.length; j++) {
-          let q = this.course.chapters[i].questions[j];
+          q = this.course.chapters[i].questions[j];
           if (q.checked) {
             questions[qi] = [];
             questions[qi].push(q.id);
+            let a;
 
             for (let k = 0; k < q.answers.length; k++) {
-              let a = q.answers[k];
-              if (a.checked){
+              a = q.answers[k];
+              if (a.checked) {
                 questions[qi].push(a.id);
               }
             }
@@ -167,13 +173,14 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
           }
         }
         // Select them
+        let max, n, maxA, nA;
         for (let x = 0; x < this.course.chapters[i].nQuestions; x++) {
-          let max = questions.length;
-          let n = Math.floor(Math.random() * max) + 1;
+          max = questions.length;
+          n = Math.floor(Math.random() * max) + 1;
           this.test.questions.push(questions[n-1][0]);
           for (let y = 0; y < 4; y++) {
-            let maxA = questions[n-1].length - 1;
-            let nA = Math.floor(Math.random() * maxA) + 1;
+            maxA = questions[n-1].length - 1;
+            nA = Math.floor(Math.random() * maxA) + 1;
             this.test.answers.push(questions[n-1][nA]);
             questions[n-1].splice(nA, 1);
           }
@@ -189,7 +196,7 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
     this.generateTest();
     this.testService.create(this.test)
     .then(test => {
-      this.router.navigate(['/manage-tests/school-year/' + test.course + '/call/' + test.call + '/test/' + test.id]);
+      this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear test: ' + this.test.title));
   }

@@ -21,7 +21,7 @@ export class CoursesComponent implements OnDestroy {
     private coursesSideNavService: CoursesSideNavService
   ) {
     this.coursesSideNavService.getCourses();
-    
+
     router.events
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)

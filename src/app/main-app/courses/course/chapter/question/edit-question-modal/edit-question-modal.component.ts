@@ -6,7 +6,6 @@ import { Chapter } from '../../../../../db/chapter';
 import { Question } from '../../../../../db/question';
 
 import { AnswerService } from '../../../../../db/answer.service';
-import { CourseInfoService } from '../../../../course-info.service';
 import { QuestionService } from '../../../../../db/question.service';
 
 import { NotificationsService } from 'angular2-notifications';
@@ -22,7 +21,6 @@ export class EditQuestionModalComponent implements OnChanges {
 
   constructor(
     private answerService: AnswerService,
-    private courseInfoService: CourseInfoService,
     private fb: FormBuilder,
     private notificationsService: NotificationsService,
     private questionService: QuestionService
@@ -90,7 +88,6 @@ export class EditQuestionModalComponent implements OnChanges {
     /* Update and delete answers */
     this.questionService.update(q)
       .then(question => {
-        this.courseInfoService.updateQuestion(this.question.chapter, noInserts);
         this.question = noInserts;
 
         /* Create the new ones */

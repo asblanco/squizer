@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Chapter } from '../../../db/chapter';
 import { Question } from '../../../db/question';
 import { ChapterService } from '../../../db/chapter.service';
-import { CourseInfoService } from '../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -12,18 +11,16 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './chapter.component.html',
   styleUrls: ['./chapter.component.css']
 })
-export class ChapterComponent implements OnInit, AfterViewInit {
+export class ChapterComponent implements AfterViewInit {
   @Input() chapter: Chapter;
+  @Output() deletedChapter: EventEmitter<Chapter> = new EventEmitter();
 
   constructor(
-    private courseInfoService: CourseInfoService,
     private chapterService: ChapterService,
     private notificationsService: NotificationsService ) { }
 
-  ngOnInit() { }
-
   ngAfterViewInit() {
-    (<any>$('.collapsible')).collapsible(); // casting to any
+    (<any>$('.collapsible')).collapsible();
   }
 
   openEditChapterModal() {
@@ -38,24 +35,28 @@ export class ChapterComponent implements OnInit, AfterViewInit {
     (<any>$('#deleteChapterModal' + this.chapter.id)).openModal();
   }
 
-  /* Edit and remove chapter */
   updateChapterTitle(title: string): void {
     const oldTitle = this.chapter.title;
     this.chapter.title = title;
     this.chapterService.update(this.chapter)
-    .then(() => { })
-    .catch(() => { this.chapter.title = oldTitle;
-                   this.notificationsService.error('Error', 'Al actualizar el titulo del tema.');
-                 });
+    .then((chapter) => { this.chapter.title = chapter.title; })
+    .catch(() => {
+        this.chapter.title = oldTitle;
+        this.notificationsService.error('Error', 'Al actualizar el titulo del tema.');
+      });
   }
 
-  deleteChapter(chapter: Chapter): void {
+  deleteChapter() {
     this.chapterService
-        .delete(chapter.id)
-        .then(() => {
-          this.courseInfoService.deleteChapter(chapter);
-        })
-        .catch( () => this.notificationsService.error('Error', 'Al eliminar el capitulo: ' + chapter.title));
+      .delete(this.chapter.id)
+      .then(() => {
+        this.deletedChapter.emit(this.chapter);
+      })
+      .catch( () => this.notificationsService.error('Error', 'Al eliminar el capitulo: ' + this.chapter.title));
+  }
+
+  deleteQuestion(question) {
+    this.chapter.questions.splice(this.chapter.questions.indexOf(question), 1);
   }
 
 }

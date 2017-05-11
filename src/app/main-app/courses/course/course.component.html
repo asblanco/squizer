@@ -15,7 +15,7 @@
   <!-- Chapters -->
   <div class="row">
     <div *ngFor="let chapter of course.chapters">
-      <app-chapter [chapter]="chapter"></app-chapter>
+      <app-chapter (deletedChapter)="deleteChapter($event)" [chapter]="chapter"></app-chapter>
     </div>
   </div>
 

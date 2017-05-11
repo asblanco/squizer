@@ -10,14 +10,13 @@ export class CoursesSideNavService {
   courses: Course[] = [];
   // Observable string sources
   private coursesList = new Subject<Course[]>();
-  private newCourse = new Subject<Course>();
   // Observable string streams
   getCourses$ = this.coursesList.asObservable();
-  addCourse$ = this.newCourse.asObservable();
 
   constructor(
     private courseService: CourseService,
-    private notificationsService: NotificationsService ) {  }
+    private notificationsService: NotificationsService
+  ) {}
 
   getCourses() {
     this.courseService.getCourses()
@@ -25,12 +24,8 @@ export class CoursesSideNavService {
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
   }
 
-  announceDeleteCourse(course: Course) {
-    this.deleteCourse(course);
-  }
-
   announceCoursesList(courses: Course[]) {
-    this.courses = courses;
+    this.courses = courses; // Here it gets linked!!! so all changes to this.courses will be propagated
     this.coursesList.next(courses);
   }
 

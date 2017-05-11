@@ -14,4 +14,4 @@
 <hr>
 
 <app-edit-question-modal [question]="question"></app-edit-question-modal>
-<app-delete-modal (onDeleted)="deleteQuestion(question)" [id]="'deleteQuestionModal'+question.id" [title]="question.title"></app-delete-modal>
+<app-delete-modal (onDeleted)="deleteQuestion()" [id]="'deleteQuestionModal'+question.id" [title]="question.title"></app-delete-modal>

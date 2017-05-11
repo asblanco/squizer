@@ -27,11 +27,11 @@ export class ListTestsComponent implements OnChanges, OnInit {
   }
 
   openEditTestModal(id) {
-    (<any>$('#editTestModal' + id)).appendTo("body").openModal();
+    (<any>$('#editTestModal' + id)).appendTo('body').openModal();
   }
 
   openDeleteTestModal(id) {
-    (<any>$('#deleteTestModal' + id)).appendTo("body").openModal();
+    (<any>$('#deleteTestModal' + id)).appendTo('body').openModal();
   }
 
   getTests() {
@@ -54,7 +54,7 @@ export class ListTestsComponent implements OnChanges, OnInit {
   displayPDF(id: number) {
     this.testService.downloadPDF(id).subscribe(
         (res) => {
-          let fileURL = URL.createObjectURL(res);
+          const fileURL = URL.createObjectURL(res);
           window.open(fileURL);
         }
     );
@@ -63,7 +63,7 @@ export class ListTestsComponent implements OnChanges, OnInit {
   downloadTEX(id: number) {
     this.testService.downloadTEX(id).subscribe(
         (res) => {
-          let fileURL = URL.createObjectURL(res);
+          const fileURL = URL.createObjectURL(res);
           window.open(fileURL);
         }
     );
