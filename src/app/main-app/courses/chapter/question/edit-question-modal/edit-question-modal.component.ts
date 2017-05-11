@@ -1,64 +1,65 @@
-import { Component, Input, OnChanges, AfterViewInit } from '@angular/core';
-import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Component, Input, OnChanges } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Answer } from '../../../../db/answer';
 import { Chapter } from '../../../../db/chapter';
 import { Question } from '../../../../db/question';
-import { Answer } from '../../../../db/answer';
 
-import { QuestionService } from '../../../../db/question.service';
 import { AnswerService } from '../../../../db/answer.service';
 import { CourseInfoService } from '../../../course-info.service';
+import { QuestionService } from '../../../../db/question.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-edit-question-modal',
   templateUrl: './edit-question-modal.component.html',
   styleUrls: ['./edit-question-modal.component.css']
 })
-export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
-  @Input() chapterId: number;
+export class EditQuestionModalComponent implements OnChanges {
   @Input() question: Question;
   questionForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private courseInfoService: CourseInfoService,
-    private questionService: QuestionService,
     private answerService: AnswerService,
-    private notificationsService: NotificationsService ) {
-    this.createForm();
-  }
-
-  ngOnChanges() {
-    this.questionForm.reset({
-      title: this.question.title
-    });
-    this.setAnswers(this.question.answers);
-  }
-
-  ngAfterViewInit() {
-  }
-
-  createForm() {
+    private courseInfoService: CourseInfoService,
+    private fb: FormBuilder,
+    private notificationsService: NotificationsService,
+    private questionService: QuestionService
+  ) {
     this.questionForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required]],
       answers: this.fb.array([])
     });
   }
 
+  ngOnChanges() {
+    this.questionForm.reset();
+    this.initForm();
+  }
+
+  initForm() {
+    this.questionForm = this.fb.group({
+      title: [this.question.title, [Validators.required]],
+      answers: this.fb.array([])
+    });
+    this.setAnswers(this.question.answers);
+  }
+
+  /*
+  * Answers
+  */
   get answers(): FormArray {
     return this.questionForm.get('answers') as FormArray;
-  };
+  }
 
   setAnswers(answers: Answer[]) {
-    const answerFGs = answers.map(answer => this.fb.group(answer));
+    // TODO add validators to answers title
+    const answerFGs = this.question.answers.map(answer => this.fb.group(answer));
     const answerFormArray = this.fb.array(answerFGs);
     this.questionForm.setControl('answers', answerFormArray);
   }
 
-  /* Answer */
   initAnswer() {
     return this.fb.group({
       id: 0,
@@ -74,9 +75,13 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
 
   removeAnswer(i: number) {
     this.answers.removeAt(i);
-    // $( "#answer"+i ).remove();
   }
 
+  /*
+  * Submit
+  */
+
+  // TODO server should read question and its answers and update!! (remove, update and create as needed)
   onSubmit() {
     const q = this.prepareSaveQuestion();
     const answers = this.answers.value;
@@ -90,18 +95,21 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
 
         /* Create the new ones */
         for (let i = 0; i < answers.length; i++) {
-            if (answers[i].id === 0) {
-              this.answerService.create(answers[i])
-                .then(answer => {
-                  this.question = this.courseInfoService.addAnswer(this.question.chapter, this.question, answer);
-                })
-                .catch(() => this.notificationsService.error('Error', 'Al crear las nuevas respuestas.'));
-            }
+          if (answers[i].id === 0) {
+            this.answerService.create(answers[i])
+              .then(answer => {
+                this.question.answers.push(answer);
+                this.ngOnChanges();
+              })
+              .catch(() => this.notificationsService.error('Error', 'Al crear las nuevas respuestas.'));
+          }
         }
+        this.ngOnChanges();
       })
-      .catch(() => this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + q.title));
-
-    this.ngOnChanges();
+      .catch(() => {
+        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + q.title);
+        this.ngOnChanges();
+      });
   }
 
   prepareSaveQuestion(): Question {
@@ -116,7 +124,7 @@ export class EditQuestionModalComponent implements OnChanges, AfterViewInit {
     // and deep copies of changed form model values
     const saveQuestion: Question = {
       id: this.question.id,
-      chapter: this.chapterId,
+      chapter: this.question.chapter,
       title: formModel.title as string,
       last_modified: new Date,
       answers: answersDeepCopy

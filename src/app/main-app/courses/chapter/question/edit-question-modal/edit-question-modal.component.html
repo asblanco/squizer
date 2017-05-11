@@ -1,47 +1,54 @@
 <div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer">
-  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" novalidate>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="questionForm">
     <div class="modal-content">
       <h4>Editar pregunta</h4>
-        <div class="row">
-          <div class="input-field form-group">
-            <label class="active">Titulo pregunta</label>
-            <input type="text" class="form-control" [formControl]="questionForm.controls['title']">
-          </div>
+      <div class="row">
+        <div class="input-field">
+          <label class="active">Titulo pregunta</label>
+          <input type="text" formControlName="title">
         </div>
-        <!--answers-->
-        <div class="row">
-          <fieldset>
-            <legend><b> Respuestas </b></legend>
-            <div formArrayName="answers">
-              <div *ngFor="let answer of questionForm.controls.answers.controls; let i=index" [formGroupName]="i" id="answer{{i}}">
-                <div class="row">
-                  <span class="col s11 form-group">
-                    <label for="title">Respuesta {{i}} {{answer.controls.id._value}} {{answer.controls.title._value}}</label>
-                    <input type="text" class="form-control" formControlName="title" required/>
-                    <a *ngIf="questionForm.controls.answers.controls.length > 4" (click)="removeAnswer(i)">
-                      <img class="icon-cross" src="../../../../assets/icons/close.svg" alt="remove answer"></a>
-                  </span>
-                  <div class="col s1 switch form-group">
-                    <label>
-                      <input type="checkbox" class="form-control" formControlName="correct">
-                      <span class="lever"></span>
-                    </label>
-                  </div>
+        <div
+          class="red-text"
+          *ngIf="questionForm.get('title').hasError('required') && questionForm.get('title').touched">
+          Title is required
+        </div>
+      </div>
+      <div class="row">
+        <fieldset>
+          <legend><b> Respuestas </b></legend>
+          <div formArrayName="answers">
+            <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
+              <div class="row">
+                <div class="col s1">
+                  <span *ngIf="i == 0" style="position:absolute;">Verdadera</span>
+                  <p class="checkbox">
+                    <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i" formControlName="correct"/>
+                    <label [for]="question.id + 'cb' + i"></label>
+                  </p>
+                </div>
+                <div class="input-field col s11">
+                  <label class="active" for="title">Respuesta {{i+1}}</label>
+                  <input type="text" formControlName="title"/>
+                  <a *ngIf="answers.controls.length > 4" (click)="removeAnswer(i)">
+                    <img class="ic-remove" src="../../../../assets/icons/ic_remove.svg" alt="remove answer"></a>
                 </div>
               </div>
             </div>
-            <a class="col s12" (click)="addAnswer()">
-              <i class="material-icons">library_add</i>
-              Add another answer
-            </a>
-          </fieldset>
-        </div>
-        <!-- <div class="margin-20">
-          <div>myForm details:-</div>
-          <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
-          <pre>form value: <br>{{questionForm.value | json}}</pre>
-        </div> -->
-        <br>
+          </div>
+          <div class="row">
+            <div class="right-align">
+              <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="addAnswer()">
+                <i class="material-icons">add</i>
+              </a>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div>
+        <div>myForm details:-</div>
+        <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
+        <pre>form value: <br>{{questionForm.value | json}}</pre>
+      </div>
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>

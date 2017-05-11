@@ -1,13 +1,8 @@
 <div class="content" *ngIf="selectedCourse; else elsePart">
   <!-- Course title -->
   <div class="row">
-    <h3 *ngIf="!editCourseTitle">
-      <div class="col s11">
-          {{selectedCourse.name}}
-      </div>
-      <div class="col s1">
-        <a (click)="editCourseBtn()"><i class="material-icons icon-blue">edit</i></a>
-      </div>
+    <h3 *ngIf="!editCourseTitle" (click)="editCourseBtn()">
+        {{selectedCourse.name}}
     </h3>
     <div *ngIf="editCourseTitle">
       <div class="input-field">

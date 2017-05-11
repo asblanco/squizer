@@ -13,7 +13,5 @@
 </a>
 <hr>
 
-<!-- Edit Question Modal -->
-<app-edit-question-modal [chapterId]="question.chapter" [question]="question"></app-edit-question-modal>
-<!-- Delete Question Modal -->
+<app-edit-question-modal [question]="question"></app-edit-question-modal>
 <app-delete-modal (onDeleted)="deleteQuestion(question)" [id]="'deleteQuestionModal'+question.id" [title]="question.title"></app-delete-modal>

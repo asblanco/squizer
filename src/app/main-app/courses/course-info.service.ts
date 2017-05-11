@@ -59,13 +59,6 @@ export class CourseInfoService {
     this.course.chapters[chapterIndex].questions.splice(questionIndex, 1, question);
   }
 
-  addAnswer(chapterId: number, question: Question, answer: Answer): Question {
-    const chapterIndex = this.indexOfId(this.course.chapters, chapterId);
-    const questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
-    this.course.chapters[chapterIndex].questions[questionIndex].answers.push(answer);
-    return this.course.chapters[chapterIndex].questions[questionIndex];
-  }
-
   private indexOfId(array, id: number) {
       for (let i = 0; i < array.length; i++) {
           if (array[i].id === id) {
