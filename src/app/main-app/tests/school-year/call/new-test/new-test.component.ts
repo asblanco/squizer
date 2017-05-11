@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { Course } from '../../db/course';
-import { CourseService } from '../../db/course.service';
-import { Test } from '../../db/test';
-import { TestService } from '../../db/test.service';
-import { TestsService } from '../tests.service';
+import { Course } from '../../../../db/course';
+import { CourseService } from '../../../../db/course.service';
+import { Test } from '../../../../db/test';
+import { TestService } from '../../../../db/test.service';
+import { TestsService } from '../../../tests.service';
 
 import { NotificationsService } from 'angular2-notifications';
 

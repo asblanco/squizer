@@ -12,23 +12,18 @@ import { Subject } from 'rxjs/Subject';
 export class CourseInfoService {
   course: Course;
   // Observable string sources
-  private selectCourse = new Subject<Course>();
-  private deleteCourse = new Subject<Course>();
+  // private deleteCourse = new Subject<Course>();
   private editCourse = new Subject<Course>();
   // Observable string streams
-  courseSelected$ = this.selectCourse.asObservable();
-  courseDeleted$ = this.deleteCourse.asObservable();
+  // courseDeleted$ = this.deleteCourse.asObservable();
   courseEdited$ = this.editCourse.asObservable();
 
   constructor(private courseService: CourseService) { }
 
   // Service message commands
-  announceSelectCourse(course: Course) {
-    this.selectCourse.next(course);
-  }
-  announceDeleteCourse(course: Course) {
-    this.deleteCourse.next(course);
-  }
+  // announceDeleteCourse(course: Course) {
+  //   this.deleteCourse.next(course);
+  // }
   announceEditCourse(course: Course) {
     this.editCourse.next(course);
   }

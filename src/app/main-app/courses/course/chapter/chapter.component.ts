@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 
-import { Chapter } from '../../db/chapter';
-import { Question } from '../../db/question';
-import { ChapterService } from '../../db/chapter.service';
-import { CourseInfoService } from '../course-info.service';
+import { Chapter } from '../../../db/chapter';
+import { Question } from '../../../db/question';
+import { ChapterService } from '../../../db/chapter.service';
+import { CourseInfoService } from '../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 

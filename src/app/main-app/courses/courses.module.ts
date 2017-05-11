@@ -2,24 +2,27 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { CourseInfoService } from './course-info.service';
 import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
 import { SharedModule } from '../shared/shared.module';
 
-import { ChapterComponent } from './chapter/chapter.component';
+import { ChapterComponent } from './course/chapter/chapter.component';
+import { CourseComponent } from './course/course.component';
 import { CoursesComponent } from './courses.component';
 import { CoursesSideNavComponent } from './courses-side-nav/courses-side-nav.component';
-import { EditQuestionModalComponent } from './chapter/question/edit-question-modal/edit-question-modal.component';
-import { NewEditComponent } from './new-edit/new-edit.component';
-import { NewQuestionModalComponent } from './chapter/new-question-modal/new-question-modal.component';
-import { QuestionComponent } from './chapter/question/question.component';
+import { EditQuestionModalComponent } from './course/chapter/question/edit-question-modal/edit-question-modal.component';
+import { NewEditComponent } from './course/new-edit/new-edit.component';
+import { NewQuestionModalComponent } from './course/chapter/new-question-modal/new-question-modal.component';
+import { QuestionComponent } from './course/chapter/question/question.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     SharedModule
   ],
   declarations: [
@@ -29,7 +32,8 @@ import { QuestionComponent } from './chapter/question/question.component';
     EditQuestionModalComponent,
     NewEditComponent,
     NewQuestionModalComponent,
-    QuestionComponent
+    QuestionComponent,
+    CourseComponent
   ],
   exports: [
     CoursesComponent,

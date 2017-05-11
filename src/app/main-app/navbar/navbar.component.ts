@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, Input, AfterViewInit } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
-import { CoursesSideNavService } from '../courses/courses-side-nav/courses-side-nav.service';
 import { TestsService } from '../tests/tests.service';
 
 import { Subject } from 'rxjs/Subject';
@@ -18,7 +17,6 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
-    private coursesSideNavService: CoursesSideNavService,
     private testsService: TestsService,
     private router: Router
   ) {
@@ -26,14 +24,15 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
-      if (event.urlAfterRedirects === '/manage-courses') {
-        this.coursesSideNavService.getCourses();
-        this.activeTab = 1;
-      } else if (event.urlAfterRedirects === '/manage-tests') {
-        this.testsService.getSchoolYears();
-        this.testsService.announceSelected(null, null);
-        this.activeTab = 2;
-      }
+        let trigger = event.urlAfterRedirects;
+        let regexpCourses = new RegExp('/manage-courses/.*');
+        let regexpTests = new RegExp('/manage-tests/.*');
+
+        if (regexpCourses.test(trigger)) {
+          this.activeTab = 1;
+        } else if (regexpTests.test(trigger)) {
+          this.activeTab = 2;
+        }
     });
   }
 

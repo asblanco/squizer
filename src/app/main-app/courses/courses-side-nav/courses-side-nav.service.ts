@@ -11,11 +11,9 @@ export class CoursesSideNavService {
   // Observable string sources
   private coursesList = new Subject<Course[]>();
   private newCourse = new Subject<Course>();
-  private select = new Subject<any>();
   // Observable string streams
   getCourses$ = this.coursesList.asObservable();
   addCourse$ = this.newCourse.asObservable();
-  selected$ = this.select.asObservable();
 
   constructor(
     private courseService: CourseService,
@@ -27,12 +25,7 @@ export class CoursesSideNavService {
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
   }
 
-  announceSelected(item) {
-    this.select.next(item);
-  }
-
   announceDeleteCourse(course: Course) {
-    this.select.next(course);
     this.deleteCourse(course);
   }
 

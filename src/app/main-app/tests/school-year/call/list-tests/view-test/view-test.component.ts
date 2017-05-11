@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { ViewTest } from '../../db/view-test';
+import { ViewTest } from '../../../../../db/view-test';
 
-import { TestService } from '../../db/test.service';
+import { TestService } from '../../../../../db/test.service';
 import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/add/operator/toPromise';
 

@@ -9,14 +9,14 @@ import { EditSchoolYearComponent } from './school-year/edit-school-year/edit-sch
 import { ListTestsComponent } from './school-year/call/list-tests/list-tests.component';
 import { NewCallComponent } from './school-year/new-call/new-call.component';
 import { NewSchoolYearComponent } from './new-school-year/new-school-year.component';
-import { NewTestComponent } from './new-test/new-test.component';
+import { NewTestComponent } from './school-year/call/new-test/new-test.component';
 import { SchoolYearComponent } from './school-year/school-year.component';
 import { TestsComponent } from './tests.component';
 import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
 
 import { SharedModule } from '../shared/shared.module';
 import { TestsService } from './tests.service';
-import { ViewTestComponent } from './view-test/view-test.component';
+import { ViewTestComponent } from './school-year/call/list-tests/view-test/view-test.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
 
 @NgModule({

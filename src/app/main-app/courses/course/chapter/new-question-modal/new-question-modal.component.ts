@@ -1,17 +1,16 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
-import { Chapter } from '../../../db/chapter';
-import { Question } from '../../../db/question';
-import { Answer } from '../../../db/answer';
+import { Chapter } from '../../../../db/chapter';
+import { Question } from '../../../../db/question';
+import { Answer } from '../../../../db/answer';
 
-import { QuestionService } from '../../../db/question.service';
-import { CourseInfoService } from '../../course-info.service';
+import { QuestionService } from '../../../../db/question.service';
+import { CourseInfoService } from '../../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-new-question-modal',
   templateUrl: './new-question-modal.component.html',
   styleUrls: ['./new-question-modal.component.css']

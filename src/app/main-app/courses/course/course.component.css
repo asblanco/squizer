@@ -1,0 +1,28 @@
+/*320px = 20em*/
+@media only screen and (min-width: 62em){
+  .content {
+    padding-left: 25em;
+    padding-right: 5em;
+  }
+}
+@media only screen and (max-width: 62em){
+  .content {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+
+.content {
+  padding-top: 5em;
+  padding-bottom: 2em;
+}
+
+#deleteCourse:hover {
+  background-color: white;
+}
+
+/*h3 size and font family*/
+#courseTitle {
+  font-size: 2.9em;
+  font-family: 'raleway-bold';
+}

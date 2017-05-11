@@ -1,13 +1,13 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Answer } from '../../../../db/answer';
-import { Chapter } from '../../../../db/chapter';
-import { Question } from '../../../../db/question';
+import { Answer } from '../../../../../db/answer';
+import { Chapter } from '../../../../../db/chapter';
+import { Question } from '../../../../../db/question';
 
-import { AnswerService } from '../../../../db/answer.service';
-import { CourseInfoService } from '../../../course-info.service';
-import { QuestionService } from '../../../../db/question.service';
+import { AnswerService } from '../../../../../db/answer.service';
+import { CourseInfoService } from '../../../../course-info.service';
+import { QuestionService } from '../../../../../db/question.service';
 
 import { NotificationsService } from 'angular2-notifications';
 

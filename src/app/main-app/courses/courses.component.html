@@ -1,63 +1,13 @@
-<div class="content" *ngIf="selectedCourse; else elsePart">
-  <!-- Course title -->
-  <div class="row">
-    <h3 *ngIf="!editCourseTitle" (click)="editCourseBtn()">
-        {{selectedCourse.name}}
-    </h3>
-    <div *ngIf="editCourseTitle">
-      <div class="input-field">
-        <input id="courseTitle" [(ngModel)]="selectedCourse.name" placeholder="name" />
-        <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color" (click)="updateCourseTitle()">Guardar</a></b>
-        <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
-      </div>
-    </div>
-  </div>
-  <!-- Chapters -->
-  <div class="row">
-    <div *ngFor="let chapter of selectedCourse.chapters">
-      <app-chapter [chapter]="chapter"></app-chapter>
-    </div>
-  </div>
-
-  <div class="row">
-    <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
-  </div>
-  <!-- Delete course -->
-  <footer class="footer">
-   <div class="footer">
-     <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
-   </div>
- </footer>
-</div>
-
-<ng-template #elsePart>
-  <div class="container">
-    <div class="center-div">
-        <h2>Selecciona o crea una asignatura</h2>
-    </div>
-  </div>
-</ng-template>
-
 <!-- Side Navigation in desktop view -->
 <ul id="slide-out" class="side-nav fixed">
   <app-courses-side-nav></app-courses-side-nav>
 </ul>
 
-<!-- New Course Modal -->
-<app-new-edit-modal (onSubmit)="createCourse($event)" [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]=""></app-new-edit-modal>
-
-<!-- Delete Course Modal -->
-<div *ngIf="selectedCourse">
-  <app-delete-modal (onDeleted)="deleteCourse(selectedCourse)" [id]="'deleteCourseModal'" [title]="selectedCourse.name"></app-delete-modal>
+<!-- Empty state -->
+<div *ngIf="!selectedCourse" class="container">
+  <div class="center-div">
+      <h2 class="light-grey">Selecciona o crea un curso</h2>
+  </div>
 </div>
 
-<!-- New Chapter Modal -->
-<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
-
-<script type="text/javascript">
-  $("#courseTitle").keyup(function(event){
-    if(event.keyCode == 13) {
-        $("#saveCourseTitle").click();
-    }
-  });
-</script>
+<router-outlet></router-outlet>

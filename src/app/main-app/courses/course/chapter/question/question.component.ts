@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Question } from '../../../db/question';
-import { QuestionService } from '../../../db/question.service';
-import { CourseInfoService } from '../../course-info.service';
+import { Question } from '../../../../db/question';
+import { QuestionService } from '../../../../db/question.service';
+import { CourseInfoService } from '../../../course-info.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
