@@ -47,7 +47,7 @@ export class EditTestComponent implements OnChanges {
   }
 
   updateTest() {
-    this.testService.update(this.testForm)
+    this.testService.update(this.testForm.value)
     .then(test => {
       this.test.title = test.title;
       this.ngOnChanges();

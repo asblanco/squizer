@@ -1,13 +1,14 @@
 <a (click)="openEditTestModal(test.id)"><i class="material-icons icon-blue">mode_edit</i></a>
 
 <div id="editTestModal{{test.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editTestModal">
-  <form #editCallForm="ngForm" novalidate>
+  <form #editTestForm="ngForm" novalidate>
     <div class="modal-content">
       <h4>Editar test</h4>
       <div class="row">
         <div class="input-field form-group">
-          <input type="text" class="form-control" name="title" [(ngModel)]="testForm.title" required
-           materialize="characterCounter" [attr.data-length]="maxLengthTest">
+          <input type="text" class="form-control" name="title" [ngModel]="testForm.title"
+            required materialize="characterCounter" [attr.data-length]="maxLengthTest"
+            maxlength="{{maxLengthTest}}">
            <label for="title" class="active">Titulo</label>
         </div>
       </div>
@@ -15,7 +16,7 @@
 
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
-         (click)="updateTest()">Guardar</button>
+         (click)="updateTest()" [disabled]="!editTestForm.valid">Guardar</button>
     </div>
   </form>
 </div>

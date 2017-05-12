@@ -4,24 +4,43 @@
     padding-right: 10em;
   }
   .questions {
-    padding-left: 6em;
+    padding-left: 5em;
     padding-right: 4em;
   }
 
   .answers {
     padding-left: 2em;
   }
+
+  .navigate-before {
+    position: absolute;
+    left: 2em;
+    top: 3.5em;
+  }
+  .title {
+    padding-left: 2em;
+    padding-right: 1em;
+  }
 }
 @media only screen and (max-width: 62em){
   .content {
-    padding-left: 10em;
-    padding-right: 10em;
+    padding-left: 5em;
+    padding-right: 5em;
   }
   .questions {
     padding-left: 1em;
   }
   .answers {
     padding-left: 2em;
+  }
+  .navigate-before {
+    position: absolute;
+    left: 1em;
+    top: 3.5em;
+  }
+  .title {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 
@@ -34,9 +53,8 @@
   position: absolute;
   right: 0;
 }
-
-.navigate-before {
+.tex {
   position: absolute;
-  left: 3em;
-  top: 3.5em;
+  right: 0;
+  top: 5em;
 }

@@ -48,7 +48,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
     this.editCallForm = this.fb.group({
       id: 0,
       school_year: 0,
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthCall)]],
       start_date: [new Date(), [Validators.required]],
       end_date: [new Date(), [Validators.required]]
     });

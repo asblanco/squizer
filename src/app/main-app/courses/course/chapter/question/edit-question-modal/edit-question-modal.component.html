@@ -24,7 +24,8 @@
                 <div class="col s1">
                   <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;">V/F</span>
                   <p class="checkbox">
-                    <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i" formControlName="correct"/>
+                    <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i"
+                      formControlName="correct"/>
                     <label [for]="question.id + 'cb' + i"></label>
                   </p>
                 </div>

@@ -198,9 +198,7 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
     }
   }
 
-  save(form: Test) {
-    // const v = (<any>$('#selectCourse')).val();
-    // this.test.course = v;
+  save() {
     this.generateTest();
     this.testService.create(this.test)
     .then(test => {

@@ -5,12 +5,15 @@
         {{course.name}}
     </h3>
     <div *ngIf="editCourseTitle">
-      <div class="input-field">
-        <input id="courseTitle" [(ngModel)]="course.name" placeholder="name" />
-        <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color"
-          (click)="updateCourseTitle()">Guardar</a></b>
-        <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
-      </div>
+      <form #editTitleForm="ngForm" novalidate>
+        <div class="input-field">
+          <input id="courseTitle" name="name" [(ngModel)]="course.name" placeholder="Type the course title"
+            materialize="characterCounter" [attr.data-length]="maxLengthCourse" required maxlength="{{maxLengthCourse}}"/>
+          <b><button id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color"
+            (click)="updateCourseTitle()" [disabled]="!editTitleForm.valid">Guardar</button></b>
+          <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
+        </div>
+      </form>
     </div>
   </div>
   <!-- Chapters -->

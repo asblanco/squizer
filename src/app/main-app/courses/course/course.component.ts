@@ -25,6 +25,7 @@ export class CourseComponent implements OnDestroy {
   course: Course;
   editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
   subscription: Subscription;
+  maxLengthCourse: number;
   maxLengthChapter: number;
   deleteModal = new EventEmitter<string|MaterializeAction>();
   newChapterModal = new EventEmitter<string|MaterializeAction>();
@@ -38,6 +39,7 @@ export class CourseComponent implements OnDestroy {
     private notificationsService: NotificationsService,
     private router: Router
  ) {
+   this.maxLengthCourse = config.MAXLENGTH_COURSE;
    this.maxLengthChapter = config.MAXLENGTH_CHAPTER;
 
     this.subscription = this.activatedRoute.params.subscribe((params: Params) => {

@@ -37,7 +37,7 @@ export class EditQuestionModalComponent implements OnChanges {
     this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
 
     this.questionForm = this.fb.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthQuestion)]],
       answers: this.fb.array([])
     });
   }
@@ -51,7 +51,7 @@ export class EditQuestionModalComponent implements OnChanges {
     this.questionForm = this.fb.group({
       id: this.question.id,
       chapter: this.question.chapter,
-      title: [this.question.title, [Validators.required]],
+      title: [this.question.title, [Validators.required, Validators.maxLength(this.maxLengthQuestion)]],
       answers: this.fb.array([])
     });
     this.setAnswers(this.question.answers);
@@ -75,7 +75,7 @@ export class EditQuestionModalComponent implements OnChanges {
     return this.fb.group({
       id: 0,
       question: this.question.id,
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthAnswer)]],
       correct: false
     });
   }

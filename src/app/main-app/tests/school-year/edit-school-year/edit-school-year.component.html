@@ -10,7 +10,9 @@
       <div class="row">
         <div class="input-field form-group">
           <label for="title" class="active">Titulo</label>
-          <input type="text" class="form-control" formControlName="title" required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear">
+          <input type="text" class="form-control" formControlName="title"
+            required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
+            maxlength="{{maxLengthSchoolYear}}">
         </div>
 
         <div class="input-field form-group col s6">
@@ -27,7 +29,7 @@
     <div class="modal-footer">
       <button class="modal-action modal-close waves-effect btn red left"
         (click)="openDeleteSchoolYearModal()">Eliminar Curso</button>
-      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn">Guardar</button>
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn" [disabled]="!editSchoolYearForm.valid">Guardar</button>
     </div>
   </form>
 </div>

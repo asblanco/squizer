@@ -3,11 +3,13 @@
     <div class="card-content center-align">
       <a routerLink="../../">
         <img class="navigate-before" src="../../../../assets/icons/ic_navigate_before.svg" alt="remove answer"></a>
-      <span class="pdf">
+      <span class="row pdf">
         <a class="waves-effect waves btn-flat blue-text squizer-color" (click)="displayPDF()">PDF</a>
+      </span>
+      <span class="row tex">
         <a class="waves-effect waves btn-flat blue-text squizer-color" (click)="downloadTEX()">TEX</a>
       </span>
-      <h4>{{test.title}} </h4>
+      <h4 class="title">{{test.title}} </h4>
       <p>{{test.course.name}}</p>
       <p>{{test.creation_date | date:'d MMM yyyy'}}</p>
     </div>

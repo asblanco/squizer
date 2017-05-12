@@ -6,13 +6,13 @@
       <div class="row">
         <div class="input-field">
           <input type="text" name="title" id="input{{modalId}}" [ngModel]="title"
-            materialize="characterCounter" [attr.data-length]="maxLength">
+            materialize="characterCounter" [attr.data-length]="maxLength" required maxlength="{{maxLength}}">
           <label [class.active]="title" for="input{{modalId}}">Titulo</label>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect btn squizer-btn" (click)="submit(form)">Guardar</a>
+      <button class="modal-action modal-close waves-effect btn squizer-btn" (click)="submit(form)" [disabled]="!form.valid">Guardar</button>
     </div>
   </form>
 </div>

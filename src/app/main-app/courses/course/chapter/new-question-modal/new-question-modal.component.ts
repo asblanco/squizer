@@ -49,7 +49,7 @@ export class NewQuestionModalComponent implements OnChanges {
 
   createForm() {
     this.newQuestion = this.fb.group({
-      title: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthQuestion)]],
       chapter: this.chapter.id,
       answers: this.fb.array([
         this.initAnswer(true),
@@ -67,16 +67,9 @@ export class NewQuestionModalComponent implements OnChanges {
     return this.newQuestion.get('answers') as FormArray;
   };
 
-  setAnswers(answers: Answer[]) {
-    // TODO add validators to answers title
-    const answerFGs = answers.map(answer => this.fb.group(answer));
-    const answerFormArray = this.fb.array(answerFGs);
-    this.newQuestion.setControl('answers', answerFormArray);
-  }
-
   initAnswer(c: boolean) {
     return this.fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthAnswer)]],
       correct: c
     });
   }

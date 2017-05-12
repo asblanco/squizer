@@ -54,7 +54,7 @@ export class EditSchoolYearComponent implements OnChanges {
   createForm() {
     this.editSchoolYearForm = this.fb.group({
       id: 0,
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthSchoolYear)]],
       start_date: [new Date(), [Validators.required]],
       end_date: [new Date(), [Validators.required]],
       calls: this.fb.array([])

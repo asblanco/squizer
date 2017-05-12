@@ -46,7 +46,7 @@ export class NewSchoolYearComponent implements OnChanges, AfterViewInit {
 
   createForm() {
     this.newSchoolYearForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(100)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthSchoolYear)]],
       start_date: ['', [Validators.required]],
       end_date: ['', [Validators.required]],
       calls: this.fb.array([])

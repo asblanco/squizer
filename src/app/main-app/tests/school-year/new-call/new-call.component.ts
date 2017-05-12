@@ -50,7 +50,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
   createForm() {
     this.newCallForm = this.fb.group({
       school_year: -1,
-      title: ['', [Validators.required, Validators.maxLength(this.config.MAXLENGTH_CALL)]],
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthCall)]],
       start_date: ['', [Validators.required]],
       end_date: ['', [Validators.required]]
     });
