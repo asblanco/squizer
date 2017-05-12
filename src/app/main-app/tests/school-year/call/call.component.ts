@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { Call } from '../../../db/call';
@@ -7,6 +7,7 @@ import { CourseService } from '../../../db/course.service';
 import { Course } from '../../../db/course';
 import { TestsService } from '../../tests.service';
 
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -18,6 +19,7 @@ export class CallComponent implements OnInit {
   callId: number;
   call: Call;
   courses: Course[];
+  deleteCallModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,7 +42,7 @@ export class CallComponent implements OnInit {
   }
 
   openDeleteCallModal() {
-    (<any>$('#deleteCallModal' + this.call.id)).openModal();
+    this.deleteCallModal.emit({action:"modal",params:['open']});
   }
 
   getCall(id: number) {

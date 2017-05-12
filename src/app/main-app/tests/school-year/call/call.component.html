@@ -26,5 +26,6 @@
    </div>
   </footer>
 
-  <app-delete-modal (onDeleted)="deleteCall()" [id]="'deleteCallModal' + call.id" [title]="call.title"></app-delete-modal>
+  <app-delete-modal (onDeleted)="deleteCall()" [id]="'deleteCallModal' + call.id"
+    [title]="call.title" [deleteModal]="deleteCallModal"></app-delete-modal>
 </div>

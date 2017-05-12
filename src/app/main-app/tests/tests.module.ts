@@ -19,6 +19,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { TestsService } from './tests.service';
 import { ViewTestComponent } from './school-year/call/list-tests/view-test/view-test.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
+import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/delete-test.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-
     TestsSideNavComponent,
     TestsComponent,
     ViewTestComponent,
-    EditTestComponent
+    EditTestComponent,
+    DeleteTestComponent
   ],
   exports: [
     TestsComponent,

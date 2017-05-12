@@ -17,13 +17,12 @@
         <a routerLink="/manage-tests/school-year/{{schoolYearId}}/call/{{callId}}/test/{{test.id}}">
           <i class="material-icons icon-blue">visibility</i></a>
         <app-edit-test [test]="test"></app-edit-test>
-        <a (click)="openDeleteTestModal(test.id)"><i class="material-icons icon-red">delete</i></a>
+        <app-delete-test [test]="test" [tests]="tests"></app-delete-test>
       </td>
       <td>
         <a (click)="displayPDF(test.id)" class="squizer-color">PDF</a>
         <a (click)="downloadTEX(test.id)" class="squizer-color">TEX</a>
       </td>
-        <app-delete-modal (onDeleted)="deleteTest(test)" [id]="'deleteTestModal' + test.id" [title]="test.title"></app-delete-modal>
     </tr>
   </tbody>
 </table>
