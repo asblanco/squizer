@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -8,7 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './list-tests.component.html',
   styleUrls: ['./list-tests.component.css']
 })
-export class ListTestsComponent implements OnChanges, OnInit {
+export class ListTestsComponent implements OnChanges {
   @Input() schoolYearId: number;
   @Input() callId: number;
   @Input() courseId: number;
@@ -19,15 +19,8 @@ export class ListTestsComponent implements OnChanges, OnInit {
     private testService: TestService
   ) { }
 
-  ngOnInit() {
-  }
-
   ngOnChanges() {
     this.getTests();
-  }
-
-  openEditTestModal(id) {
-    (<any>$('#editTestModal' + id)).appendTo('body').openModal();
   }
 
   openDeleteTestModal(id) {

@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+
 import { Call } from '../../../db/call';
 import { CallService } from '../../../db/call.service';
 import { CourseService } from '../../../db/course.service';
 import { Course } from '../../../db/course';
-import { NotificationsService } from 'angular2-notifications';
 import { TestsService } from '../../tests.service';
+
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-call',
@@ -35,10 +37,6 @@ export class CallComponent implements OnInit {
        this.callId = params['callId'];
        this.getCall(this.callId);
      });
-  }
-
-  openEditCallModal() {
-    (<any>$('#editCallModal' + this.call.id)).openModal();
   }
 
   openDeleteCallModal() {

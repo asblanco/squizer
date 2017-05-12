@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { APP_CONFIG } from '../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../shared/app-config/iapp-config';
 
 import { Chapter } from '../../../db/chapter';
 import { Question } from '../../../db/question';
 import { ChapterService } from '../../../db/chapter.service';
 
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -11,28 +14,27 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './chapter.component.html',
   styleUrls: ['./chapter.component.css']
 })
-export class ChapterComponent implements AfterViewInit {
+export class ChapterComponent {
   @Input() chapter: Chapter;
   @Output() deletedChapter: EventEmitter<Chapter> = new EventEmitter();
+  maxLengthChapter: number;
+  editChapterModal = new EventEmitter<string|MaterializeAction>();
+  deleteChapterModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private chapterService: ChapterService,
-    private notificationsService: NotificationsService ) { }
-
-  ngAfterViewInit() {
-    (<any>$('.collapsible')).collapsible();
+    @Inject(APP_CONFIG) private config: IAppConfig,
+    private notificationsService: NotificationsService
+  ) {
+    this.maxLengthChapter = config.MAXLENGTH_CHAPTER;
   }
 
   openEditChapterModal() {
-    (<any>$('#editChapterModal' + this.chapter.id)).openModal();
-  }
-
-  openNewQuestionModal() {
-    (<any>$('#newQuestionModal' + this.chapter.id)).openModal({dismissible: false});
+    this.editChapterModal.emit({action:"modal",params:['open']});
   }
 
   openDeleteChapterModal() {
-    (<any>$('#deleteChapterModal' + this.chapter.id)).openModal();
+    this.deleteChapterModal.emit({action:"modal",params:['open']});
   }
 
   updateChapterTitle(title: string): void {

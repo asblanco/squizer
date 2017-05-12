@@ -1,8 +1,13 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Test } from '../../../../../db/test';
 import { TestService } from '../../../../../db/test.service';
+
+import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
+
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -13,12 +18,17 @@ import { NotificationsService } from 'angular2-notifications';
 export class EditTestComponent implements OnChanges {
   @Input() test: Test;
   testForm: Test;
+  editTestModal = new EventEmitter<string|MaterializeAction>();
+  maxLengthTest: number;
 
   constructor(
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private testService: TestService,
     private notificationsService: NotificationsService
-  ) { }
+  ) {
+    this.maxLengthTest = config.MAXLENGTH_TEST;
+  }
 
   ngOnChanges() {
     this.testForm = {
@@ -30,6 +40,10 @@ export class EditTestComponent implements OnChanges {
      questions: this.test.questions,
      answers: this.test.answers
    };
+  }
+
+  openEditTestModal(id) {
+    this.editTestModal.emit({action:"modal",params:['open']});
   }
 
   updateTest() {

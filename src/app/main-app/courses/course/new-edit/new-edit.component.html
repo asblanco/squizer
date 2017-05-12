@@ -1,12 +1,13 @@
 <!-- New and Edit Modal -->
-<div id="{{modalId}}" class="modal bottom-sheet">
+<div id="{{modalId}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="modalNewEdit">
   <form #form="ngForm" novalidate>
     <div class="modal-content">
       <h4>{{text}}</h4>
       <div class="row">
         <div class="input-field">
-          <label [class.active]="title">Titulo</label>
-          <input type="text" name="title" [ngModel]="title">
+          <input type="text" name="title" id="input{{modalId}}" [ngModel]="title"
+            materialize="characterCounter" [attr.data-length]="maxLength">
+          <label [class.active]="title" for="input{{modalId}}">Titulo</label>
         </div>
       </div>
     </div>

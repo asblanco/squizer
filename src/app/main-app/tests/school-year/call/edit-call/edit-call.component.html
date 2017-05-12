@@ -1,4 +1,6 @@
-<div id="editCallModal{{call.id}}" class="modal bottom-sheet">
+<a (click)="openEditCallModal(); $event.stopPropagation()"><i class="material-icons icon-blue">edit</i></a>
+
+<div id="editCallModal{{call.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editCallModal">
   <form [formGroup]="editCallForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4>Editar convocatoria</h4>
@@ -6,7 +8,7 @@
       <div class="row">
         <div class="input-field form-group">
           <label for="title" class="active">Titulo</label>
-          <input type="text" class="form-control" formControlName="title" required>
+          <input type="text" class="form-control" formControlName="title" required materialize="characterCounter" [attr.data-length]="maxLengthCall">
         </div>
 
         <div class="input-field form-group col s6">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 // import { ActivatedRoute, Params, Router, RouterModule, NavigationEnd } from '@angular/router';
 
 import { Call } from '../../db/call';
@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './tests-side-nav.component.html',
   styleUrls: ['./tests-side-nav.component.css']
 })
-export class TestsSideNavComponent implements OnInit {
+export class TestsSideNavComponent {
   schoolYears$: Observable<SchoolYear[]>;
   selectedCallId$: Observable<number>;
   selectedSchoolYearId$: Observable<number>;
@@ -43,16 +43,4 @@ export class TestsSideNavComponent implements OnInit {
     this.selectedSchoolYearId$ = testsService.selectedSchoolYear$;
     this.selectedCallId$ = testsService.selectedCall$;
   }
-
-  ngOnInit() {
-  }
-
-  openSchoolYearModal() {
-    (<any>$('#newSchoolYearModal')).appendTo('body').openModal();
-  }
-
-  openNewCallModal(schoolYear: SchoolYear) {
-    (<any>$('#newCallModal' + schoolYear.id)).appendTo('body').openModal();
-  }
-
 }

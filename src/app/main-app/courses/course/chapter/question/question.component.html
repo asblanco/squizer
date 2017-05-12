@@ -13,5 +13,9 @@
 </a>
 <hr>
 
-<app-edit-question-modal [question]="question"></app-edit-question-modal>
-<app-delete-modal (onDeleted)="deleteQuestion()" [id]="'deleteQuestionModal'+question.id" [title]="question.title"></app-delete-modal>
+<app-edit-question-modal [question]="question" [editQuestionModal]="editQuestionModal"
+  (editedQuestion)="editQuestion($event)">
+</app-edit-question-modal>
+<app-delete-modal (onDeleted)="deleteQuestion()" [id]="'deleteQuestionModal'+question.id"
+  [title]="question.title" [deleteModal]="deleteQuestionModal">
+</app-delete-modal>

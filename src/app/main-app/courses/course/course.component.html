@@ -7,7 +7,8 @@
     <div *ngIf="editCourseTitle">
       <div class="input-field">
         <input id="courseTitle" [(ngModel)]="course.name" placeholder="name" />
-        <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color" (click)="updateCourseTitle()">Guardar</a></b>
+        <b><a id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color"
+          (click)="updateCourseTitle()">Guardar</a></b>
         <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
       </div>
     </div>
@@ -22,13 +23,19 @@
   <div class="row">
     <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
   </div>
+
   <!-- Delete course -->
   <footer class="footer">
    <div class="footer">
-     <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
+     <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right"
+       (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
    </div>
  </footer>
 </div>
 
-<app-delete-modal *ngIf="course" (onDeleted)="deleteCourse(course)" [id]="'deleteCourseModal'" [title]="course.name"></app-delete-modal>
-<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" [text]="'Nuevo tema'" [title]=""></app-new-edit-modal>
+<app-delete-modal *ngIf="course" (onDeleted)="deleteCourse(course)"
+  [id]="'deleteCourseModal'" [title]="course.name" [deleteModal]="deleteModal">
+</app-delete-modal>
+<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'"
+  [text]="'Nuevo tema'" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
+</app-new-edit-modal>

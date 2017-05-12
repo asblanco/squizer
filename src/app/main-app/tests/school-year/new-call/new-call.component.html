@@ -1,4 +1,6 @@
-<div id="newCallModal{{schoolYear.id}}" class="modal bottom-sheet">
+<a class="waves-effect btn-flat squizer-color" (click)="openNewCallModal(schoolYear)">Añadir convocatoria</a>
+
+<div id="newCallModal{{schoolYear.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="newCallModal">
   <form [formGroup]="newCallForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4>Nueva convocatoria en {{schoolYear.title}}</h4>
@@ -6,7 +8,7 @@
       <div class="row">
         <div class="input-field form-group">
           <label for="title">Titulo</label>
-          <input type="text" class="form-control" formControlName="title" required>
+          <input type="text" class="form-control" formControlName="title" required materialize="characterCounter" [attr.data-length]="maxLengthCall">
         </div>
 
         <div class="input-field form-group col s6">

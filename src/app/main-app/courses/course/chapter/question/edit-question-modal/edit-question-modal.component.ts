@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Answer } from '../../../../../db/answer';
@@ -7,7 +7,10 @@ import { Question } from '../../../../../db/question';
 
 import { AnswerService } from '../../../../../db/answer.service';
 import { QuestionService } from '../../../../../db/question.service';
+import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
 
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -17,14 +20,22 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class EditQuestionModalComponent implements OnChanges {
   @Input() question: Question;
+  @Input() editQuestionModal = new EventEmitter<string|MaterializeAction>();
+  @Output() editedQuestion: EventEmitter<Question> = new EventEmitter();
   questionForm: FormGroup;
+  maxLengthQuestion: number;
+  maxLengthAnswer: number;
 
   constructor(
     private answerService: AnswerService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private notificationsService: NotificationsService,
     private questionService: QuestionService
   ) {
+    this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
+    this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
+
     this.questionForm = this.fb.group({
       title: ['', [Validators.required]],
       answers: this.fb.array([])
@@ -38,6 +49,8 @@ export class EditQuestionModalComponent implements OnChanges {
 
   initForm() {
     this.questionForm = this.fb.group({
+      id: this.question.id,
+      chapter: this.question.chapter,
       title: [this.question.title, [Validators.required]],
       answers: this.fb.array([])
     });
@@ -81,21 +94,21 @@ export class EditQuestionModalComponent implements OnChanges {
 
   // TODO server should read question and its answers and update!! (remove, update and create as needed)
   onSubmit() {
-    const q = this.prepareSaveQuestion();
+    const noInserts = this.updateQuestionWithoutInserts(this.questionForm.value);
     const answers = this.answers.value;
-    const noInserts = this.updateQuestionWithoutInserts(q);
 
-    /* Update and delete answers */
-    this.questionService.update(q)
+    /* Update and delete answers and title question */
+    this.questionService.update(noInserts)
       .then(question => {
-        this.question = noInserts;
+        this.editedQuestion.emit(question);
 
-        /* Create the new ones */
+        /* Create the new answers */
         for (let i = 0; i < answers.length; i++) {
           if (answers[i].id === 0) {
             this.answerService.create(answers[i])
               .then(answer => {
-                this.question.answers.push(answer);
+                noInserts.answers.push(answer);
+                this.editedQuestion.emit(noInserts);
                 this.ngOnChanges();
               })
               .catch(() => this.notificationsService.error('Error', 'Al crear las nuevas respuestas.'));
@@ -104,29 +117,9 @@ export class EditQuestionModalComponent implements OnChanges {
         this.ngOnChanges();
       })
       .catch(() => {
-        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + q.title);
+        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + noInserts.title);
         this.ngOnChanges();
       });
-  }
-
-  prepareSaveQuestion(): Question {
-    const formModel = this.questionForm.value;
-
-    // deep copy of form model answers
-    const answersDeepCopy: Answer[] = formModel.answers.map(
-      (answer: Answer) => Object.assign({}, answer)
-    );
-
-    // return new `Question` object containing a combination of original question value(s)
-    // and deep copies of changed form model values
-    const saveQuestion: Question = {
-      id: this.question.id,
-      chapter: this.question.chapter,
-      title: formModel.title as string,
-      last_modified: new Date,
-      answers: answersDeepCopy
-    };
-    return saveQuestion;
   }
 
   updateQuestionWithoutInserts(completeQuestion: Question): Question {

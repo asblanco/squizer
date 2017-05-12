@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from '../../../../db/question';
 import { QuestionService } from '../../../../db/question.service';
 
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -14,17 +15,23 @@ export class QuestionComponent {
   @Input() question: Question;
   @Input() i: number;
   @Output() deletedQuestion: EventEmitter<Question> = new EventEmitter();
+  editQuestionModal = new EventEmitter<string|MaterializeAction>();
+  deleteQuestionModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private questionService: QuestionService,
     private notificationsService: NotificationsService ) { }
 
   openEditQuestionModal() {
-    (<any>$('#editQuestionModal' + this.question.id)).openModal({dismissible: false});
+    this.editQuestionModal.emit({action:"modal",params:['open']});
   }
 
   openDeleteQuestionModal() {
-    (<any>$('#deleteQuestionModal' + this.question.id)).openModal();
+    this.deleteQuestionModal.emit({action:"modal",params:['open']});
+  }
+
+  editQuestion(question: Question) {
+    this.question = question;
   }
 
   deleteQuestion() {

@@ -1,4 +1,8 @@
-<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet">
+<a  id="editSchoolYear"
+    class="waves-effect waves btn-flat btn-large white-text right"
+    (click)="openEditSchoolYearModal()">Editar</a>
+
+<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editSchoolYearModal">
   <form [formGroup]="editSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4>Editar curso</h4>
@@ -6,7 +10,7 @@
       <div class="row">
         <div class="input-field form-group">
           <label for="title" class="active">Titulo</label>
-          <input type="text" class="form-control" formControlName="title" required>
+          <input type="text" class="form-control" formControlName="title" required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear">
         </div>
 
         <div class="input-field form-group col s6">
@@ -21,8 +25,13 @@
     </div>
 
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect btn red left" (click)="openDeleteSchoolYearModal()">Eliminar Curso</button>
+      <button class="modal-action modal-close waves-effect btn red left"
+        (click)="openDeleteSchoolYearModal()">Eliminar Curso</button>
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn">Guardar</button>
     </div>
   </form>
 </div>
+
+<app-delete-modal (onDeleted)="deleteSchoolYear()"
+  [id]="'deleteSchoolYearModal' + schoolYear.id"
+  [title]="schoolYear.title" [deleteModal]="deleteSchoolYearModal"></app-delete-modal>

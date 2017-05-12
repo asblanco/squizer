@@ -1,8 +1,14 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { SchoolYear } from '../../../db/school-year';
 import { SchoolYearService } from '../../../db/school-year.service';
 import { TestsService } from '../../tests.service';
+import { APP_CONFIG } from '../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../shared/app-config/iapp-config';
+
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -13,18 +19,32 @@ import { NotificationsService } from 'angular2-notifications';
 export class EditSchoolYearComponent implements OnChanges {
   @Input() schoolYear: SchoolYear;
   editSchoolYearForm: FormGroup;
+  editSchoolYearModal = new EventEmitter<string|MaterializeAction>();
+  deleteSchoolYearModal = new EventEmitter<string|MaterializeAction>();
+  maxLengthSchoolYear: number;
 
   constructor(
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private schoolYearService: SchoolYearService,
     private testsService: TestsService,
+    private router: Router,
     private notificationsService: NotificationsService
   ) {
+    this.maxLengthSchoolYear = config.MAXLENGTH_SCHOOLYEAR;
     this.createForm();
   }
 
+  ngAfterViewInit() {
+    (<any>$('#editSchoolYearModal' + this.schoolYear.id)).appendTo('body');
+  }
+
+  openEditSchoolYearModal() {
+    this.editSchoolYearModal.emit({action:"modal",params:['open']});
+  }
+
   openDeleteSchoolYearModal() {
-    (<any>$('#deleteSchoolYearModal' + this.schoolYear.id)).openModal();
+    this.deleteSchoolYearModal.emit({action:"modal",params:['open']});
   }
 
   ngOnChanges() {
@@ -71,4 +91,13 @@ export class EditSchoolYearComponent implements OnChanges {
     });
   }
 
+  deleteSchoolYear() {
+    this.schoolYearService
+      .delete(this.schoolYear.id)
+      .then(() => {
+        this.testsService.deleteSchoolYear(this.schoolYear);
+        this.router.navigate(['/manage-tests/']);
+      })
+      .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.schoolYear.title));
+  }
 }

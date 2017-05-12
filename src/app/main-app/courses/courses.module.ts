@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
 import { SharedModule } from '../shared/shared.module';
+import { MaterializeModule } from 'angular2-materialize';
 
 import { ChapterComponent } from './course/chapter/chapter.component';
 import { CourseComponent } from './course/course.component';
@@ -19,6 +20,7 @@ import { QuestionComponent } from './course/chapter/question/question.component'
 @NgModule({
   imports: [
     CommonModule,
+    MaterializeModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

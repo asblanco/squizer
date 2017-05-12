@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { Course } from '../../../../db/course';
@@ -7,6 +7,10 @@ import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
 import { TestsService } from '../../../tests.service';
 
+import { APP_CONFIG } from '../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../shared/app-config/iapp-config'
+
+import { MaterializeDirective } from "angular2-materialize";
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -19,8 +23,10 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
   courses: Course[] = [];
   course = null; // Course with checked property in questions and answers
   test: Test;
+  maxLengthTest: number;
 
   constructor(
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private activatedRoute: ActivatedRoute,
     private courseService: CourseService,
     private notificationsService: NotificationsService,
@@ -28,6 +34,8 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
     private testService: TestService,
     private testsService: TestsService
   ) {
+    this.maxLengthTest = config.MAXLENGTH_TEST;
+
     this.courseService.getCourses()
     .then(courses => { this.courses = courses; })
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));

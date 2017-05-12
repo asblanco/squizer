@@ -1,4 +1,6 @@
-<div id="newSchoolYearModal" class="modal bottom-sheet">
+<li><a class="waves-effect btn-large squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a></li>
+
+<div id="newSchoolYearModal" class="modal bottom-sheet" materialize="modal" [materializeActions]="newSchoolYearModal">
   <form [formGroup]="newSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4>Nuevo curso</h4>
@@ -6,7 +8,7 @@
       <div class="row">
         <div class="input-field form-group">
           <label for="title">Titulo</label>
-          <input type="text" class="form-control" formControlName="title" required>
+          <input type="text" class="form-control" formControlName="title" required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear">
         </div>
 
         <div class="input-field form-group col s6">

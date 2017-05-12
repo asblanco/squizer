@@ -7,7 +7,6 @@ import { Test } from './test';
 import { ViewTest } from './view-test';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
- // import 'rxjs/Rx';
 
 @Injectable()
 export class TestService {

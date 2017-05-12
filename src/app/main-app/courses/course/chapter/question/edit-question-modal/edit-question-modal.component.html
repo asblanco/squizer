@@ -1,11 +1,13 @@
-<div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer">
+<div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer"
+  materialize="modal" [materializeActions]="editQuestionModal"
+  [materializeParams]="[{dismissible: false}]">
   <form novalidate (ngSubmit)="onSubmit()" [formGroup]="questionForm">
     <div class="modal-content">
       <h4>Editar pregunta</h4>
       <div class="row">
         <div class="input-field">
           <label class="active">Titulo pregunta</label>
-          <input type="text" formControlName="title">
+          <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthQuestion">
         </div>
         <div
           class="red-text"
@@ -28,7 +30,7 @@
                 </div>
                 <div class="input-field col s11">
                   <label class="active" for="title">Respuesta {{i+1}}</label>
-                  <input type="text" formControlName="title"/>
+                  <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthAnswer"/>
                   <a *ngIf="answers.controls.length > 4" (click)="removeAnswer(i)">
                     <img class="ic-remove" src="../../../../assets/icons/ic_remove.svg" alt="remove answer"></a>
                 </div>
@@ -44,15 +46,10 @@
           </div>
         </fieldset>
       </div>
-      <!-- <div>
-        <div>myForm details:-</div>
-        <pre>Is myForm valid?: <br>{{questionForm.valid | json}}</pre>
-        <pre>form value: <br>{{questionForm.value | json}}</pre>
-      </div> -->
     </div>
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
-      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit">Editar</button>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!questionForm.valid">Editar</button>
     </div>
   </form>
 </div>

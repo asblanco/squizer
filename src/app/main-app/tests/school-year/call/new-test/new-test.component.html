@@ -1,19 +1,19 @@
 <div class="content">
   <h3>Crear test</h3>
 
-  <form #newTestForm="ngForm" novalidate>
+  <form #newTestForm="ngForm" novalidate materialize>
     <div class="row">
       <div class="input-field form-group col s6">
         <label for="title">Titulo</label>
-        <input type="text" class="form-control" name="title" [(ngModel)]="test.title" required>
+        <input type="text" class="form-control" name="title" [(ngModel)]="test.title" required materialize="characterCounter" [attr.data-length]="maxLengthTest">
       </div>
 
       <div class="input-field form-group col s6">
-        <select name="course" class="browser-default" [(ngModel)]="test.course" (change)="selectCourse()">
-          <option value="" disabled>Choose your option</option>
+        <select [(ngModel)]="test.course" name="course" materialize="material_select" (change)="selectCourse()">
+          <option value="" disabled selected>Elige una asignatura</option>
           <option *ngFor="let course of courses" [value]="course.id">{{course.name}}</option>
         </select>
-        <!-- <label for="course">Asignatura</label> -->
+        <label>Asignatura</label>
       </div>
     </div>
 

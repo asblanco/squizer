@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
 import { CoursesSideNavService } from './courses-side-nav.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -16,18 +19,22 @@ import { Observable } from 'rxjs/Observable';
 export class CoursesSideNavComponent {
   selectedCourseId: number;
   courses$: Observable<Course[]>;
+  maxLengthCourse: number;
+  newEditModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private courseService: CourseService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private coursesSideNavService: CoursesSideNavService,
     private notificationsService: NotificationsService,
     private router: Router,
   ) {
+    this.maxLengthCourse = config.MAXLENGTH_COURSE;
     this.courses$ = coursesSideNavService.getCourses$;
   }
 
   openCourseModal() {
-    (<any>$('#newCourseModal')).appendTo('body').openModal();
+    this.newEditModal.emit({action:"modal",params:['open']});
   }
 
   createCourse(name: string): void {

@@ -1,5 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 
 import { Course } from '../../db/course';
 import { Chapter } from '../../db/chapter';
@@ -8,6 +10,7 @@ import { CourseService } from '../../db/course.service';
 import { ChapterService } from '../../db/chapter.service';
 import { CoursesSideNavService } from '../courses-side-nav/courses-side-nav.service';
 
+import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -22,15 +25,21 @@ export class CourseComponent implements OnDestroy {
   course: Course;
   editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
   subscription: Subscription;
+  maxLengthChapter: number;
+  deleteModal = new EventEmitter<string|MaterializeAction>();
+  newChapterModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    @Inject(APP_CONFIG) private config: IAppConfig,
     private courseService: CourseService,
     private coursesSideNavService: CoursesSideNavService,
     private chapterService: ChapterService,
     private notificationsService: NotificationsService,
     private router: Router
  ) {
+   this.maxLengthChapter = config.MAXLENGTH_CHAPTER;
+
     this.subscription = this.activatedRoute.params.subscribe((params: Params) => {
       this.courseId = params['courseId'];
       this.getCourse(this.courseId);
@@ -39,11 +48,13 @@ export class CourseComponent implements OnDestroy {
   }
 
   openNewChapterModal() {
-    (<any>$('#newChapterModal')).openModal();
+    // (<any>$('#newChapterModal')).openModal();
+    this.newChapterModal.emit({action:"modal",params:['open']});
   }
 
   openDeleteCourseModal() {
-    (<any>$('#deleteCourseModal')).openModal();
+    // (<any>$('#deleteCourseModal')).openModal();
+    this.deleteModal.emit({action:"modal",params:['open']});
   }
 
   /*

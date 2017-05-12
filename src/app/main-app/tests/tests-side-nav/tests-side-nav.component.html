@@ -7,21 +7,19 @@
       <b>{{schoolYear.title | uppercase}}</b></a>
   <ul>
     <li *ngFor="let call of schoolYear.calls" [class.active]="call.id == (selectedCallId$ | async)">
-      <a  class="call truncate"
+      <a  class="truncate"
           routerLink="/manage-tests/school-year/{{schoolYear.id}}/call/{{call.id}}">
           = {{call.title}}</a>
     </li>
     <li *ngIf="schoolYear.id === (selectedSchoolYearId$ | async)">
-      <a class="call truncate" (click)="openNewCallModal(schoolYear)"><u>+ Añadir convocatoria</u></a>
+      <app-new-call [schoolYear]="schoolYear"></app-new-call>
     </li>
   </ul>
-  <app-new-call [schoolYear]="schoolYear"></app-new-call>
 </li>
-<a class="waves-effect btn squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a>
+<app-new-school-year [schoolYears]="(schoolYears$ | async)"></app-new-school-year>
 <!-- Materialize has a bug so it needs a last empty li to show the actual
  last one when there is scroll down, or two more <li> in firefox -->
 <li>-</li>
 <li>-</li>
 
 <!-- New SchoolYear Modal -->
-<app-new-school-year [schoolYears]="(schoolYears$ | async)"></app-new-school-year>

@@ -15,6 +15,7 @@ import { TestsComponent } from './tests.component';
 import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { MaterializeModule } from 'angular2-materialize';
 import { TestsService } from './tests.service';
 import { ViewTestComponent } from './school-year/call/list-tests/view-test/view-test.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
@@ -25,7 +26,8 @@ import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MaterializeModule
   ],
   declarations: [
     CallComponent,
