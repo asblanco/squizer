@@ -1,31 +1,34 @@
-<li><a class="waves-effect btn-large squizer-btn" (click)="openSchoolYearModal()">Nuevo curso</a></li>
+<li><a class="waves-effect btn-large squizer-btn" (click)="openSchoolYearModal()" i18n>New school year</a></li>
 
 <div id="newSchoolYearModal" class="modal bottom-sheet" materialize="modal" [materializeActions]="newSchoolYearModal">
   <form [formGroup]="newSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Nuevo curso</h4>
+      <h4 i18n>New course</h4>
 
       <div class="row">
         <div class="input-field form-group">
-          <label for="title">Titulo</label>
+          <label for="title" i18n>Title</label>
           <input type="text" class="form-control" formControlName="title"
             required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
             maxlength="{{maxLengthSchoolYear}}">
         </div>
 
         <div class="input-field form-group col s6">
-          <label for="start_date" class="active">Fecha de inicio</label>
-          <input type="date" class="datepicker form-control" id="start_date" formControlName="start_date" placeholder="yyyy-mm-dd"required>
+          <label for="start_date" class="active" i18n>Start date</label>
+          <input type="date" class="datepicker form-control" id="start_date"
+            formControlName="start_date" placeholder="yyyy-mm-dd"required>
         </div>
         <div class="input-field form-group col s6">
-          <label for="end_date" class="active">Fecha de fin</label>
-          <input type="date" class="datepicker form-control" id="end_date" formControlName="end_date" placeholder="yyyy-mm-dd" required>
+          <label for="end_date" class="active" i18n>End date</label>
+          <input type="date" class="datepicker form-control" id="end_date"
+            formControlName="end_date" placeholder="yyyy-mm-dd" required>
         </div>
       </div>
     </div>
 
     <div class="modal-footer">
-      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn" [disabled]="!newSchoolYearForm.valid">Crear</button>
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
+        [disabled]="!newSchoolYearForm.valid" i18n>Create</button>
     </div>
   </form>
 </div>

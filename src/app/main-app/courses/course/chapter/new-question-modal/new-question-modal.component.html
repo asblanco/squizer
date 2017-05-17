@@ -8,29 +8,30 @@
   [materializeParams]="[{dismissible: false}]">
   <form [formGroup]="newQuestion" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Crear pregunta</h4>
+      <h4 i18n>New question</h4>
         <div class="row">
           <div class="input-field">
-            <label for="title_question">Titulo pregunta</label>
+            <label for="title_question" i18n>Question title</label>
             <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthQuestion">
           </div>
         </div>
         <!--answers-->
         <div class="row">
           <fieldset>
-            <legend><b> Respuestas </b></legend>
+            <legend><b i18n> Anwers </b></legend>
             <div formArrayName="answers">
               <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
                 <div class="row">
                   <div class="col s1">
-                    <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;">V/F</span>
+                    <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>V/F</span>
                     <p class="checkbox">
-                      <input type="checkbox" class="center-align filled-in checkbox-squizer" [id]="chapter.id + 'cb' + i" formControlName="correct"/>
+                      <input type="checkbox" class="center-align filled-in checkbox-squizer"
+                        [id]="chapter.id + 'cb' + i" formControlName="correct"/>
                       <label [for]="chapter.id + 'cb' + i"></label>
                     </p>
                   </div>
                   <div class="input-field col s11">
-                    <label for="title">Respuesta {{i+1}}</label>
+                    <label for="title"># {{i+1}}</label>
                     <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthAnswer"/>
                     <a *ngIf="answers.controls.length > 4" (click)="removeAnswer(i)">
                       <img class="ic-remove" src="../../assets/icons/ic_remove.svg" alt="remove answer"></a>
@@ -49,8 +50,9 @@
         </div>
     </div>
     <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
-      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!newQuestion.valid">Crear</button>
+      <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()" i18n>Cancel</a>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit"
+        [disabled]="!newQuestion.valid" i18n>Create</button>
     </div>
   </form>
 </div>

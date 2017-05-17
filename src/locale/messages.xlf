@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
+        <source>Delete</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/shared/modals/delete/delete.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0bdee168bd6b301167bfbf1d565948d51b5f290" datatype="html">
+        <source>Delete <x id="START_BOLD_TEXT" ctype="x-b"/><x id="INTERPOLATION"/><x id="CLOSE_BOLD_TEXT" ctype="x-b"/>?</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/shared/modals/delete/delete.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/shared/modals/delete/delete.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e8a00edd7b63c551703860ec11ae4b2e12f7b603" datatype="html">
+        <source>
+      Delete</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/shared/modals/delete/delete.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/new-edit/new-edit.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/edit-call/edit-call.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/edit-test/edit-test.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b022a7c737ac665c6bf0212335938ac1324021c1" datatype="html">
+        <source>New chapter</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f60305f3f294e24abbc06af3f63efe61f51eca0c" datatype="html">
+        <source>Delete course</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="266424b164b4e3e713f846eb64256d590ca3b782" datatype="html">
+        <source>Select or create a course</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/courses.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="528b5f96cefc647129ce528b4ae5e5f8bf567cab" datatype="html">
+        <source>COURSES</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/courses-side-nav/courses-side-nav.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1188de2e2c6a6ee333f60ec4299199e6f26abf47" datatype="html">
+        <source>
+  New Course</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/courses-side-nav/courses-side-nav.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ea1c89bc7fdf32bd391130f053b3199d245b0cf2" datatype="html">
+        <source>Edit question</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f134eb0b56858428da3b7ccbdf81657baa13fb65" datatype="html">
+        <source>Question title</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0abc9eeb07845a09519be62dabdc9b2f7ea1127" datatype="html">
+        <source>
+          Title is required
+        </source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="98552f8211ee996520b680266d3dbcdb6f6866aa" datatype="html">
+        <source> Answers </source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3f2c9179e8cfb6236fb7474358cc7e5d423e62ef" datatype="html">
+        <source>V/F</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        <source>Edit</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fdf7cbdc140d0aab0f0b6c06065a0fd448ed6a2e" datatype="html">
+        <source>Title</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/new-edit/new-edit.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/edit-call/edit-call.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/list-tests.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/edit-test/edit-test.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a06d7ee50b08dbba19f5e6942ea1677008ab0254" datatype="html">
+        <source>New question</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5ce4367e76f06b994d7b7056d91a61b1034a6990" datatype="html">
+        <source> Anwers </source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
+        <source>Create</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a885f0badd50b7d4e00c47665812756271ac382b" datatype="html">
+        <source>DELETE</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/question/question.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b7a70699065fac3ffcd5952606bd3a3acfcebdb9" datatype="html">
+        <source>
+          New test</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/call.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e433b04f4e61a02718b24bcef9d106595bde6844" datatype="html">
+        <source>Delete call</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/call.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="669531a661924419ac4f25bd194b19775eed94fc" datatype="html">
+        <source>Edit call</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/edit-call/edit-call.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="77bbe324b08f6636fb50f673cea05313b86fb692" datatype="html">
+        <source>Start date</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/edit-call/edit-call.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f60960faa2cd3e0db11e48688774d05dfa9d715b" datatype="html">
+        <source>End date</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/edit-call/edit-call.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="59245c4d1c4d9d5a9c15d85179de0cc0cb228978" datatype="html">
+        <source>Edit school year</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a6db90babafc9d7f74d456b541cb7817dff48df7" datatype="html">
+        <source>Delete school year</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/edit-school-year/edit-school-year.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="97cd7c497d440f6f1befeb2ceb734459063875f1" datatype="html">
+        <source>(No tests)</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/list-tests.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1b051734b0ee9021991c91b3ed4e81c244322462" datatype="html">
+        <source>Created</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/list-tests.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="030b4423b92167200e39519599f9b863b4f7c62c" datatype="html">
+        <source>Actions</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/list-tests.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dc75033a5238fdc4f462212c847a45ba8018a3fd" datatype="html">
+        <source>Download</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/list-tests.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d7a5b8ae675184db2f744eae76c00ecdab6449a4" datatype="html">
+        <source>Add call</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="10fbfbc2d836a240f618a35855916c29f11dd9a5" datatype="html">
+        <source>New call in <x id="INTERPOLATION"/></source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f243481a07aa250dff2d87344eac04cf70516c65" datatype="html">
+        <source>New school year</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d57b76ac4abbc8870fcb9e32322a371073cd3672" datatype="html">
+        <source>Create test</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f13946a4721c217d3ab8fb1f746cc6cbdaf23334" datatype="html">
+        <source>Select a course</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b7a285515e41f0c8038d8b8e65b5199cb9928681" datatype="html">
+        <source>Course</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b39eece7483bf84caf38dd938fb1d7c661965893" datatype="html">
+        <source>Number of questions per course: </source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="86aec831355ae2b983b0a4756c26028ac610051e" datatype="html">
+        <source>Uncheck All</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="028123b0ed924b27efff8769b25de46f8e679f89" datatype="html">
+        <source>Check All</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="024ce97c962f343cb454e8f277d2442e304e516e" datatype="html">
+        <source>Select or create a school year</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/tests.component.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d6afd67fceaef2790d8a446de71d4f9a4b5c582" datatype="html">
+        <source>SCHOOL YEARS</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/tests-side-nav/tests-side-nav.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="725a80e22e990a7358a6aed57cabeb303071fd7c" datatype="html">
+        <source>Updated <x id="INTERPOLATION"/></source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/view-test/view-test.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="237671f9fe9cf6562f6324325b37c75fb7893ec6" datatype="html">
+        <source>Edit test</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/edit-test/edit-test.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7eec194fdb5177fb2a2b67ddfd1a5c71a943eb9d" datatype="html">
+        <source>Courses</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/navbar/navbar.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/navbar/navbar.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be8e1a199c0f65656ec614786777a1552a968979" datatype="html">
+        <source>Tests</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/navbar/navbar.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/navbar/navbar.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ba42cf7b98cd3552987ee46f302c63523be671d3" datatype="html">
+        <source>Page not found :(</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/page-not-found/page-not-found.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

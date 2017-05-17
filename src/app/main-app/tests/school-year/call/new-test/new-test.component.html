@@ -1,10 +1,10 @@
 <div class="content">
-  <h3>Crear test</h3>
+  <h3 i18n>Create test</h3>
 
   <form #newTestForm="ngForm" novalidate materialize>
     <div class="row">
       <div class="input-field form-group col s6">
-        <label for="title">Titulo</label>
+        <label for="title" i18n>Title</label>
         <input type="text" class="form-control" name="title" [(ngModel)]="test.title"
           required materialize="characterCounter" [attr.data-length]="maxLengthTest"
           maxlength="{{maxLengthTest}}">
@@ -12,15 +12,15 @@
 
       <div class="input-field form-group col s6">
         <select [(ngModel)]="test.course" name="course" materialize="material_select" (change)="selectCourse()" required>
-          <option value="" disabled selected>Elige una asignatura</option>
+          <option value="" disabled selected i18n>Select a course</option>
           <option *ngFor="let course of courses" [value]="course.id">{{course.name}}</option>
         </select>
-        <label>Asignatura</label>
+        <label i18n>Course</label>
       </div>
     </div>
 
     <div *ngIf="course" class="row" id="all">
-      <b><p>Numero de preguntas por tema: </p></b>
+      <b><p i18n>Number of questions per course: </p></b>
       <div *ngFor="let chapter of course.chapters">
         <div class="input-field">
           <label for="title" class="active">{{chapter.title}}</label>
@@ -28,8 +28,8 @@
         </div>
       </div>
 
-      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', false)">uncheckAll</button>
-      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', true)">checkAll</button>
+      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', false)" i18n>Uncheck All</button>
+      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', true)" i18n>Check All</button>
       <br><br>
 
       <div *ngFor="let chapter of course.chapters" id="ch{{chapter.id}}">
@@ -50,7 +50,7 @@
 
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
-        (click)="save()" [disabled]="!newTestForm.valid">Crear test</button>
+        (click)="save()" [disabled]="!newTestForm.valid" i18n>Create test</button>
     </div>
   </form>
 </div>

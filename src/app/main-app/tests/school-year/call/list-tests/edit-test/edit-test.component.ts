@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Test } from '../../../../../db/test';
@@ -15,9 +15,9 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './edit-test.component.html',
   styleUrls: ['./edit-test.component.css']
 })
-export class EditTestComponent implements OnChanges {
+export class EditTestComponent implements OnChanges, OnInit {
   @Input() test: Test;
-  testForm: Test;
+  testForm: Test = new Test();
   editTestModal = new EventEmitter<string|MaterializeAction>();
   maxLengthTest: number;
 
@@ -30,7 +30,7 @@ export class EditTestComponent implements OnChanges {
     this.maxLengthTest = config.MAXLENGTH_TEST;
   }
 
-  ngOnChanges() {
+  ngOnInit() {
     this.testForm = {
      id: this.test.id,
      title: this.test.title,
@@ -42,12 +42,16 @@ export class EditTestComponent implements OnChanges {
    };
   }
 
+  ngOnChanges() {
+    this.testForm.title = this.test.title;
+  }
+
   openEditTestModal(id) {
     this.editTestModal.emit({action:"modal",params:['open']});
   }
 
   updateTest() {
-    this.testService.update(this.testForm.value)
+    this.testService.update(this.testForm)
     .then(test => {
       this.test.title = test.title;
       this.ngOnChanges();

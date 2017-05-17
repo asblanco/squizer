@@ -1,4 +1,4 @@
-<li><div class="center bold">CURSOS</div></li>
+<li><div class="center bold" i18n>SCHOOL YEARS</div></li>
 <li><div class="divider"></div></li>
 <li *ngFor="let schoolYear of (schoolYears$ | async)"
     [class.active]="((selectedCallId$ | async) === null) && (schoolYear.id === (selectedSchoolYearId$ | async))">

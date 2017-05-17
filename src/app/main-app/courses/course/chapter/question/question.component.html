@@ -1,6 +1,7 @@
 <a class="question" (click)="openEditQuestionModal(); $event.stopPropagation();">
   <div class="right">
-    <b><a class="waves-effect waves btn-flat edit red-text" (click)="openDeleteQuestionModal(); $event.stopPropagation();">ELIMINAR</a></b>
+    <b><a class="waves-effect waves btn-flat edit red-text"
+      (click)="openDeleteQuestionModal(); $event.stopPropagation();" i18n>DELETE</a></b>
   </div>
   <b><p> #{{i+1}} {{question.title}} </p></b>
   <div class="collection">

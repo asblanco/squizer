@@ -1,12 +1,12 @@
 <!-- Delete Modal -->
 <div id="{{id}}" class="modal" materialize="modal" [materializeActions]="deleteModal">
   <div class="modal-content">
-    <h4>Eliminar</h4>
-    <p>¿Eliminar <b>{{title}}</b>?</p>
+    <h4 i18n>Delete</h4>
+    <p i18n>Delete <b>{{title}}</b>?</p>
   </div>
   <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect waves btn-flat">Cancelar</a>
-    <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="delete()">
-      Eliminar</a></b>
+    <a class=" modal-action modal-close waves-effect waves btn-flat" i18n>Cancel</a>
+    <b><a class=" modal-action modal-close waves-effect red-text waves-indigo btn-flat" (click)="delete()" i18n>
+      Delete</a></b>
   </div>
 </div>

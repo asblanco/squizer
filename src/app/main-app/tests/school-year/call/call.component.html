@@ -16,13 +16,15 @@
           <br>
         </div>
         <br>
-        <a class="waves-effect btn squizer-btn" routerLink="/manage-tests/school-year/{{call.school_year}}/call/{{call.id}}/new-test/">Nuevo test</a>
+        <a class="waves-effect btn squizer-btn" routerLink="/manage-tests/school-year/{{call.school_year}}/call/{{call.id}}/new-test/" i18n>
+          New test</a>
       </div>
     </div>
   </div>
   <footer class="footer">
    <div class="footer">
-     <b><a id="deleteCall" class="waves-effect waves btn-flat btn-large red-text right" (click)="openDeleteCallModal()">Eliminar convocatoria</a></b>
+     <b><a id="deleteCall" class="waves-effect waves btn-flat btn-large red-text right"
+       (click)="openDeleteCallModal()" i18n>Delete call</a></b>
    </div>
   </footer>
 

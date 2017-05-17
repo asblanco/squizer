@@ -10,8 +10,8 @@
           <input id="courseTitle" name="name" [(ngModel)]="course.name" placeholder="Type the course title"
             materialize="characterCounter" [attr.data-length]="maxLengthCourse" required maxlength="{{maxLengthCourse}}"/>
           <b><button id="saveCourseTitle" class="waves-effect waves btn-flat squizer-color"
-            (click)="updateCourseTitle()" [disabled]="!editTitleForm.valid">Guardar</button></b>
-          <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()">Cancelar</a>
+            (click)="updateCourseTitle()" [disabled]="!editTitleForm.valid" i18n>Save</button></b>
+          <a class="waves-effect waves btn-flat" (click)="cancelEditCourse()" i18n>Cancel</a>
         </div>
       </form>
     </div>
@@ -24,14 +24,14 @@
   </div>
 
   <div class="row">
-    <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()">Nuevo tema</a>
+    <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()" i18n>New chapter</a>
   </div>
 
   <!-- Delete course -->
   <footer class="footer">
    <div class="footer">
      <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right"
-       (click)="openDeleteCourseModal()">Eliminar asignatura</a></b>
+       (click)="openDeleteCourseModal()" i18n>Delete course</a></b>
    </div>
  </footer>
 </div>
@@ -40,5 +40,5 @@
   [id]="'deleteCourseModal'" [title]="course.name" [deleteModal]="deleteModal">
 </app-delete-modal>
 <app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'"
-  [text]="'Nuevo tema'" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
+  [text]="'New chapter'" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
 </app-new-edit-modal>

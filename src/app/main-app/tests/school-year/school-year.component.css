@@ -4,6 +4,7 @@
     padding-right: 1em;
   }
   .header {
+    padding-top: 4em;
     margin-left: 21em;
     margin-right: 1em;
   }
@@ -12,6 +13,9 @@
   .content {
     padding-left: 1em;
     padding-right: 1em;
+  }
+  .header {
+    padding-top: 0.1em;
   }
 }
 .content {
@@ -27,7 +31,6 @@ sub {
 }
 
 .header {
-  padding-top: 4em;
   background-color: #8f8f8f;
   border-radius: 0px 0px 3em 3em;
 }

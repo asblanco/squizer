@@ -3,26 +3,26 @@
   [materializeParams]="[{dismissible: false}]">
   <form novalidate (ngSubmit)="onSubmit()" [formGroup]="questionForm">
     <div class="modal-content">
-      <h4>Editar pregunta</h4>
+      <h4 i18n>Edit question</h4>
       <div class="row">
         <div class="input-field">
-          <label class="active">Titulo pregunta</label>
+          <label class="active" i18n>Question title</label>
           <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthQuestion">
         </div>
         <div
           class="red-text"
-          *ngIf="questionForm.get('title').hasError('required') && questionForm.get('title').touched">
+          *ngIf="questionForm.get('title').hasError('required') && questionForm.get('title').touched" i18n>
           Title is required
         </div>
       </div>
       <div class="row">
         <fieldset>
-          <legend><b> Respuestas </b></legend>
+          <legend><b i18n> Answers </b></legend>
           <div formArrayName="answers">
             <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
               <div class="row">
                 <div class="col s1">
-                  <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;">V/F</span>
+                  <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>V/F</span>
                   <p class="checkbox">
                     <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i"
                       formControlName="correct"/>
@@ -30,7 +30,7 @@
                   </p>
                 </div>
                 <div class="input-field col s11">
-                  <label class="active" for="title">Respuesta {{i+1}}</label>
+                  <label class="active" for="title"># {{i+1}}</label>
                   <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthAnswer"/>
                   <a *ngIf="answers.controls.length > 4" (click)="removeAnswer(i)">
                     <img class="ic-remove" src="../../../../assets/icons/ic_remove.svg" alt="remove answer"></a>
@@ -49,8 +49,9 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()">Cancelar</a>
-      <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit" [disabled]="!questionForm.valid">Editar</button>
+      <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()" i18n>Cancel</a>
+      <button class=" modal-action modal-close waves-effect btn squizer-btn"
+        type="submit" [disabled]="!questionForm.valid" i18n>Edit</button>
     </div>
   </form>
 </div>

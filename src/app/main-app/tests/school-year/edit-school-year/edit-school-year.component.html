@@ -1,26 +1,27 @@
 <a  id="editSchoolYear"
     class="waves-effect waves btn-flat btn-large white-text right"
-    (click)="openEditSchoolYearModal()">Editar</a>
+    (click)="openEditSchoolYearModal()" i18n>Edit</a>
 
-<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editSchoolYearModal">
+<div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet"
+  materialize="modal" [materializeActions]="editSchoolYearModal">
   <form [formGroup]="editSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4>Editar curso</h4>
+      <h4 i18n>Edit school year</h4>
 
       <div class="row">
         <div class="input-field form-group">
-          <label for="title" class="active">Titulo</label>
+          <label for="title" class="active" i18n>Title</label>
           <input type="text" class="form-control" formControlName="title"
             required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
             maxlength="{{maxLengthSchoolYear}}">
         </div>
 
         <div class="input-field form-group col s6">
-          <label for="start_date" class="active">Fecha de inicio</label>
+          <label for="start_date" class="active" i18n>Start date</label>
           <input type="date" class="datepicker form-control" id="start_date" formControlName="start_date" required>
         </div>
         <div class="input-field form-group col s6">
-          <label for="end_date" class="active">Fecha de fin</label>
+          <label for="end_date" class="active" i18n>End date</label>
           <input type="date" class="datepicker form-control" id="end_date" formControlName="end_date"  required>
         </div>
       </div>
@@ -28,8 +29,9 @@
 
     <div class="modal-footer">
       <button class="modal-action modal-close waves-effect btn red left"
-        (click)="openDeleteSchoolYearModal()">Eliminar Curso</button>
-      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn" [disabled]="!editSchoolYearForm.valid">Guardar</button>
+        (click)="openDeleteSchoolYearModal()" i18n>Delete school year</button>
+      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
+        [disabled]="!editSchoolYearForm.valid" i18n>Save</button>
     </div>
   </form>
 </div>

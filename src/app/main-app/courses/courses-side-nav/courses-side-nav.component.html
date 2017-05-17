@@ -1,5 +1,5 @@
 <!-- Side Navigation -->
-<li><div class="center bold">ASIGNATURAS</div></li>
+<li><div class="center bold" i18n>COURSES</div></li>
 <li><div class="divider"></div></li>
 <li *ngFor="let course of (courses$ | async)" [class.active]="course.id === selectedCourseId">
   <a
@@ -7,10 +7,10 @@
     (click)="selectCourse(course.id)"
     routerLink="/manage-courses/course/{{course.id}}">{{course.name}}</a>
 </li>
-<li><a class="waves-effect btn-large squizer-btn" (click)="openCourseModal()">
-  Nueva Asignatura</a>
+<li><a class="waves-effect btn-large squizer-btn" (click)="openCourseModal()" i18n>
+  New Course</a>
 </li>
 
 <app-new-edit-modal [modalNewEdit]="newEditModal" (onSubmit)="createCourse($event)"
-  [modalId]="'newCourseModal'" [text]="'Nueva asignatura'" [title]="" [maxLength]="maxLengthCourse">
+  [modalId]="'newCourseModal'" [text]="'New course'" [title]="" [maxLength]="maxLengthCourse">
 </app-new-edit-modal>

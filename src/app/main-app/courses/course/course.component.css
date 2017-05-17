@@ -3,6 +3,7 @@
   .content {
     padding-left: 25em;
     padding-right: 5em;
+    padding-top: 5em;
   }
 }
 @media only screen and (max-width: 62em){
@@ -13,7 +14,6 @@
 }
 
 .content {
-  padding-top: 5em;
   padding-bottom: 2em;
 }
 
