@@ -15,12 +15,14 @@
 
         <div class="input-field form-group col s6">
           <label for="start_date" class="active" i18n>Start date</label>
-          <input type="date" class="datepicker form-control" id="start_date"
+          <input type="date" id="start_date" materialize="pickadate"
+            [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
             formControlName="start_date" placeholder="yyyy-mm-dd"required>
         </div>
         <div class="input-field form-group col s6">
           <label for="end_date" class="active" i18n>End date</label>
-          <input type="date" class="datepicker form-control" id="end_date"
+          <input type="date" id="end_date" materialize="pickadate"
+            [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
             formControlName="end_date" placeholder="yyyy-mm-dd" required>
         </div>
       </div>
