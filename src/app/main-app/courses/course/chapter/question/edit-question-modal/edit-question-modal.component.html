@@ -22,7 +22,7 @@
             <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
               <div class="row">
                 <div class="col s1">
-                  <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>V/F</span>
+                  <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>T/F</span>
                   <p class="checkbox">
                     <input type="checkbox" class="filled-in checkbox-squizer" [id]="question.id + 'cb' + i"
                       formControlName="correct"/>

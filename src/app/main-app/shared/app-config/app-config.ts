@@ -4,6 +4,7 @@ import { IAppConfig } from './iapp-config';
 export const AppConfig: IAppConfig = {
     // apiEndpoint: 'https://squizer-server.herokuapp.com/',
     apiEndpoint: 'http://localhost:8000/',
+    // apiEndpoint: 'http://vps411854.ovh.net/',
     MAXLENGTH_COURSE: 100,
     MAXLENGTH_CHAPTER: 100,
     MAXLENGTH_QUESTION: 500,

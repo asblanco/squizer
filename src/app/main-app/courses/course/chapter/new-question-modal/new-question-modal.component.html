@@ -18,16 +18,16 @@
         <!--answers-->
         <div class="row">
           <fieldset>
-            <legend><b i18n> Anwers </b></legend>
+            <legend><b i18n> Answers </b></legend>
             <div formArrayName="answers">
               <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
                 <div class="row">
                   <div class="col s1">
-                    <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>V/F</span>
+                    <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>T/F</span>
                     <p class="checkbox">
                       <input type="checkbox" class="center-align filled-in checkbox-squizer"
-                        [id]="chapter.id + 'cb' + i" formControlName="correct"/>
-                      <label [for]="chapter.id + 'cb' + i"></label>
+                        [id]="chapter.id + '0' + i" formControlName="correct"/>
+                      <label [for]="chapter.id + '0' + i"></label>
                     </p>
                   </div>
                   <div class="input-field col s11">

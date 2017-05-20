@@ -24,6 +24,7 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
   course = null; // Course with checked property in questions and answers
   test: Test;
   maxLengthTest: number;
+  selectedChapter = null;
 
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
@@ -59,56 +60,25 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
   }
 
   ngAfterViewInit() {
-    // (<any>$('select')).material_select();
-    // $('#selectCourse').on('change', function(){
-    //   console.log("got you");
-    // });
   }
 
   ngOnChanges() {
   }
 
+  selectChapter(chapter) {
+    this.selectedChapter = chapter;
+  }
+
   checkAll(divId: string, check: boolean) {
     $('#' + divId + ' :checkbox:enabled').prop('checked', check);
-    let qs, q, a;
-    for (let i = 0; i < this.course.chapters.length; i++) {
-      qs = this.course.chapters[i].questions;
-      for (let j = 0; j < qs.length; j++) {
-        q = this.course.chapters[i].questions[j];
-        q.checked = check;
-        for (let k = 0; k < q.answers.length; k++) {
-          a = q.answers[k];
-          a.checked = check;
-        }
-      }
-    }
   }
 
-  checkChapter(check: boolean, chapter) {
-    $('#ch' + chapter.id + ' :checkbox:enabled').prop('checked', check);
-    const index = this.course.chapters.indexOf(chapter);
-    const qs = this.course.chapters[index].questions;
-    let q, a;
-    for (let j = 0; j < qs.length; j++) {
-      q = qs[j];
-      q.checked = check;
-      for (let k = 0; k < q.answers.length; k++) {
-        a = q.answers[k];
-        a.checked = check;
-      }
-    }
+  checkChapter(check: boolean, chapterId) {
+    $('#ch' + chapterId + ' :checkbox:enabled').prop('checked', check);
   }
 
-  checkQuestion(check: boolean, question, chapter) {
-    $('#q' + question.id + ' :checkbox:enabled').prop('checked', check);
-    const chapterIndex = this.course.chapters.indexOf(chapter);
-    const questionIndex = this.course.chapters[chapterIndex].questions.indexOf(question);
-    const q = this.course.chapters[chapterIndex].questions[questionIndex];
-    let a;
-    for (let i = 0; i < q.answers.length; i++) {
-      a = q.answers[i];
-      a.checked = check;
-    }
+  checkQuestion(check: boolean, questionId) {
+    $('#q' + questionId + ' :checkbox:enabled').prop('checked', check);
   }
 
   selectCourse() {

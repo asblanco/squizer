@@ -37,10 +37,38 @@ h1, h2, h3, h4, h5 {
   font-family: 'raleway-bold';
 }
 
-.tabs .indicator {
-    background-color:#fff !important;
-    height: 3px;
+.navbar-tabs .indicator {
+   background-color:#fff !important;
+   height: 3px;
 } /*Color of underline in mobile extended navbar*/
+
+
+/*
+* Card tabs
+*/
+
+.card-tabs {
+  background-color: #efefef;
+}
+.card-tabs .indicator {
+   background-color: #4717F6;
+} /*Color of underline*/
+
+.card-tabs .tab a {
+  color: #9275fa;
+}
+
+.card-tabs .tab a:hover {
+  color: #4717F6;
+}
+
+.card-tabs .tab a.active {
+  color: #4717F6;
+}
+
+/*
+* Buttons
+*/
 
 .squizer-btn {
   color: white !important;
@@ -70,6 +98,11 @@ h1, h2, h3, h4, h5 {
 
 .squizer-color {
   color: #4717F6 !important;
+}
+
+.checkbox-squizer[type="checkbox"].filled-in:checked + label:after{
+     border: 2px solid #4717F6;
+     background-color: #4717F6;
 }
 
 i.icon-blue {

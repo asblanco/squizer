@@ -149,9 +149,13 @@
           <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="3f2c9179e8cfb6236fb7474358cc7e5d423e62ef" datatype="html">
-        <source>V/F</source>
+      <trans-unit id="9d8a0624f2f99385153db17c1fcff092db9ba9f1" datatype="html">
+        <source>T/F</source>
         <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
@@ -203,7 +207,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/edit-test/edit-test.component.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a06d7ee50b08dbba19f5e6942ea1677008ab0254" datatype="html">
@@ -212,14 +216,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
           <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5ce4367e76f06b994d7b7056d91a61b1034a6990" datatype="html">
-        <source> Anwers </source>
-        <target/>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
-          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
@@ -382,6 +378,10 @@
           <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="d57b76ac4abbc8870fcb9e32322a371073cd3672" datatype="html">
         <source>Create test</source>
@@ -392,7 +392,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f13946a4721c217d3ab8fb1f746cc6cbdaf23334" datatype="html">
@@ -400,7 +400,7 @@
         <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b7a285515e41f0c8038d8b8e65b5199cb9928681" datatype="html">
@@ -408,15 +408,7 @@
         <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b39eece7483bf84caf38dd938fb1d7c661965893" datatype="html">
-        <source>Number of questions per course: </source>
-        <target/>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="86aec831355ae2b983b0a4756c26028ac610051e" datatype="html">
@@ -424,7 +416,7 @@
         <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="028123b0ed924b27efff8769b25de46f8e679f89" datatype="html">
@@ -432,7 +424,23 @@
         <target/>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a60855756106d28e44c4c9a04b12ad7fc5d4d296" datatype="html">
+        <source>Uncheck Chapter</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5f7595e043987dde86e8538fa61d352853f5dc7" datatype="html">
+        <source>Check Chapter</source>
+        <target/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="024ce97c962f343cb454e8f277d2442e304e516e" datatype="html">

@@ -39,7 +39,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="e8a00edd7b63c551703860ec11ae4b2e12f7b603" datatype="html">
-        <source>Delete</source>
+        <source>
+      Delete</source>
         <target>Eliminar</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/shared/modals/delete/delete.component.ts</context>
@@ -72,15 +73,15 @@
       </trans-unit>
       <trans-unit id="b022a7c737ac665c6bf0212335938ac1324021c1" datatype="html">
         <source>New chapter</source>
-        <target>Nuevo capitulo</target>
+        <target>Nuevo tema</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
           <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f60305f3f294e24abbc06af3f63efe61f51eca0c" datatype="html">
-        <source>Eliminar asignatura</source>
-        <target></target>
+        <source>Delete course</source>
+        <target>Eliminar asignatura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/course.component.ts</context>
           <context context-type="linenumber">34</context>
@@ -88,7 +89,7 @@
       </trans-unit>
       <trans-unit id="266424b164b4e3e713f846eb64256d590ca3b782" datatype="html">
         <source>Select or create a course</source>
-        <target>Selecciona o crea una asignatura</target>
+        <target>Seleccionar o crear asignatura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/courses.component.ts</context>
           <context context-type="linenumber">9</context>
@@ -103,7 +104,8 @@
         </context-group>
       </trans-unit>
       <trans-unit id="1188de2e2c6a6ee333f60ec4299199e6f26abf47" datatype="html">
-        <source>New Course</source>
+        <source>
+  New Course</source>
         <target>Nueva asignatura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/courses-side-nav/courses-side-nav.component.ts</context>
@@ -134,9 +136,7 @@
         <source>
           Title is required
         </source>
-        <target>
-          El titulo es obligatorio
-        </target>
+        <target>El titulo es obligatorio</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
           <context context-type="linenumber">14</context>
@@ -149,9 +149,13 @@
           <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
       </trans-unit>
-      <trans-unit id="3f2c9179e8cfb6236fb7474358cc7e5d423e62ef" datatype="html">
-        <source>V/F</source>
+      <trans-unit id="9d8a0624f2f99385153db17c1fcff092db9ba9f1" datatype="html">
+        <source>T/F</source>
         <target>V/F</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/chapter/question/edit-question-modal/edit-question-modal.component.ts</context>
@@ -203,7 +207,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/edit-test/edit-test.component.ts</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a06d7ee50b08dbba19f5e6942ea1677008ab0254" datatype="html">
@@ -212,14 +216,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
           <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5ce4367e76f06b994d7b7056d91a61b1034a6990" datatype="html">
-        <source> Anwers </source>
-        <target> Respuestas </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/courses/course/chapter/new-question-modal/new-question-modal.component.ts</context>
-          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="70a67e04629f6d412db0a12d51820b480788d795" datatype="html">
@@ -249,8 +245,7 @@
       <trans-unit id="b7a70699065fac3ffcd5952606bd3a3acfcebdb9" datatype="html">
         <source>
           New test</source>
-        <target>
-          Nuevo test</target>
+        <target>Crear test</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/call.component.ts</context>
           <context context-type="linenumber">19</context>
@@ -362,7 +357,7 @@
       </trans-unit>
       <trans-unit id="d7a5b8ae675184db2f744eae76c00ecdab6449a4" datatype="html">
         <source>Add call</source>
-        <target>Crear convocatoria</target>
+        <target>Añadir convocatoria</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/new-call/new-call.component.ts</context>
           <context context-type="linenumber">1</context>
@@ -383,6 +378,10 @@
           <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/new-school-year/new-school-year.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="d57b76ac4abbc8870fcb9e32322a371073cd3672" datatype="html">
         <source>Create test</source>
@@ -393,7 +392,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f13946a4721c217d3ab8fb1f746cc6cbdaf23334" datatype="html">
@@ -401,7 +400,7 @@
         <target>Selecciona una asignatura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b7a285515e41f0c8038d8b8e65b5199cb9928681" datatype="html">
@@ -409,15 +408,7 @@
         <target>Asignatura</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b39eece7483bf84caf38dd938fb1d7c661965893" datatype="html">
-        <source>Number of questions per course: </source>
-        <target>Numero de preguntas por curso: </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="86aec831355ae2b983b0a4756c26028ac610051e" datatype="html">
@@ -425,7 +416,7 @@
         <target>Deseleccionar todo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="028123b0ed924b27efff8769b25de46f8e679f89" datatype="html">
@@ -433,7 +424,23 @@
         <target>Seleccionar todo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a60855756106d28e44c4c9a04b12ad7fc5d4d296" datatype="html">
+        <source>Uncheck Chapter</source>
+        <target>Deseleccionar capitulo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5f7595e043987dde86e8538fa61d352853f5dc7" datatype="html">
+        <source>Check Chapter</source>
+        <target>Seleccionar capitulo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="024ce97c962f343cb454e8f277d2442e304e516e" datatype="html">
@@ -494,7 +501,7 @@
       </trans-unit>
       <trans-unit id="ba42cf7b98cd3552987ee46f302c63523be671d3" datatype="html">
         <source>Page not found :(</source>
-        <target>Pagina no encontrada :()</target>
+        <target>Pagina no encontrada :(</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/page-not-found/page-not-found.component.ts</context>
           <context context-type="linenumber">2</context>

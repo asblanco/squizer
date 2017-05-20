@@ -11,7 +11,8 @@
       </div>
 
       <div class="input-field form-group col s6">
-        <select [(ngModel)]="test.course" name="course" materialize="material_select" (change)="selectCourse()" required>
+        <select [(ngModel)]="test.course" name="course" materialize="material_select"
+          (change)="selectCourse()" required [materializeSelectOptions]="courses">
           <option value="" disabled selected i18n>Select a course</option>
           <option *ngFor="let course of courses" [value]="course.id">{{course.name}}</option>
         </select>
@@ -19,38 +20,54 @@
       </div>
     </div>
 
-    <div *ngIf="course" class="row" id="all">
-      <b><p i18n>Number of questions per course: </p></b>
-      <div *ngFor="let chapter of course.chapters">
-        <div class="input-field">
-          <label for="title" class="active">{{chapter.title}}</label>
-          <input type="number" class="form-control" name="nQuestions" [(ngModel)]="chapter.nQuestions" required>
-        </div>
+    <div *ngIf="course" id="all">
+      <div class="row">
+        <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', false)" i18n>Uncheck All</button>
+        <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', true)" i18n>Check All</button>
       </div>
 
-      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', false)" i18n>Uncheck All</button>
-      <button type="button" class="waves-effect btn squizer-btn" (click)="checkAll('all', true)" i18n>Check All</button>
-      <br><br>
+      <div class="card">
+        <div class="tabs" >
+          <ul class="tabs tabs-fixed-width card-tabs" materialize="tabs">
+            <li class="tab" *ngFor="let chapter of course.chapters">
+              <a (click)="selectChapter(chapter)">{{chapter.title}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-content">
+          <div *ngFor="let chapter of course.chapters" id="ch{{chapter.id}}" [hidden]="chapter != selectedChapter">
+            <b>{{chapter.title}}</b>
 
-      <div *ngFor="let chapter of course.chapters" id="ch{{chapter.id}}">
-        <input type="checkbox" id="course{{chapter.id}}" (change)="checkChapter($event.target.checked, chapter)"/>
-        <label for="course{{chapter.id}}">{{chapter.title}}</label>
+            <div class="row">
+              <div class="input-field col s2">
+                <label for="title"></label>
+                <input type="number" class="form-control" name="nQuestions"
+                  [(ngModel)]="chapter.nQuestions" required>
+              </div>
+              <p class="col s10"> questions out of {{chapter.questions.length}}</p>
+            </div>
+            <div class="row">
+              <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(false, chapter.id)" i18n>Uncheck Chapter</button>
+              <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(true, chapter.id)" i18n>Check Chapter</button>
+            </div>
 
-        <div class="questions" *ngFor="let question of chapter.questions" id="q{{question.id}}">
-          <input type="checkbox" id="question{{question.id}}"
-            (change)="question.checked=$event.target.checked; checkQuestion($event.target.checked, question, chapter)"/>
-          <label for="question{{question.id}}">{{question.title}}</label>
-          <div class="answers" *ngFor="let answer of question.answers">
-            <input type="checkbox" id="answer{{answer.id}}" (change)="answer.checked=$event.target.checked" />
-            <label for="answer{{answer.id}}">{{answer.title}}</label>
+            <div class="questions" *ngFor="let question of chapter.questions" id="q{{question.id}}">
+              <input type="checkbox" class="filled-in checkbox-squizer" id="question{{question.id}}"
+                (change)="question.checked=$event.target.checked; checkQuestion($event.target.checked, question.id)"/>
+              <label for="question{{question.id}}">{{question.title}}</label>
+              <div class="answers" *ngFor="let answer of question.answers">
+                <input type="checkbox" class="filled-in checkbox-squizer" id="answer{{answer.id}}" (change)="answer.checked=$event.target.checked" />
+                <label for="answer{{answer.id}}">{{answer.title}}</label>
+              </div>
+              <br>
+            </div>
           </div>
         </div>
+        <div class="card-action">
+          <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
+            (click)="save()" [disabled]="!newTestForm.valid" i18n>Create test</button>
+        </div>
       </div>
-    </div>
-
-    <div class="modal-footer">
-      <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
-        (click)="save()" [disabled]="!newTestForm.valid" i18n>Create test</button>
     </div>
   </form>
 </div>
