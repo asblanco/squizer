@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Inject, OnChanges, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Course } from '../../../../db/course';
 import { CourseService } from '../../../../db/course.service';
@@ -10,6 +11,7 @@ import { TestsService } from '../../../tests.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config'
 
+import { CustomValidators } from 'ng2-validation';
 import { MaterializeDirective } from "angular2-materialize";
 import { NotificationsService } from 'angular2-notifications';
 
@@ -18,17 +20,18 @@ import { NotificationsService } from 'angular2-notifications';
   templateUrl: './new-test.component.html',
   styleUrls: ['./new-test.component.css']
 })
-export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
+export class NewTestComponent implements OnInit {
   callId: number;
   courses: Course[] = [];
-  course = null; // Course with checked property in questions and answers
-  test: Test;
+  selectedCourse: Course = null; // Course with checked property in questions and answers
+  newTestForm: FormGroup;
   maxLengthTest: number;
   selectedChapter = null;
 
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
     private courseService: CourseService,
     private notificationsService: NotificationsService,
     private router: Router,
@@ -40,141 +43,163 @@ export class NewTestComponent implements AfterViewInit, OnChanges, OnInit {
     this.courseService.getCourses()
     .then(courses => { this.courses = courses; })
     .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
+
+    this.newTestForm = this.fb.group({
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthTest)]],
+      course: 0,
+      call: 0,
+      chapters: this.fb.array([])
+    });
   }
 
   ngOnInit() {
-    // this.courses = this.testsService.courses;
     this.activatedRoute.params.subscribe((params: Params) => {
        this.callId = params['callId'];
      });
-
-    this.test = {
-      id: 0,
-      title: '',
-      course: 0,
-      call: this.callId,
-      creation_date: new Date,
-      questions: [],
-      answers: []
-    };
   }
 
-  ngAfterViewInit() {
+  /*
+  * Array getters of newTestForm
+  */
+
+  get chapters(): FormArray {
+    return this.newTestForm.get('chapters') as FormArray;
+  };
+
+  getQuestions(i: number): FormArray {
+    return this.chapters.controls[i].get('questions') as FormArray;
   }
 
-  ngOnChanges() {
+  getAnswers(i: number, j: number): FormArray {
+    return this.getQuestions(i).controls[j].get('answers') as FormArray;
   }
 
+  // Used to know which chapter to show in the card
   selectChapter(chapter) {
     this.selectedChapter = chapter;
   }
 
+  /*
+  * Checkboxes
+  */
+
   checkAll(divId: string, check: boolean) {
     $('#' + divId + ' :checkbox:enabled').prop('checked', check);
+
+    this.chapters.controls.forEach( (c, i) => {
+      c.value.checked = check;
+      this.getQuestions(i).controls.forEach( (q, j) => {
+        q.value.checked = check;
+        this.getAnswers(i, j).controls.forEach(a => a.value.checked = check);
+      })
+    })
   }
 
-  checkChapter(check: boolean, chapterId) {
-    $('#ch' + chapterId + ' :checkbox:enabled').prop('checked', check);
+  checkChapter(check: boolean, chapter, i) {
+    $('#ch' + chapter.id + ' :checkbox:enabled').prop('checked', check);
+    this.getQuestions(i).controls.forEach( (q, j) => {
+      q.value.checked = check;
+      this.getAnswers(i, j).controls.forEach(a => a.value.checked = check);
+    })
   }
 
-  checkQuestion(check: boolean, questionId) {
+  checkQuestion(check: boolean, questionId, chapterIndex, questionIndex) {
     $('#q' + questionId + ' :checkbox:enabled').prop('checked', check);
+    this.getAnswers(chapterIndex, questionIndex).controls.forEach(a => a.value.checked = check);
   }
+
+  // If I use formControlName in the template, it also unchecks the question
+  checkAnswer(check: boolean, chapterIndex, questionIndex, answerIndex) {
+    this.getAnswers(chapterIndex, questionIndex).controls[answerIndex].value.checked = check;
+  }
+
+  /*
+  * Select a course, download its data and initialize the reactive form
+  */
 
   selectCourse() {
-    this.test.questions = [];
-    this.test.answers = [];
-    this.courseService.getCourseDetails(this.test.course)
+    this.courseService.getCourseDetails(this.newTestForm.value.course)
     .then(course => {
-      this.setArray(course);
+      this.selectedCourse = course;
+      if(course.chapters.length > 0) {
+        this.selectedChapter = course.chapters[0];
+      }
+      this.setForm();
     })
     .catch(() => this.notificationsService.error('Error', 'Al descargar los datos de la asignatura.'));
   }
 
-  setArray(c) {
-    this.course = JSON.parse(JSON.stringify(c)); // Save value without binding
-    let qs, q, a;
-    for (let i = 0; i < c.chapters.length; i++) {
-      qs = c.chapters[i].questions;
-      this.course.chapters[i] = {
-        id: c.chapters[i].id,
-        course: c.chapters[i].course,
-        title: c.chapters[i].title,
-        questions: c.chapters[i].questions,
-        nQuestions: 0
-      };
-      for (let j = 0; j < qs.length; j++) {
-        q = qs[j];
-        this.course.chapters[i].questions[j] = {
-          id: q.id,
-          chapter: q.chapter,
-          title: q.title,
-          answers: q.answers,
+  setForm() {
+    const title = this.newTestForm.value.title;
+    this.newTestForm = this.fb.group({
+      title: [title, [Validators.required, Validators.maxLength(this.maxLengthTest)]],
+      course: [this.selectedCourse.id, [Validators.required]],
+      call: this.callId,
+      chapters: this.fb.array([]),
+    });
+    this.setChapters();
+  }
+
+  setChapters() {
+    const chapters = this.selectedCourse.chapters;
+    let c;
+    for(let i=0; i < chapters.length; i++) {
+      c = (
+        this.fb.group({
+          id: chapters[i].id,
+          title: chapters[i].title,
+          numberQuestions: [0, [CustomValidators.min(0), CustomValidators.max(chapters[i].questions.length)]],
+          questions: this.fb.array([])
+        })
+      )
+      this.setQuestions(c.controls, chapters[i], i);
+      this.chapters.push(c);
+    }
+  }
+
+  setQuestions(c, chapter, i) {
+    const questions = chapter.questions;
+    let q;
+    for(let j = 0; j < questions.length; j++) {
+      q = (
+        this.fb.group({
+          id: questions[j].id,
+          chapter: questions[j].chapter,
+          title: questions[j].title,
+          checked: false,
+          answers: this.fb.array([])
+        })
+      )
+      this.setAnswers(q.controls, questions[j], i, j);
+      c.questions.push(q);
+    }
+  }
+
+  setAnswers(q, question, i, j) {
+    const answers = question.answers;
+    for(let k = 0; k < answers.length; k++) {
+      q.answers.push(
+        this.fb.group({
+          id: answers[k].id,
+          question: question.id,
+          title: answers[k].title,
+          correct: answers[k].correct,
           checked: false
-        };
-        for (let k = 0; k < q.answers.length; k++) {
-          a = q.answers[k];
-          this.course.chapters[i].questions[j].answers[k] = {
-            id: a.id,
-            question: a.question,
-            title: a.title,
-            correct: a.correct,
-            checked: false
-          };
-        }
-      }
+        })
+      )
     }
   }
 
-  generateTest() {
-    let qs;
-    for (let i = 0; i < this.course.chapters.length; i++) {
-      qs = this.course.chapters[i].questions;
-      if (this.course.chapters[i].nQuestions > 0) {
-        const questions: number[][] = [];
-        // Fill in questions and answers arrays with all the checked ones
-        let qi = 0, q;
-        for (let j = 0; j < qs.length; j++) {
-          q = this.course.chapters[i].questions[j];
-          if (q.checked) {
-            questions[qi] = [];
-            questions[qi].push(q.id);
-            let a;
-
-            for (let k = 0; k < q.answers.length; k++) {
-              a = q.answers[k];
-              if (a.checked) {
-                questions[qi].push(a.id);
-              }
-            }
-            qi++;
-          }
-        }
-        // Select them
-        let max, n, maxA, nA;
-        for (let x = 0; x < this.course.chapters[i].nQuestions; x++) {
-          max = questions.length;
-          n = Math.floor(Math.random() * max) + 1;
-          this.test.questions.push(questions[n-1][0]);
-          for (let y = 0; y < 4; y++) {
-            maxA = questions[n-1].length - 1;
-            nA = Math.floor(Math.random() * maxA) + 1;
-            this.test.answers.push(questions[n-1][nA]);
-            questions[n-1].splice(nA, 1);
-          }
-          questions.splice(n-1, 1);
-        }
-      }
-    }
-  }
-
-  save() {
-    this.generateTest();
-    this.testService.create(this.test)
+  onSubmit() {
+    this.testService.generateTest(this.newTestForm.value)
     .then(test => {
-      this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
+      this.testService.create(test)
+      .then(test => {
+        this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
+      })
+      .catch(() => this.notificationsService.error('Error', 'Saving test to database'));
     })
-    .catch(() => this.notificationsService.error('Error', 'Al crear test: ' + this.test.title));
+    .catch((err) => this.notificationsService.alert('Warning', err._body));
   }
 
 }
