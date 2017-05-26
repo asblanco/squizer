@@ -58,6 +58,14 @@ export class NewTestComponent implements OnInit {
      });
   }
 
+  getTotalNumberQuestions() {
+    let sum = 0;
+    this.chapters.controls.forEach(c => {
+      sum += parseInt(c.value.numberQuestions);
+    })
+    return sum;
+  }
+
   /*
   * Array getters of newTestForm
   */

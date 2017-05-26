@@ -21,6 +21,7 @@
 
     <div *ngIf="selectedCourse" id="all">
       <div class="row">
+        <span i18n><b>Total number of questions on the test: {{getTotalNumberQuestions()}}</b></span>
         <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', false)" i18n>Uncheck All</button>
         <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', true)" i18n>Check All</button>
       </div>
@@ -36,45 +37,43 @@
         <div class="card-content" formArrayName="chapters">
           <div *ngFor="let chapter of chapters.controls; let i=index" [formGroupName]="i">
             <div *ngIf="selectedChapter" id="ch{{chapter.value.id}}" [hidden]="chapter.value.id != selectedChapter.id">
-            <b>{{chapter.value.title}}</b>
-
-            <div class="row">
-              <div class="input-field col s2">
-                <label for="numberQuestions"></label>
-                <input type="number" formControlName="numberQuestions">
-                <p *ngIf="chapter.controls.numberQuestions.errors?.min" class="red-text"><b i18n>Minimum is 0</b></p>
-                <p *ngIf="chapter.controls.numberQuestions.errors?.max" class="red-text"><b i18n>Maximum is {{chapter.value.questions.length}}</b></p>
-              </div>
-              <p class="col s10"> questions out of {{chapter.value.questions.length}}</p>
-            </div>
-            <div class="row">
-              <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(false, chapter.value, i)" i18n>Uncheck Chapter</button>
-              <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(true, chapter.value, i)" i18n>Check Chapter</button>
-            </div>
-
-            <div formArrayName="questions">
-              <div class="questions" *ngFor="let question of chapter.controls.questions.controls; let j=index"
-                id="q{{question.value.id}}" [formGroupName]="j">
-                <input type="checkbox" class="filled-in checkbox-squizer" id="question{{question.value.id}}"
-                  (change)="checkQuestion($event.target.checked, question.value.id, i, j)"
-                  formControlName="checked"/>
-                <label for="question{{question.value.id}}" class="black-text">#{{j+1}} {{question.value.title}}</label>
-                <div formArrayName="answers">
-                  <div class="answers" *ngFor="let answer of question.controls.answers.controls; let k=index"
-                    [formGroupName]="k">
-                    <input type="checkbox" class="filled-in checkbox-squizer"
-                      id="answer{{answer.value.id}}" (change)="checkAnswer($event.target.checked, i, j, k)"/>
-                    <label for="answer{{answer.value.id}}" [ngClass]="{'green-text': answer.value.correct}">
-                      {{answer.value.title}}
-                    </label>
-                  </div>
+              <div class="row">
+                <div class="input-field col s2">
+                  <label for="numberQuestions"></label>
+                  <input type="number" formControlName="numberQuestions">
+                  <p *ngIf="chapter.controls.numberQuestions.errors?.min" class="red-text"><b i18n>Minimum is 0</b></p>
+                  <p *ngIf="chapter.controls.numberQuestions.errors?.max" class="red-text"><b i18n>Maximum is {{chapter.value.questions.length}}</b></p>
                 </div>
-                <br>
+                <p class="col s10"> questions out of {{chapter.value.questions.length}}</p>
               </div>
-            </div>
-            </div>
+              <div class="row">
+                <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(false, chapter.value, i)" i18n>Uncheck Chapter</button>
+                <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(true, chapter.value, i)" i18n>Check Chapter</button>
+              </div>
+
+              <div formArrayName="questions">
+                <div class="questions" *ngFor="let question of chapter.controls.questions.controls; let j=index"
+                  id="q{{question.value.id}}" [formGroupName]="j">
+                  <input type="checkbox" class="filled-in checkbox-squizer" id="question{{question.value.id}}"
+                    (change)="checkQuestion($event.target.checked, question.value.id, i, j)"
+                    formControlName="checked"/>
+                  <label for="question{{question.value.id}}" class="black-text">#{{j+1}} {{question.value.title}}</label>
+                  <div formArrayName="answers">
+                    <div class="answers" *ngFor="let answer of question.controls.answers.controls; let k=index"
+                      [formGroupName]="k">
+                      <input type="checkbox" class="filled-in checkbox-squizer"
+                        id="answer{{answer.value.id}}" (change)="checkAnswer($event.target.checked, i, j, k)"/>
+                      <label for="answer{{answer.value.id}}" [ngClass]="{'green-text': answer.value.correct}">
+                        {{answer.value.title}}
+                      </label>
+                    </div> <!-- End answer -->
+                  </div>
+                  <br>
+                </div> <!-- End question -->
+              </div>
+            </div> <!-- End chaper -->
           </div>
-        </div>
+        </div> <!-- End array of chapter -->
         <div class="card-action">
           <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
             [disabled]="!newTestForm.valid" i18n>Create test</button>
