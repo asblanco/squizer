@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { APP_CONFIG } from '../../shared/app-config/app-config';
-import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../shared/app-config/iapp-config';
 
 import { Course } from '../../db/course';
 import { Chapter } from '../../db/chapter';

@@ -1,23 +1,21 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { APP_CONFIG } from '../shared/app-config/app-config';
-import { IAppConfig } from '../shared/app-config/iapp-config';
-
+import { AuthHttp } from 'angular2-jwt';
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 import { SchoolYear } from './school-year';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SchoolYearService {
   private url = this.config.apiEndpoint + 'school-year/';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http,
-    @Inject(APP_CONFIG) private config: IAppConfig
+    @Inject(APP_CONFIG) private config: IAppConfig,
+    public authHttp: AuthHttp
   ) { }
 
   getSchoolYears(): Promise<SchoolYear[]> {
-    return this.http.get(this.url)
+    return this.authHttp.get(this.url)
                .toPromise()
                .then(response => response.json() as SchoolYear[])
                .catch(this.handleError);
@@ -25,15 +23,15 @@ export class SchoolYearService {
 
   getSchoolYear(id: number): Promise<SchoolYear> {
     const url = `${this.url}${id}/`;
-    return this.http.get(url)
+    return this.authHttp.get(url)
       .toPromise()
       .then(response => response.json() as SchoolYear)
       .catch(this.handleError);
   }
 
   create(schoolYear: SchoolYear): Promise<SchoolYear> {
-    return this.http
-      .post(this.url, JSON.stringify(schoolYear), {headers: this.headers})
+    return this.authHttp
+      .post(this.url, JSON.stringify(schoolYear))
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -41,8 +39,8 @@ export class SchoolYearService {
 
   update(schoolYear: SchoolYear): Promise<SchoolYear> {
     const url = `${this.url}${schoolYear.id}/`;
-    return this.http
-      .put(url, JSON.stringify(schoolYear), {headers: this.headers})
+    return this.authHttp
+      .put(url, JSON.stringify(schoolYear))
       .toPromise()
       .then(() => schoolYear)
       .catch(this.handleError);
@@ -50,7 +48,7 @@ export class SchoolYearService {
 
   delete(id: number): Promise<void> {
     const url = `${this.url}${id}/`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.authHttp.delete(url)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

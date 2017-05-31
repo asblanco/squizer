@@ -8,8 +8,8 @@ import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
 import { TestsService } from '../../../tests.service';
 
-import { APP_CONFIG } from '../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../shared/app-config/iapp-config'
+import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
 
 import { CustomValidators } from 'ng2-validation';
 import { MaterializeDirective } from "angular2-materialize";

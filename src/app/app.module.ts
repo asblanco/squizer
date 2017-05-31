@@ -7,16 +7,18 @@ import { AppComponent } from './app.component';
 import { MainAppComponent } from './main-app/main-app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginModule } from './login/login.module';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import * as $ from 'jquery';
 
 @NgModule({
   imports: [
-    AppRoutingModule,
     BrowserModule,
     HttpModule,
+    LoginModule,
     MainAppModule,
+    AppRoutingModule,
     SimpleNotificationsModule.forRoot()
   ],
   declarations: [

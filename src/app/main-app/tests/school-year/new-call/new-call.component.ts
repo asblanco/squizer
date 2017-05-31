@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { CallService } from '../../../db/call.service';
 import { SchoolYear } from '../../../db/school-year';
 import { TestsService } from '../../tests.service';
-import { APP_CONFIG } from '../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';

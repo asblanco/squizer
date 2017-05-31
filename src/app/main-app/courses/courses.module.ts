@@ -1,12 +1,15 @@
 /* Feature Module */
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { NgModule, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesSideNavService } from './courses-side-nav/courses-side-nav.service';
-import { SharedModule } from '../shared/shared.module';
-import { MaterializeModule } from 'angular2-materialize';
+import { SharedModule } from '../../shared/shared.module';
+import { DeleteModule } from '../delete/delete.module';
+// import { MaterializeModule } from 'angular2-materialize';
 
 import { ChapterComponent } from './course/chapter/chapter.component';
 import { CourseComponent } from './course/course.component';
@@ -19,12 +22,14 @@ import { QuestionComponent } from './course/chapter/question/question.component'
 
 @NgModule({
   imports: [
-    CommonModule,
-    MaterializeModule,
-    FormsModule,
+    // CommonModule,
+    // MaterializeModule,
+    // FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    CoursesRoutingModule,
+    DeleteModule
   ],
   declarations: [
     ChapterComponent,

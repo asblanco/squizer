@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { APP_CONFIG } from '../../shared/app-config/app-config';
-import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../shared/app-config/iapp-config';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
 import { CoursesSideNavService } from './courses-side-nav.service';

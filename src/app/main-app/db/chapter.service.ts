@@ -1,30 +1,29 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { APP_CONFIG } from '../shared/app-config/app-config';
-import { IAppConfig } from '../shared/app-config/iapp-config';
+import { AuthHttp } from 'angular2-jwt';
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 import { Chapter } from './chapter';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ChapterService {
   private url = this.config.apiEndpoint + 'chapter/';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http,
+    private authHttp: AuthHttp,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getChapters(): Promise<Chapter[]> {
-    return this.http.get(this.url)
+    return this.authHttp.get(this.url)
                .toPromise()
                .then(response => response.json() as Chapter[])
                .catch(this.handleError);
   }
 
   create(title: string, course: number): Promise<Chapter> {
-    return this.http
-      .post(this.url, JSON.stringify({course: course, title: title, questions: []}), {headers: this.headers})
+    return this.authHttp
+      .post(this.url, JSON.stringify({course: course, title: title, questions: []}))
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -32,8 +31,8 @@ export class ChapterService {
 
   update(chapter: Chapter): Promise<Chapter> {
     const url = `${this.url}${chapter.id}/`;
-    return this.http
-      .put(url, JSON.stringify(chapter), {headers: this.headers})
+    return this.authHttp
+      .put(url, JSON.stringify(chapter))
       .toPromise()
       .then(() => chapter)
       .catch(this.handleError);
@@ -41,7 +40,7 @@ export class ChapterService {
 
   delete(id: number): Promise<void> {
     const url = `${this.url}${id}/`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.authHttp.delete(url)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);

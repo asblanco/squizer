@@ -7,8 +7,8 @@ import { Question } from '../../../../../db/question';
 
 import { AnswerService } from '../../../../../db/answer.service';
 import { QuestionService } from '../../../../../db/question.service';
-import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';

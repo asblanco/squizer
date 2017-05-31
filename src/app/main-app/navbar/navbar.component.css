@@ -25,6 +25,12 @@ img {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.ic_logout {
+  position: absolute;
+  top:0;
+  margin-top: 1em;
+}
+
 /*
  * Side navbar
  */

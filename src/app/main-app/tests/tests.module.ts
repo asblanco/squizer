@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+// import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CallComponent } from './school-year/call/call.component';
@@ -14,8 +15,10 @@ import { SchoolYearComponent } from './school-year/school-year.component';
 import { TestsComponent } from './tests.component';
 import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
 
-import { SharedModule } from '../shared/shared.module';
-import { MaterializeModule } from 'angular2-materialize';
+import { SharedModule } from '../../shared/shared.module';
+import { DeleteModule } from '../delete/delete.module';
+import { TestsRoutingModule } from './tests-routing.module';
+// import { MaterializeModule } from 'angular2-materialize';
 import { TestsService } from './tests.service';
 import { ViewTestComponent } from './school-year/call/list-tests/view-test/view-test.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
@@ -23,12 +26,14 @@ import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/d
 
 @NgModule({
   imports: [
-    CommonModule,
+    // CommonModule,
     SharedModule,
-    FormsModule,
+    // FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MaterializeModule
+    // MaterializeModule,
+    TestsRoutingModule,
+    DeleteModule
   ],
   declarations: [
     CallComponent,

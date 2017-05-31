@@ -4,8 +4,8 @@ import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Test } from '../../../../../db/test';
 import { TestService } from '../../../../../db/test.service';
 
-import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
+import { APP_CONFIG } from '../../../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../../../shared/app-config/iapp-config'
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';

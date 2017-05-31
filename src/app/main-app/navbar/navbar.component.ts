@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Output, Input, AfterViewInit } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
+import { AuthService } from '../../shared/auth/auth.service';
 import { TestsService } from '../tests/tests.service';
 
 import { Subject } from 'rxjs/Subject';
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
+    private auth: AuthService,
     private testsService: TestsService,
     private router: Router
   ) {
@@ -44,6 +46,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   select() {
     (<any>$('.button-collapse')).sideNav('hide');
+  }
+
+  logout() {
+    this.auth.logout();
   }
 
   ngOnDestroy() {

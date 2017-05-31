@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { APP_CONFIG } from '../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { Chapter } from '../../../db/chapter';
 import { Question } from '../../../db/question';

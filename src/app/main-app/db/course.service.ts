@@ -1,38 +1,37 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { APP_CONFIG } from '../shared/app-config/app-config';
-import { IAppConfig } from '../shared/app-config/iapp-config';
+import { AuthHttp } from 'angular2-jwt';
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 import { Course } from './course';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CourseService {
   private url = this.config.apiEndpoint + 'course/';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http,
-    @Inject(APP_CONFIG) private config: IAppConfig
+    @Inject(APP_CONFIG) private config: IAppConfig,
+    private authHttp: AuthHttp,
   ) { }
 
   getCourses(): Promise<Course[]> {
-    return this.http.get(this.config.apiEndpoint + 'courses/')
-               .toPromise()
-               .then(response => response.json() as Course[])
-               .catch(this.handleError);
+    return this.authHttp.get(this.config.apiEndpoint + 'courses/')
+      .toPromise()
+      .then(response => response.json() as Course[])
+      .catch(this.handleError);
   }
 
   getCourseDetails(id: number): Promise<Course> {
     const url = `${this.url}${id}/`;
-    return this.http.get(url)
+    return this.authHttp.get(url)
       .toPromise()
       .then(response => response.json() as Course)
       .catch(this.handleError);
   }
 
   create(name: string): Promise<Course> {
-    return this.http
-      .post(this.url, JSON.stringify({name: name, chapters: []}), {headers: this.headers})
+    return this.authHttp
+      .post(this.url, JSON.stringify({name: name, chapters: []}))
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -40,7 +39,7 @@ export class CourseService {
 
   delete(id: number): Promise<void> {
     const url = `${this.url}${id}/`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.authHttp.delete(url)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
@@ -48,8 +47,8 @@ export class CourseService {
 
   update(course: Course): Promise<Course> {
     const url = `${this.url}${course.id}/`;
-    return this.http
-      .put(url, JSON.stringify(course), {headers: this.headers})
+    return this.authHttp
+      .put(url, JSON.stringify(course))
       .toPromise()
       .then(() => course)
       .catch(this.handleError);

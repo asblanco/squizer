@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { Headers, Http, ResponseContentType } from '@angular/http';
-import { APP_CONFIG } from '../shared/app-config/app-config';
-import { IAppConfig } from '../shared/app-config/iapp-config';
+import { ResponseContentType } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
+import { APP_CONFIG } from '../../shared/app-config/app-config';
+import { IAppConfig } from '../../shared/app-config/iapp-config';
 
 import { Test } from './test';
 import { ViewTest } from './view-test';
@@ -11,16 +12,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TestService {
   private url = this.config.apiEndpoint + 'test/';
-  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http,
+    private authHttp: AuthHttp,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getCourseCallTests(call: number, course: number): Promise<Test[]> {
     const url = `${this.url}?call=${call}&course=${course}`;
-    return this.http.get(url)
+    return this.authHttp.get(url)
                .toPromise()
                .then(response => response.json() as Test[])
                .catch(this.handleError);
@@ -28,15 +28,15 @@ export class TestService {
 
   getTest(id: number): Promise<ViewTest> {
     const url = this.config.apiEndpoint + `retrieve-test/${id}/`;
-    return this.http.get(url)
+    return this.authHttp.get(url)
       .toPromise()
       .then(response => response.json() as ViewTest)
       .catch(this.handleError);
   }
 
   create(test: Test): Promise<Test> {
-    return this.http
-      .post(this.url, JSON.stringify(test), {headers: this.headers})
+    return this.authHttp
+      .post(this.url, JSON.stringify(test))
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -44,8 +44,8 @@ export class TestService {
 
   update(test: Test): Promise<Test> {
     const url = `${this.url}${test.id}/`;
-    return this.http
-      .put(url, JSON.stringify(test), {headers: this.headers})
+    return this.authHttp
+      .put(url, JSON.stringify(test))
       .toPromise()
       .then(() => test)
       .catch(this.handleError);
@@ -53,7 +53,7 @@ export class TestService {
 
   delete(id: number): Promise<void> {
     const url = `${this.url}${id}/`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.authHttp.delete(url)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
@@ -62,7 +62,7 @@ export class TestService {
   downloadPDF(id: number): any {
     // const url = `https://latexonline.cc/compile?url=http://asblanco.com/test.tex`;
     const url = `${this.config.apiEndpoint}test-pdf/${id}/`;
-    return this.http.get(url, { responseType: ResponseContentType.Blob })
+    return this.authHttp.get(url, { responseType: ResponseContentType.Blob })
     .map(
       (res) => {
         return new Blob([res.blob()], { type: 'application/pdf' });
@@ -71,7 +71,7 @@ export class TestService {
 
   downloadTEX(id: number): any {
     const url = `${this.config.apiEndpoint}test-tex/${id}/`;
-    return this.http.get(url, { responseType: ResponseContentType.Blob })
+    return this.authHttp.get(url, { responseType: ResponseContentType.Blob })
     .map(
       (res) => {
         return new Blob([res.blob()], { type: 'plain/text' });
@@ -80,8 +80,8 @@ export class TestService {
 
   generateTest(test): Promise<Test> {
     const url = `${this.config.apiEndpoint}generate-test/`
-    return this.http
-      .post(url, JSON.stringify(test), {headers: this.headers})
+    return this.authHttp
+      .post(url, JSON.stringify(test))
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
