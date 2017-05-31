@@ -1,5 +1,26 @@
-<form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" *ngIf="!auth.loggedIn()">
-  <input type="text" placeholder="username" name="username" [ngModel]="credentials.username" required>
-  <input type="password" placeholder="password" name="password" [ngModel]="credentials.password">
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+    <h2 class="center-align womby-font">Squizer</h2>
+    <div class="row">
+        <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" *ngIf="!auth.loggedIn()">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" name="username" [ngModel]="credentials.username" required>
+                    <label for="username" i18n>Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="password" name="password" [ngModel]="credentials.password" required>
+                    <label for="password" i18n>Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m12">
+                    <p class="right-align">
+                        <button class="btn btn-large waves-effect waves-light squizer-btn" type="submit">Login</button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

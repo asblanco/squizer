@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CourseService {
   private url = this.config.apiEndpoint + 'course/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
@@ -31,9 +33,18 @@ export class CourseService {
 
   create(name: string): Promise<Course> {
     return this.authHttp
-      .post(this.url, JSON.stringify({name: name, chapters: []}))
+      .post(this.url, JSON.stringify({name: name, chapters: []}), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  update(course: Course): Promise<Course> {
+    const url = `${this.url}${course.id}/`;
+    return this.authHttp
+      .put(url, JSON.stringify(course), {headers: this.headers})
+      .toPromise()
+      .then(() => course)
       .catch(this.handleError);
   }
 
@@ -42,15 +53,6 @@ export class CourseService {
     return this.authHttp.delete(url)
       .toPromise()
       .then(() => null)
-      .catch(this.handleError);
-  }
-
-  update(course: Course): Promise<Course> {
-    const url = `${this.url}${course.id}/`;
-    return this.authHttp
-      .put(url, JSON.stringify(course))
-      .toPromise()
-      .then(() => course)
       .catch(this.handleError);
   }
 

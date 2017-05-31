@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
+import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/add/operator/map';
 
 import { APP_CONFIG } from '../app-config/app-config';
@@ -14,6 +15,7 @@ export class AuthService {
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
+    private notificationsService: NotificationsService,
     private router: Router,
   ) {}
 
@@ -25,7 +27,7 @@ export class AuthService {
           localStorage.setItem('token', data.token),
           this.router.navigate(['/manage-tests/']);
         },
-        error => console.log(error)
+        error => this.notificationsService.error('Error', 'Incorrect username or password')
       );
   }
 

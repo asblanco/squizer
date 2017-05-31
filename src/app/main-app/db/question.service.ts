@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class QuestionService {
   private url = this.config.apiEndpoint + 'question/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private authHttp: AuthHttp,
@@ -16,7 +18,7 @@ export class QuestionService {
 
   create(question: Question): Promise<Question> {
     return this.authHttp
-      .post(this.url, JSON.stringify(question))
+      .post(this.url, JSON.stringify(question), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -25,7 +27,7 @@ export class QuestionService {
   update(question: Question): Promise<Question> {
     return this.authHttp
       .put( this.config.apiEndpoint + `update-question/${question.id}/`,
-            JSON.stringify(question) )
+            JSON.stringify(question), {headers: this.headers} )
       .toPromise()
       .then(() => question)
       .catch(this.handleError);

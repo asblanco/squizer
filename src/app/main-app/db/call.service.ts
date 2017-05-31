@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { Call } from './call';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
@@ -7,6 +8,7 @@ import { IAppConfig } from '../../shared/app-config/iapp-config';
 @Injectable()
 export class CallService {
   private url = this.config.apiEndpoint + 'call/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private authHttp: AuthHttp,
@@ -23,7 +25,7 @@ export class CallService {
 
   create(call: Call): Promise<Call> {
     return this.authHttp
-      .post(this.url, JSON.stringify(call))
+      .post(this.url, JSON.stringify(call), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -32,7 +34,7 @@ export class CallService {
   update(call: Call): Promise<Call> {
     const url = `${this.url}${call.id}/`;
     return this.authHttp
-      .put(url, JSON.stringify(call))
+      .put(url, JSON.stringify(call), {headers: this.headers})
       .toPromise()
       .then(() => call)
       .catch(this.handleError);

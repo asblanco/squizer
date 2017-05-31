@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { ResponseContentType } from '@angular/http';
+import { Headers, ResponseContentType } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TestService {
   private url = this.config.apiEndpoint + 'test/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private authHttp: AuthHttp,
@@ -36,7 +37,7 @@ export class TestService {
 
   create(test: Test): Promise<Test> {
     return this.authHttp
-      .post(this.url, JSON.stringify(test))
+      .post(this.url, JSON.stringify(test), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
@@ -45,7 +46,7 @@ export class TestService {
   update(test: Test): Promise<Test> {
     const url = `${this.url}${test.id}/`;
     return this.authHttp
-      .put(url, JSON.stringify(test))
+      .put(url, JSON.stringify(test), {headers: this.headers})
       .toPromise()
       .then(() => test)
       .catch(this.handleError);

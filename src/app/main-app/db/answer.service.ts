@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
+import { Headers } from '@angular/http';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
 import { Answer } from './answer';
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AnswerService {
   private url = this.config.apiEndpoint + 'answer/';
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private authHttp: AuthHttp,
@@ -16,7 +18,7 @@ export class AnswerService {
 
   create(answer: Answer): Promise<Answer> {
     return this.authHttp
-      .post(this.url, JSON.stringify(answer))
+      .post(this.url, JSON.stringify(answer), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);

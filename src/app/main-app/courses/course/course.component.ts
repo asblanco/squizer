@@ -50,12 +50,10 @@ export class CourseComponent implements OnDestroy {
   }
 
   openNewChapterModal() {
-    // (<any>$('#newChapterModal')).openModal();
     this.newChapterModal.emit({action:"modal",params:['open']});
   }
 
   openDeleteCourseModal() {
-    // (<any>$('#deleteCourseModal')).openModal();
     this.deleteModal.emit({action:"modal",params:['open']});
   }
 
@@ -65,7 +63,7 @@ export class CourseComponent implements OnDestroy {
   getCourse(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
       .then(course => { this.course = course; })
-      .catch(() => this.notificationsService.error('Error', 'Al descargar detalles de asignatura.'));
+      .catch(() => this.notificationsService.error('Error', 'Downloading course details.'));
   }
 
   deleteCourse(course: Course): void {
@@ -75,7 +73,7 @@ export class CourseComponent implements OnDestroy {
           this.coursesSideNavService.deleteCourse(course);
           this.router.navigate(['/manage-courses/']);
         })
-        .catch(() => this.notificationsService.error('Error', 'Al eliminar asignatura ' + course.name));
+        .catch(() => this.notificationsService.error('Error', 'Deleting course ' + course.name));
   }
 
   deleteChapter(chapter) {
