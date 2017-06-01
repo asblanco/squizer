@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { SchoolYear } from '../../../db/school-year';
 import { SchoolYearService } from '../../../db/school-year.service';
-import { TestsService } from '../../tests.service';
+import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
@@ -27,7 +27,7 @@ export class EditSchoolYearComponent implements OnChanges {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private schoolYearService: SchoolYearService,
-    private testsService: TestsService,
+    private testsSideNavService: TestsSideNavService,
     private router: Router,
     private notificationsService: NotificationsService
   ) {
@@ -75,7 +75,7 @@ export class EditSchoolYearComponent implements OnChanges {
       this.schoolYear.title = schoolYear.title;
       this.schoolYear.start_date = schoolYear.start_date;
       this.schoolYear.end_date = schoolYear.end_date;
-      this.testsService.updateSchoolYear(schoolYear);
+      this.testsSideNavService.updateSchoolYear(schoolYear);
       this.ngOnChanges();
     })
     .catch(() => {
@@ -88,7 +88,7 @@ export class EditSchoolYearComponent implements OnChanges {
     this.schoolYearService
       .delete(this.schoolYear.id)
       .then(() => {
-        this.testsService.deleteSchoolYear(this.schoolYear);
+        this.testsSideNavService.deleteSchoolYear(this.schoolYear);
         this.router.navigate(['/manage-tests/']);
       })
       .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.schoolYear.title));

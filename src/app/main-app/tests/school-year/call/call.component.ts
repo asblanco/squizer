@@ -5,7 +5,7 @@ import { Call } from '../../../db/call';
 import { CallService } from '../../../db/call.service';
 import { CourseService } from '../../../db/course.service';
 import { Course } from '../../../db/course';
-import { TestsService } from '../../tests.service';
+import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
@@ -27,7 +27,7 @@ export class CallComponent implements OnInit {
     private courseService: CourseService,
     private notificationsService: NotificationsService,
     private router: Router,
-    private testsService: TestsService
+    private testsSideNavService: TestsSideNavService
   ) {
     this.courseService.getCourses()
     .then(courses => { this.courses = courses; })
@@ -49,7 +49,7 @@ export class CallComponent implements OnInit {
     this.callService.getCall(id)
     .then(call => {
       this.call = call;
-      this.testsService.announceSelected(call.school_year, call.id);
+      this.testsSideNavService.announceSelected(call.school_year, call.id);
     })
     .catch(() => this.notificationsService.error('Error', 'Al descargar los datos de la convocatoria.'));
   }
@@ -58,7 +58,7 @@ export class CallComponent implements OnInit {
     this.callService
     .delete(this.call.id)
     .then(() => {
-      this.testsService.deleteCall(this.call);
+      this.testsSideNavService.deleteCall(this.call);
       this.router.navigate(['/manage-tests/school-year/' + this.call.school_year]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al eliminar convocatoria ' + this.call.title));

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { CallService } from '../../../db/call.service';
 import { SchoolYear } from '../../../db/school-year';
-import { TestsService } from '../../tests.service';
+import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
@@ -27,7 +27,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
     private callService: CallService,
     private notificationsService: NotificationsService,
     private router: Router,
-    private testsService: TestsService,
+    private testsSideNavService: TestsSideNavService,
     @Inject(APP_CONFIG) private config: IAppConfig,
   ) {
     this.maxLengthCall = config.MAXLENGTH_CALL;
@@ -68,7 +68,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
   onSubmit() {
     this.callService.create(this.newCallForm.value)
     .then(call => {
-      this.testsService.addCall(call);
+      this.testsSideNavService.addCall(call);
       this.router.navigate(['/manage-tests/school-year/' + call.school_year + '/call/' + call.id]);
     })
     .catch(() => this.notificationsService.error('Error', 'Al crear convocatoria: ' + this.newCallForm.value.title));

@@ -3,7 +3,7 @@ import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
 import { Call } from '../../../../db/call';
 import { CallService } from '../../../../db/call.service';
-import { TestsService } from '../../../tests.service';
+import { TestsSideNavService } from '../../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
 
@@ -25,7 +25,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private callService: CallService,
-    private testsService: TestsService,
+    private testsSideNavService: TestsSideNavService,
     private notificationsService: NotificationsService
   ) {
     this.maxLengthCall = config.MAXLENGTH_CALL;
@@ -70,7 +70,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
       this.call.title = call.title;
       this.call.start_date = call.start_date;
       this.call.end_date = call.end_date;
-      this.testsService.updateCall(call);
+      this.testsSideNavService.updateCall(call);
       this.ngOnChanges();
     })
     .catch(() => {

@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy, Output, Input, AfterViewInit } from '@ang
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
 import { AuthService } from '../../shared/auth/auth.service';
-import { TestsService } from '../tests/tests.service';
+import { CoursesSideNavService } from '../courses/courses-sidenav/courses-sidenav.service';
+import { TestsSideNavService } from '../tests/tests-sidenav/tests-sidenav.service';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
@@ -14,12 +15,13 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
-  activeTab: number; // 1=courses, 2=tests
+  activeTab = 0; // 1=courses, 2=tests
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private auth: AuthService,
-    private testsService: TestsService,
+    private coursesSideNavService: CoursesSideNavService,
+    private testsSideNavService: TestsSideNavService,
     private router: Router
   ) {
     router.events
@@ -30,10 +32,12 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         const regexpCourses = new RegExp('/manage-courses.*');
         const regexpTests = new RegExp('/manage-tests.*');
 
-        if (regexpCourses.test(trigger)) {
+        if (regexpCourses.test(trigger) && this.activeTab != 1) {
           this.activeTab = 1;
-        } else if (regexpTests.test(trigger)) {
+          this.coursesSideNavService.getCourses();
+        } else if (regexpTests.test(trigger) && this.activeTab != 2) {
           this.activeTab = 2;
+          testsSideNavService.getSchoolYears();
         }
     });
   }

@@ -99,7 +99,7 @@
         <source>COURSES</source>
         <target/>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/courses/courses-side-nav/courses-side-nav.component.ts</context>
+          <context context-type="sourcefile">app/main-app/courses/courses-sidenav/courses-sidenav.component.ts</context>
           <context context-type="linenumber">2</context>
         </context-group>
       </trans-unit>
@@ -108,7 +108,7 @@
   New Course</source>
         <target/>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/courses/courses-side-nav/courses-side-nav.component.ts</context>
+          <context context-type="sourcefile">app/main-app/courses/courses-sidenav/courses-sidenav.component.ts</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
@@ -455,7 +455,7 @@
         <source>SCHOOL YEARS</source>
         <target/>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/tests/tests-side-nav/tests-side-nav.component.ts</context>
+          <context context-type="sourcefile">app/main-app/tests/tests-sidenav/tests-sidenav.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>

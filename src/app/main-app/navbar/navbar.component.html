@@ -29,10 +29,10 @@
     <!-- Collapsible side nav in mobile view -->
     <ul class="side-nav" id="mobile-sidenav">
       <div *ngIf="activeTab == 1">
-        <app-courses-side-nav></app-courses-side-nav>
+        <app-courses-sidenav></app-courses-sidenav>
       </div>
       <div *ngIf="activeTab == 2">
-        <app-tests-side-nav (click)="select()"></app-tests-side-nav>
+        <app-tests-sidenav (click)="select()"></app-tests-sidenav>
       </div>
       <li ><a (click)="logout()">
         <i><img src="../../../../assets/icons/ic_exit_to_app.svg" alt="log out"></i>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { SchoolYear } from '../../db/school-year';
 import { SchoolYearService } from '../../db/school-year.service';
-import { TestsService } from '../tests.service';
+import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
 
 import { NotificationsService } from 'angular2-notifications';
 
@@ -20,7 +20,7 @@ export class SchoolYearComponent {
     private activatedRoute: ActivatedRoute,
     private notificationsService: NotificationsService,
     private schoolYearService: SchoolYearService,
-    private testsService: TestsService
+    private testsSideNavService: TestsSideNavService
   ) {
     this.activatedRoute.params.subscribe((params: Params) => {
        this.schoolYearId = params['syId'];
@@ -32,7 +32,7 @@ export class SchoolYearComponent {
     this.schoolYearService.getSchoolYear(id)
     .then(schoolYear => {
       this.schoolYear = schoolYear;
-      this.testsService.announceSelected(schoolYear.id, null);
+      this.testsSideNavService.announceSelected(schoolYear.id, null);
     })
     .catch(() => this.notificationsService.error('Error', 'Al descargar los datos del curso.'));
   }

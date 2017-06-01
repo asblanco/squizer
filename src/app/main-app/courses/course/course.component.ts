@@ -8,7 +8,7 @@ import { Chapter } from '../../db/chapter';
 import { Question } from '../../db/question';
 import { CourseService } from '../../db/course.service';
 import { ChapterService } from '../../db/chapter.service';
-import { CoursesSideNavService } from '../courses-side-nav/courses-side-nav.service';
+import { CoursesSideNavService } from '../courses-sidenav/courses-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';

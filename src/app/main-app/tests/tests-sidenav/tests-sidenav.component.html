@@ -1,17 +1,17 @@
 <li><div class="center bold" i18n>SCHOOL YEARS</div></li>
 <li><div class="divider"></div></li>
 <li *ngFor="let schoolYear of (schoolYears$ | async)"
-    [class.active]="((selectedCallId$ | async) === null) && (schoolYear.id === (selectedSchoolYearId$ | async))">
+    [class.active]="(selectedCallId === null) && (schoolYear.id === selectedSchoolYearId)">
   <a  class="school-year truncate"
       routerLink="/manage-tests/school-year/{{schoolYear.id}}">
       <b>{{schoolYear.title | uppercase}}</b></a>
   <ul>
-    <li *ngFor="let call of schoolYear.calls" [class.active]="call.id == (selectedCallId$ | async)">
+    <li *ngFor="let call of schoolYear.calls" [class.active]="call.id === selectedCallId">
       <a  class="truncate"
           routerLink="/manage-tests/school-year/{{schoolYear.id}}/call/{{call.id}}">
           = {{call.title}}</a>
     </li>
-    <li *ngIf="schoolYear.id === (selectedSchoolYearId$ | async)">
+    <li *ngIf="schoolYear.id === selectedSchoolYearId">
       <app-new-call [schoolYear]="schoolYear"></app-new-call>
     </li>
   </ul>
@@ -21,5 +21,3 @@
  last one when there is scroll down, or two more <li> in firefox -->
 <li>-</li>
 <li>-</li>
-
-<!-- New SchoolYear Modal -->

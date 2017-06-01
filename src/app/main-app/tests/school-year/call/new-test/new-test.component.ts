@@ -6,7 +6,7 @@ import { Course } from '../../../../db/course';
 import { CourseService } from '../../../../db/course.service';
 import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
-import { TestsService } from '../../../tests.service';
+import { TestsSideNavService } from '../../../tests-sidenav/tests-sidenav.service';
 
 import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
@@ -36,7 +36,7 @@ export class NewTestComponent implements OnInit {
     private notificationsService: NotificationsService,
     private router: Router,
     private testService: TestService,
-    private testsService: TestsService
+    private testsSideNavService: TestsSideNavService
   ) {
     this.maxLengthTest = config.MAXLENGTH_TEST;
 

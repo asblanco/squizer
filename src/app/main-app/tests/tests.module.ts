@@ -11,12 +11,11 @@ import { NewSchoolYearComponent } from './new-school-year/new-school-year.compon
 import { NewTestComponent } from './school-year/call/new-test/new-test.component';
 import { SchoolYearComponent } from './school-year/school-year.component';
 import { TestsComponent } from './tests.component';
-import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component';
+import { TestsSideNavComponent } from './tests-sidenav/tests-sidenav.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { DeleteModule } from '../delete/delete.module';
 import { TestsRoutingModule } from './tests-routing.module';
-import { TestsService } from './tests.service';
 import { TestDetailComponent } from './school-year/call/list-tests/test-detail/test-detail.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
 import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/delete-test.component';
@@ -49,6 +48,6 @@ import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/d
     SchoolYearComponent,
     TestsSideNavComponent
   ],
-  providers: [ TestsService ]
+  providers: []
 })
 export class TestsModule {}

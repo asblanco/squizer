@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { Call } from '../db/call';
-import { Course } from '../db/course';
+import { Call } from '../../db/call';
+import { Course } from '../../db/course';
 import { NotificationsService } from 'angular2-notifications';
-import { SchoolYear } from '../db/school-year';
-import { SchoolYearService } from '../db/school-year.service';
+import { SchoolYear } from '../../db/school-year';
+import { SchoolYearService } from '../../db/school-year.service';
 
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class TestsService {
+export class TestsSideNavService {
   schoolYears: SchoolYear[] = [];
 
   // Observable string sources
@@ -25,9 +25,7 @@ export class TestsService {
   constructor(
     private notificationsService: NotificationsService,
     private schoolYearService: SchoolYearService
-  ) {
-    this.getSchoolYears();
-  }
+  ) {}
 
   getSchoolYears() {
     this.schoolYearService.getSchoolYears()

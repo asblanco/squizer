@@ -1,26 +1,30 @@
 import { Component, EventEmitter, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { APP_CONFIG } from '../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../shared/app-config/iapp-config';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
-import { CoursesSideNavService } from './courses-side-nav.service';
+import { CoursesSideNavService } from './courses-sidenav.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/filter';
 
 @Component({
-  selector: 'app-courses-side-nav',
-  templateUrl: './courses-side-nav.component.html',
-  styleUrls: ['./courses-side-nav.component.css']
+  selector: 'app-courses-sidenav',
+  templateUrl: './courses-sidenav.component.html',
+  styleUrls: ['./courses-sidenav.component.css']
 })
 export class CoursesSideNavComponent {
   selectedCourseId: number;
   courses$: Observable<Course[]>;
   maxLengthCourse: number;
   newEditModal = new EventEmitter<string|MaterializeAction>();
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private courseService: CourseService,
@@ -31,6 +35,21 @@ export class CoursesSideNavComponent {
   ) {
     this.maxLengthCourse = config.MAXLENGTH_COURSE;
     this.courses$ = coursesSideNavService.getCourses$;
+
+    this.router.events
+    .filter(event => event instanceof NavigationEnd)
+    .takeUntil(this.ngUnsubscribe)
+    .subscribe((event: NavigationEnd) => {
+      let trigger = event.urlAfterRedirects;
+      let regexp = new RegExp('/manage-courses/course/[1-9]+');
+
+      if (event.urlAfterRedirects === '/manage-courses') {
+        this.selectedCourseId = null;
+      } else if (regexp.test(trigger)) {
+        let splitted = trigger.split("/", 4);
+        this.selectedCourseId = +splitted[3];
+      }
+    });
   }
 
   openCourseModal() {
@@ -53,6 +72,5 @@ export class CoursesSideNavComponent {
 
   selectCourse(id: number) {
     (<any>$('.button-collapse')).sideNav('hide');
-    this.selectedCourseId = id;
   }
 }
