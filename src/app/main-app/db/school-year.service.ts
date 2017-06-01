@@ -8,7 +8,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class SchoolYearService {
-  private url = this.config.apiEndpoint + 'school-year/';
+  private url = this.config.apiEndpoint + 'schoolyear/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
@@ -17,7 +17,7 @@ export class SchoolYearService {
   ) { }
 
   getSchoolYears(): Promise<SchoolYear[]> {
-    return this.authHttp.get(this.url)
+    return this.authHttp.get(this.config.apiEndpoint + 'schoolyears/')
                .toPromise()
                .then(response => response.json() as SchoolYear[])
                .catch(this.handleError);

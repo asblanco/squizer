@@ -65,8 +65,14 @@ export class EditQuestionModalComponent implements OnChanges {
   }
 
   setAnswers(answers: Answer[]) {
-    // TODO add validators to answers title
-    const answerFGs = this.question.answers.map(answer => this.fb.group(answer));
+    const answerFGs = this.question.answers.map(answer =>
+      this.fb.group({
+        id: answer.id,
+        question: answer.question,
+        title: [answer.title, [Validators.required, Validators.maxLength(this.maxLengthAnswer)]],
+        correct: answer.correct
+      })
+    );
     const answerFormArray = this.fb.array(answerFGs);
     this.questionForm.setControl('answers', answerFormArray);
   }
@@ -88,56 +94,16 @@ export class EditQuestionModalComponent implements OnChanges {
     this.answers.removeAt(i);
   }
 
-  /*
-  * Submit
-  */
-
-  // TODO server should read question and its answers and update!! (remove, update and create as needed)
   onSubmit() {
-    const noInserts = this.updateQuestionWithoutInserts(this.questionForm.value);
-    const answers = this.answers.value;
-
-    /* Update and delete answers and title question */
-    this.questionService.update(noInserts)
+    this.questionService.update(this.questionForm.value)
       .then(question => {
         this.editedQuestion.emit(question);
-
-        /* Create the new answers */
-        for (let i = 0; i < answers.length; i++) {
-          if (answers[i].id === 0) {
-            this.answerService.create(answers[i])
-              .then(answer => {
-                noInserts.answers.push(answer);
-                this.editedQuestion.emit(noInserts);
-                this.ngOnChanges();
-              })
-              .catch(() => this.notificationsService.error('Error', 'Al crear las nuevas respuestas.'));
-          }
-        }
         this.ngOnChanges();
       })
       .catch(() => {
-        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + noInserts.title);
+        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + this.questionForm.value.title);
         this.ngOnChanges();
       });
-  }
-
-  updateQuestionWithoutInserts(completeQuestion: Question): Question {
-    const answersDeepCopy: Answer[] = new Array<Answer>();
-    for (let i = 0; i < completeQuestion.answers.length; i++) {
-      if (completeQuestion.answers[i].id !== 0) {
-        answersDeepCopy.push(completeQuestion.answers[i]);
-      }
-    }
-
-    const updateQ: Question = {
-      id: completeQuestion.id,
-      chapter: completeQuestion.chapter,
-      title: completeQuestion.title,
-      last_modified: new Date,
-      answers: answersDeepCopy
-    };
-    return updateQ;
   }
 
   revert() { this.ngOnChanges(); }

@@ -2,7 +2,7 @@ import { SchoolYear } from './school-year';
 import { Course } from './course';
 import { Answer } from './answer';
 
-export class ViewTest {
+export class TestDetail {
   id: number;
   title: string;
   creation_date: Date;

@@ -51,6 +51,7 @@ export class TestsService {
   }
 
   updateSchoolYear(schoolYear: SchoolYear) {
+    schoolYear.calls = this.schoolYears[this.indexOf(this.schoolYears, schoolYear.id)].calls;
     this.schoolYears.splice(this.indexOf(this.schoolYears, schoolYear.id), 1, schoolYear);
     this.announceSchoolYearList(this.schoolYears);
   }

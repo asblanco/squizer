@@ -463,7 +463,7 @@
         <source>Updated <x id="INTERPOLATION"/></source>
         <target>Actualizado o <x id="INTERPOLATION"/></target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/view-test/view-test.component.ts</context>
+          <context context-type="sourcefile">app/main-app/tests/school-year/call/list-tests/test-detail/test-detail.component.ts</context>
           <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>

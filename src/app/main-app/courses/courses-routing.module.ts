@@ -9,6 +9,7 @@ const coursesRoutes: Routes = [
     path: '',
     component: CoursesComponent,
     children: [
+      { path: 'course', redirectTo: '/manage-courses', pathMatch: 'full' },
       { path: 'course/:courseId', component: CourseComponent }
     ]
   }

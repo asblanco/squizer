@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { ViewTest } from '../../../../../db/view-test';
+import { TestDetail } from '../../../../../db/test-detail';
 
 import { TestService } from '../../../../../db/test.service';
 import { NotificationsService } from 'angular2-notifications';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-view-test',
-  templateUrl: './view-test.component.html',
-  styleUrls: ['./view-test.component.css']
+  selector: 'app-test-detail',
+  templateUrl: './test-detail.component.html',
+  styleUrls: ['./test-detail.component.css']
 })
-export class ViewTestComponent implements OnInit {
-  test: ViewTest;
+export class TestDetailComponent implements OnInit {
+  test: TestDetail;
 
   constructor(
     private activatedRoute: ActivatedRoute,

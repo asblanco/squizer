@@ -26,7 +26,7 @@ export class QuestionService {
 
   update(question: Question): Promise<Question> {
     return this.authHttp
-      .put( this.config.apiEndpoint + `update-question/${question.id}/`,
+      .put(`${this.url}${question.id}/`,
             JSON.stringify(question), {headers: this.headers} )
       .toPromise()
       .then(() => question)

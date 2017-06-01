@@ -14,7 +14,9 @@
       <td>{{test.title}}</td>
       <td>{{test.creation_date | date:'d MMM yyyy'}}</td>
       <td>
-        <a routerLink="/manage-tests/school-year/{{schoolYearId}}/call/{{callId}}/test/{{test.id}}">
+        <a routerLink="/manage-tests/school-year/{{schoolYearId}}/call/{{callId}}/test/{{test.id}}"
+        materialize="tooltip" class="tooltipped" data-position="bottom"
+        data-delay="50" data-tooltip="Open">
           <i class="material-icons icon-blue">visibility</i></a>
         <app-edit-test [test]="test"></app-edit-test>
         <app-delete-test [test]="test" [tests]="tests"></app-delete-test>

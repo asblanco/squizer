@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CallComponent } from './school-year/call/call.component';
@@ -18,20 +16,16 @@ import { TestsSideNavComponent } from './tests-side-nav/tests-side-nav.component
 import { SharedModule } from '../../shared/shared.module';
 import { DeleteModule } from '../delete/delete.module';
 import { TestsRoutingModule } from './tests-routing.module';
-// import { MaterializeModule } from 'angular2-materialize';
 import { TestsService } from './tests.service';
-import { ViewTestComponent } from './school-year/call/list-tests/view-test/view-test.component';
+import { TestDetailComponent } from './school-year/call/list-tests/test-detail/test-detail.component';
 import { EditTestComponent } from './school-year/call/list-tests/edit-test/edit-test.component';
 import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/delete-test.component';
 
 @NgModule({
   imports: [
-    // CommonModule,
     SharedModule,
-    // FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    // MaterializeModule,
     TestsRoutingModule,
     DeleteModule
   ],
@@ -46,7 +40,7 @@ import { DeleteTestComponent } from './school-year/call/list-tests/delete-test/d
     SchoolYearComponent,
     TestsSideNavComponent,
     TestsComponent,
-    ViewTestComponent,
+    TestDetailComponent,
     EditTestComponent,
     DeleteTestComponent
   ],

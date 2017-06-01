@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div *ngIf="selectedCourse" id="all">
+    <div *ngIf="selectedCourse && selectedCourse.chapters.length > 0" id="all">
       <div class="row">
         <span i18n><b>Total number of questions on the test: {{getTotalNumberQuestions()}}</b></span>
         <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', false)" i18n>Uncheck All</button>

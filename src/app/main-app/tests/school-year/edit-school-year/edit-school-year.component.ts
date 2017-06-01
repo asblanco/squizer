@@ -57,7 +57,6 @@ export class EditSchoolYearComponent implements OnChanges {
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthSchoolYear)]],
       start_date: [new Date(), [Validators.required]],
       end_date: [new Date(), [Validators.required]],
-      calls: this.fb.array([])
     });
   }
 
@@ -71,12 +70,6 @@ export class EditSchoolYearComponent implements OnChanges {
   }
 
   onSubmit() {
-    // Set calls array here because the form could have been initialized before
-    // the user modified the calls array, so in this form the array is not updated
-    const callFGs = this.schoolYear.calls.map(call => this.fb.group(call));
-    const callFormArray = this.fb.array(callFGs);
-    this.editSchoolYearForm.setControl('calls', callFormArray);
-
     this.schoolYearService.update(this.editSchoolYearForm.value)
     .then(schoolYear => {
       this.schoolYear.title = schoolYear.title;

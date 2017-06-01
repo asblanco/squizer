@@ -1,4 +1,6 @@
-<a (click)="openEditTestModal(test.id)"><i class="material-icons icon-blue">mode_edit</i></a>
+<a (click)="openEditTestModal(test.id)" materialize="tooltip" class="tooltipped"
+data-position="bottom" data-delay="50" data-tooltip="Edit">
+  <i class="material-icons icon-blue">mode_edit</i></a>
 
 <div id="editTestModal{{test.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editTestModal">
   <form #editTestForm="ngForm" novalidate>

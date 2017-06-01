@@ -17,14 +17,14 @@ export class CourseService {
   ) { }
 
   getCourses(): Promise<Course[]> {
-    return this.authHttp.get(this.config.apiEndpoint + 'courses/')
+    return this.authHttp.get(this.url)
       .toPromise()
       .then(response => response.json() as Course[])
       .catch(this.handleError);
   }
 
   getCourseDetails(id: number): Promise<Course> {
-    const url = `${this.url}${id}/`;
+    const url = `${this.config.apiEndpoint}course-detail/${id}/`;
     return this.authHttp.get(url)
       .toPromise()
       .then(response => response.json() as Course)

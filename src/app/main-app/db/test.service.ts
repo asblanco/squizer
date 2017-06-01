@@ -5,7 +5,7 @@ import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
 
 import { Test } from './test';
-import { ViewTest } from './view-test';
+import { TestDetail } from './test-detail';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
@@ -27,11 +27,11 @@ export class TestService {
                .catch(this.handleError);
   }
 
-  getTest(id: number): Promise<ViewTest> {
-    const url = this.config.apiEndpoint + `retrieve-test/${id}/`;
+  getTest(id: number): Promise<TestDetail> {
+    const url = this.config.apiEndpoint + `test-detail/${id}/`;
     return this.authHttp.get(url)
       .toPromise()
-      .then(response => response.json() as ViewTest)
+      .then(response => response.json() as TestDetail)
       .catch(this.handleError);
   }
 
