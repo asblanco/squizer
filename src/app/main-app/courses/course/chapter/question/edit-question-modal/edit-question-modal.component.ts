@@ -95,15 +95,31 @@ export class EditQuestionModalComponent implements OnChanges {
   }
 
   onSubmit() {
-    this.questionService.update(this.questionForm.value)
-      .then(question => {
-        this.editedQuestion.emit(question);
-        this.ngOnChanges();
-      })
-      .catch(() => {
-        this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + this.questionForm.value.title);
-        this.ngOnChanges();
-      });
+    // Check if it creates at least 1 answer correct and 3 incorrects
+    let question = this.questionForm.value;
+    let corrects = 0;
+    let incorrects = 0;
+    for(let i = 0; i < question.answers.length; i++) {
+      if(question.answers[i].correct) {
+        corrects++;
+      } else {
+        incorrects++;
+      }
+    }
+
+    if(corrects >= 1 && incorrects >= 3) {
+      this.questionService.update(question)
+        .then(question => {
+          this.editedQuestion.emit(question);
+          this.ngOnChanges();
+        })
+        .catch(() => {
+          this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + question.title);
+          this.ngOnChanges();
+        });
+    } else {
+      this.notificationsService.alert('Warning', 'You must choose at least 1 correct and 3 incorrects')
+    }
   }
 
   revert() { this.ngOnChanges(); }

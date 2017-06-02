@@ -32,6 +32,7 @@ export class NewQuestionModalComponent implements OnChanges {
       this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
 
       this.newQuestion = this.fb.group({
+        id: 0,
         title: [''],
         chapter: 0,
         answers: this.fb.array([])
@@ -49,6 +50,7 @@ export class NewQuestionModalComponent implements OnChanges {
 
   createForm() {
     this.newQuestion = this.fb.group({
+      id: 0,
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthQuestion)]],
       chapter: this.chapter.id,
       answers: this.fb.array([
@@ -69,6 +71,7 @@ export class NewQuestionModalComponent implements OnChanges {
 
   initAnswer(c: boolean) {
     return this.fb.group({
+      id: 0,
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthAnswer)]],
       correct: c
     });
@@ -83,12 +86,28 @@ export class NewQuestionModalComponent implements OnChanges {
   }
 
   onSubmit() {
-    this.questionService.create(this.newQuestion.value)
-    .then(question => {
-        this.chapter.questions.push(question);
-      })
-      .catch(() => this.notificationsService.error('Error', 'Al crear pregunta: ' + this.newQuestion.value.title));
-    this.ngOnChanges();
+    // Check if it creates at least 1 answer correct and 3 incorrects
+    let newQuestion = this.newQuestion.value;
+    let corrects = 0;
+    let incorrects = 0;
+    for(let i = 0; i < newQuestion.answers.length; i++) {
+      if(newQuestion.answers[i].correct) {
+        corrects++;
+      } else {
+        incorrects++;
+      }
+    }
+
+    if(corrects >= 1 && incorrects >= 3) {
+      this.questionService.create(newQuestion)
+      .then(question => {
+          this.chapter.questions.push(question);
+        })
+        .catch(() => this.notificationsService.error('Error', 'Al crear pregunta: ' + newQuestion.title));
+      this.ngOnChanges();
+    } else {
+      this.notificationsService.alert('Warning', 'You must choose at least 1 correct and 3 incorrects')
+    }
   }
 
   revert() { this.ngOnChanges(); }

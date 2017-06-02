@@ -199,15 +199,19 @@ export class NewTestComponent implements OnInit {
   }
 
   onSubmit() {
-    this.testService.generateTest(this.newTestForm.value)
-    .then(test => {
-      this.testService.create(test)
+    if(this.getTotalNumberQuestions() <= 0) {
+      this.notificationsService.alert('Warning', 'Number of questions must be greater than 0')
+    } else {
+      this.testService.generateTest(this.newTestForm.value)
       .then(test => {
-        this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
+        this.testService.create(test)
+        .then(test => {
+          this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
+        })
+        .catch(() => this.notificationsService.error('Error', 'Saving test to database'));
       })
-      .catch(() => this.notificationsService.error('Error', 'Saving test to database'));
-    })
-    .catch((err) => this.notificationsService.alert('Warning', err._body));
+      .catch((err) => this.notificationsService.alert('Warning', err._body));
+    }
   }
 
 }
