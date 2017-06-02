@@ -5,6 +5,7 @@ import { CoursesModule } from './courses/courses.module';
 import { TestsModule } from './tests/tests.module';
 import { DbModule } from './db/db.module';
 import { MainAppRoutingModule } from './main-app-routing.module';
+import { MaterializeModule } from 'angular2-materialize'; // Used in dropdown navbar
 
 import { CoursesSideNavService } from './courses/courses-sidenav/courses-sidenav.service';
 import { TestsSideNavService } from './tests/tests-sidenav/tests-sidenav.service';
@@ -17,7 +18,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     DbModule.forRoot(),
     TestsModule,
     CoursesModule,
-    MainAppRoutingModule
+    MainAppRoutingModule,
+    MaterializeModule
   ],
   declarations: [
     MainAppComponent,

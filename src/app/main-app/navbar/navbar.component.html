@@ -11,9 +11,8 @@
         i18n>Courses</a></li>
       <li class="desktopTab"><a routerLink="/manage-tests" routerLinkActive="active"
         i18n>Tests</a></li>
-        <li ><a (click)="logout()">
-          <img class="ic_logout" src="../../../../assets/icons/ic_exit_to_app.svg" alt="log out">
-        </a></li>
+      <li><a materialize="dropdown" class="dropdown-button" data-activates="user">
+        {{username}}<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
 
     <!-- Tabs under main nabvar in mobile view -->
@@ -36,9 +35,14 @@
       </div>
       <li ><a (click)="logout()">
         <i><img src="../../../../assets/icons/ic_exit_to_app.svg" alt="log out"></i>
-        Logout
+        {{username}} logout
       </a></li>
     </ul>
 
   </div>
 </nav>
+
+<!-- Dropdown Structure -->
+<ul id="user" class="dropdown-content">
+  <li><a (click)="logout()" i18n>Logout</a></li>
+</ul>

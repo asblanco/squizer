@@ -25,6 +25,7 @@ export class AuthService {
       .map(res => res.json())
       .subscribe(
         data => {
+          localStorage.setItem('username', credentials.username),
           localStorage.setItem('token', data.token),
           this.router.navigate(['/manage-tests/']);
         },
@@ -43,6 +44,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     this.router.navigate(['/login']);
   }
 }

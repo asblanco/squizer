@@ -16,6 +16,7 @@ import 'rxjs/add/operator/filter';
 })
 export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
   activeTab = 0; // 1=courses, 2=tests
+  username: string;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(
@@ -42,7 +43,9 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.username = localStorage.getItem('username');
+  }
 
   ngAfterViewInit() {
     (<any>$('.button-collapse')).sideNav();

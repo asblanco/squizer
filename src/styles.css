@@ -86,12 +86,6 @@ h1, h2, h3, h4, h5 {
   background-color: #4717F6;
 }
 
-/*
-* Materialize select squizer color
-* ul.dropdown-content.select-dropdown li span {
-*    color: #4717F6;
-}*/
-
 .btn-flat {
   font-family: 'raleway-bold';
 }
@@ -135,5 +129,10 @@ ul.dropdown-content.select-dropdown li.disabled span {
   color: #000;
 }
 ul.dropdown-content.select-dropdown li span {
+  color: #4717F6;
+}
+
+/* Dropdown */
+ul.dropdown-content li a {
   color: #4717F6;
 }
