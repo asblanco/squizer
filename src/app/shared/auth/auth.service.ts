@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { NotificationsService } from 'angular2-notifications';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 import { APP_CONFIG } from '../app-config/app-config';
@@ -33,6 +34,11 @@ export class AuthService {
 
   loggedIn() {
     return tokenNotExpired();
+  }
+
+  // Check every 30 seconds if the token is expired
+  validate(): Observable<any> {
+    return Observable.interval(30000).map(() => !tokenNotExpired() );
   }
 
   logout() {

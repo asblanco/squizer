@@ -106,7 +106,7 @@ export class NewQuestionModalComponent implements OnChanges {
         .catch(() => this.notificationsService.error('Error', 'Al crear pregunta: ' + newQuestion.title));
       this.ngOnChanges();
     } else {
-      this.notificationsService.alert('Warning', 'You must choose at least 1 correct and 3 incorrects')
+      this.notificationsService.info('Pay attention', 'You must choose at least 1 correct and 3 incorrects')
     }
   }
 

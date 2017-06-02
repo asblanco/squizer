@@ -118,7 +118,7 @@ export class EditQuestionModalComponent implements OnChanges {
           this.ngOnChanges();
         });
     } else {
-      this.notificationsService.alert('Warning', 'You must choose at least 1 correct and 3 incorrects')
+      this.notificationsService.info('Pay attention', 'You must choose at least 1 correct and 3 incorrects')
     }
   }
 

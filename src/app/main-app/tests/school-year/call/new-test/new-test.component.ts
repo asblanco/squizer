@@ -200,7 +200,7 @@ export class NewTestComponent implements OnInit {
 
   onSubmit() {
     if(this.getTotalNumberQuestions() <= 0) {
-      this.notificationsService.alert('Warning', 'Number of questions must be greater than 0')
+      this.notificationsService.info('Pay attention', 'Number of questions must be greater than 0')
     } else {
       this.testService.generateTest(this.newTestForm.value)
       .then(test => {
@@ -210,7 +210,7 @@ export class NewTestComponent implements OnInit {
         })
         .catch(() => this.notificationsService.error('Error', 'Saving test to database'));
       })
-      .catch((err) => this.notificationsService.alert('Warning', err._body));
+      .catch((err) => this.notificationsService.info('Pay attention', err._body));
     }
   }
 
