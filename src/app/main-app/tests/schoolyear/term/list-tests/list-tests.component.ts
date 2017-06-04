@@ -10,7 +10,7 @@ import { i18nService } from '../../../../../shared/i18n/i18n.service';
 })
 export class ListTestsComponent implements OnChanges {
   @Input() schoolYearId: number;
-  @Input() callId: number;
+  @Input() termId: number;
   @Input() courseId: number;
   tests: Test[] = [];
 
@@ -24,7 +24,7 @@ export class ListTestsComponent implements OnChanges {
   }
 
   getTests() {
-    this.testService.getCourseCallTests(this.callId, this.courseId)
+    this.testService.getCourseTermTests(this.termId, this.courseId)
     .then((tests) => {
       this.tests = tests;
     })

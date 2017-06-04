@@ -19,8 +19,8 @@ export class TestService {
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
-  getCourseCallTests(call: number, course: number): Promise<Test[]> {
-    const url = `${this.url}?call=${call}&course=${course}`;
+  getCourseTermTests(term: number, course: number): Promise<Test[]> {
+    const url = `${this.url}?term=${term}&course=${course}`;
     return this.authHttp.get(url)
                .toPromise()
                .then(response => response.json() as Test[])

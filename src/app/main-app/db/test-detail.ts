@@ -1,4 +1,4 @@
-import { SchoolYear } from './school-year';
+import { SchoolYear } from './schoolyear';
 import { Course } from './course';
 import { Answer } from './answer';
 
@@ -7,9 +7,9 @@ export class TestDetail {
   title: string;
   creation_date: Date;
   course: Course;
-  call: {
+  term: {
     id: number;
-    school_year: SchoolYear;
+    schoolyear: SchoolYear;
     title: string;
     start_date: Date;
     end_date: Date;

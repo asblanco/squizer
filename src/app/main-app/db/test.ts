@@ -1,4 +1,4 @@
-import { Call } from './call';
+import { Term } from './term';
 import { Course } from './course';
 import { Question } from './question';
 import { Answer } from './answer';
@@ -8,7 +8,7 @@ export class Test {
   title: string;
   creation_date: Date;
   course: number;
-  call: number;
+  term: number;
   questions: number[];
   answers: number[];
 }

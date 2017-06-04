@@ -1,6 +1,6 @@
-export class Call {
+export class Term {
   id: number;
-  school_year: number;
+  schoolyear: number;
   title: string;
   start_date: Date;
   end_date: Date;

@@ -3,7 +3,7 @@ import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
-import { SchoolYear } from './school-year';
+import { SchoolYear } from './schoolyear';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

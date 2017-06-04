@@ -1,16 +1,16 @@
-<a (click)="openEditCallModal(); $event.stopPropagation()"><i class="material-icons icon-blue">edit</i></a>
+<a (click)="openEditTermModal(); $event.stopPropagation()"><i class="material-icons icon-blue">edit</i></a>
 
-<div id="editCallModal{{call.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editCallModal">
-  <form [formGroup]="editCallForm" (ngSubmit)="onSubmit()" novalidate>
+<div id="editTermModal{{term.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="editTermModal">
+  <form [formGroup]="editTermForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4 i18n>Edit call</h4>
+      <h4 i18n>Edit term</h4>
 
       <div class="row">
         <div class="input-field form-group">
           <label for="title" class="active" i18n>Title</label>
           <input type="text" class="form-control" formControlName="title"
-            required materialize="characterCounter" [attr.data-length]="maxLengthCall"
-            maxlength="{{maxLengthCall}}">
+            required materialize="characterCounter" [attr.data-length]="maxLengthTerm"
+            maxlength="{{maxLengthTerm}}">
         </div>
 
         <div class="input-field form-group col s6">
@@ -30,7 +30,7 @@
 
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
-        [disabled]="!editCallForm.valid" i18n>Save</button>
+        [disabled]="!editTermForm.valid" i18n>Save</button>
     </div>
   </form>
 </div>

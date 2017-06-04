@@ -1,22 +1,22 @@
 <li><div class="center bold" i18n>SCHOOL YEARS</div></li>
 <li><div class="divider"></div></li>
 <li *ngFor="let schoolYear of (schoolYears$ | async)"
-    [class.active]="(selectedCallId === null) && (schoolYear.id === selectedSchoolYearId)">
-  <a  class="school-year truncate"
-      routerLink="/manage-tests/school-year/{{schoolYear.id}}">
+    [class.active]="(selectedTermId === null) && (schoolYear.id === selectedSchoolYearId)">
+  <a  class="schoolyear truncate"
+      routerLink="/manage-tests/schoolyear/{{schoolYear.id}}">
       <b>{{schoolYear.title | uppercase}}</b></a>
   <ul>
-    <li *ngFor="let call of schoolYear.calls" [class.active]="call.id === selectedCallId">
+    <li *ngFor="let term of schoolYear.terms" [class.active]="term.id === selectedTermId">
       <a  class="truncate"
-          routerLink="/manage-tests/school-year/{{schoolYear.id}}/call/{{call.id}}">
-          = {{call.title}}</a>
+          routerLink="/manage-tests/schoolyear/{{schoolYear.id}}/term/{{term.id}}">
+          = {{term.title}}</a>
     </li>
     <li *ngIf="schoolYear.id === selectedSchoolYearId">
-      <app-new-call [schoolYear]="schoolYear"></app-new-call>
+      <app-new-term [schoolYear]="schoolYear"></app-new-term>
     </li>
   </ul>
 </li>
-<app-new-school-year [schoolYears]="(schoolYears$ | async)"></app-new-school-year>
+<app-new-schoolyear [schoolYears]="(schoolYears$ | async)"></app-new-schoolyear>
 <!-- Materialize has a bug so it needs a last empty li to show the actual
  last one when there is scroll down, or two more <li> in firefox -->
 <li>-</li>

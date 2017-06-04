@@ -103,10 +103,10 @@ export class NewQuestionModalComponent implements OnChanges {
       .then(question => {
           this.chapter.questions.push(question);
         })
-        .catch(() => this.i18nService.error(22, newQuestion.title));
+      .catch(() => this.i18nService.error(22, newQuestion.title));
       this.ngOnChanges();
     } else {
-      this.i18nService.info(4)
+      this.i18nService.info(4);
     }
   }
 

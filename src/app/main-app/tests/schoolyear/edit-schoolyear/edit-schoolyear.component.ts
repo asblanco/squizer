@@ -2,8 +2,8 @@ import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SchoolYear } from '../../../db/school-year';
-import { SchoolYearService } from '../../../db/school-year.service';
+import { SchoolYear } from '../../../db/schoolyear';
+import { SchoolYearService } from '../../../db/schoolyear.service';
 import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
@@ -12,9 +12,9 @@ import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
-  selector: 'app-edit-school-year',
-  templateUrl: './edit-school-year.component.html',
-  styleUrls: ['./edit-school-year.component.css']
+  selector: 'app-edit-schoolyear',
+  templateUrl: './edit-schoolyear.component.html',
+  styleUrls: ['./edit-schoolyear.component.css']
 })
 export class EditSchoolYearComponent implements OnChanges {
   @Input() schoolYear: SchoolYear;

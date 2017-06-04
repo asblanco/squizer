@@ -35,7 +35,7 @@ export class EditTestComponent implements OnChanges, OnInit {
      id: this.test.id,
      title: this.test.title,
      course: this.test.course,
-     call: this.test.call,
+     term: this.test.term,
      creation_date: this.test.creation_date,
      questions: this.test.questions,
      answers: this.test.answers

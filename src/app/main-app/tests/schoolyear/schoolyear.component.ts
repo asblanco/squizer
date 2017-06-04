@@ -1,15 +1,15 @@
 import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { SchoolYear } from '../../db/school-year';
-import { SchoolYearService } from '../../db/school-year.service';
+import { SchoolYear } from '../../db/schoolyear';
+import { SchoolYearService } from '../../db/schoolyear.service';
 import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
 import { i18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({
-  selector: 'app-school-year',
-  templateUrl: './school-year.component.html',
-  styleUrls: ['./school-year.component.css']
+  selector: 'app-schoolyear',
+  templateUrl: './schoolyear.component.html',
+  styleUrls: ['./schoolyear.component.css']
 })
 export class SchoolYearComponent {
   schoolYear: SchoolYear = null;

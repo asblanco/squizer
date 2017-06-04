@@ -2,28 +2,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TestsComponent } from './tests.component';
-import { SchoolYearComponent } from './school-year/school-year.component';
-import { NewTestComponent } from './school-year/call/new-test/new-test.component';
-import { TestDetailComponent } from './school-year/call/list-tests/test-detail/test-detail.component';
-import { CallComponent } from './school-year/call/call.component';
+import { SchoolYearComponent } from './schoolyear/schoolyear.component';
+import { NewTestComponent } from './schoolyear/term/new-test/new-test.component';
+import { TestDetailComponent } from './schoolyear/term/list-tests/test-detail/test-detail.component';
+import { TermComponent } from './schoolyear/term/term.component';
 
 const testsRoutes: Routes = [
   {
     path: '',
     component: TestsComponent,
     children: [
-      { path: 'school-year/:syId/call/:callId/test/:id', component: TestDetailComponent },
-      { path: 'school-year/:syId/call/:callId/new-test', component: NewTestComponent },
+      { path: 'schoolyear/:syId/term/:termId/test/:id', component: TestDetailComponent },
+      { path: 'schoolyear/:syId/term/:termId/new-test', component: NewTestComponent },
       {
-        path: 'school-year/:syId',
+        path: 'schoolyear/:syId',
         component: SchoolYearComponent,
         children: [
-          { path: 'call/:callId', component: CallComponent },
-          { path: 'call', redirectTo: '/manage-tests', pathMatch: 'full' },
+          { path: 'term/:termId', component: TermComponent },
+          { path: 'term', redirectTo: '/manage-tests', pathMatch: 'full' },
         ]
       },
-      { path: 'school-year/:syId/call/:callId/test', redirectTo: '/manage-tests', pathMatch: 'full' },
-      { path: 'school-year', redirectTo: '/manage-tests', pathMatch: 'full' },
+      { path: 'schoolyear/:syId/term/:termId/test', redirectTo: '/manage-tests', pathMatch: 'full' },
+      { path: 'schoolyear', redirectTo: '/manage-tests', pathMatch: 'full' },
       { path: '', pathMatch: 'full', redirectTo: '/manage-tests'}
     ]
   }

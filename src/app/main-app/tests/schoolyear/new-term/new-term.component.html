@@ -1,16 +1,16 @@
-<a class="waves-effect btn squizer-btn call" (click)="openNewCallModal(schoolYear)" i18n>Add call</a>
+<a class="waves-effect btn squizer-btn term" (click)="openNewTermModal(schoolYear)" i18n>Add term</a>
 
-<div id="newCallModal{{schoolYear.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="newCallModal">
-  <form [formGroup]="newCallForm" (ngSubmit)="onSubmit()" novalidate>
+<div id="newTermModal{{schoolYear.id}}" class="modal bottom-sheet" materialize="modal" [materializeActions]="newTermModal">
+  <form [formGroup]="newTermForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
-      <h4 i18n>New call in {{schoolYear.title}}</h4>
+      <h4 i18n>New term in {{schoolYear.title}}</h4>
 
       <div class="row">
         <div class="input-field form-group">
-          <label for="title">Titulo</label>
+          <label for="title" i18n>Title</label>
           <input type="text" class="form-control" formControlName="title"
-            required materialize="characterCounter" [attr.data-length]="maxLengthCall"
-            maxlength="{{maxLengthCall}}">
+            required materialize="characterCounter" [attr.data-length]="maxLengthTerm"
+            maxlength="{{maxLengthTerm}}">
         </div>
 
         <div class="input-field form-group col s6">
@@ -30,7 +30,7 @@
 
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
-        [disabled]="!newCallForm.valid" i18n>Create</button>
+        [disabled]="!newTermForm.valid" i18n>Create</button>
     </div>
   </form>
 </div>

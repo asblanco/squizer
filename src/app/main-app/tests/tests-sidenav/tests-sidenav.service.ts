@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Call } from '../../db/call';
+import { Term } from '../../db/term';
 import { Course } from '../../db/course';
 import { i18nService } from '../../../shared/i18n/i18n.service';
-import { SchoolYear } from '../../db/school-year';
-import { SchoolYearService } from '../../db/school-year.service';
+import { SchoolYear } from '../../db/schoolyear';
+import { SchoolYearService } from '../../db/schoolyear.service';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -14,12 +14,12 @@ export class TestsSideNavService {
 
   // Observable string sources
   private schoolYearList = new Subject<SchoolYear[]>();
-  private selectCall = new Subject<number>();
+  private selectTerm = new Subject<number>();
   private selectSchoolYear = new Subject<number>();
 
   // Observable string streams
   getSchoolYears$ = this.schoolYearList.asObservable();
-  selectedCall$ = this.selectCall.asObservable();
+  selectedTerm$ = this.selectTerm.asObservable();
   selectedSchoolYear$ = this.selectSchoolYear.asObservable();
 
   constructor(
@@ -38,9 +38,9 @@ export class TestsSideNavService {
     this.schoolYearList.next(schoolYears);
   }
 
-  announceSelected(schoolYearId: number, callId: number) {
+  announceSelected(schoolYearId: number, termId: number) {
     this.selectSchoolYear.next(schoolYearId);
-    this.selectCall.next(callId);
+    this.selectTerm.next(termId);
   }
 
   addSchoolYear(schoolYear: SchoolYear) {
@@ -49,7 +49,7 @@ export class TestsSideNavService {
   }
 
   updateSchoolYear(schoolYear: SchoolYear) {
-    schoolYear.calls = this.schoolYears[this.indexOf(this.schoolYears, schoolYear.id)].calls;
+    schoolYear.terms = this.schoolYears[this.indexOf(this.schoolYears, schoolYear.id)].terms;
     this.schoolYears.splice(this.indexOf(this.schoolYears, schoolYear.id), 1, schoolYear);
     this.announceSchoolYearList(this.schoolYears);
   }
@@ -60,28 +60,28 @@ export class TestsSideNavService {
     this.announceSelected(null, null);
   }
 
-  addCall(call: Call) {
-    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
+  addTerm(term: Term) {
+    const schoolYearIndex = this.indexOf(this.schoolYears, term.schoolyear);
 
-    this.schoolYears[schoolYearIndex].calls.push(call);
+    this.schoolYears[schoolYearIndex].terms.push(term);
     this.announceSchoolYearList(this.schoolYears);
   }
 
-  updateCall(call: Call) {
-    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
-    const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
+  updateTerm(term: Term) {
+    const schoolYearIndex = this.indexOf(this.schoolYears, term.schoolyear);
+    const termIndex = this.indexOf(this.schoolYears[schoolYearIndex].terms, term.id);
 
-    this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1, call);
+    this.schoolYears[schoolYearIndex].terms.splice(termIndex, 1, term);
     this.announceSchoolYearList(this.schoolYears);
   }
 
-  deleteCall(call: Call) {
-    const schoolYearIndex = this.indexOf(this.schoolYears, call.school_year);
-    const callIndex = this.indexOf(this.schoolYears[schoolYearIndex].calls, call.id);
+  deleteTerm(term: Term) {
+    const schoolYearIndex = this.indexOf(this.schoolYears, term.schoolyear);
+    const termIndex = this.indexOf(this.schoolYears[schoolYearIndex].terms, term.id);
 
-    this.schoolYears[schoolYearIndex].calls.splice(callIndex, 1);
+    this.schoolYears[schoolYearIndex].terms.splice(termIndex, 1);
     this.announceSchoolYearList(this.schoolYears);
-    this.selectCall.next(null);
+    this.selectTerm.next(null);
   }
 
   private indexOf(array, itemId) {

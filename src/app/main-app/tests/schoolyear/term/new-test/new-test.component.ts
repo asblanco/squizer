@@ -21,7 +21,7 @@ import { i18nService } from '../../../../../shared/i18n/i18n.service';
   styleUrls: ['./new-test.component.css']
 })
 export class NewTestComponent implements OnInit {
-  callId: number;
+  termId: number;
   courses: Course[] = [];
   selectedCourse: Course = null; // Course with checked property in questions and answers
   newTestForm: FormGroup;
@@ -47,14 +47,14 @@ export class NewTestComponent implements OnInit {
     this.newTestForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthTest)]],
       course: 0,
-      call: 0,
+      term: 0,
       chapters: this.fb.array([])
     });
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-       this.callId = params['callId'];
+       this.termId = params['termId'];
      });
   }
 
@@ -142,7 +142,7 @@ export class NewTestComponent implements OnInit {
     this.newTestForm = this.fb.group({
       title: [title, [Validators.required, Validators.maxLength(this.maxLengthTest)]],
       course: [this.selectedCourse.id, [Validators.required]],
-      call: this.callId,
+      term: this.termId,
       chapters: this.fb.array([]),
     });
     this.setChapters();

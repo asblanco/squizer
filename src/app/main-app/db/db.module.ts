@@ -5,8 +5,8 @@ import { AnswerService } from './answer.service';
 import { ChapterService } from './chapter.service';
 import { CourseService } from './course.service';
 import { QuestionService } from './question.service';
-import { CallService } from './call.service';
-import { SchoolYearService } from './school-year.service';
+import { TermService } from './term.service';
+import { SchoolYearService } from './schoolyear.service';
 import { TestService } from './test.service';
 
 @NgModule({
@@ -21,7 +21,7 @@ export class DbModule {
       ngModule: DbModule,
       providers: [
         AnswerService,
-        CallService,
+        TermService,
         ChapterService,
         CourseService,
         QuestionService,

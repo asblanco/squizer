@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { Call } from '../../../db/call';
-import { CallService } from '../../../db/call.service';
+import { Term } from '../../../db/term';
+import { TermService } from '../../../db/term.service';
 import { CourseService } from '../../../db/course.service';
 import { Course } from '../../../db/course';
 import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
@@ -11,19 +11,19 @@ import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
-  selector: 'app-call',
-  templateUrl: './call.component.html',
-  styleUrls: ['./call.component.css']
+  selector: 'app-term',
+  templateUrl: './term.component.html',
+  styleUrls: ['./term.component.css']
 })
-export class CallComponent implements OnInit {
-  callId: number;
-  call: Call;
+export class TermComponent implements OnInit {
+  termId: number;
+  term: Term;
   courses: Course[];
-  deleteCallModal = new EventEmitter<string|MaterializeAction>();
+  deleteTermModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private callService: CallService,
+    private termService: TermService,
     private courseService: CourseService,
     private i18nService: i18nService,
     private router: Router,
@@ -36,32 +36,32 @@ export class CallComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-       this.callId = params['callId'];
-       this.getCall(this.callId);
+       this.termId = params['termId'];
+       this.getTerm(this.termId);
      });
   }
 
-  openDeleteCallModal() {
-    this.deleteCallModal.emit({action: 'modal', params: ['open']});
+  openDeleteTermModal() {
+    this.deleteTermModal.emit({action: 'modal', params: ['open']});
   }
 
-  getCall(id: number) {
-    this.callService.getCall(id)
-    .then(call => {
-      this.call = call;
-      this.testsSideNavService.announceSelected(call.school_year, call.id);
+  getTerm(id: number) {
+    this.termService.getTerm(id)
+    .then(term => {
+      this.term = term;
+      this.testsSideNavService.announceSelected(term.schoolyear, term.id);
     })
     .catch(() => this.i18nService.error(7, ''));
   }
 
-  deleteCall() {
-    this.callService
-    .delete(this.call.id)
+  deleteTerm() {
+    this.termService
+    .delete(this.term.id)
     .then(() => {
-      this.testsSideNavService.deleteCall(this.call);
-      this.router.navigate(['/manage-tests/school-year/' + this.call.school_year]);
+      this.testsSideNavService.deleteTerm(this.term);
+      this.router.navigate(['/manage-tests/schoolyear/' + this.term.schoolyear]);
     })
-    .catch(() => this.i18nService.error(8, this.call.title));
+    .catch(() => this.i18nService.error(8, this.term.title));
   }
 
 }

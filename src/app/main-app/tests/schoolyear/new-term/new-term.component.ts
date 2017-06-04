@@ -2,8 +2,8 @@ import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges } from
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { CallService } from '../../../db/call.service';
-import { SchoolYear } from '../../../db/school-year';
+import { TermService } from '../../../db/term.service';
+import { SchoolYear } from '../../../db/schoolyear';
 import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
@@ -12,25 +12,25 @@ import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
-  selector: 'app-new-call',
-  templateUrl: './new-call.component.html',
-  styleUrls: ['./new-call.component.css']
+  selector: 'app-new-term',
+  templateUrl: './new-term.component.html',
+  styleUrls: ['./new-term.component.css']
 })
-export class NewCallComponent implements OnChanges, AfterViewInit {
+export class NewTermComponent implements OnChanges, AfterViewInit {
   @Input() schoolYear: SchoolYear;
-  newCallModal = new EventEmitter<string|MaterializeAction>();
-  newCallForm: FormGroup;
-  maxLengthCall: number;
+  newTermModal = new EventEmitter<string|MaterializeAction>();
+  newTermForm: FormGroup;
+  maxLengthTerm: number;
 
   constructor(
     private fb: FormBuilder,
-    private callService: CallService,
+    private termService: TermService,
     private i18nService: i18nService,
     private router: Router,
     private testsSideNavService: TestsSideNavService,
     @Inject(APP_CONFIG) private config: IAppConfig,
   ) {
-    this.maxLengthCall = config.MAXLENGTH_CALL;
+    this.maxLengthTerm = config.MAXLENGTH_CALL;
     this.createForm();
   }
 
@@ -39,26 +39,26 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    (<any>$('#newCallModal' + this.schoolYear.id)).appendTo('body');
+    (<any>$('#newTermModal' + this.schoolYear.id)).appendTo('body');
   }
 
 
-  openNewCallModal(schoolYear: SchoolYear) {
-    this.newCallModal.emit({action: 'modal', params: ['open']});
+  openNewTermModal(schoolYear: SchoolYear) {
+    this.newTermModal.emit({action: 'modal', params: ['open']});
   }
 
   createForm() {
-    this.newCallForm = this.fb.group({
-      school_year: -1,
-      title: ['', [Validators.required, Validators.maxLength(this.maxLengthCall)]],
+    this.newTermForm = this.fb.group({
+      schoolyear: -1,
+      title: ['', [Validators.required, Validators.maxLength(this.maxLengthTerm)]],
       start_date: ['', [Validators.required]],
       end_date: ['', [Validators.required]]
     });
   }
 
   setForm() {
-    this.newCallForm.reset({
-      school_year: this.schoolYear.id,
+    this.newTermForm.reset({
+      schoolyear: this.schoolYear.id,
       title: '',
       start_date: '',
       end_date: ''
@@ -66,12 +66,12 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
   }
 
   onSubmit() {
-    this.callService.create(this.newCallForm.value)
-    .then(call => {
-      this.testsSideNavService.addCall(call);
-      this.router.navigate(['/manage-tests/school-year/' + call.school_year + '/call/' + call.id]);
+    this.termService.create(this.newTermForm.value)
+    .then(term => {
+      this.testsSideNavService.addTerm(term);
+      this.router.navigate(['/manage-tests/schoolyear/' + term.schoolyear + '/term/' + term.id]);
     })
-    .catch(() => this.i18nService.error(3, this.newCallForm.value.title));
+    .catch(() => this.i18nService.error(3, this.newTermForm.value.title));
 
     this.ngOnChanges();
   }

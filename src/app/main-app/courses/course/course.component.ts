@@ -108,7 +108,15 @@ export class CourseComponent implements OnDestroy {
     if (!title) { return; }
     this.chapterService.create(title, this.course.id)
       .then(chapter => {
-        this.course.chapters.push(chapter);
+        // the response chapter doesnt include the empty array of questions,
+        // so when pushing a question right after creating the chapter it outputs error
+        let ch: Chapter = {
+          id: chapter.id,
+          title: chapter.title,
+          course: chapter.course,
+          questions: []
+        };
+        this.course.chapters.push(ch);
       })
       .catch(() => this.i18nService.error(19, title));
   }

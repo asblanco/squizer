@@ -1,7 +1,7 @@
 import { Component, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
-import { SchoolYear } from '../../db/school-year';
+import { SchoolYear } from '../../db/schoolyear';
 import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/filter';
 })
 export class TestsSideNavComponent {
   schoolYears$: Observable<SchoolYear[]>;
-  selectedCallId = null;
+  selectedTermId = null;
   selectedSchoolYearId = null;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -29,20 +29,20 @@ export class TestsSideNavComponent {
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
       let trigger = event.urlAfterRedirects;
-      let regexpSchoolYear = new RegExp('/manage-tests/school-year/[1-9]+');
-      let regexpCall = new RegExp('/manage-tests/school-year/[0-9]+/call/[0-9]+');
+      let regexpSchoolYear = new RegExp('/manage-tests/schoolyear/[1-9]+');
+      let regexpTerm = new RegExp('/manage-tests/schoolyear/[0-9]+/term/[0-9]+');
 
       if (event.urlAfterRedirects === '/manage-tests') {
         this.selectedSchoolYearId = null;
-        this.selectedCallId = null;
-      } else if (regexpCall.test(trigger)) {
+        this.selectedTermId = null;
+      } else if (regexpTerm.test(trigger)) {
         let splitted = trigger.split("/", 6);
         this.selectedSchoolYearId = +splitted[3];
-        this.selectedCallId = +splitted[5];
+        this.selectedTermId = +splitted[5];
       } else if (regexpSchoolYear.test(trigger)) {
         let splitted = trigger.split("/", 4);
         this.selectedSchoolYearId = +splitted[3];
-        this.selectedCallId = null;
+        this.selectedTermId = null;
       }
     });
 

@@ -1,13 +1,13 @@
 import { Injectable, Inject } from '@angular/core';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-import { Call } from './call';
+import { Term } from './term';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
 
 @Injectable()
-export class CallService {
-  private url = this.config.apiEndpoint + 'call/';
+export class TermService {
+  private url = this.config.apiEndpoint + 'term/';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
@@ -15,28 +15,28 @@ export class CallService {
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
-  getCall(id: number): Promise<Call> {
+  getTerm(id: number): Promise<Term> {
     const url = `${this.url}${id}/`;
     return this.authHttp.get(url)
       .toPromise()
-      .then(response => response.json() as Call)
+      .then(response => response.json() as Term)
       .catch(this.handleError);
   }
 
-  create(call: Call): Promise<Call> {
+  create(term: Term): Promise<Term> {
     return this.authHttp
-      .post(this.url, JSON.stringify(call), {headers: this.headers})
+      .post(this.url, JSON.stringify(term), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
-  update(call: Call): Promise<Call> {
-    const url = `${this.url}${call.id}/`;
+  update(term: Term): Promise<Term> {
+    const url = `${this.url}${term.id}/`;
     return this.authHttp
-      .put(url, JSON.stringify(call), {headers: this.headers})
+      .put(url, JSON.stringify(term), {headers: this.headers})
       .toPromise()
-      .then(() => call)
+      .then(() => term)
       .catch(this.handleError);
   }
 
