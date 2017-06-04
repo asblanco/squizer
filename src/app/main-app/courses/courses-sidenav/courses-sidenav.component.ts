@@ -6,7 +6,7 @@ import { IAppConfig } from '../../../shared/app-config/iapp-config';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
 import { CoursesSideNavService } from './courses-sidenav.service';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +30,7 @@ export class CoursesSideNavComponent {
     private courseService: CourseService,
     @Inject(APP_CONFIG) private config: IAppConfig,
     private coursesSideNavService: CoursesSideNavService,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private router: Router,
   ) {
     this.maxLengthCourse = config.MAXLENGTH_COURSE;
@@ -53,7 +53,7 @@ export class CoursesSideNavComponent {
   }
 
   openCourseModal() {
-    this.newEditModal.emit({action:"modal",params:['open']});
+    this.newEditModal.emit({action: 'modal', params: ['open']});
   }
 
   createCourse(name: string): void {
@@ -65,7 +65,7 @@ export class CoursesSideNavComponent {
         this.coursesSideNavService.addCourse(course);
         this.router.navigate(['/manage-courses/course/' + course.id]);
       })
-      .catch(() => this.notificationsService.error('Error', 'Al crear la asignatura: ' + name));
+      .catch(() => this.i18nService.error(25, name));
 
     (<any>$('.button-collapse')).sideNav('hide');
   }

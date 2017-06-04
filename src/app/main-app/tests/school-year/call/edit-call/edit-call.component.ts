@@ -8,7 +8,7 @@ import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-call',
@@ -26,7 +26,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
     private fb: FormBuilder,
     private callService: CallService,
     private testsSideNavService: TestsSideNavService,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {
     this.maxLengthCall = config.MAXLENGTH_CALL;
     this.createForm();
@@ -41,7 +41,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
   }
 
   openEditCallModal() {
-    this.editCallModal.emit({action:"modal",params:['open']});
+    this.editCallModal.emit({action: 'modal', params: ['open']});
   }
 
   createForm() {
@@ -74,7 +74,7 @@ export class EditCallComponent implements AfterViewInit, OnChanges {
       this.ngOnChanges();
     })
     .catch(() => {
-      this.notificationsService.error('Error', 'Al editar convocatoria: ' + this.editCallForm.value.title);
+      this.i18nService.error(12, this.editCallForm.value.title);
       this.ngOnChanges();
     });
   }

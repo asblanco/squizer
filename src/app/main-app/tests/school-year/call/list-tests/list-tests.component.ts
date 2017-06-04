@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
-
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-list-tests',
@@ -16,7 +15,7 @@ export class ListTestsComponent implements OnChanges {
   tests: Test[] = [];
 
   constructor(
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private testService: TestService
   ) { }
 
@@ -29,7 +28,7 @@ export class ListTestsComponent implements OnChanges {
     .then((tests) => {
       this.tests = tests;
     })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar tests.'));
+    .catch(() => this.i18nService.error(13, ''));
   }
 
   displayPDF(id: number) {

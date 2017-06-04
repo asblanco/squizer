@@ -13,7 +13,7 @@ import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
 
 import { CustomValidators } from 'ng2-validation';
 import { MaterializeDirective } from "angular2-materialize";
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-test',
@@ -33,7 +33,7 @@ export class NewTestComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private courseService: CourseService,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private router: Router,
     private testService: TestService,
     private testsSideNavService: TestsSideNavService
@@ -42,7 +42,7 @@ export class NewTestComponent implements OnInit {
 
     this.courseService.getCourses()
     .then(courses => { this.courses = courses; })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
+    .catch(() => this.i18nService.error(9, ''));
 
     this.newTestForm = this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthTest)]],
@@ -134,7 +134,7 @@ export class NewTestComponent implements OnInit {
       }
       this.setForm();
     })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar los datos de la asignatura.'));
+    .catch(() => this.i18nService.error(10, ''));
   }
 
   setForm() {
@@ -200,7 +200,7 @@ export class NewTestComponent implements OnInit {
 
   onSubmit() {
     if(this.getTotalNumberQuestions() <= 0) {
-      this.notificationsService.info('Pay attention', 'Number of questions must be greater than 0')
+      this.i18nService.info(0)
     } else {
       this.testService.generateTest(this.newTestForm.value)
       .then(test => {
@@ -208,9 +208,25 @@ export class NewTestComponent implements OnInit {
         .then(test => {
           this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
         })
-        .catch(() => this.notificationsService.error('Error', 'Saving test to database'));
+        .catch(() => this.i18nService.error(11, ''));
       })
-      .catch((err) => this.notificationsService.info('Pay attention', err._body));
+      .catch((err) => {
+        console.log(err._body)
+        switch(err._body) {
+           case '1': {
+              this.i18nService.info(1)
+              break;
+           }
+           case '2': {
+              this.i18nService.info(2)
+              break;
+           }
+           default: {
+              this.i18nService.info(3)
+              break;
+           }
+        }
+      });
     }
   }
 

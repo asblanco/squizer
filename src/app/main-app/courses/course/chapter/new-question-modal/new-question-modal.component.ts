@@ -9,7 +9,7 @@ import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-question-modal',
@@ -27,7 +27,7 @@ export class NewQuestionModalComponent implements OnChanges {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private questionService: QuestionService,
-    private notificationsService: NotificationsService ) {
+    private i18nService: i18nService ) {
       this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
       this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
 
@@ -45,7 +45,7 @@ export class NewQuestionModalComponent implements OnChanges {
   }
 
   openNewQuestionModal() {
-    this.newQuestionModal.emit({action:"modal",params:['open']});
+    this.newQuestionModal.emit({action: 'modal', params: ['open']});
   }
 
   createForm() {
@@ -87,7 +87,7 @@ export class NewQuestionModalComponent implements OnChanges {
 
   onSubmit() {
     // Check if it creates at least 1 answer correct and 3 incorrects
-    let newQuestion = this.newQuestion.value;
+    const newQuestion = this.newQuestion.value;
     let corrects = 0;
     let incorrects = 0;
     for(let i = 0; i < newQuestion.answers.length; i++) {
@@ -103,10 +103,10 @@ export class NewQuestionModalComponent implements OnChanges {
       .then(question => {
           this.chapter.questions.push(question);
         })
-        .catch(() => this.notificationsService.error('Error', 'Al crear pregunta: ' + newQuestion.title));
+        .catch(() => this.i18nService.error(22, newQuestion.title));
       this.ngOnChanges();
     } else {
-      this.notificationsService.info('Pay attention', 'You must choose at least 1 correct and 3 incorrects')
+      this.i18nService.info(4)
     }
   }
 

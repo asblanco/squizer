@@ -7,7 +7,7 @@ import { Question } from '../../../db/question';
 import { ChapterService } from '../../../db/chapter.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-chapter',
@@ -24,17 +24,17 @@ export class ChapterComponent {
   constructor(
     private chapterService: ChapterService,
     @Inject(APP_CONFIG) private config: IAppConfig,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {
     this.maxLengthChapter = config.MAXLENGTH_CHAPTER;
   }
 
   openEditChapterModal() {
-    this.editChapterModal.emit({action:"modal",params:['open']});
+    this.editChapterModal.emit({action: 'modal', params: ['open']});
   }
 
   openDeleteChapterModal() {
-    this.deleteChapterModal.emit({action:"modal",params:['open']});
+    this.deleteChapterModal.emit({action: 'modal', params: ['open']});
   }
 
   updateChapterTitle(title: string): void {
@@ -44,7 +44,7 @@ export class ChapterComponent {
     .then((chapter) => { this.chapter.title = chapter.title; })
     .catch(() => {
         this.chapter.title = oldTitle;
-        this.notificationsService.error('Error', 'Al actualizar el titulo del tema.');
+        this.i18nService.error(20, '');
       });
   }
 
@@ -54,7 +54,7 @@ export class ChapterComponent {
       .then(() => {
         this.deletedChapter.emit(this.chapter);
       })
-      .catch( () => this.notificationsService.error('Error', 'Al eliminar el capitulo: ' + this.chapter.title));
+      .catch( () => this.i18nService.error(21, this.chapter.title));
   }
 
   deleteQuestion(question) {

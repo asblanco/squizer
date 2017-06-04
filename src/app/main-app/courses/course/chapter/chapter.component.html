@@ -21,7 +21,7 @@
 </ul>
 
 <app-new-edit-modal (onSubmit)="updateChapterTitle($event)"
-  [modalId]="'editChapterModal'+chapter.id" [text]="'Edit chapter'"
+  [modalId]="'editChapterModal'+chapter.id" i18n-text text="Edit chapter"
   [title]="chapter.title" [maxLength]="maxLengthChapter"
   [modalNewEdit]="editChapterModal">
 </app-new-edit-modal>

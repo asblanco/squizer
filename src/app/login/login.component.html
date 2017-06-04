@@ -1,4 +1,9 @@
 <div class="container">
+    <b class="i18n-right">
+      <a [class.squizer-color]="lang == 'en'" href="{{config.webappURL}}en/"> EN </a>|
+      <a [class.squizer-color]="lang == 'es'" href="{{config.webappURL}}es/"> ES </a>|
+      <a [class.squizer-color]="lang == 'gl'" href="{{config.webappURL}}gl/"> GL </a>
+    </b>
     <h2 class="center-align womby-font">Squizer</h2>
     <div class="row">
         <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" *ngIf="!auth.loggedIn()">

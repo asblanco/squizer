@@ -4,7 +4,7 @@ import { Question } from '../../../../db/question';
 import { QuestionService } from '../../../../db/question.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-question',
@@ -20,14 +20,14 @@ export class QuestionComponent {
 
   constructor(
     private questionService: QuestionService,
-    private notificationsService: NotificationsService ) { }
+    private i18nService: i18nService ) { }
 
   openEditQuestionModal() {
-    this.editQuestionModal.emit({action:"modal",params:['open']});
+    this.editQuestionModal.emit({action: 'modal', params: ['open']});
   }
 
   openDeleteQuestionModal() {
-    this.deleteQuestionModal.emit({action:"modal",params:['open']});
+    this.deleteQuestionModal.emit({action: 'modal', params: ['open']});
   }
 
   editQuestion(question: Question) {
@@ -39,6 +39,6 @@ export class QuestionComponent {
       .then(() => {
         this.deletedQuestion.emit(this.question);
       })
-      .catch(() => this.notificationsService.error('Error', 'Al eliminar la pregunta: ' + this.question.title));
+      .catch(() => this.i18nService.error(23, this.question.title));
   }
 }

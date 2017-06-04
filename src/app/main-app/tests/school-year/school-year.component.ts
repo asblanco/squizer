@@ -4,8 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { SchoolYear } from '../../db/school-year';
 import { SchoolYearService } from '../../db/school-year.service';
 import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
-
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-school-year',
@@ -18,7 +17,7 @@ export class SchoolYearComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService
   ) {
@@ -34,7 +33,7 @@ export class SchoolYearComponent {
       this.schoolYear = schoolYear;
       this.testsSideNavService.announceSelected(schoolYear.id, null);
     })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar los datos del curso.'));
+    .catch(() => this.i18nService.error(1, ''));
   }
 
 }

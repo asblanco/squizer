@@ -11,7 +11,7 @@ import { APP_CONFIG } from '../../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-question-modal',
@@ -30,7 +30,7 @@ export class EditQuestionModalComponent implements OnChanges {
     private answerService: AnswerService,
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private questionService: QuestionService
   ) {
     this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
@@ -114,11 +114,11 @@ export class EditQuestionModalComponent implements OnChanges {
           this.ngOnChanges();
         })
         .catch(() => {
-          this.notificationsService.error('Error', 'Al actualizar la pregunta: ' + question.title);
+          this.i18nService.error(24, question.title);
           this.ngOnChanges();
         });
     } else {
-      this.notificationsService.info('Pay attention', 'You must choose at least 1 correct and 3 incorrects')
+      this.i18nService.info(4)
     }
   }
 

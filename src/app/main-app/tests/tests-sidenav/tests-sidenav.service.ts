@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Call } from '../../db/call';
 import { Course } from '../../db/course';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 import { SchoolYear } from '../../db/school-year';
 import { SchoolYearService } from '../../db/school-year.service';
 
@@ -23,14 +23,14 @@ export class TestsSideNavService {
   selectedSchoolYear$ = this.selectSchoolYear.asObservable();
 
   constructor(
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private schoolYearService: SchoolYearService
   ) {}
 
   getSchoolYears() {
     this.schoolYearService.getSchoolYears()
     .then(schoolYears => { this.announceSchoolYearList(schoolYears); })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de cursos.'));
+    .catch(() => this.i18nService.error(2, ''));
   }
 
   announceSchoolYearList(schoolYears: SchoolYear[]) {

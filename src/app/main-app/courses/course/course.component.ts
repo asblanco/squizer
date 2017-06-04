@@ -11,7 +11,7 @@ import { ChapterService } from '../../db/chapter.service';
 import { CoursesSideNavService } from '../courses-sidenav/courses-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -36,7 +36,7 @@ export class CourseComponent implements OnDestroy {
     private courseService: CourseService,
     private coursesSideNavService: CoursesSideNavService,
     private chapterService: ChapterService,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private router: Router
  ) {
    this.maxLengthCourse = config.MAXLENGTH_COURSE;
@@ -50,11 +50,11 @@ export class CourseComponent implements OnDestroy {
   }
 
   openNewChapterModal() {
-    this.newChapterModal.emit({action:"modal",params:['open']});
+    this.newChapterModal.emit({action: 'modal', params: ['open']});
   }
 
   openDeleteCourseModal() {
-    this.deleteModal.emit({action:"modal",params:['open']});
+    this.deleteModal.emit({action: 'modal', params: ['open']});
   }
 
   /*
@@ -63,7 +63,7 @@ export class CourseComponent implements OnDestroy {
   getCourse(courseId: number): void {
       this.courseService.getCourseDetails(courseId)
       .then(course => { this.course = course; })
-      .catch(() => this.notificationsService.error('Error', 'Downloading course details.'));
+      .catch(() => this.i18nService.error(10, ''));
   }
 
   deleteCourse(course: Course): void {
@@ -73,7 +73,7 @@ export class CourseComponent implements OnDestroy {
           this.coursesSideNavService.deleteCourse(course);
           this.router.navigate(['/manage-courses/']);
         })
-        .catch(() => this.notificationsService.error('Error', 'Deleting course ' + course.name));
+        .catch(() => this.i18nService.error(17, course.name));
   }
 
   deleteChapter(chapter) {
@@ -97,7 +97,7 @@ export class CourseComponent implements OnDestroy {
       this.editCourseTitle = false;
     })
     .catch(() => {  this.cancelEditCourse();
-                    this.notificationsService.error('Error', 'Al actualizar el titulo de la asignatura.'); });
+                    this.i18nService.error(18, ''); });
   }
 
   /*
@@ -110,7 +110,7 @@ export class CourseComponent implements OnDestroy {
       .then(chapter => {
         this.course.chapters.push(chapter);
       })
-      .catch(() => this.notificationsService.error('Error', 'Al añadir el tema: ' + title));
+      .catch(() => this.i18nService.error(19, title));
   }
 
   ngOnDestroy() {

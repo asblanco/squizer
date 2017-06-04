@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TestDetail } from '../../../../../db/test-detail';
 
 import { TestService } from '../../../../../db/test.service';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../../shared/i18n/i18n.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -17,7 +17,7 @@ export class TestDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private testService: TestService
   ) { }
 
@@ -32,7 +32,7 @@ export class TestDetailComponent implements OnInit {
     .then(test => {
       this.test = test;
     })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar test.'));
+    .catch(() => this.i18nService.error(14, ''));
   }
 
   displayPDF() {

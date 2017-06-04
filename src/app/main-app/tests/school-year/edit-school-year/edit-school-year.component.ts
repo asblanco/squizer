@@ -9,7 +9,7 @@ import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-school-year',
@@ -29,7 +29,7 @@ export class EditSchoolYearComponent implements OnChanges {
     private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService,
     private router: Router,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {
     this.maxLengthSchoolYear = config.MAXLENGTH_SCHOOLYEAR;
     this.createForm();
@@ -40,11 +40,11 @@ export class EditSchoolYearComponent implements OnChanges {
   }
 
   openEditSchoolYearModal() {
-    this.editSchoolYearModal.emit({action:"modal",params:['open']});
+    this.editSchoolYearModal.emit({action: 'modal', params: ['open']});
   }
 
   openDeleteSchoolYearModal() {
-    this.deleteSchoolYearModal.emit({action:"modal",params:['open']});
+    this.deleteSchoolYearModal.emit({action: 'modal', params: ['open']});
   }
 
   ngOnChanges() {
@@ -79,7 +79,7 @@ export class EditSchoolYearComponent implements OnChanges {
       this.ngOnChanges();
     })
     .catch(() => {
-      this.notificationsService.error('Error', 'Al editar curso: ' + this.editSchoolYearForm.value.title);
+      this.i18nService.error(4,this.editSchoolYearForm.value.title);
       this.ngOnChanges();
     });
   }
@@ -91,6 +91,6 @@ export class EditSchoolYearComponent implements OnChanges {
         this.testsSideNavService.deleteSchoolYear(this.schoolYear);
         this.router.navigate(['/manage-tests/']);
       })
-      .catch(() => this.notificationsService.error('Error', 'Al eliminar curso ' + this.schoolYear.title));
+      .catch(() => this.i18nService.error(5, this.schoolYear.title));
   }
 }

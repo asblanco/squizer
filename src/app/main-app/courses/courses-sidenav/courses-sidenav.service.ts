@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -15,13 +15,13 @@ export class CoursesSideNavService {
 
   constructor(
     private courseService: CourseService,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {}
 
   getCourses() {
     this.courseService.getCourses()
     .then(courses => { this.announceCoursesList(courses); })
-    .catch(() => this.notificationsService.error('Error', 'Al descargar la lista de asignaturas.'));
+    .catch(() => this.i18nService.error(9, ''));
   }
 
   announceCoursesList(courses: Course[]) {

@@ -44,7 +44,7 @@
                   <p *ngIf="chapter.controls.numberQuestions.errors?.min" class="red-text"><b i18n>Minimum is 0</b></p>
                   <p *ngIf="chapter.controls.numberQuestions.errors?.max" class="red-text"><b i18n>Maximum is {{chapter.value.questions.length}}</b></p>
                 </div>
-                <p class="col s10"> questions out of {{chapter.value.questions.length}}</p>
+                <p class="col s10" i18n> questions out of {{chapter.value.questions.length}}</p>
               </div>
               <div class="row">
                 <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(false, chapter.value, i)" i18n>Uncheck Chapter</button>

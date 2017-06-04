@@ -1,3 +1,13 @@
 .womby-font {
   font-family: 'womby';
 }
+
+.i18n-right {
+  position: absolute;
+  top: 1em;
+  right: 4em;
+}
+
+.i18n-right a {
+  color: black;
+}

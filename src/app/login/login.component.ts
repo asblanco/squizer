@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth/auth.service';
+import { APP_CONFIG } from '../shared/app-config/app-config';
+import { IAppConfig } from '../shared/app-config/iapp-config';
 
 interface Credentials {
-  username: string,
-  password: string
+  username: string;
+  password: string;
 }
 
 @Component({
@@ -14,9 +16,15 @@ interface Credentials {
 })
 export class LoginComponent implements OnInit {
   credentials: Credentials;
+  lang: string;
 
-  constructor(private auth: AuthService, private router: Router) {
-    if(auth.loggedIn()) {
+  constructor(
+    private auth: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig,
+    private router: Router,
+  ) {
+    this.lang = document.URL.split("/", 4)[3];
+    if (auth.loggedIn()) {
       this.router.navigate(['/manage-tests']);
     }
   }
@@ -25,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.credentials = {
       username: '',
       password: ''
-    }
+    };
   }
 
   onLogin(credentials) {

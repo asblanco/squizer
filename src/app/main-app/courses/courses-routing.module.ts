@@ -4,13 +4,13 @@ import { CoursesComponent } from './courses.component';
 import { CourseComponent } from './course/course.component';
 
 const coursesRoutes: Routes = [
-  { path: '', redirectTo: '/manage-courses', pathMatch: 'full' },
   {
     path: '',
     component: CoursesComponent,
     children: [
+      { path: 'course/:courseId', component: CourseComponent },
       { path: 'course', redirectTo: '/manage-courses', pathMatch: 'full' },
-      { path: 'course/:courseId', component: CourseComponent }
+      { path: '', pathMatch: 'full', redirectTo: '/manage-courses'}
     ]
   }
 ];

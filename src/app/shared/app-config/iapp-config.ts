@@ -1,5 +1,6 @@
 export interface IAppConfig {
     apiEndpoint: string;
+    webappURL: string;
     MAXLENGTH_COURSE: number;
     MAXLENGTH_CHAPTER: number;
     MAXLENGTH_QUESTION: number;

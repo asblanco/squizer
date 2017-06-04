@@ -8,7 +8,7 @@ import { APP_CONFIG } from '../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-school-year',
@@ -26,7 +26,7 @@ export class NewSchoolYearComponent implements OnChanges, AfterViewInit {
     private fb: FormBuilder,
     private schoolYearService: SchoolYearService,
     private router: Router,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {
     this.maxLengthSchoolYear = config.MAXLENGTH_SCHOOLYEAR;
     this.createForm();
@@ -41,7 +41,7 @@ export class NewSchoolYearComponent implements OnChanges, AfterViewInit {
   }
 
   openSchoolYearModal() {
-    this.newSchoolYearModal.emit({action:"modal",params:['open']});
+    this.newSchoolYearModal.emit({action: 'modal', params: ['open']});
   }
 
   createForm() {
@@ -59,7 +59,7 @@ export class NewSchoolYearComponent implements OnChanges, AfterViewInit {
       this.schoolYears.push(schoolYear);
       this.router.navigate(['/manage-tests/school-year/' + schoolYear.id]);
     })
-    .catch(() => this.notificationsService.error('Error', 'Al crear curso: ' + this.newSchoolYearForm.value.title));
+    .catch(() => this.i18nService.error(6, this.newSchoolYearForm.value.title));
 
     this.ngOnChanges();
   }

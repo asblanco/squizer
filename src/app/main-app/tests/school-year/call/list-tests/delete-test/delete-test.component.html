@@ -1,5 +1,5 @@
 <a (click)="openDeleteTestModal()" materialize="tooltip" class="tooltipped"
-data-position="bottom" data-delay="50" data-tooltip="Delete">
+data-position="bottom" data-delay="50" i18n-data-tooltip data-tooltip="Delete">
   <i class="material-icons icon-red">delete</i></a>
 
 <app-delete-modal (onDeleted)="deleteTest()" [id]="'deleteTestModal' + test.id"

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../i18n/i18n.service';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private router: Router,
   ) {}
 
@@ -29,7 +29,7 @@ export class AuthService {
           localStorage.setItem('token', data.token),
           this.router.navigate(['/manage-tests/']);
         },
-        error => this.notificationsService.error('Error', 'Incorrect username or password')
+        error => this.i18nService.error(0, '')
       );
   }
 
@@ -39,7 +39,7 @@ export class AuthService {
 
   // Check every 30 seconds if the token is expired
   validate(): Observable<any> {
-    return Observable.interval(30000).map(() => !tokenNotExpired() );
+    return Observable.interval(10000).map(() => !tokenNotExpired() );
   }
 
   logout() {

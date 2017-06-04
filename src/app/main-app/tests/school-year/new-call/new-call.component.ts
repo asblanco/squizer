@@ -9,7 +9,7 @@ import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-call',
@@ -25,7 +25,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private callService: CallService,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private router: Router,
     private testsSideNavService: TestsSideNavService,
     @Inject(APP_CONFIG) private config: IAppConfig,
@@ -44,7 +44,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
 
 
   openNewCallModal(schoolYear: SchoolYear) {
-    this.newCallModal.emit({action:"modal",params:['open']});
+    this.newCallModal.emit({action: 'modal', params: ['open']});
   }
 
   createForm() {
@@ -71,7 +71,7 @@ export class NewCallComponent implements OnChanges, AfterViewInit {
       this.testsSideNavService.addCall(call);
       this.router.navigate(['/manage-tests/school-year/' + call.school_year + '/call/' + call.id]);
     })
-    .catch(() => this.notificationsService.error('Error', 'Al crear convocatoria: ' + this.newCallForm.value.title));
+    .catch(() => this.i18nService.error(3, this.newCallForm.value.title));
 
     this.ngOnChanges();
   }

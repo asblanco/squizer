@@ -3,7 +3,7 @@ import { AfterViewInit, Component, EventEmitter, Input } from '@angular/core';
 import { Test } from '../../../../../db/test';
 import { TestService } from '../../../../../db/test.service';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-delete-test',
@@ -15,7 +15,7 @@ export class DeleteTestComponent implements AfterViewInit {
   deleteTestModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
     private testService: TestService
   ) { }
 
@@ -24,7 +24,7 @@ export class DeleteTestComponent implements AfterViewInit {
   }
 
   openDeleteTestModal() {
-    this.deleteTestModal.emit({action:"modal",params:['open']});
+    this.deleteTestModal.emit({action: 'modal', params: ['open']});
   }
 
   deleteTest() {
@@ -33,7 +33,7 @@ export class DeleteTestComponent implements AfterViewInit {
     .then(() => {
       this.tests.splice(this.tests.indexOf(this.test), 1);
     })
-    .catch(() => this.notificationsService.error('Error', 'Al eliminar el test ' + this.test.title));
+    .catch(() => this.i18nService.error(16, this.test.title));
   }
 
 }

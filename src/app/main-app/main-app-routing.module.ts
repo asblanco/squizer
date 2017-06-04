@@ -5,13 +5,11 @@ import { MainAppComponent } from './main-app.component';
 import { AuthGuard } from '../shared/auth/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/manage-tests'},
   {
     path: '',
     component: MainAppComponent,
     canActivate: [ AuthGuard ],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: '/manage-tests'},
       {
         path: 'manage-courses',
         loadChildren: './courses/courses.module#CoursesModule',
@@ -19,7 +17,8 @@ const appRoutes: Routes = [
       {
         path: 'manage-tests',
         loadChildren: './tests/tests.module#TestsModule',
-      }
+      },
+      { path: '', pathMatch: 'full', redirectTo: '/manage-tests'}
     ]
   }
 ];

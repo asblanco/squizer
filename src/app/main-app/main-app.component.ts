@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../shared/auth/auth.service';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-main',
@@ -11,14 +11,14 @@ export class MainAppComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private notificationsService: NotificationsService,
+    private i18nService: i18nService,
   ) {}
 
   ngOnInit() {
     this.subscription = this.auth.validate()
     .subscribe((tokenExpired) => {
       if(tokenExpired) {
-        this.notificationsService.alert('Alert', 'Your session has expired')
+        this.i18nService.alert(0),
         this.auth.logout();
       }
     });

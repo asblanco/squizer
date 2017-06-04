@@ -8,7 +8,7 @@ import { APP_CONFIG } from '../../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../../shared/app-config/iapp-config'
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from 'angular2-notifications';
+import { i18nService } from '../../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-test',
@@ -25,7 +25,7 @@ export class EditTestComponent implements OnChanges, OnInit {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private testService: TestService,
-    private notificationsService: NotificationsService
+    private i18nService: i18nService
   ) {
     this.maxLengthTest = config.MAXLENGTH_TEST;
   }
@@ -47,7 +47,7 @@ export class EditTestComponent implements OnChanges, OnInit {
   }
 
   openEditTestModal(id) {
-    this.editTestModal.emit({action:"modal",params:['open']});
+    this.editTestModal.emit({action: 'modal', params: ['open']});
   }
 
   updateTest() {
@@ -57,7 +57,7 @@ export class EditTestComponent implements OnChanges, OnInit {
       this.ngOnChanges();
     })
     .catch(() => {
-      this.notificationsService.error('Error', 'Al actualizar test: ' + this.test.title);
+      this.i18nService.error(15, this.test.title);
       this.ngOnChanges();
     });
   }

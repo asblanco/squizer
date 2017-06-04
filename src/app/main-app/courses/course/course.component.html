@@ -39,6 +39,6 @@
 <app-delete-modal *ngIf="course" (onDeleted)="deleteCourse(course)"
   [id]="'deleteCourseModal'" [title]="course.name" [deleteModal]="deleteModal">
 </app-delete-modal>
-<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'"
-  [text]="'New chapter'" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
+<app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" i18n-text
+  text="New chapter" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
 </app-new-edit-modal>
