@@ -25,9 +25,18 @@ export class TestService {
     this.authService.refreshToken();
     const url = `${this.url}?term=${term}&course=${course}`;
     return this.authHttp.get(url)
-               .toPromise()
-               .then(response => response.json() as Test[])
-               .catch(this.handleError);
+     .toPromise()
+     .then(response => response.json() as Test[])
+     .catch(this.handleError);
+  }
+
+  getCourseTests(course: number): Promise<Test[]> {
+    this.authService.refreshToken();
+    const url = `${this.url}?course=${course}`;
+    return this.authHttp.get(url)
+     .toPromise()
+     .then(response => response.json() as Test[])
+     .catch(this.handleError);
   }
 
   getTest(id: number): Promise<TestDetail> {

@@ -23,6 +23,7 @@ import { I18nService } from '../../../../../shared/i18n/i18n.service';
 export class NewTestComponent implements OnInit {
   termId: number;
   courses: Course[] = [];
+  tests: Test[] = [];
   selectedCourse: Course = null; // Course with checked property in questions and answers
   newTestForm: FormGroup;
   maxLengthTest: number;
@@ -48,6 +49,7 @@ export class NewTestComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthTest)]],
       course: 0,
       term: 0,
+      bannedTests: [],
       chapters: this.fb.array([])
     });
   }
@@ -121,6 +123,25 @@ export class NewTestComponent implements OnInit {
     this.getAnswers(chapterIndex, questionIndex).controls[answerIndex].value.checked = check;
   }
 
+  banQuestions() {
+    let bannedQuestions = [];
+    // Fill list bannedQuestions
+    this.newTestForm.value.bannedTests.forEach( t => {
+      t.questions.forEach(q => {
+        bannedQuestions.push(q);
+      });
+    });
+    // Deselect checboxes and the form
+    this.selectedCourse.chapters.forEach((c, i) => {
+      c.questions.forEach((q, j) => {
+        if (bannedQuestions.includes(q.id)) {
+          $('#q' + q.id + ' :checkbox:enabled').prop('checked', false);
+          this.getQuestions(i).controls[j].value.checked = false;
+        }
+      });
+    });
+  }
+
   /*
   * Select a course, download its data and initialize the reactive form
   */
@@ -131,6 +152,12 @@ export class NewTestComponent implements OnInit {
       this.selectedCourse = course;
       if (course.chapters.length > 0) {
         this.selectedChapter = course.chapters[0];
+        // Download past tests
+        this.testService.getCourseTests(course.id)
+        .then((tests) => {
+          this.tests = tests;
+        })
+        .catch(() => this.i18nService.error(13, ''));
       }
       this.setForm();
     })
@@ -143,6 +170,7 @@ export class NewTestComponent implements OnInit {
       title: [title, [Validators.required, Validators.maxLength(this.maxLengthTest)]],
       course: [this.selectedCourse.id, [Validators.required]],
       term: this.termId,
+      bannedTests: [],
       chapters: this.fb.array([]),
     });
     this.setChapters();

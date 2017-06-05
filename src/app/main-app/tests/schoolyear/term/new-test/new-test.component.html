@@ -3,13 +3,13 @@
 
   <form [formGroup]="newTestForm" (ngSubmit)="onSubmit()" novalidate materialize>
     <div class="row">
-      <div class="input-field form-group col s6">
+      <div class="input-field col s6">
         <label for="title" i18n>Title</label>
         <input type="text" formControlName="title" materialize="characterCounter"
           [attr.data-length]="maxLengthTest" maxlength="{{maxLengthTest}}">
       </div>
 
-      <div class="input-field form-group col s6">
+      <div class="input-field col s6">
         <select materialize="material_select" (change)="selectCourse()"
           formControlName="course" [materializeSelectOptions]="courses">
           <option value="" disabled selected i18n>Select a course</option>
@@ -19,22 +19,40 @@
       </div>
     </div>
 
-    <div *ngIf="selectedCourse && selectedCourse.chapters.length > 0" id="all">
+    <div *ngIf="selectedCourse && selectedCourse.chapters.length > 0">
       <div class="row">
-        <span i18n><b>Total number of questions on the test: {{getTotalNumberQuestions()}}</b></span>
-        <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', false)" i18n>Uncheck All</button>
-        <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', true)" i18n>Check All</button>
+        <div class="col s6">
+          <span i18n><b>Total number of questions on the test: {{getTotalNumberQuestions()}}</b></span>
+        </div>
+        <div class="col s6">
+          <select multiple materialize="material_select" formControlName="bannedTests"
+          [materializeSelectOptions]="tests">
+            <option value="" disabled selected i18n>Ban past tests</option>
+            <option *ngFor="let test of tests" [value]="test">{{test.title}}</option>
+          </select>
+          <label i18n>Ban past tests</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col s6">
+          <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', false)" i18n>Uncheck All</button>
+          <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkAll('all', true)" i18n>Check All</button>
+        </div>
+        <div class="col s6">
+          <button type="button" class="waves-effect btn-flat squizer-color" (click)="banQuestions()" i18n>Apply bans</button>
+        </div>
       </div>
 
       <div class="card">
-        <div class="tabs" >
+        <div class="tabs">
           <ul class="tabs tabs-fixed-width card-tabs" materialize="tabs">
             <li class="tab" *ngFor="let chapter of selectedCourse.chapters">
               <a (click)="selectChapter(chapter)">{{chapter.title}}</a>
             </li>
           </ul>
         </div>
-        <div class="card-content" formArrayName="chapters">
+        <div class="card-content" formArrayName="chapters" id="all">
           <div *ngFor="let chapter of chapters.controls; let i=index" [formGroupName]="i">
             <div *ngIf="selectedChapter" id="ch{{chapter.value.id}}" [hidden]="chapter.value.id != selectedChapter.id">
               <div class="row">

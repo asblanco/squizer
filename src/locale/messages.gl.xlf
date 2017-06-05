@@ -450,7 +450,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">97</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f13946a4721c217d3ab8fb1f746cc6cbdaf23334" datatype="html">
@@ -474,7 +474,19 @@
         <target><x id="START_BOLD_TEXT" ctype="x-b"/>Número total de preguntas en el test: <x id="INTERPOLATION"/><x id="CLOSE_BOLD_TEXT" ctype="x-b"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8f29ee4c510b5ec6e8d458745755a87996fa99d" datatype="html">
+        <source>Ban past tests</source>
+        <target>Deseleccionar preguntas de outros tests</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="86aec831355ae2b983b0a4756c26028ac610051e" datatype="html">
@@ -482,7 +494,7 @@
         <target>Deseleccionar todo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="028123b0ed924b27efff8769b25de46f8e679f89" datatype="html">
@@ -490,7 +502,15 @@
         <target>Seleccionar todo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7bd8e821fb564a5bc4adbcd8ce08e65b54ba7a3b" datatype="html">
+        <source>Apply bans</source>
+        <target>Aplicar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d227905cc815b82624e15185237a5060194bd992" datatype="html">
@@ -498,7 +518,7 @@
         <target>Mínimo é 0</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bb85558d8e420dc857756e3cadf8f3308381b47d" datatype="html">
@@ -506,7 +526,7 @@
         <target>Máximo é <x id="INTERPOLATION"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c15267a43e901cac71ea1ef8b7c17b800a179ad0" datatype="html">
@@ -514,7 +534,7 @@
         <target> preguntas de <x id="INTERPOLATION"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a60855756106d28e44c4c9a04b12ad7fc5d4d296" datatype="html">
@@ -522,7 +542,7 @@
         <target>Deseleccionar capítulo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d5f7595e043987dde86e8538fa61d352853f5dc7" datatype="html">
@@ -530,7 +550,7 @@
         <target>Seleccionar capítulo</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/main-app/tests/schoolyear/term/new-test/new-test.component.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="024ce97c962f343cb454e8f277d2442e304e516e" datatype="html">
