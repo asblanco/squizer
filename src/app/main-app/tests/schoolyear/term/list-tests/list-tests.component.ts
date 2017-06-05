@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
-import { i18nService } from '../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-list-tests',
@@ -15,7 +15,7 @@ export class ListTestsComponent implements OnChanges {
   tests: Test[] = [];
 
   constructor(
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private testService: TestService
   ) { }
 

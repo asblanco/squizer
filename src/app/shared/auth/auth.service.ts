@@ -2,8 +2,9 @@ import { Injectable, Inject } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
-import { i18nService } from '../i18n/i18n.service';
-import { Observable } from 'rxjs';
+import { I18nService } from '../i18n/i18n.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/map';
 
 import { APP_CONFIG } from '../app-config/app-config';
@@ -17,7 +18,7 @@ export class AuthService {
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private router: Router,
   ) {}
 
@@ -26,8 +27,8 @@ export class AuthService {
       .map(res => res.json())
       .subscribe(
         data => {
-          localStorage.setItem('username', credentials.username),
-          localStorage.setItem('token', data.token),
+          localStorage.setItem('username', credentials.username);
+          localStorage.setItem('token', data.token);
           this.router.navigate(['/manage-tests/']);
         },
         error => this.i18nService.error(0, '')

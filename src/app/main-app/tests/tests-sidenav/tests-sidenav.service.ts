@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Term } from '../../db/term';
 import { Course } from '../../db/course';
-import { i18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 import { SchoolYear } from '../../db/schoolyear';
 import { SchoolYearService } from '../../db/schoolyear.service';
 
@@ -23,7 +23,7 @@ export class TestsSideNavService {
   selectedSchoolYear$ = this.selectSchoolYear.asObservable();
 
   constructor(
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private schoolYearService: SchoolYearService
   ) {}
 

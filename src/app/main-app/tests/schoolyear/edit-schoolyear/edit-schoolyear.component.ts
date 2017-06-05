@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,14 +9,14 @@ import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-schoolyear',
   templateUrl: './edit-schoolyear.component.html',
   styleUrls: ['./edit-schoolyear.component.css']
 })
-export class EditSchoolYearComponent implements OnChanges {
+export class EditSchoolYearComponent implements AfterViewInit, OnChanges {
   @Input() schoolYear: SchoolYear;
   editSchoolYearForm: FormGroup;
   editSchoolYearModal = new EventEmitter<string|MaterializeAction>();
@@ -29,7 +29,7 @@ export class EditSchoolYearComponent implements OnChanges {
     private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService,
     private router: Router,
-    private i18nService: i18nService
+    private i18nService: I18nService
   ) {
     this.maxLengthSchoolYear = config.MAXLENGTH_SCHOOLYEAR;
     this.createForm();
@@ -79,7 +79,7 @@ export class EditSchoolYearComponent implements OnChanges {
       this.ngOnChanges();
     })
     .catch(() => {
-      this.i18nService.error(4,this.editSchoolYearForm.value.title);
+      this.i18nService.error(4, this.editSchoolYearForm.value.title);
       this.ngOnChanges();
     });
   }

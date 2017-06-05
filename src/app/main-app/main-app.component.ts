@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../shared/auth/auth.service';
-import { i18nService } from '../shared/i18n/i18n.service';
+import { I18nService } from '../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-main',
@@ -11,14 +11,14 @@ export class MainAppComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
   ) {}
 
   ngOnInit() {
     this.subscription = this.auth.validate()
     .subscribe((tokenExpired) => {
-      if(tokenExpired) {
-        this.i18nService.alert(0),
+      if (tokenExpired) {
+        this.i18nService.alert(0);
         this.auth.logout();
       }
     });

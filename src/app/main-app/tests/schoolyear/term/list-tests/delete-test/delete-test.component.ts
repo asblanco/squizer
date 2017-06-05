@@ -3,7 +3,7 @@ import { AfterViewInit, Component, EventEmitter, Input } from '@angular/core';
 import { Test } from '../../../../../db/test';
 import { TestService } from '../../../../../db/test.service';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-delete-test',
@@ -15,7 +15,7 @@ export class DeleteTestComponent implements AfterViewInit {
   deleteTestModal = new EventEmitter<string|MaterializeAction>();
 
   constructor(
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private testService: TestService
   ) { }
 

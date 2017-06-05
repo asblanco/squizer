@@ -28,19 +28,19 @@ export class TestsSideNavComponent {
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
-      let trigger = event.urlAfterRedirects;
-      let regexpSchoolYear = new RegExp('/manage-tests/schoolyear/[1-9]+');
-      let regexpTerm = new RegExp('/manage-tests/schoolyear/[0-9]+/term/[0-9]+');
+      const trigger = event.urlAfterRedirects;
+      const regexpSchoolYear = new RegExp('/manage-tests/schoolyear/[1-9]+');
+      const regexpTerm = new RegExp('/manage-tests/schoolyear/[0-9]+/term/[0-9]+');
 
       if (event.urlAfterRedirects === '/manage-tests') {
         this.selectedSchoolYearId = null;
         this.selectedTermId = null;
       } else if (regexpTerm.test(trigger)) {
-        let splitted = trigger.split("/", 6);
+        const splitted = trigger.split('/', 6);
         this.selectedSchoolYearId = +splitted[3];
         this.selectedTermId = +splitted[5];
       } else if (regexpSchoolYear.test(trigger)) {
-        let splitted = trigger.split("/", 4);
+        const splitted = trigger.split('/', 4);
         this.selectedSchoolYearId = +splitted[3];
         this.selectedTermId = null;
       }

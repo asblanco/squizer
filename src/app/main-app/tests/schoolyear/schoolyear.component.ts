@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { SchoolYear } from '../../db/schoolyear';
 import { SchoolYearService } from '../../db/schoolyear.service';
 import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
-import { i18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-schoolyear',
@@ -17,7 +17,7 @@ export class SchoolYearComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private schoolYearService: SchoolYearService,
     private testsSideNavService: TestsSideNavService
   ) {

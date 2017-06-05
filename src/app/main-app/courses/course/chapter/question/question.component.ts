@@ -4,7 +4,7 @@ import { Question } from '../../../../db/question';
 import { QuestionService } from '../../../../db/question.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-question',
@@ -20,7 +20,7 @@ export class QuestionComponent {
 
   constructor(
     private questionService: QuestionService,
-    private i18nService: i18nService ) { }
+    private i18nService: I18nService ) { }
 
   openEditQuestionModal() {
     this.editQuestionModal.emit({action: 'modal', params: ['open']});

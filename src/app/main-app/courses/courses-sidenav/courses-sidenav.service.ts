@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
-import { i18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -15,7 +15,7 @@ export class CoursesSideNavService {
 
   constructor(
     private courseService: CourseService,
-    private i18nService: i18nService
+    private i18nService: I18nService
   ) {}
 
   getCourses() {

@@ -11,7 +11,7 @@ import { ChapterService } from '../../db/chapter.service';
 import { CoursesSideNavService } from '../courses-sidenav/courses-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -36,7 +36,7 @@ export class CourseComponent implements OnDestroy {
     private courseService: CourseService,
     private coursesSideNavService: CoursesSideNavService,
     private chapterService: ChapterService,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private router: Router
  ) {
    this.maxLengthCourse = config.MAXLENGTH_COURSE;
@@ -110,7 +110,7 @@ export class CourseComponent implements OnDestroy {
       .then(chapter => {
         // the response chapter doesnt include the empty array of questions,
         // so when pushing a question right after creating the chapter it outputs error
-        let ch: Chapter = {
+        const ch: Chapter = {
           id: chapter.id,
           title: chapter.title,
           course: chapter.course,

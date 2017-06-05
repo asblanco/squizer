@@ -9,11 +9,11 @@ import { TestService } from '../../../../db/test.service';
 import { TestsSideNavService } from '../../../tests-sidenav/tests-sidenav.service';
 
 import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
+import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
 
 import { CustomValidators } from 'ng2-validation';
-import { MaterializeDirective } from "angular2-materialize";
-import { i18nService } from '../../../../../shared/i18n/i18n.service';
+import { MaterializeDirective } from 'angular2-materialize';
+import { I18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-test',
@@ -33,7 +33,7 @@ export class NewTestComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private courseService: CourseService,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private router: Router,
     private testService: TestService,
     private testsSideNavService: TestsSideNavService
@@ -61,8 +61,8 @@ export class NewTestComponent implements OnInit {
   getTotalNumberQuestions() {
     let sum = 0;
     this.chapters.controls.forEach(c => {
-      sum += parseInt(c.value.numberQuestions);
-    })
+      sum += c.value.numberQuestions;
+    });
     return sum;
   }
 
@@ -99,8 +99,8 @@ export class NewTestComponent implements OnInit {
       this.getQuestions(i).controls.forEach( (q, j) => {
         q.value.checked = check;
         this.getAnswers(i, j).controls.forEach(a => a.value.checked = check);
-      })
-    })
+      });
+    });
   }
 
   checkChapter(check: boolean, chapter, i) {
@@ -108,7 +108,7 @@ export class NewTestComponent implements OnInit {
     this.getQuestions(i).controls.forEach( (q, j) => {
       q.value.checked = check;
       this.getAnswers(i, j).controls.forEach(a => a.value.checked = check);
-    })
+    });
   }
 
   checkQuestion(check: boolean, questionId, chapterIndex, questionIndex) {
@@ -129,7 +129,7 @@ export class NewTestComponent implements OnInit {
     this.courseService.getCourseDetails(this.newTestForm.value.course)
     .then(course => {
       this.selectedCourse = course;
-      if(course.chapters.length > 0) {
+      if (course.chapters.length > 0) {
         this.selectedChapter = course.chapters[0];
       }
       this.setForm();
@@ -151,15 +151,13 @@ export class NewTestComponent implements OnInit {
   setChapters() {
     const chapters = this.selectedCourse.chapters;
     let c;
-    for(let i=0; i < chapters.length; i++) {
-      c = (
-        this.fb.group({
-          id: chapters[i].id,
-          title: chapters[i].title,
-          numberQuestions: [0, [CustomValidators.min(0), CustomValidators.max(chapters[i].questions.length)]],
-          questions: this.fb.array([])
-        })
-      )
+    for (let i = 0; i < chapters.length; i++) {
+      c = this.fb.group({
+            id: chapters[i].id,
+            title: chapters[i].title,
+            numberQuestions: [0, [CustomValidators.min(0), CustomValidators.max(chapters[i].questions.length)]],
+            questions: this.fb.array([])
+          });
       this.setQuestions(c.controls, chapters[i], i);
       this.chapters.push(c);
     }
@@ -168,16 +166,14 @@ export class NewTestComponent implements OnInit {
   setQuestions(c, chapter, i) {
     const questions = chapter.questions;
     let q;
-    for(let j = 0; j < questions.length; j++) {
-      q = (
-        this.fb.group({
-          id: questions[j].id,
-          chapter: questions[j].chapter,
-          title: questions[j].title,
-          checked: false,
-          answers: this.fb.array([])
-        })
-      )
+    for (let j = 0; j < questions.length; j++) {
+      q = this.fb.group({
+            id: questions[j].id,
+            chapter: questions[j].chapter,
+            title: questions[j].title,
+            checked: false,
+            answers: this.fb.array([])
+          });
       this.setAnswers(q.controls, questions[j], i, j);
       c.questions.push(q);
     }
@@ -185,7 +181,7 @@ export class NewTestComponent implements OnInit {
 
   setAnswers(q, question, i, j) {
     const answers = question.answers;
-    for(let k = 0; k < answers.length; k++) {
+    for (let k = 0; k < answers.length; k++) {
       q.answers.push(
         this.fb.group({
           id: answers[k].id,
@@ -194,40 +190,36 @@ export class NewTestComponent implements OnInit {
           correct: answers[k].correct,
           checked: false
         })
-      )
+      );
     }
   }
 
   onSubmit() {
-    if(this.getTotalNumberQuestions() <= 0) {
-      this.i18nService.info(0)
+    if (this.getTotalNumberQuestions() <= 0) {
+      this.i18nService.info(0);
     } else {
       this.testService.generateTest(this.newTestForm.value)
-      .then(test => {
-        this.testService.create(test)
+      .then(generatedTest => {
+        // Save to database
+        this.testService.create(generatedTest)
         .then(test => {
           this.router.navigate(['../test/' + test.id], {relativeTo: this.activatedRoute});
         })
         .catch(() => this.i18nService.error(11, ''));
       })
       .catch((err) => {
-        console.log(err._body)
-        switch(err._body) {
-           case '1': {
-              this.i18nService.info(1)
+        switch (err._body) {
+           case '1':
+              this.i18nService.info(1);
               break;
-           }
-           case '2': {
-              this.i18nService.info(2)
+           case '2':
+              this.i18nService.info(2);
               break;
-           }
-           default: {
-              this.i18nService.info(3)
+           default:
+              this.i18nService.info(3);
               break;
-           }
         }
       });
     }
   }
-
 }

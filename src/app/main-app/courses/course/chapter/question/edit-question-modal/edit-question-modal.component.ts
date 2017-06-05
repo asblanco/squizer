@@ -11,7 +11,7 @@ import { APP_CONFIG } from '../../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-question-modal',
@@ -30,7 +30,7 @@ export class EditQuestionModalComponent implements OnChanges {
     private answerService: AnswerService,
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private questionService: QuestionService
   ) {
     this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
@@ -96,21 +96,21 @@ export class EditQuestionModalComponent implements OnChanges {
 
   onSubmit() {
     // Check if it creates at least 1 answer correct and 3 incorrects
-    let question = this.questionForm.value;
+    const question = this.questionForm.value;
     let corrects = 0;
     let incorrects = 0;
-    for(let i = 0; i < question.answers.length; i++) {
-      if(question.answers[i].correct) {
+    for (let i = 0; i < question.answers.length; i++) {
+      if (question.answers[i].correct) {
         corrects++;
       } else {
         incorrects++;
       }
     }
 
-    if(corrects >= 1 && incorrects >= 3) {
+    if (corrects >= 1 && incorrects >= 3) {
       this.questionService.update(question)
-        .then(question => {
-          this.editedQuestion.emit(question);
+        .then(q => {
+          this.editedQuestion.emit(q);
           this.ngOnChanges();
         })
         .catch(() => {
@@ -118,7 +118,7 @@ export class EditQuestionModalComponent implements OnChanges {
           this.ngOnChanges();
         });
     } else {
-      this.i18nService.info(4)
+      this.i18nService.info(4);
     }
   }
 

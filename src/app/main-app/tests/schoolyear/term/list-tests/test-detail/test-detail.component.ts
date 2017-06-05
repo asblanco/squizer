@@ -4,7 +4,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TestDetail } from '../../../../../db/test-detail';
 
 import { TestService } from '../../../../../db/test.service';
-import { i18nService } from '../../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../../shared/i18n/i18n.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -17,7 +17,7 @@ export class TestDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private testService: TestService
   ) { }
 

@@ -15,11 +15,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 @NgModule({
   imports: [
     CommonModule,
-    DbModule.forRoot(),
     TestsModule,
     CoursesModule,
+    DbModule.forRoot(),
+    MaterializeModule,
     MainAppRoutingModule,
-    MaterializeModule
   ],
   declarations: [
     MainAppComponent,

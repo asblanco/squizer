@@ -9,7 +9,7 @@ import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-question-modal',
@@ -27,7 +27,7 @@ export class NewQuestionModalComponent implements OnChanges {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private fb: FormBuilder,
     private questionService: QuestionService,
-    private i18nService: i18nService ) {
+    private i18nService: I18nService ) {
       this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
       this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
 
@@ -90,15 +90,15 @@ export class NewQuestionModalComponent implements OnChanges {
     const newQuestion = this.newQuestion.value;
     let corrects = 0;
     let incorrects = 0;
-    for(let i = 0; i < newQuestion.answers.length; i++) {
-      if(newQuestion.answers[i].correct) {
+    for (let i = 0; i < newQuestion.answers.length; i++) {
+      if (newQuestion.answers[i].correct) {
         corrects++;
       } else {
         incorrects++;
       }
     }
 
-    if(corrects >= 1 && incorrects >= 3) {
+    if (corrects >= 1 && incorrects >= 3) {
       this.questionService.create(newQuestion)
       .then(question => {
           this.chapter.questions.push(question);

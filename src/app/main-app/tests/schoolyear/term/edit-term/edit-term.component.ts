@@ -5,10 +5,10 @@ import { Term } from '../../../../db/term';
 import { TermService } from '../../../../db/term.service';
 import { TestsSideNavService } from '../../../tests-sidenav/tests-sidenav.service';
 import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../../shared/app-config/iapp-config'
+import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-edit-term',
@@ -26,7 +26,7 @@ export class EditTermComponent implements AfterViewInit, OnChanges {
     private fb: FormBuilder,
     private termService: TermService,
     private testsSideNavService: TestsSideNavService,
-    private i18nService: i18nService
+    private i18nService: I18nService
   ) {
     this.maxLengthTerm = config.MAXLENGTH_CALL;
     this.createForm();

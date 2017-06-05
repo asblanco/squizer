@@ -8,7 +8,7 @@ import { Course } from '../../../db/course';
 import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-term',
@@ -25,7 +25,7 @@ export class TermComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private termService: TermService,
     private courseService: CourseService,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private router: Router,
     private testsSideNavService: TestsSideNavService
   ) {

@@ -9,7 +9,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "i18n": "ng-xi18n -p src/tsconfig.json --i18nFormat=xlf --output-path=src/locale"
+    "i18n": "ng xi18n --output-path src/locale",
+    "build-aot-en": "ng build --aot",
+    "build-aot-es": "ng build --i18n-file=src/locale/messages.es.xlf --locale=es --i18n-format=xlf --aot",
+    "build-aot-gl": "ng build --i18n-file=src/locale/messages.gl.xlf --locale=gl --i18n-format=xlf --aot"
   },
   "private": true,
   "dependencies": {

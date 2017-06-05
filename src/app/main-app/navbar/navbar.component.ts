@@ -33,10 +33,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         const regexpCourses = new RegExp('/manage-courses.*');
         const regexpTests = new RegExp('/manage-tests.*');
 
-        if (regexpCourses.test(trigger) && this.activeTab != 1) {
+        if (regexpCourses.test(trigger) && this.activeTab !== 1) {
           this.activeTab = 1;
           this.coursesSideNavService.getCourses();
-        } else if (regexpTests.test(trigger) && this.activeTab != 2) {
+        } else if (regexpTests.test(trigger) && this.activeTab !== 2) {
           this.activeTab = 2;
           testsSideNavService.getSchoolYears();
         }

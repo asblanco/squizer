@@ -89,7 +89,7 @@ export class TestService {
 
   generateTest(test): Promise<Test> {
     this.authService.refreshToken();
-    const url = `${this.config.apiEndpoint}generate-test/`
+    const url = `${this.config.apiEndpoint}generate-test/`;
     return this.authHttp
       .post(url, JSON.stringify(test))
       .toPromise()

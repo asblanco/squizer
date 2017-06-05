@@ -6,7 +6,7 @@ import { IAppConfig } from '../../../shared/app-config/iapp-config';
 import { Course } from '../../db/course';
 import { CourseService } from '../../db/course.service';
 import { CoursesSideNavService } from './courses-sidenav.service';
-import { i18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +30,7 @@ export class CoursesSideNavComponent {
     private courseService: CourseService,
     @Inject(APP_CONFIG) private config: IAppConfig,
     private coursesSideNavService: CoursesSideNavService,
-    private i18nService: i18nService,
+    private i18nService: I18nService,
     private router: Router,
   ) {
     this.maxLengthCourse = config.MAXLENGTH_COURSE;
@@ -40,13 +40,13 @@ export class CoursesSideNavComponent {
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
-      let trigger = event.urlAfterRedirects;
-      let regexp = new RegExp('/manage-courses/course/[1-9]+');
+      const trigger = event.urlAfterRedirects;
+      const regexp = new RegExp('/manage-courses/course/[1-9]+');
 
       if (event.urlAfterRedirects === '/manage-courses') {
         this.selectedCourseId = null;
       } else if (regexp.test(trigger)) {
-        let splitted = trigger.split("/", 4);
+        const splitted = trigger.split('/', 4);
         this.selectedCourseId = +splitted[3];
       }
     });

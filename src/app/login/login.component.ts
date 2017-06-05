@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     @Inject(APP_CONFIG) private config: IAppConfig,
     private router: Router,
   ) {
-    this.lang = document.URL.split("/", 4)[3];
+    this.lang = document.URL.split('/', 4)[3];
     if (auth.loggedIn()) {
       this.router.navigate(['/manage-tests']);
     }

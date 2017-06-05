@@ -7,7 +7,7 @@ import { Question } from '../../../db/question';
 import { ChapterService } from '../../../db/chapter.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { i18nService } from '../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-chapter',
@@ -24,7 +24,7 @@ export class ChapterComponent {
   constructor(
     private chapterService: ChapterService,
     @Inject(APP_CONFIG) private config: IAppConfig,
-    private i18nService: i18nService
+    private i18nService: I18nService
   ) {
     this.maxLengthChapter = config.MAXLENGTH_CHAPTER;
   }
