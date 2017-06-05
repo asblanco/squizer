@@ -3,6 +3,7 @@ import { Headers, ResponseContentType } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 
 import { Test } from './test';
 import { TestDetail } from './test-detail';
@@ -16,10 +17,12 @@ export class TestService {
 
   constructor(
     private authHttp: AuthHttp,
+    private authService: AuthService,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getCourseTermTests(term: number, course: number): Promise<Test[]> {
+    this.authService.refreshToken();
     const url = `${this.url}?term=${term}&course=${course}`;
     return this.authHttp.get(url)
                .toPromise()
@@ -28,6 +31,7 @@ export class TestService {
   }
 
   getTest(id: number): Promise<TestDetail> {
+    this.authService.refreshToken();
     const url = this.config.apiEndpoint + `test-detail/${id}/`;
     return this.authHttp.get(url)
       .toPromise()
@@ -36,6 +40,7 @@ export class TestService {
   }
 
   create(test: Test): Promise<Test> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify(test), {headers: this.headers})
       .toPromise()
@@ -44,6 +49,7 @@ export class TestService {
   }
 
   update(test: Test): Promise<Test> {
+    this.authService.refreshToken();
     const url = `${this.url}${test.id}/`;
     return this.authHttp
       .put(url, JSON.stringify(test), {headers: this.headers})
@@ -53,6 +59,7 @@ export class TestService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()
@@ -61,7 +68,7 @@ export class TestService {
   }
 
   downloadPDF(id: number): any {
-    // const url = `https://latexonline.cc/compile?url=http://asblanco.com/test.tex`;
+    this.authService.refreshToken();
     const url = `${this.config.apiEndpoint}test-pdf/${id}/`;
     return this.authHttp.get(url, { responseType: ResponseContentType.Blob })
     .map(
@@ -71,6 +78,7 @@ export class TestService {
   }
 
   downloadTEX(id: number): any {
+    this.authService.refreshToken();
     const url = `${this.config.apiEndpoint}test-tex/${id}/`;
     return this.authHttp.get(url, { responseType: ResponseContentType.Blob })
     .map(
@@ -80,6 +88,7 @@ export class TestService {
   }
 
   generateTest(test): Promise<Test> {
+    this.authService.refreshToken();
     const url = `${this.config.apiEndpoint}generate-test/`
     return this.authHttp
       .post(url, JSON.stringify(test))

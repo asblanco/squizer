@@ -3,6 +3,7 @@ import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 import { Chapter } from './chapter';
 import 'rxjs/add/operator/toPromise';
 
@@ -13,10 +14,12 @@ export class ChapterService {
 
   constructor(
     private authHttp: AuthHttp,
+    private authService: AuthService,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getChapters(): Promise<Chapter[]> {
+    this.authService.refreshToken();
     return this.authHttp.get(this.url)
                .toPromise()
                .then(response => response.json() as Chapter[])
@@ -24,6 +27,7 @@ export class ChapterService {
   }
 
   create(title: string, course: number): Promise<Chapter> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify({course: course, title: title, questions: []}), {headers: this.headers})
       .toPromise()
@@ -32,6 +36,7 @@ export class ChapterService {
   }
 
   update(chapter: Chapter): Promise<Chapter> {
+    this.authService.refreshToken();
     const url = `${this.url}${chapter.id}/`;
     return this.authHttp
       .put(url, JSON.stringify(chapter), {headers: this.headers})
@@ -41,6 +46,7 @@ export class ChapterService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()

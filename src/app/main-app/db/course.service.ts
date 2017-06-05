@@ -3,6 +3,7 @@ import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 import { Course } from './course';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,11 +13,13 @@ export class CourseService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    @Inject(APP_CONFIG) private config: IAppConfig,
     private authHttp: AuthHttp,
+    private authService: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getCourses(): Promise<Course[]> {
+    this.authService.refreshToken();
     return this.authHttp.get(this.url)
       .toPromise()
       .then(response => response.json() as Course[])
@@ -24,6 +27,7 @@ export class CourseService {
   }
 
   getCourseDetails(id: number): Promise<Course> {
+    this.authService.refreshToken();
     const url = `${this.config.apiEndpoint}course-detail/${id}/`;
     return this.authHttp.get(url)
       .toPromise()
@@ -32,6 +36,7 @@ export class CourseService {
   }
 
   create(name: string): Promise<Course> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify({name: name, chapters: []}), {headers: this.headers})
       .toPromise()
@@ -40,6 +45,7 @@ export class CourseService {
   }
 
   update(course: Course): Promise<Course> {
+    this.authService.refreshToken();
     const url = `${this.url}${course.id}/`;
     return this.authHttp
       .put(url, JSON.stringify(course), {headers: this.headers})
@@ -49,6 +55,7 @@ export class CourseService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()

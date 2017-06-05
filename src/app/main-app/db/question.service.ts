@@ -3,6 +3,7 @@ import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 import { Question } from './question';
 import 'rxjs/add/operator/toPromise';
 
@@ -13,10 +14,12 @@ export class QuestionService {
 
   constructor(
     private authHttp: AuthHttp,
+    private authService: AuthService,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   create(question: Question): Promise<Question> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify(question), {headers: this.headers})
       .toPromise()
@@ -25,6 +28,7 @@ export class QuestionService {
   }
 
   update(question: Question): Promise<Question> {
+    this.authService.refreshToken();
     return this.authHttp
       .put(`${this.url}${question.id}/`,
             JSON.stringify(question), {headers: this.headers} )
@@ -34,6 +38,7 @@ export class QuestionService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()

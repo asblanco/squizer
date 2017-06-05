@@ -4,6 +4,7 @@ import { AuthHttp } from 'angular2-jwt';
 import { Term } from './term';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Injectable()
 export class TermService {
@@ -12,10 +13,12 @@ export class TermService {
 
   constructor(
     private authHttp: AuthHttp,
+    private authService: AuthService,
     @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getTerm(id: number): Promise<Term> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.get(url)
       .toPromise()
@@ -24,6 +27,7 @@ export class TermService {
   }
 
   create(term: Term): Promise<Term> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify(term), {headers: this.headers})
       .toPromise()
@@ -32,6 +36,7 @@ export class TermService {
   }
 
   update(term: Term): Promise<Term> {
+    this.authService.refreshToken();
     const url = `${this.url}${term.id}/`;
     return this.authHttp
       .put(url, JSON.stringify(term), {headers: this.headers})
@@ -41,6 +46,7 @@ export class TermService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()

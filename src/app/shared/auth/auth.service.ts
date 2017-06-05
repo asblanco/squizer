@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
 import { i18nService } from '../i18n/i18n.service';
@@ -11,7 +11,8 @@ import { IAppConfig } from '../app-config/iapp-config';
 
 @Injectable()
 export class AuthService {
-  private url = this.config.apiEndpoint + 'api-token-auth/'
+  private url = this.config.apiEndpoint + 'api-token-auth/';
+  private urlRefresh = this.config.apiEndpoint + 'api-token-refresh/';
 
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
@@ -30,6 +31,19 @@ export class AuthService {
           this.router.navigate(['/manage-tests/']);
         },
         error => this.i18nService.error(0, '')
+      );
+  }
+
+  refreshToken() {
+    const token = localStorage.getItem('token');
+    const headers = new Headers({'Content-Type': 'application/json'});
+    this.http.post(this.urlRefresh, { headers: headers, 'token': token })
+      .map(res => res.json())
+      .subscribe(
+        data => {
+          localStorage.setItem('token', data.token);
+        },
+        error => this.i18nService.error(26, '')
       );
   }
 

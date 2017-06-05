@@ -3,6 +3,7 @@ import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { APP_CONFIG } from '../../shared/app-config/app-config';
 import { IAppConfig } from '../../shared/app-config/iapp-config';
+import { AuthService } from '../../shared/auth/auth.service';
 import { SchoolYear } from './schoolyear';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,11 +13,13 @@ export class SchoolYearService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
-    @Inject(APP_CONFIG) private config: IAppConfig,
-    public authHttp: AuthHttp
+    public authHttp: AuthHttp,
+    private authService: AuthService,
+    @Inject(APP_CONFIG) private config: IAppConfig
   ) { }
 
   getSchoolYears(): Promise<SchoolYear[]> {
+    this.authService.refreshToken();
     return this.authHttp.get(this.config.apiEndpoint + 'schoolyears/')
                .toPromise()
                .then(response => response.json() as SchoolYear[])
@@ -24,6 +27,7 @@ export class SchoolYearService {
   }
 
   getSchoolYear(id: number): Promise<SchoolYear> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.get(url)
       .toPromise()
@@ -32,6 +36,7 @@ export class SchoolYearService {
   }
 
   create(schoolYear: SchoolYear): Promise<SchoolYear> {
+    this.authService.refreshToken();
     return this.authHttp
       .post(this.url, JSON.stringify(schoolYear), {headers: this.headers})
       .toPromise()
@@ -40,6 +45,7 @@ export class SchoolYearService {
   }
 
   update(schoolYear: SchoolYear): Promise<SchoolYear> {
+    this.authService.refreshToken();
     const url = `${this.url}${schoolYear.id}/`;
     return this.authHttp
       .put(url, JSON.stringify(schoolYear), {headers: this.headers})
@@ -49,6 +55,7 @@ export class SchoolYearService {
   }
 
   delete(id: number): Promise<void> {
+    this.authService.refreshToken();
     const url = `${this.url}${id}/`;
     return this.authHttp.delete(url)
       .toPromise()

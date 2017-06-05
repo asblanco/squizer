@@ -31,7 +31,8 @@ export const errors = [
     /*22*/ 'Creating question ',
     /*23*/ 'Deleting question ',
     /*24*/ 'Updating question ',
-    /*25*/ 'Creating course '
+    /*25*/ 'Creating course ',
+    /*26*/ 'Failed to refresh authentication token'
   ],
   [
     'Nombre de usuario o contraseña incorrectos.',
@@ -59,7 +60,8 @@ export const errors = [
     'Al crear pregunta: ',
     'Al eliminar la pregunta: ',
     'Al actualizar la pregunta: ',
-    'Al crear la asignatura: '
+    'Al crear la asignatura: ',
+    'Fallo al recargar token de autenticación'
   ],
   [
     'Nome de usuario ou contrasinal incorrectos.',
@@ -87,7 +89,8 @@ export const errors = [
     'Ao crea-la pregunta: ',
     'Ao elimina-la pregunta: ',
     'Ao actualiza-la pregunta: ',
-    'Ao crear a asignatura: '
+    'Ao crear a asignatura: ',
+    'Fallo ao recargar token de autenticación'
   ]
 ];
 
