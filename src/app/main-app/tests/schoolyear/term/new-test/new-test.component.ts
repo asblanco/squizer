@@ -6,7 +6,7 @@ import { Course } from '../../../../db/course';
 import { CourseService } from '../../../../db/course.service';
 import { Test } from '../../../../db/test';
 import { TestService } from '../../../../db/test.service';
-import { TestsSideNavService } from '../../../tests-sidenav/tests-sidenav.service';
+import { TestsSideNavService } from '../../../../navbars/tests-sidenav/tests-sidenav.service';
 
 import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
@@ -124,7 +124,7 @@ export class NewTestComponent implements OnInit {
   }
 
   banQuestions() {
-    let bannedQuestions = [];
+    const bannedQuestions = [];
     // Fill list bannedQuestions
     this.newTestForm.value.bannedTests.forEach( t => {
       t.questions.forEach(q => {

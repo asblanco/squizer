@@ -1,33 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { CoursesModule } from './courses/courses.module';
-import { TestsModule } from './tests/tests.module';
 import { DbModule } from './db/db.module';
 import { MainAppRoutingModule } from './main-app-routing.module';
 import { MaterializeModule } from 'angular2-materialize'; // Used in dropdown navbar
+import { NavbarsModule } from './navbars/navbars.module';
 
-import { CoursesSideNavService } from './courses/courses-sidenav/courses-sidenav.service';
-import { TestsSideNavService } from './tests/tests-sidenav/tests-sidenav.service';
+import { CoursesSideNavService } from './navbars/courses-sidenav/courses-sidenav.service';
 import { MainAppComponent } from './main-app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { TestsSideNavService } from './navbars/tests-sidenav/tests-sidenav.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    TestsModule,
-    CoursesModule,
+    FormsModule,
+    NavbarsModule,
     DbModule.forRoot(),
     MaterializeModule,
     MainAppRoutingModule,
   ],
   declarations: [
-    MainAppComponent,
-    NavbarComponent
+    MainAppComponent
   ],
   exports: [
-    MainAppComponent,
-    NavbarComponent
+    MainAppComponent
   ],
   providers: [
     CoursesSideNavService,

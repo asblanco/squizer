@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { TermService } from '../../../db/term.service';
 import { SchoolYear } from '../../../db/schoolyear';
-import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
+import { TestsSideNavService } from '../tests-sidenav.service';
 import { APP_CONFIG } from '../../../../shared/app-config/app-config';
 import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 

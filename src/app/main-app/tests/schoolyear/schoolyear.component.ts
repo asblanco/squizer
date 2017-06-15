@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { SchoolYear } from '../../db/schoolyear';
 import { SchoolYearService } from '../../db/schoolyear.service';
-import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
+import { TestsSideNavService } from '../../navbars/tests-sidenav/tests-sidenav.service';
 import { I18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({

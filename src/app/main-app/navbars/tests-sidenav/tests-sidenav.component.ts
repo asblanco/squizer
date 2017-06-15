@@ -2,7 +2,7 @@ import { Component, EventEmitter } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { SchoolYear } from '../../db/schoolyear';
-import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
+import { TestsSideNavService } from './tests-sidenav.service';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';

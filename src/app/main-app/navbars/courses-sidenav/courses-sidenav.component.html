@@ -7,9 +7,4 @@
     (click)="selectCourse(course.id)"
     routerLink="/manage-courses/course/{{course.id}}">{{course.name}}</a>
 </li>
-<li><a class="waves-effect btn-large squizer-btn" (click)="openCourseModal()" i18n>New course</a>
-</li>
-
-<app-new-edit-modal [modalNewEdit]="newEditModal" (onSubmit)="createCourse($event)"
-  [modalId]="'newCourseModal'" i18n-text text="New course" [title]="" [maxLength]="maxLengthCourse">
-</app-new-edit-modal>
+<app-new-course></app-new-course>

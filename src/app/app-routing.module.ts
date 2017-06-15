@@ -6,16 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: AppComponent,
-    children: [
-      { path: 'login', component: LoginComponent },
-      {
-        path: '',
-        loadChildren: './main-app/main-app.module#MainAppModule'
-      },
-    ]
+    loadChildren: './main-app/main-app.module#MainAppModule'
   },
   { path: '**', component: PageNotFoundComponent }
 ];

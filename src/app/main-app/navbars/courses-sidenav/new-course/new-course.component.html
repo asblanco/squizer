@@ -1,0 +1,22 @@
+<li><a class="waves-effect btn-large squizer-btn" (click)="openCourseModal()" i18n>New course</a></li>
+
+<!-- Create course modal -->
+<div id="newCourseModal" class="modal bottom-sheet" materialize="modal" [materializeActions]="newCourseModal">
+  <form #newCourseForm="ngForm" novalidate>
+    <div class="modal-content">
+      <h4 i18n>New course</h4>
+      <div class="row">
+        <div class="input-field">
+          <input type="text" name="title" id="inputNewCourseModal" [ngModel]="title"
+            materialize="characterCounter" [attr.data-length]="maxLengthCourse"
+            required maxlength="maxLengthCourse">
+          <label [class.active]="title" for="inputNewCourseModal" i18n>Title</label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect btn squizer-btn"
+        (click)="createCourse(newCourseForm)" [disabled]="!newCourseForm.valid" i18n>Save</button>
+    </div>
+  </form>
+</div>

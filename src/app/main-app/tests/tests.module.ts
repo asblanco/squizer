@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NavbarsModule } from '../navbars/navbars.module';
 
-import { TermComponent } from './schoolyear/term/term.component';
 import { EditTermComponent } from './schoolyear/term/edit-term/edit-term.component';
 import { EditSchoolYearComponent } from './schoolyear/edit-schoolyear/edit-schoolyear.component';
 import { ListTestsComponent } from './schoolyear/term/list-tests/list-tests.component';
-import { NewTermComponent } from './schoolyear/new-term/new-term.component';
-import { NewSchoolYearComponent } from './new-schoolyear/new-schoolyear.component';
 import { NewTestComponent } from './schoolyear/term/new-test/new-test.component';
 import { SchoolYearComponent } from './schoolyear/schoolyear.component';
+import { TermComponent } from './schoolyear/term/term.component';
 import { TestsComponent } from './tests.component';
-import { TestsSideNavComponent } from './tests-sidenav/tests-sidenav.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { DeleteModule } from '../delete/delete.module';
@@ -26,27 +24,24 @@ import { DeleteTestComponent } from './schoolyear/term/list-tests/delete-test/de
     ReactiveFormsModule,
     RouterModule,
     TestsRoutingModule,
+    NavbarsModule,
     DeleteModule
   ],
   declarations: [
-    TermComponent,
-    EditTermComponent,
+    DeleteTestComponent,
     EditSchoolYearComponent,
+    EditTermComponent,
+    EditTestComponent,
     ListTestsComponent,
-    NewTermComponent,
-    NewSchoolYearComponent,
     NewTestComponent,
     SchoolYearComponent,
-    TestsSideNavComponent,
+    TermComponent,
     TestsComponent,
     TestDetailComponent,
-    EditTestComponent,
-    DeleteTestComponent
   ],
   exports: [
-    TestsComponent,
     SchoolYearComponent,
-    TestsSideNavComponent
+    TestsComponent
   ],
   providers: []
 })

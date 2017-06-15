@@ -24,7 +24,6 @@ const testsRoutes: Routes = [
       },
       { path: 'schoolyear/:syId/term/:termId/test', redirectTo: '/manage-tests', pathMatch: 'full' },
       { path: 'schoolyear', redirectTo: '/manage-tests', pathMatch: 'full' },
-      { path: '', pathMatch: 'full', redirectTo: '/manage-tests'}
     ]
   }
 ];

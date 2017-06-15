@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, Output, Input, AfterViewInit } from '@angular/core';
 import { Router, RouterModule, NavigationEnd } from '@angular/router';
 
-import { AuthService } from '../../shared/auth/auth.service';
-import { CoursesSideNavService } from '../courses/courses-sidenav/courses-sidenav.service';
-import { TestsSideNavService } from '../tests/tests-sidenav/tests-sidenav.service';
+import { AuthService } from '../../../shared/auth/auth.service';
+import { CoursesSideNavService } from '../courses-sidenav/courses-sidenav.service';
+import { TestsSideNavService } from '../tests-sidenav/tests-sidenav.service';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';

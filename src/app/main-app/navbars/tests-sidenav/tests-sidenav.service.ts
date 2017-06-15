@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { Term } from '../../db/term';
 import { Course } from '../../db/course';
 import { I18nService } from '../../../shared/i18n/i18n.service';
 import { SchoolYear } from '../../db/schoolyear';
 import { SchoolYearService } from '../../db/schoolyear.service';
+import { Term } from '../../db/term';
 
 import { Subject } from 'rxjs/Subject';
 

@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './login/login.module';
-import { MainAppModule } from './main-app/main-app.module';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -17,7 +16,6 @@ import * as $ from 'jquery';
   imports: [
     BrowserModule,
     HttpModule,
-    MainAppModule,
     LoginModule,
     AppRoutingModule,
     SimpleNotificationsModule.forRoot()

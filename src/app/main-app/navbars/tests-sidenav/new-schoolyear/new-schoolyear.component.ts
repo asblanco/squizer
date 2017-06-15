@@ -2,13 +2,13 @@ import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges } from
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { SchoolYear } from '../../db/schoolyear';
-import { SchoolYearService } from '../../db/schoolyear.service';
-import { APP_CONFIG } from '../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../shared/app-config/iapp-config';
+import { SchoolYear } from '../../../db/schoolyear';
+import { SchoolYearService } from '../../../db/schoolyear.service';
+import { APP_CONFIG } from '../../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../../shared/app-config/iapp-config';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
-import { I18nService } from '../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-schoolyear',

@@ -5,7 +5,7 @@ import { Term } from '../../../db/term';
 import { TermService } from '../../../db/term.service';
 import { CourseService } from '../../../db/course.service';
 import { Course } from '../../../db/course';
-import { TestsSideNavService } from '../../tests-sidenav/tests-sidenav.service';
+import { TestsSideNavService } from '../../../navbars/tests-sidenav/tests-sidenav.service';
 
 import { MaterializeDirective, MaterializeAction } from 'angular2-materialize';
 import { I18nService } from '../../../../shared/i18n/i18n.service';
