@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
-import { TestDetail } from '../../../../../db/test-detail';
+import { TestDetail } from '../../db/test-detail';
 
-import { TestService } from '../../../../../db/test.service';
-import { I18nService } from '../../../../../../shared/i18n/i18n.service';
+import { TestService } from '../../db/test.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({

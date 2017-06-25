@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Inject, Input } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 import { Chapter } from '../../../../db/chapter';
@@ -16,7 +16,7 @@ import { I18nService } from '../../../../../shared/i18n/i18n.service';
   templateUrl: './new-question-modal.component.html',
   styleUrls: ['./new-question-modal.component.css']
 })
-export class NewQuestionModalComponent implements OnChanges {
+export class NewQuestionModalComponent {
   @Input() chapter: Chapter;
   newQuestionModal = new EventEmitter<string|MaterializeAction>();
   newQuestion: FormGroup;
@@ -30,18 +30,7 @@ export class NewQuestionModalComponent implements OnChanges {
     private i18nService: I18nService ) {
       this.maxLengthQuestion = config.MAXLENGTH_QUESTION;
       this.maxLengthAnswer = config.MAXLENGTH_ANSWER;
-
-      this.newQuestion = this.fb.group({
-        id: 0,
-        title: [''],
-        chapter: 0,
-        answers: this.fb.array([])
-      });
-  }
-
-  ngOnChanges() {
-    this.newQuestion.reset();
-    this.createForm();
+      this.createForm();
   }
 
   openNewQuestionModal() {
@@ -52,7 +41,7 @@ export class NewQuestionModalComponent implements OnChanges {
     this.newQuestion = this.fb.group({
       id: 0,
       title: ['', [Validators.required, Validators.maxLength(this.maxLengthQuestion)]],
-      chapter: this.chapter.id,
+      chapter: 0,
       answers: this.fb.array([
         this.initAnswer(true),
         this.initAnswer(false),
@@ -86,7 +75,9 @@ export class NewQuestionModalComponent implements OnChanges {
   }
 
   onSubmit() {
-    // Check if it creates at least 1 answer correct and 3 incorrects
+    /*
+    * Check if it creates at least 1 answer correct and 3 incorrects
+    */
     const newQuestion = this.newQuestion.value;
     let corrects = 0;
     let incorrects = 0;
@@ -99,16 +90,18 @@ export class NewQuestionModalComponent implements OnChanges {
     }
 
     if (corrects >= 1 && incorrects >= 3) {
+      newQuestion.chapter = this.chapter.id;
+
       this.questionService.create(newQuestion)
       .then(question => {
           this.chapter.questions.push(question);
+          this.createForm();
         })
       .catch(() => this.i18nService.error(22, newQuestion.title));
-      this.ngOnChanges();
     } else {
       this.i18nService.info(4);
     }
   }
 
-  revert() { this.ngOnChanges(); }
+  revert() { this.createForm(); }
 }

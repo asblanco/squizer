@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TestsComponent } from './tests.component';
 import { SchoolYearComponent } from './schoolyear/schoolyear.component';
-import { NewTestComponent } from './schoolyear/term/new-test/new-test.component';
-import { TestDetailComponent } from './schoolyear/term/list-tests/test-detail/test-detail.component';
+import { NewTestComponent } from './new-test/new-test.component';
+import { TestDetailComponent } from './test-detail/test-detail.component';
 import { TermComponent } from './schoolyear/term/term.component';
 
 const testsRoutes: Routes = [

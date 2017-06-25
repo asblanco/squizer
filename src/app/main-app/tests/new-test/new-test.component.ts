@@ -2,18 +2,18 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 
-import { Course } from '../../../../db/course';
-import { CourseService } from '../../../../db/course.service';
-import { Test } from '../../../../db/test';
-import { TestService } from '../../../../db/test.service';
-import { TestsSideNavService } from '../../../../navbars/tests-sidenav/tests-sidenav.service';
+import { Course } from '../../db/course';
+import { CourseService } from '../../db/course.service';
+import { Test } from '../../db/test';
+import { TestService } from '../../db/test.service';
+import { TestsSideNavService } from '../../navbars/tests-sidenav/tests-sidenav.service';
 
-import { APP_CONFIG } from '../../../../../shared/app-config/app-config';
-import { IAppConfig } from '../../../../../shared/app-config/iapp-config';
+import { APP_CONFIG } from '../../../shared/app-config/app-config';
+import { IAppConfig } from '../../../shared/app-config/iapp-config';
 
 import { CustomValidators } from 'ng2-validation';
 import { MaterializeDirective } from 'angular2-materialize';
-import { I18nService } from '../../../../../shared/i18n/i18n.service';
+import { I18nService } from '../../../shared/i18n/i18n.service';
 
 @Component({
   selector: 'app-new-test',

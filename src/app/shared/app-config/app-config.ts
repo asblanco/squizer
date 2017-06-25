@@ -2,7 +2,6 @@ import { InjectionToken } from '@angular/core';
 import { IAppConfig } from './iapp-config';
 
 export const AppConfig: IAppConfig = {
-    // apiEndpoint: 'https://squizer-server.herokuapp.com/',
     apiEndpoint: 'http://localhost:8000/',
     // apiEndpoint: 'http://vps411854.ovh.net/',
     webappURL: 'http://squizer.ga/',

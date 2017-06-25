@@ -95,7 +95,9 @@ export class EditQuestionModalComponent implements OnChanges {
   }
 
   onSubmit() {
-    // Check if it creates at least 1 answer correct and 3 incorrects
+    /*
+    * Check if it has at least 1 answer correct and 3 incorrects
+    */
     const question = this.questionForm.value;
     let corrects = 0;
     let incorrects = 0;
