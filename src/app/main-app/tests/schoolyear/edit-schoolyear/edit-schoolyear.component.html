@@ -9,24 +9,24 @@
       <h4 i18n>Edit school year</h4>
 
       <div class="row">
-        <div class="input-field form-group">
+        <div class="input-field">
           <label for="title" class="active" i18n>Title</label>
-          <input type="text" class="form-control" formControlName="title"
-            required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
-            maxlength="{{maxLengthSchoolYear}}">
+          <input type="text" formControlName="title"
+            materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
+            maxlength="{{maxLengthSchoolYear}}" required [ngModel]="schoolYear.title">
         </div>
 
         <div class="input-field col s6">
           <label for="start_date" class="active" i18n>Start date</label>
-          <input type="date" id="start_date" materialize="pickadate"
-            [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
-            formControlName="start_date" required>
+          <input type="date" formControlName="start_date" id="start_date"
+            materialize="pickadate" [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
+            required [ngModel]="schoolYear.start_date">
         </div>
         <div class="input-field col s6">
           <label for="end_date" class="active" i18n>End date</label>
           <input type="date" id="end_date" materialize="pickadate"
             [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
-            formControlName="end_date"  required>
+            formControlName="end_date" required [ngModel]="schoolYear.end_date">
         </div>
       </div>
     </div>

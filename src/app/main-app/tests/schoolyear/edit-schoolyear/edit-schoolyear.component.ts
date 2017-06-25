@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input } from '@angular/core';
 import { Validators, FormArray, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ import { I18nService } from '../../../../shared/i18n/i18n.service';
   templateUrl: './edit-schoolyear.component.html',
   styleUrls: ['./edit-schoolyear.component.css']
 })
-export class EditSchoolYearComponent implements AfterViewInit, OnChanges {
+export class EditSchoolYearComponent implements AfterViewInit {
   @Input() schoolYear: SchoolYear;
   editSchoolYearForm: FormGroup;
   editSchoolYearModal = new EventEmitter<string|MaterializeAction>();
@@ -47,10 +47,6 @@ export class EditSchoolYearComponent implements AfterViewInit, OnChanges {
     this.deleteSchoolYearModal.emit({action: 'modal', params: ['open']});
   }
 
-  ngOnChanges() {
-    this.setForm();
-  }
-
   createForm() {
     this.editSchoolYearForm = this.fb.group({
       id: 0,
@@ -60,27 +56,18 @@ export class EditSchoolYearComponent implements AfterViewInit, OnChanges {
     });
   }
 
-  setForm() {
-    this.editSchoolYearForm.reset({
-      id: this.schoolYear.id,
-      title: this.schoolYear.title,
-      start_date: <Date>(this.schoolYear.start_date),
-      end_date: <Date>(this.schoolYear.end_date)
-    });
-  }
-
   onSubmit() {
+    this.editSchoolYearForm.value.id = this.schoolYear.id;
+    
     this.schoolYearService.update(this.editSchoolYearForm.value)
     .then(schoolYear => {
       this.schoolYear.title = schoolYear.title;
       this.schoolYear.start_date = schoolYear.start_date;
       this.schoolYear.end_date = schoolYear.end_date;
       this.testsSideNavService.updateSchoolYear(schoolYear);
-      this.ngOnChanges();
     })
     .catch(() => {
       this.i18nService.error(4, this.editSchoolYearForm.value.title);
-      this.ngOnChanges();
     });
   }
 
