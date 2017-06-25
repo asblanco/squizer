@@ -3,12 +3,13 @@
 
   <form [formGroup]="newTestForm" (ngSubmit)="onSubmit()" novalidate materialize>
     <div class="row">
+      <!-- Title -->
       <div class="input-field col s6">
         <label for="title" i18n>Title</label>
         <input type="text" formControlName="title" materialize="characterCounter"
           [attr.data-length]="maxLengthTest" maxlength="{{maxLengthTest}}">
       </div>
-
+      <!-- Course -->
       <div class="input-field col s6">
         <select materialize="material_select" (change)="selectCourse()"
           formControlName="course" [materializeSelectOptions]="courses">
@@ -21,9 +22,11 @@
 
     <div *ngIf="selectedCourse && selectedCourse.chapters.length > 0">
       <div class="row">
+        <!-- Number of questions -->
         <div class="col s6">
           <span i18n><b>Total number of questions on the test: {{getTotalNumberQuestions()}}</b></span>
         </div>
+        <!-- Banned questions -->
         <div class="col s6">
           <select multiple materialize="material_select" formControlName="bannedTests"
           [materializeSelectOptions]="tests">
@@ -44,6 +47,7 @@
         </div>
       </div>
 
+      <!-- Chapters -->
       <div class="card">
         <div class="tabs">
           <ul class="tabs tabs-fixed-width card-tabs" materialize="tabs">
@@ -69,6 +73,7 @@
                 <button type="button" class="waves-effect btn-flat squizer-color" (click)="checkChapter(true, chapter.value, i)" i18n>Check Chapter</button>
               </div>
 
+              <!-- Questions -->
               <div formArrayName="questions">
                 <div class="questions" *ngFor="let question of chapter.controls.questions.controls; let j=index"
                   id="q{{question.value.id}}" [formGroupName]="j">
@@ -76,6 +81,7 @@
                     (change)="checkQuestion($event.target.checked, question.value.id, i, j)"
                     formControlName="checked"/>
                   <label for="question{{question.value.id}}" class="black-text">#{{j+1}} {{question.value.title}}</label>
+                  <!-- Answers -->
                   <div formArrayName="answers">
                     <div class="answers" *ngFor="let answer of question.controls.answers.controls; let k=index"
                       [formGroupName]="k">
@@ -86,10 +92,12 @@
                       </label>
                     </div> <!-- End answer -->
                   </div>
+
                   <br>
                 </div> <!-- End question -->
               </div>
-            </div> <!-- End chaper -->
+              
+            </div> <!-- End chapter -->
           </div>
         </div> <!-- End array of chapter -->
         <div class="card-action">

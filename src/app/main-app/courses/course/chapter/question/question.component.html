@@ -1,9 +1,11 @@
+<!-- Question -->
 <a class="question" (click)="openEditQuestionModal(); $event.stopPropagation();">
   <div class="right">
     <b><a class="waves-effect waves btn-flat edit red-text"
       (click)="openDeleteQuestionModal(); $event.stopPropagation();" i18n>DELETE</a></b>
   </div>
   <b><p> #{{i+1}} {{question.title}} </p></b>
+  <!-- Answers -->
   <div class="collection">
     <a *ngFor="let answer of question.answers" class="collection-item">
       <div [ngClass]="{'greenLine': answer.correct, 'redLine': !answer.correct}">
@@ -14,9 +16,11 @@
 </a>
 <hr>
 
+<!-- Edit question modal -->
 <app-edit-question-modal [question]="question" [editQuestionModal]="editQuestionModal"
   (editedQuestion)="editQuestion($event)">
 </app-edit-question-modal>
+<!-- Delete question modal -->
 <app-delete-modal (onDeleted)="deleteQuestion()" [id]="'deleteQuestionModal'+question.id"
   [title]="question.title" [deleteModal]="deleteQuestionModal">
 </app-delete-modal>

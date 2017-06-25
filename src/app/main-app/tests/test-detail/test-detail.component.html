@@ -1,5 +1,7 @@
+<!-- Display test details -->
 <div *ngIf="test" class="content">
   <div class="card">
+    <!-- Download PDF, TEX and title -->
     <div class="card-content center-align">
       <a routerLink="../../">
         <img class="navigate-before" src="../../../../assets/icons/ic_navigate_before.svg" alt="remove answer"></a>
@@ -13,12 +15,15 @@
       <p>{{test.course.name}}</p>
       <p>{{test.creation_date | date:'d MMM yyyy'}}</p>
     </div>
+    
+    <!-- Questions -->
     <div class="card-action">
       <div *ngFor="let question of test.questions; let i=index" class="questions">
         <b>{{i+1}}. {{question.title}}
            <span *ngIf="question.last_modified > test.creation_date" class="red-text">
              <sup i18n>Updated {{question.last_modified | date:'d MMM yyyy'}}</sup></span>
         </b>
+        <!-- Answers -->
         <div *ngFor="let answer of test.answers" class="answers">
           <div *ngIf="answer.question === question.id" [class.green-text]="answer.correct">
             - {{answer.title}}
@@ -27,5 +32,6 @@
         <br>
       </div>
     </div>
+
   </div>
 </div>

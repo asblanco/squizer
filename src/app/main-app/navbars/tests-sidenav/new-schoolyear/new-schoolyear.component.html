@@ -1,10 +1,12 @@
+<!-- New school year button -->
 <li><a class="waves-effect btn-large squizer-btn" (click)="openSchoolYearModal()" i18n>New school year</a></li>
 
+<!-- New school year modal -->
 <div id="newSchoolYearModal" class="modal bottom-sheet" materialize="modal" [materializeActions]="newSchoolYearModal">
   <form [formGroup]="newSchoolYearForm" (ngSubmit)="onSubmit()" novalidate materialize>
     <div class="modal-content">
       <h4 i18n>New school year</h4>
-
+      <!-- School year title -->
       <div class="row">
         <div class="input-field form-group">
           <label for="title" i18n>Title</label>
@@ -12,13 +14,14 @@
             required materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
             maxlength="{{maxLengthSchoolYear}}">
         </div>
-
+        <!-- School year start date -->
         <div class="input-field col s6">
           <label for="start_date" class="active" i18n>Start date</label>
           <input type="date" id="start_date" materialize="pickadate"
             [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
             formControlName="start_date" placeholder="yyyy-mm-dd" required>
         </div>
+        <!-- School year end date -->
         <div class="input-field col s6">
           <label for="end_date" class="active" i18n>End date</label>
           <input type="date" id="end_date" materialize="pickadate"
@@ -27,6 +30,7 @@
         </div>
       </div>
     </div>
+    <!-- Create school year button -->
     <div class="modal-footer">
       <button type="submit" class="modal-action modal-close waves-effect btn squizer-btn"
         [disabled]="!newSchoolYearForm.valid" i18n>Create</button>

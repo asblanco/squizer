@@ -11,7 +11,7 @@ import 'rxjs/add/operator/filter';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnDestroy {
-  selectedCourse = false;
+  emptyState = true;
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   constructor(private router: Router) {
@@ -20,13 +20,14 @@ export class CoursesComponent implements OnDestroy {
     .takeUntil(this.ngUnsubscribe)
     .subscribe((event: NavigationEnd) => {
       if (event.urlAfterRedirects === '/manage-courses') {
-        this.selectedCourse = false;
+        this.emptyState = true;
       } else {
-        this.selectedCourse = true;
+        this.emptyState = false;
       }
     });
   }
 
+  /* Unsubscribe from all to prevent memory leak when component is destroyed */
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();

@@ -1,9 +1,11 @@
+<!-- Edit question modal -->
 <div id="editQuestionModal{{question.id}}" class="modal modal-fixed-footer"
   materialize="modal" [materializeActions]="editQuestionModal"
   [materializeParams]="[{dismissible: false}]">
   <form novalidate (ngSubmit)="onSubmit()" [formGroup]="questionForm">
     <div class="modal-content">
       <h4 i18n>Edit question</h4>
+      <!-- Title -->
       <div class="row">
         <div class="input-field">
           <label class="active" i18n>Question title</label>
@@ -15,12 +17,14 @@
           Title is required
         </div>
       </div>
+      <!-- Answers -->
       <div class="row">
         <fieldset>
           <legend><b i18n> Answers </b></legend>
           <div formArrayName="answers">
             <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
               <div class="row">
+                <!-- True / False checkbox -->
                 <div class="col s1">
                   <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>T/F</span>
                   <p class="checkbox">
@@ -29,6 +33,7 @@
                     <label [for]="question.id + 'cb' + i"></label>
                   </p>
                 </div>
+                <!-- Title -->
                 <div class="input-field col s11">
                   <label class="active" for="title"># {{i+1}}</label>
                   <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthAnswer"/>
@@ -38,6 +43,7 @@
               </div>
             </div>
           </div>
+          <!-- Add answer button -->
           <div class="row">
             <div class="right-align">
               <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="addAnswer()">
@@ -48,10 +54,11 @@
         </fieldset>
       </div>
     </div>
+    <!-- Save / Cancel buttons -->
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()" i18n>Cancel</a>
       <button class=" modal-action modal-close waves-effect btn squizer-btn"
-        type="submit" [disabled]="!questionForm.valid" i18n>Edit</button>
+        type="submit" [disabled]="!questionForm.valid" i18n>Save</button>
     </div>
   </form>
 </div>

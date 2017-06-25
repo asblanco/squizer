@@ -24,6 +24,9 @@ export class TestsSideNavComponent {
     private router: Router,
     private testsSideNavService: TestsSideNavService
   ) {
+    /*
+    * Determine whether there nothing selected or a schoolyear or term selected, to reflect it on the UI of the sidenav
+    */
     this.router.events
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)

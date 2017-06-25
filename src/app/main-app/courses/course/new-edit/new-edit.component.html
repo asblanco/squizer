@@ -3,6 +3,7 @@
   <form #form="ngForm" novalidate>
     <div class="modal-content">
       <h4>{{text}}</h4>
+      <!-- Title -->
       <div class="row">
         <div class="input-field">
           <input type="text" name="title" id="input{{modalId}}" [ngModel]="title"
@@ -11,10 +12,14 @@
           <label [class.active]="title" for="input{{modalId}}" i18n>Title</label>
         </div>
       </div>
+
     </div>
     <div class="modal-footer">
-      <button class="modal-action modal-close waves-effect btn squizer-btn"
+      <!-- Create or save button depending if it's new or edit -->
+      <button *ngIf="title !== ''" class="modal-action modal-close waves-effect btn squizer-btn"
         (click)="submit(form)" [disabled]="!form.valid" i18n>Save</button>
+      <button *ngIf="title === ''" class="modal-action modal-close waves-effect btn squizer-btn"
+          (click)="submit(form)" [disabled]="!form.valid" i18n>Create</button>
     </div>
   </form>
 </div>

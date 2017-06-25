@@ -27,6 +27,9 @@ export class CoursesSideNavComponent {
   ) {
     this.courses$ = coursesSideNavService.getCourses$;
 
+    /*
+    * Determine whether there nothing selected or a course selected, to reflect it on the UI of the sidenav
+    */
     this.router.events
     .filter(event => event instanceof NavigationEnd)
     .takeUntil(this.ngUnsubscribe)

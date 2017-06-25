@@ -1,13 +1,15 @@
+<!-- Edit school year button -->
 <a  id="editSchoolYear"
     class="waves-effect waves btn-flat btn-large white-text right"
     (click)="openEditSchoolYearModal()" i18n>Edit</a>
 
+<!-- Edit school year modal -->
 <div id="editSchoolYearModal{{schoolYear.id}}" class="modal bottom-sheet"
   materialize="modal" [materializeActions]="editSchoolYearModal">
   <form [formGroup]="editSchoolYearForm" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4 i18n>Edit school year</h4>
-
+      <!-- Title -->
       <div class="row">
         <div class="input-field">
           <label for="title" class="active" i18n>Title</label>
@@ -15,13 +17,14 @@
             materialize="characterCounter" [attr.data-length]="maxLengthSchoolYear"
             maxlength="{{maxLengthSchoolYear}}" required [ngModel]="schoolYear.title">
         </div>
-
+        <!-- Start date -->
         <div class="input-field col s6">
           <label for="start_date" class="active" i18n>Start date</label>
           <input type="date" formControlName="start_date" id="start_date"
             materialize="pickadate" [materializeParams]="[{selectMonths: true, selectYears: true, format: 'yyyy-mm-dd'}]"
             required [ngModel]="schoolYear.start_date">
         </div>
+        <!-- End date -->
         <div class="input-field col s6">
           <label for="end_date" class="active" i18n>End date</label>
           <input type="date" id="end_date" materialize="pickadate"
@@ -30,7 +33,7 @@
         </div>
       </div>
     </div>
-
+    <!-- Save and delete buttons -->
     <div class="modal-footer">
       <button class="modal-action modal-close waves-effect btn red left"
         (click)="openDeleteSchoolYearModal()" i18n>Delete school year</button>
@@ -40,6 +43,7 @@
   </form>
 </div>
 
+<!-- Delete school year modal -->
 <app-delete-modal (onDeleted)="deleteSchoolYear()"
   [id]="'deleteSchoolYearModal' + schoolYear.id"
   [title]="schoolYear.title" [deleteModal]="deleteSchoolYearModal"></app-delete-modal>

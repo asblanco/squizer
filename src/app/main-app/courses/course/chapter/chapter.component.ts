@@ -40,6 +40,7 @@ export class ChapterComponent {
   updateChapterTitle(title: string): void {
     const oldTitle = this.chapter.title;
     this.chapter.title = title;
+    
     this.chapterService.update(this.chapter)
     .then((chapter) => { this.chapter.title = chapter.title; })
     .catch(() => {

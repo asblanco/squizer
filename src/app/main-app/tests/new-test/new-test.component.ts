@@ -222,6 +222,9 @@ export class NewTestComponent implements OnInit {
     }
   }
 
+  /*
+  * First generate and then create test
+  */
   onSubmit() {
     if (this.getTotalNumberQuestions() <= 0) {
       this.i18nService.info(0);

@@ -1,9 +1,11 @@
 <div class="content" *ngIf="course">
-  <!-- Course title -->
   <div class="row">
+    <!-- Course title -->
     <h3 *ngIf="!editCourseTitle" (click)="editCourseBtn()">
         {{course.name}}
     </h3>
+
+    <!-- Edit course title -->
     <div *ngIf="editCourseTitle">
       <form #editTitleForm="ngForm" novalidate>
         <div class="input-field">
@@ -15,7 +17,9 @@
         </div>
       </form>
     </div>
+
   </div>
+
   <!-- Chapters -->
   <div class="row">
     <div *ngFor="let chapter of course.chapters">
@@ -23,11 +27,12 @@
     </div>
   </div>
 
+  <!-- Create chapter button -->
   <div class="row">
     <a class="waves-effect btn-large squizer-btn" (click)="openNewChapterModal()" i18n>New chapter</a>
   </div>
 
-  <!-- Delete course -->
+  <!-- Delete course button -->
   <footer class="footer">
    <div class="footer">
      <b><a id="deleteCourse" class="waves-effect waves btn-flat btn-large red-text right"
@@ -36,9 +41,12 @@
  </footer>
 </div>
 
+<!-- Delete course -->
 <app-delete-modal *ngIf="course" (onDeleted)="deleteCourse(course)"
   [id]="'deleteCourseModal'" [title]="course.name" [deleteModal]="deleteModal">
 </app-delete-modal>
+
+<!-- Create chapter -->
 <app-new-edit-modal (onSubmit)="addChapter($event)" [modalId]="'newChapterModal'" i18n-text
-  text="New chapter" [title]="" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
+  text="New chapter" [title]="''" [maxLength]="maxLengthChapter" [modalNewEdit]="newChapterModal">
 </app-new-edit-modal>

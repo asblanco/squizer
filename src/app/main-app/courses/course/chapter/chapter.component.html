@@ -1,3 +1,4 @@
+<!-- Chapter collapsible -->
 <ul class="collapsible" data-collapsible="accordion" materialize="collapsible">
   <li class="hoverable onHover">
     <!-- Header -->
@@ -20,11 +21,14 @@
   </li>
 </ul>
 
+<!-- Edit chapter modal -->
 <app-new-edit-modal (onSubmit)="updateChapterTitle($event)"
   [modalId]="'editChapterModal'+chapter.id" i18n-text text="Edit chapter"
   [title]="chapter.title" [maxLength]="maxLengthChapter"
   [modalNewEdit]="editChapterModal">
 </app-new-edit-modal>
+
+<!-- Delete chapter modal -->
 <app-delete-modal (onDeleted)="deleteChapter()"
   [id]="'deleteChapterModal'+chapter.id" [title]="chapter.title"
   [deleteModal]="deleteChapterModal">

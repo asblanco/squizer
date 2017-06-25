@@ -37,6 +37,10 @@
         <i><img src="../../../../assets/icons/ic_exit_to_app.svg" alt="log out"></i>
         {{username}} logout
       </a></li>
+      <!-- Materialize has a bug so it needs a last empty li to show the actual
+       last one when there is scroll down, or two more <li> in firefox -->
+      <li class="black-text">-</li>
+      <li class="black-text">-</li>
     </ul>
 
   </div>

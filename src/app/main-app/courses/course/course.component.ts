@@ -24,9 +24,9 @@ export class CourseComponent implements OnDestroy {
   courseId: number;
   course: Course;
   editCourseTitle = false; // Type is already inferred, no need to implicitly declare the type (angular style guide)
-  subscription: Subscription;
   maxLengthCourse: number;
   maxLengthChapter: number;
+  subscription: Subscription;
   deleteModal = new EventEmitter<string|MaterializeAction>();
   newChapterModal = new EventEmitter<string|MaterializeAction>();
 
@@ -76,10 +76,6 @@ export class CourseComponent implements OnDestroy {
         .catch(() => this.i18nService.error(17, course.name));
   }
 
-  deleteChapter(chapter) {
-    this.course.chapters.splice(this.course.chapters.indexOf(chapter), 1);
-  }
-
   editCourseBtn(): void {
     this.editCourseTitle = true;
     this.oldTitleCourse = this.course.name;
@@ -119,6 +115,10 @@ export class CourseComponent implements OnDestroy {
         this.course.chapters.push(ch);
       })
       .catch(() => this.i18nService.error(19, title));
+  }
+
+  deleteChapter(chapter) {
+    this.course.chapters.splice(this.course.chapters.indexOf(chapter), 1);
   }
 
   ngOnDestroy() {

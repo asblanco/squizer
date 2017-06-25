@@ -1,26 +1,31 @@
+<!-- New question button -->
 <div class="right-align">
   <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="openNewQuestionModal(); $event.stopPropagation();">
     <i class="material-icons">add</i></a>
 </div>
 
+<!-- New question modal -->
 <div id="newQuestionModal{{chapter.id}}" class="modal modal-fixed-footer"
   materialize="modal" [materializeActions]="newQuestionModal"
   [materializeParams]="[{dismissible: false}]">
   <form [formGroup]="newQuestion" (ngSubmit)="onSubmit()" novalidate>
     <div class="modal-content">
       <h4 i18n>New question</h4>
+        <!-- Title -->
         <div class="row">
           <div class="input-field">
             <label for="title_question" i18n>Question title</label>
             <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthQuestion">
           </div>
         </div>
+        <!-- Answers -->
         <div class="row">
           <fieldset>
             <legend><b i18n> Answers </b></legend>
             <div formArrayName="answers">
               <div *ngFor="let answer of answers.controls; let i=index" [formGroupName]="i">
                 <div class="row">
+                  <!-- True / False -->
                   <div class="col s1">
                     <span *ngIf="i == 0" style="position:absolute; padding-left: 2%;" i18n>T/F</span>
                     <p class="checkbox">
@@ -29,6 +34,7 @@
                       <label [for]="chapter.id + '0' + i"></label>
                     </p>
                   </div>
+                  <!-- Title -->
                   <div class="input-field col s11">
                     <label for="title"># {{i+1}}</label>
                     <input type="text" formControlName="title" materialize="characterCounter" [attr.data-length]="maxLengthAnswer"/>
@@ -38,6 +44,7 @@
                 </div>
               </div>
             </div>
+            <!-- Insert answer button -->
             <div class="row">
               <div class="right-align">
                 <a class="btn-floating btn-large waves-effect waves squizer-btn" (click)="addAnswer()">
@@ -48,6 +55,8 @@
           </fieldset>
         </div>
     </div>
+
+    <!-- Create / Cancel buttons -->
     <div class="modal-footer">
       <a class="modal-action modal-close waves-effect btn-flat" (click)="revert()" i18n>Cancel</a>
       <button class=" modal-action modal-close waves-effect btn squizer-btn" type="submit"
