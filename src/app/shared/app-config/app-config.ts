@@ -4,7 +4,8 @@ import { IAppConfig } from './iapp-config';
 export const AppConfig: IAppConfig = {
     apiEndpoint: 'http://localhost:8000/',
     // apiEndpoint: 'http://vps411854.ovh.net/',
-    webappURL: 'http://squizer.ga/',
+    // webappURL: 'http://squizer.ga/',
+    webappURL: 'http://localhost:4200/',
     MAXLENGTH_COURSE: 100,
     MAXLENGTH_CHAPTER: 100,
     MAXLENGTH_QUESTION: 500,

@@ -16,6 +16,7 @@ import { I18nService } from '../../../../shared/i18n/i18n.service';
 export class NewCourseComponent implements AfterViewInit {
   newCourseModal = new EventEmitter<string|MaterializeAction>();
   maxLengthCourse: number;
+  title: string;
 
   constructor(
     @Inject(APP_CONFIG) private config: IAppConfig,
@@ -45,8 +46,7 @@ export class NewCourseComponent implements AfterViewInit {
         this.coursesSideNavService.addCourse(course);
         this.router.navigate(['/manage-courses/course/' + course.id]);
       })
-      .catch(() => this.i18nService.error(25, name));
-
+      .catch(() => {this.i18nService.error(25, name); console.log('new course failed');});
   }
 
 }

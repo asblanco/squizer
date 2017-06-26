@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
   lang: string;
 
   constructor(
-    private auth: AuthService,
-    @Inject(APP_CONFIG) private config: IAppConfig,
+    public auth: AuthService,
+    @Inject(APP_CONFIG) public config: IAppConfig,
     private router: Router,
   ) {
     this.lang = document.URL.split('/', 4)[3];
